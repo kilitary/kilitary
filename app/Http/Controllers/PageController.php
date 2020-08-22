@@ -9,7 +9,7 @@ class PageController extends Controller
     public function index(Request $request)
     {
         \Log::debug($_SERVER['REMOTE_ADDR']);
-        $info = '';
+        $info = $request->fullUrl();
         return view('home', compact('info'));
     }
 
