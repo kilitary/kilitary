@@ -9,7 +9,8 @@ class PageController extends Controller
     public function index(Request $request)
     {
         \Log::debug($_SERVER['REMOTE_ADDR']);
-        return view('home');
+        $info = '';
+        return view('home', compact('info'));
     }
 
     public function notfound(Request $request)
