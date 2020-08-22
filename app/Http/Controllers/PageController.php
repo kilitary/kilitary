@@ -11,4 +11,10 @@ class PageController extends Controller
         \Log::debug($_SERVER['REMOTE_ADDR']);
         return view('home');
     }
+
+    public function notfound(Request $request)
+    {
+        \Log::debug($_SERVER['REMOTE_ADDR'] . ' ' . $request->url());
+        return view('home');
+    }
 }
