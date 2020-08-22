@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-       hello
+       hello {{ $info }}
     </div>
 @endsection
