@@ -15,6 +15,7 @@ class PageController extends Controller
     public function notfound(Request $request)
     {
         \Log::debug($_SERVER['REMOTE_ADDR'] . ' ' . $request->url());
+        phpinfo();
         return view('home');
     }
 }
