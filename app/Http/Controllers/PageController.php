@@ -14,9 +14,10 @@ class PageController extends Controller
         $info = $request->fullUrl();
 
         $gdiSelected = mt_rand(0, 1);
+        $chanceOf = mt_rand(0, 4);
         Logger::msg($gdiSelected);
         // one run
-        return view('home', compact('info', 'gdiSelected'));
+        return view('home', compact('info', 'gdiSelected', 'chanceOf'));
     }
 
     public function fallback(Request $request)
