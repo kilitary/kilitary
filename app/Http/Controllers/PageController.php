@@ -12,10 +12,14 @@ class PageController extends Controller
         \Log::debug($_SERVER['REMOTE_ADDR'] . ' ' . $request->url() . ' from ' . $request->header('HTTP_REFERER'));
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
         $info = $request->fullUrl();
-        return view('home', compact('info'));
+
+        $gdiSelected = mt_rand(0, 1);
+        Logger::msg($gdiSelected);
+        // one run
+        return view('home', compact('info', 'gdiSelected'));
     }
 
-    public function notfound(Request $request)
+    public function fallback(Request $request)
     {
         \Log::debug($_SERVER['REMOTE_ADDR'] . ' ' . $request->url() . ' from ' . $request->header('HTTP_REFERER'));
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));

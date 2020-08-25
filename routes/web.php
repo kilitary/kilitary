@@ -15,4 +15,4 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', 'PageController@index');
-Route::fallback('PageController@notfound');
+Route::fallback('PageController@fallback');
