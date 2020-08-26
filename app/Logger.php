@@ -4,6 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Logger
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Logger newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Logger newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Logger query()
+ * @mixin \Eloquent
+ */
 class Logger extends Model
 {
     public static function msg(...$msgs)

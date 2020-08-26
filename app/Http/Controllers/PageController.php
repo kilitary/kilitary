@@ -17,7 +17,7 @@ class PageController extends Controller
         $info = $request->fullUrl();
 
         $gdiSelected = XRandom::get(0, 1);
-        $chanceOf = XRandom::get(0, 4);
+        $chanceOf = XRandom::get(0, 5);
         $sign = XRandom::sign(24);
 
         Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
