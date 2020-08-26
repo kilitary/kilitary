@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class XRandom
 {
@@ -14,8 +15,13 @@ class XRandom
         }
     }
 
-    public static function get($max)
+    public static function get($min, $max)
     {
-        return mt_rand(0, $max);
+        return mt_rand($min, $max);
+    }
+
+    public static function sign($max)
+    {
+        return Str::random($max);
     }
 }

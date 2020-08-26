@@ -18,10 +18,11 @@ class PageController extends Controller
 
         $gdiSelected = XRandom::get(0, 1);
         $chanceOf = XRandom::get(0, 4);
+        $sign = XRandom::sign(24);
 
-        Logger::msg('$gdiSelected:  ' . $gdiSelected . ' $chanceOf: ' . $chanceOf);
+        Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
 
-        return view('home', compact('info', 'gdiSelected', 'chanceOf'));
+        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign'));
     }
 
     public function fallback(Request $request)
