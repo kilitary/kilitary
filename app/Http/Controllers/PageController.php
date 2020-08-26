@@ -16,7 +16,11 @@ class PageController extends Controller
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
         $info = $request->fullUrl();
 
-        return view('home', compact('info'));
+        $gdiSelected = 0;
+        $chanceOf = -1;
+        $sign = '<empty>';
+
+        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign'));
     }
 
     public function fallback(Request $request)
