@@ -5,6 +5,8 @@
         <h2>hello {{ $info }}</h2>
         @if (isset($gdiSelected) && $gdiSelected)
             <h3> global defense initiative selected (in chance of {{$chanceOf}})</h3>
+        @else
+            <h3> brotherhood of nod selected (in chance of {{$chanceOf}})</h3>
         @endif
     </div>
 @endsection
