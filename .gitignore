@@ -13,3 +13,5 @@ yarn-error.log
 .idea
 /.idea
 /public/debug.log
+_ide_helper.php
+.phpstorm.meta.php

@@ -16,13 +16,7 @@ class PageController extends Controller
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
         $info = $request->fullUrl();
 
-        $gdiSelected = XRandom::get(0, 1);
-        $chanceOf = XRandom::get(0, 5);
-        $sign = XRandom::sign(24);
-
-        Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
-
-        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign'));
+        return view('home', compact('info'));
     }
 
     public function fallback(Request $request)
@@ -33,7 +27,14 @@ class PageController extends Controller
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
         $info = $request->fullUrl();
 
-        return view('home', compact('info'));
+        $gdiSelected = XRandom::get(0, 1);
+        $chanceOf = XRandom::get(0, 5);
+        $sign = XRandom::sign(24);
+
+        Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
+
+        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign'));
+
     }
 
 }
