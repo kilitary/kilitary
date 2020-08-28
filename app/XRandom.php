@@ -33,7 +33,11 @@ class XRandom
         if($fp !== false) {
             $bytes = fread($fp, $numBytes);
             Logger::msg('read ' . strlen($bytes) . ' bytes of random');
-            $stepSection .= sprintf("%x", $bytes);
+
+            for($i = 0; $i < strlen($bytes); $i++) {
+                $stepSection .= sprintf("%x", $bytes[$i]);
+            }
+
             fclose($fp);
         } else {
             die("/dev/random: cannot read $numBytes bytes.");
