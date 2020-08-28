@@ -10,5 +10,6 @@
         @endif
 
         <div style="font-size:13px;font-variant: small-caps;font-family: consolas">sign:{{ $sign }}</div>
+        <div class="links"><a href='/command/sync'>sync</a></div>
     </div>
 @endsection

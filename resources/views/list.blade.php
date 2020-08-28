@@ -2,9 +2,11 @@
 
 @section('content')
     <div class="container">
-        @dump($list)
         @foreach ($list as $key => $item)
-            <span>{{ $key }}</span>: <span>{{ $item }}</span>
+            <div class="list-item-container">
+                <span class="list-key">{{ $key }}</span>: <span
+                    class="list-item">{!! $item !!}</span>
+            </div>
         @endforeach
     </div>
 @endsection

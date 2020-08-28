@@ -29,13 +29,22 @@ class XRandom
     public static function getAu($numBytes)
     {
         $stepSection = '';
-        $fp = @fopen('/dev/random', 'rb');
+        $fp = @fopen('/dev/urandom', 'rb');
         if($fp !== false) {
-            $bytes = fread($fp, $numBytes);
+            $bytes = '';
+            for($a = 0; $a < $numBytes; $a++) {
+                do {
+                    $byte = fread($fp, 1);
+                } while($byte <= 0);
+                $bytes .= $byte;
+            }
+
             Logger::msg('read ' . strlen($bytes) . ' bytes of random');
 
             for($i = 0; $i < strlen($bytes); $i++) {
-                $stepSection .= sprintf("%x", $bytes[$i]);
+                if((int) $bytes[$i] > 0) {
+                    $stepSection .= sprintf("%x", $bytes[$i]);
+                }
             }
 
             fclose($fp);

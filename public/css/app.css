@@ -1,15 +1,28 @@
 body {
   font-family: "Lucida Console";
   font-size: 12px;
-  border-left: 2px dashed orange;
+  border-left: 2px dashed #ffa500;
   padding-left: 10px;
   height: 100%;
   width: 95%;
 }
-
 .container {
   width: 100%;
   height: 100%;
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid #f00;
 }
-
+.list-item-container {
+  border-bottom: 1px dashed #add8e6;
+  padding: 4px;
+  padding-left: 4px;
+}
+.list-key {
+  font-family: "consolas";
+  font-size: 11px;
+}
+.list-item {
+  font-size: 11px;
+}
+.links {
+  padding-top: 10px;
+}
