@@ -16,8 +16,8 @@ class PageController extends Controller
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
         $info = $request->fullUrl();
 
-        $gdiSelected = 0;
-        $chanceOf = -1;
+        $gdiSelected = -3;
+        $chanceOf = -3;
         $sign = '<empty>';
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign'));
@@ -32,8 +32,8 @@ class PageController extends Controller
         $info = $request->fullUrl();
 
         $gdiSelected = XRandom::get(0, 1);
-        $chanceOf = XRandom::get(0, 5);
-        $sign = XRandom::sign(24);
+        $chanceOf = XRandom::get(0, 9);
+        $sign = XRandom::sign(26);
 
         Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
 
