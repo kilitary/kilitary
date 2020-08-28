@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Logger;
 
 class XRandom
 {
@@ -23,5 +24,21 @@ class XRandom
     public static function sign($max)
     {
         return Str::random($max);
+    }
+
+    public static function getAu($numBytes)
+    {
+        $stepSection = '';
+        $fp = @fopen('/dev/random', 'rb');
+        if($fp !== false) {
+            $bytes = fread($fp, $numBytes);
+            Logger::msg('read ' . strlen($bytes) . ' bytes of random');
+            $stepSection .= sprintf("%x", $bytes);
+            fclose($fp);
+        } else {
+            die("/dev/random: cannot read $numBytes bytes.");
+        }
+
+        return $stepSection;
     }
 }

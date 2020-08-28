@@ -15,4 +15,5 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', 'PageController@index');
+Route::get('/command/rand', 'CommandController@rand');
 Route::fallback('PageController@fallback');
