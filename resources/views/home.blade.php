@@ -9,6 +9,6 @@
             <h3> brotherhood of nod selected (in {{ mt_rand(0,1) ? 'case' : 'state' }} of {{$chanceOf}})</h3>
         @endif
 
-        <div style="font-size:12px;font-variant: small-caps;font-family: consolas">sign:{{ $sign }}</div>
+        <div style="font-size:13px;font-variant: small-caps;font-family: consolas">sign:{{ $sign }}</div>
     </div>
 @endsection
