@@ -15,7 +15,8 @@ class CommandController extends Controller
         $list['hashes'] = join(',', hash_algos());
 
         foreach(hash_algos() as $algo) {
-            $list[$algo] = hash($algo, $list['rand']);
+            $hash = hash($algo, $list['rand']);
+            $list[$algo] = $hash . " <a target=_blank href='http://google.com/search?q=%2B" . substr($hash, 0, 8) . "'>??</a>";
         }
 
         $list['check'] = XRandom::get(0, 1) ? '<font color=green>pass</font>' : '<font color=red>fail</font>';
