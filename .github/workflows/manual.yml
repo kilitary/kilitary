@@ -1,0 +1,30 @@
+name: deploy kilitary.ru
+on: [push]
+#on:
+ # workflow_dispatch:
+jobs:
+  deploy:
+    name: deploy kilitary
+    runs-on: ubuntu-latest
+    steps:
+      - name: ssh-pipeline
+        uses: cross-the-world/ssh-pipeline@v1.2.0
+        with:
+    # ssh remote host
+          host: kilitary.ru
+    # ssh remote port
+          #port: # optional, default is 22
+    # ssh remote user
+          user: deployer
+    # content of ssh private key. ex raw content of ~/.ssh/id_rsa
+          key: ${{ secrets.PKEY }}
+    # ssh remote password
+          pass: t3mpt3mp
+    # connection timeout to remote host
+          #connect_timeout: # optional, default is 30s
+    # execute commands on ssh
+          script: |
+            cd /var/www/html/kilitary
+            git reset --hard
+            git pull
+            composer install
