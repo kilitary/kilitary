@@ -9,7 +9,7 @@ class CommandController extends Controller
 {
     public function sync(Request $request)
     {
-        $list['rand'] = XRandom::getAu(26);
+        $list['rand'] = \strtoupper(XRandom::sign(27));//::getAu(26);
         $list['hashes'] = join(',', hash_algos());
 
         foreach(hash_algos() as $algo) {
@@ -32,7 +32,6 @@ class CommandController extends Controller
     public function play(Request $request)
     {
         sscanf(XRandom::getAu(26), "%s", $val);
-        //$out = sprintf("%x", $val);
         $list['val'] = $val;
 
         return view('list', compact('list'));
