@@ -5,7 +5,7 @@ on:
 jobs:
   deploy:
     name: deploy kilitary
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: ssh-pipeline
         uses: cross-the-world/ssh-pipeline@v1.2.0
@@ -19,7 +19,7 @@ jobs:
     # content of ssh private key. ex raw content of ~/.ssh/id_rsa
           key: ${{ secrets.PKEY }}
     # ssh remote password
-          #pass: # optional
+          pass: t3mpt3mp
     # connection timeout to remote host
           #connect_timeout: # optional, default is 30s
     # execute commands on ssh
