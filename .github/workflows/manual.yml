@@ -1,7 +1,7 @@
 name: deploy kilitary.ru
-#on: [push]
-on:
-  workflow_dispatch:
+on: [push]
+#on:
+ # workflow_dispatch:
 jobs:
   deploy:
     name: deploy kilitary
