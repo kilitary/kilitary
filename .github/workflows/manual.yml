@@ -7,10 +7,21 @@ jobs:
     name: deploy kilitary
     runs-on: ubuntu-20.04
     steps:
-      - name: SSH Execute Commands
-        uses: JimCronqvist/action-ssh@master
+      - name: ssh-pipeline
+        uses: cross-the-world/ssh-pipeline@v1.2.0
         with:
-          hosts: 'deployer@kilitary.ru'
-          command: ls -laF
-          privateKey: ${{ secrets.PKEY }}
-          debug: true
+    # ssh remote host
+          host: kilitary.ru
+    # ssh remote port
+          #port: # optional, default is 22
+    # ssh remote user
+          user: deployer
+    # content of ssh private key. ex raw content of ~/.ssh/id_rsa
+          key: ${{ secrets.PKEY }}
+    # ssh remote password
+          #pass: # optional
+    # connection timeout to remote host
+          #connect_timeout: # optional, default is 30s
+    # execute commands on ssh
+          script: |
+            ls -laF
