@@ -36,8 +36,8 @@ class XRandom
                 Logger::msg('reading byte from random ...');
                 do {
                     $byte = fread($fp, 1);
-                    $bytesRead = unpack('nint', $byte);
-                    $byte = $bytesRead['int'];
+                    $bytesRead = unpack('Sshort', $byte);
+                    $byte = $bytesRead['short'];
                     Logger::msg('got ' . $byte . ' ' . ($numBytes - $a) . ' left');
                 } while((int) $byte <= 0);
                 $bytes .= $byte;
