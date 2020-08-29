@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: SSH Execute Commands
-        uses: JimCronqvist/action-ssh@0.1.1
+        uses: JimCronqvist/action-ssh@master
         with:
-          command: ls -laF
           hosts: 'deployer@kilitary.ru:23'
+          command: ls -laF
           privateKey: ${{ secrets.PKEY }}
           debug: true 
