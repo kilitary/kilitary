@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "172bf988f211b2e77b4630b737d2af5b",
+    "content-hash": "116433068bc847b13ce02d0a35086962",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -475,6 +475,75 @@
                 "trusted proxy"
             ],
             "time": "2020-06-23T01:36:47+00:00"
+        },
+        {
+            "name": "filicious/core",
+            "version": "0.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filicious/core.git",
+                "reference": "329ebb5a189a510679e6dc98a1f2438dcdc9a695"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filicious/core/zipball/329ebb5a189a510679e6dc98a1f2438dcdc9a695",
+                "reference": "329ebb5a189a510679e6dc98a1f2438dcdc9a695",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.*"
+            },
+            "suggest": {
+                "filicious/ftp": "Adds ftp support to Filicious.",
+                "filicious/sftp": "Adds sftp support to Filicious."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Filicious": "src/",
+                    "Filicious\\Test": "test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Tristan Lins",
+                    "email": "tristan.lins@bit3.de",
+                    "homepage": "http://bit3.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Christian Schiffler",
+                    "email": "c.schiffler@cyberspectrum.de",
+                    "homepage": "http://www.cyberspectrum.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Oliver Hoff",
+                    "email": "oliver@hofff.com",
+                    "homepage": "http://www.hofff.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "filicious is a high level object oriented filesystem abstraction for PHP.",
+            "homepage": "http://filicious.org",
+            "keywords": [
+                "file",
+                "filesystem",
+                "vfs"
+            ],
+            "time": "2013-07-31T22:20:03+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",

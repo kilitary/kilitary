@@ -1,18 +1,18 @@
 body
-    font-family: "Lucida Console";
-    font-size: 12px;
-    border-left: 2px dashed orange;
-    padding-left: 10px;
-    height: 100%;
-    width: 95%;
+    font-family: "Lucida Console"
+    font-size: 12px
+    border-left: 2px dashed orange
+    padding-left: 10px
+    height: 100%
+    width: 95%
 
 .container
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px dashed red;
+    width: 100%
+    height: 100%
+    border-bottom: 1px dashed red
 
 .list-item-container
-    border-bottom: 1px dashed lightblue;
+    border-bottom: 1px dashed lightblue
     padding: 4px
     padding-left: 4px
 
@@ -28,3 +28,55 @@ body
 
 .links
     padding-top: 10px
+
+a
+a:visited
+    text-decoration none
+
+a:hover
+    border-bottom: 3px dotted red
+
+.blinking-red
+    animation: blinkingRed 0.8s infinite;
+
+    @keyframes blinkingRed {
+        0% {
+            color: red;
+        }
+        50% {
+            color: transparent;
+        }
+        100% {
+            color: red;
+        }
+    }
+
+.blinking-green
+    animation: blinkingGreen 0.8s infinite;
+
+@keyframes blinkingGreen {
+    0% {
+        color: green;
+    }
+    50% {
+        color: transparent;
+    }
+    100% {
+        color: greenyellow;
+    }
+}
+
+.blinking-orange
+    animation: blinkingOrange 0.8s infinite;
+
+@keyframes blinkingOrange {
+    0% {
+        color: red;
+    }
+    50% {
+        color: transparent;
+    }
+    100% {
+        color: orange;
+    }
+}
