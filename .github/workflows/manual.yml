@@ -26,5 +26,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}"
+    - name: Execute SSH commmands on remote server
+      uses: JimCronqvist/action-ssh@master
+      with:
+        hosts: 'deployer@kilitary.ru'
+        privateKey: ${{ secrets.pkey }}
+        command: |
+          ls -lah
+          echo "I am $NAME"
