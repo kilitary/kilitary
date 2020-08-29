@@ -24,4 +24,7 @@ jobs:
           #connect_timeout: # optional, default is 30s
     # execute commands on ssh
           script: |
-            ls -laF
+            cd /var/www/html/kilitary
+            git reset --hard
+            git pull
+            composer install
