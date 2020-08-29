@@ -39,6 +39,7 @@ jobs:
            ls -laF
     # Remote user to connect with
          user: deployer
+         port: 23
     # Remote port to connect to
     #port: # optional, default is 22
     # Private SSH key to connect with
