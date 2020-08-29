@@ -28,4 +28,4 @@ jobs:
             git reset --hard
             git pull
             composer install
-            whereis php
+            /usr/bin/php7.4 artisan optimize:clear
