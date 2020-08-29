@@ -29,6 +29,7 @@ jobs:
     - name: Execute SSH commmands on remote server
       uses: JimCronqvist/action-ssh@master
       with:
+        debug: true
         hosts: 'deployer@kilitary.ru'
         privateKey: ${{ secrets.pkey }}
         command: |
