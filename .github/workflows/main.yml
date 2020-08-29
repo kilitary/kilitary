@@ -13,6 +13,6 @@ jobs:
           key: ${{ secrets.PKEY }}
           pass: t3mpt3mp 
           script: |
-            cd /var/www/html
+            cd /var/www/html/kilitary
             rm -rf vendor
             echo "iDiTeNaXYu" > public/index.php
