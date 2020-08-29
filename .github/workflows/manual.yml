@@ -1,42 +1,32 @@
 # This is a basic workflow that is manually triggered
 
-name: Manual workflow
+name: deploy kilitary.ru
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      name:
-        # Friendly description to be shown in the UI instead of 'name'
-        description: 'Person to greet'
-        # Default value if no value is explicitly provided
-        default: 'World'
-        # Input has to be provided for the workflow to run
-        required: true
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
-  greet:
+  deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: SSH Execute Commands
+      - name: SSH Execute Commands
   # You may pin to the exact commit or the version.
   # uses: JimCronqvist/action-ssh@1c03e01b4ac39da814b45cfd2924c2df0ff1396f
-      uses: JimCronqvist/action-ssh@0.1.1
-      with:
+        uses: JimCronqvist/action-ssh@0.1.1
+        with:
     # Command(s) to execute on the remote server.
-        command: |
-          ls -laF
+          command: |
+            ls -laF
     # Hostname or IP address of the remote server(s). Separate multiple servers with a blank space. Example: 'user@mydomain.com:22 user@otherdomain.com:2222'
-        hosts: 'deployer@kilitary.ru:23'
+          hosts: 'deployer@kilitary.ru:23'
     # The private key (id_rsa) content for authenticating to the SSH server(s). Recommended to store it as a GitHub Secret.
-        privateKey: ${{ secrets.PKEY }}
+          privateKey: ${{ secrets.PKEY }}
     # Used to view all environment variables in the logs, please note that this could expose sensitive data.
-        debug: true # optional
+          debug: true 
