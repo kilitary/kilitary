@@ -28,3 +28,4 @@ jobs:
             git reset --hard
             git pull
             composer install
+            whereis php
