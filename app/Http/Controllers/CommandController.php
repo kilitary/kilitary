@@ -28,4 +28,13 @@ class CommandController extends Controller
 
         return view('list', compact('list'));
     }
+
+    public function play(Request $request)
+    {
+        sscanf(XRandom::getAu(26), "%s", $val);
+        //$out = sprintf("%x", $val);
+        $list['val'] = $val;
+
+        return view('list', compact('list'));
+    }
 }

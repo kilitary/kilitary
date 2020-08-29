@@ -15,7 +15,8 @@ class TextController extends Controller
 
         $num = mt_rand(0, 26) * 9;
         for($i = 0; $i < $num; $i++) {
-            $list[XRandom::sign(5)] = $words[XRandom::get(0, count($words) - 1)];
+            $list[XRandom::sign(5)] = $words[XRandom::get(0, count($words) - 1)] .
+                sprintf("%s%02d ", XRandom::get(0, 4) % 2 ? '+' : '-', XRandom::get(0, 9));
         }
 
         return view('list-text', compact('list'));

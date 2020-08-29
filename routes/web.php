@@ -18,5 +18,6 @@ Route::get('/', 'PageController@index');
 Route::fallback('PageController@fallback');
 
 Route::get('/command/sync', 'CommandController@sync');
+Route::get('/command/play', 'CommandController@play');
 
 Route::get('/{file}.txt', 'TextController@identify');
