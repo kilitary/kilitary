@@ -38,7 +38,7 @@ a:hover {
   border-bottom: 3px dotted #f00;
 }
 .blinking-red {
-  animation: blinkingRed 0.8s infinite;
+  animation: blinkingRed 1s infinite;
 }
 @-moz-keyframes blinkingRed {
   0% {
@@ -85,7 +85,7 @@ a:hover {
   }
 }
 .blinking-green {
-  animation: blinkingGreen 1.8s infinite;
+  animation: blinkingGreen 1.3s infinite;
 }
 .blinking-orange {
   animation: blinkingOrange 1.8s infinite;
@@ -95,7 +95,7 @@ a:hover {
     color: #008000;
   }
   50% {
-    color: transparent;
+    color: #955ae7;
   }
   100% {
     color: #adff2f;
@@ -106,7 +106,7 @@ a:hover {
     color: #008000;
   }
   50% {
-    color: transparent;
+    color: #955ae7;
   }
   100% {
     color: #adff2f;
@@ -117,7 +117,7 @@ a:hover {
     color: #008000;
   }
   50% {
-    color: transparent;
+    color: #955ae7;
   }
   100% {
     color: #adff2f;
@@ -128,7 +128,7 @@ a:hover {
     color: #008000;
   }
   50% {
-    color: transparent;
+    color: #955ae7;
   }
   100% {
     color: #adff2f;
