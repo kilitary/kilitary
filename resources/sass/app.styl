@@ -5,7 +5,6 @@ body
     padding-left: 10px
     height: 100%
     width: 95%
-    //background-color #fffee9
 
 .container
     width: 100%
@@ -18,10 +17,7 @@ body
     padding: 4px
     display: box
     min-height: 10px
-    :hover
-        background-color: #ffa500
-        color: whitesmoke
-        cursor: pointer
+
 
 .list-key
     font-family: "consolas"
@@ -33,8 +29,11 @@ body
     padding-right: 8px
     margin-right: 1px
     float: left
-    :hover
+
+    &:hover
         background-color: rebeccapurple
+        color: whitesmoke
+        cursor: pointer
 
 .list-item
     font-family: "consolas"
@@ -43,8 +42,11 @@ body
     padding-left: 8px
     margin: 0px
     width: 90%
-    :hover
+
+    &:hover
         background-color: #7dffae
+        color: black
+        cursor: pointer
 
 .links
     padding-top: 10px
@@ -52,9 +54,11 @@ body
 a
 a:visited
     text-decoration none
+    color: #117a8b
 
 a:hover
-    border-bottom: 3px dotted red
+    border-bottom: 2px dotted cornflowerblue
+    color red
 
 .blinking-red
     animation: blinkingRed 0.3s infinite;
@@ -91,7 +95,7 @@ a:hover
 
 @keyframes blinkingOrange {
     0% {
-        color: green;
+        color: yellow;
     }
     50% {
         color: orange;
