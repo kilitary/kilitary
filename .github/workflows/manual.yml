@@ -10,7 +10,7 @@ jobs:
       - name: SSH Execute Commands
         uses: JimCronqvist/action-ssh@master
         with:
-          hosts: deployer@kilitary.ru
+          hosts: deployer@kilitary.ru:23
           command: ls -laF
           privateKey: ${{ secrets.PKEY }}
           debug: true
