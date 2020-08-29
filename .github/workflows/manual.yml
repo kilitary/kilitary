@@ -7,20 +7,21 @@ name: deploy kilitary.ru
 on:
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
+    jobs:
   # This workflow contains a single job called "greet"
-  deploy:
+      deploy:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+      name: deploy kilitary
+      runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - uses: JimCronqvist/action-ssh@0.1.1
     # Runs a single command using the runners shell
-      - name: SSH Execute Commands
+    - name: SSH Execute Commands
   # You may pin to the exact commit or the version.
   # uses: JimCronqvist/action-ssh@1c03e01b4ac39da814b45cfd2924c2df0ff1396f
-        uses: JimCronqvist/action-ssh@0.1.1
-        with:
+      with:
     # Command(s) to execute on the remote server.
           command: |
             ls -laF
