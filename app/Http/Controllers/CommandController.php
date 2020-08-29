@@ -37,3 +37,4 @@ class CommandController extends Controller
         return view('list', compact('list'));
     }
 }
+
