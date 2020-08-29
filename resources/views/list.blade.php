@@ -4,8 +4,8 @@
     <div class="container">
         @foreach ($list as $key => $item)
             <div class="list-item-container">
-                <span class="list-key">{{ $key }}</span>
-                <span class="list-item">{!! $item !!}</span>
+                <div class="list-key">{{ $key }}</div>
+                <div class="list-item">{!! $item !!}</div>
             </div>
         @endforeach
     </div>
