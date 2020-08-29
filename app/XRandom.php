@@ -36,7 +36,7 @@ class XRandom
                 Logger::msg('reading byte from random ...');
                 do {
                     $byte = fread($fp, 1);
-                    Logger::msg('got %s', $byte);
+                    Logger::msg('got ' . $byte);
                 } while($byte <= 0);
                 $bytes .= $byte;
             }
