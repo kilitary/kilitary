@@ -32,16 +32,17 @@ jobs:
        uses: Evaneos/ssh-action@v0.1.0
        with: 
     # Remote host(s) to connect to
-         hosts: kilitary.ru
+         hosts: |
+           kilitary.ru
     # One or multiple commands to run on the remote host(s)
          commands: |
            ls -laF
     # Remote user to connect with
-         user: 'deployer'
+         user: deployer
     # Remote port to connect to
     #port: # optional, default is 22
     # Private SSH key to connect with
-         private_key: ${{ secrets.pkey }}
+         private_key: ${{ secrets.PKEY }}
     # Password to connect with
     #password: # optional
     # Known hosts keys that SSH can rely on to connect to the remote host(s)
