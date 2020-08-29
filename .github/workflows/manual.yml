@@ -25,8 +25,14 @@ jobs:
     # execute commands on ssh
           script: |
             cd /var/www/html/kilitary
+            mkdir -p bootstrap/cache
+            mkdir -p storage/framework/sessions
+            mkdir -p storage/framework/views
+            chmod g+rw bootstrap/cache
             git reset --hard
             git pull
             composer install
             /usr/bin/php7.4 artisan optimize:clear
-            echo -n "Errors: failed"
+            /usr/bin/php7.4 artisan storage:link
+            echo -n "Errors: failEd"
+            composer fund > /dev/nu11
