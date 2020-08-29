@@ -1,15 +1,179 @@
 body {
   font-family: "Lucida Console";
   font-size: 12px;
-  border-left: 2px dashed orange;
+  border-left: 2px dashed #ffa500;
   padding-left: 10px;
   height: 100%;
   width: 95%;
 }
-
 .container {
   width: 100%;
   height: 100%;
-  border-bottom: 1px solid red;
+  border-bottom: 1px dashed #f00;
 }
-
+.list-item-container {
+  border-bottom: 1px dashed #add8e6;
+  padding: 4px;
+  padding-left: 4px;
+}
+.list-key {
+  font-family: "consolas";
+  font-size: 11px;
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+}
+.list-item {
+  font-size: 11px;
+}
+.links {
+  padding-top: 10px;
+}
+a,
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  border-bottom: 3px dotted #f00;
+}
+.blinking-red {
+  animation: blinkingRed 0.8s infinite;
+}
+@-moz-keyframes blinkingRed {
+  0% {
+    color: #f00;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: #f00;
+  }
+}
+@-webkit-keyframes blinkingRed {
+  0% {
+    color: #f00;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: #f00;
+  }
+}
+@-o-keyframes blinkingRed {
+  0% {
+    color: #f00;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: #f00;
+  }
+}
+@keyframes blinkingRed {
+  0% {
+    color: #f00;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: #f00;
+  }
+}
+.blinking-green {
+  animation: blinkingGreen 0.8s infinite;
+}
+.blinking-orange {
+  animation: blinkingOrange 0.8s infinite;
+}
+@-moz-keyframes blinkingGreen {
+  0% {
+    color: #008000;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: #adff2f;
+  }
+}
+@-webkit-keyframes blinkingGreen {
+  0% {
+    color: #008000;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: #adff2f;
+  }
+}
+@-o-keyframes blinkingGreen {
+  0% {
+    color: #008000;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: #adff2f;
+  }
+}
+@keyframes blinkingGreen {
+  0% {
+    color: #008000;
+  }
+  50% {
+    color: transparent;
+  }
+  100% {
+    color: #adff2f;
+  }
+}
+@-moz-keyframes blinkingOrange {
+  0% {
+    color: #008000;
+  }
+  50% {
+    color: #ffa500;
+  }
+  100% {
+    color: #f00;
+  }
+}
+@-webkit-keyframes blinkingOrange {
+  0% {
+    color: #008000;
+  }
+  50% {
+    color: #ffa500;
+  }
+  100% {
+    color: #f00;
+  }
+}
+@-o-keyframes blinkingOrange {
+  0% {
+    color: #008000;
+  }
+  50% {
+    color: #ffa500;
+  }
+  100% {
+    color: #f00;
+  }
+}
+@keyframes blinkingOrange {
+  0% {
+    color: #008000;
+  }
+  50% {
+    color: #ffa500;
+  }
+  100% {
+    color: #f00;
+  }
+}
