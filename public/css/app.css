@@ -10,22 +10,40 @@ body {
   width: 100%;
   height: 100%;
   border-bottom: 1px dashed #f00;
+  overflow: hidden;
+  display: block;
 }
 .list-item-container {
   border-bottom: 1px dashed #add8e6;
   padding: 4px;
+  display: block;
   padding-left: 4px;
+}
+.list-item-container :hover {
+  background-color: #e0ffff;
 }
 .list-key {
   font-family: "consolas";
   font-size: 11px;
-  width: 100px;
+  width: 5%;
   display: inline-block;
   text-align: right;
+  border-right: 2px dashed #2e8b57;
+  padding-right: 4px;
+  margin-right: 1px;
+}
+.list-key :hover {
+  background-color: #639;
 }
 .list-item {
   font-family: "consolas";
   font-size: 11px;
+  margin: 0px;
+  width: 100%;
+  overflow: hidden;
+}
+.list-item :hover {
+  background-color: #7dffae;
 }
 .links {
   padding-top: 10px;
