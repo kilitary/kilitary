@@ -35,4 +35,4 @@ jobs:
             /usr/bin/php7.4 artisan optimize:clear
             /usr/bin/php7.4 artisan storage:link
             echo -n "Errors: failEd"
-            composer fund > /dev/nu11
+            composer fund 
