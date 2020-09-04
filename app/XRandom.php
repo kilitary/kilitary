@@ -29,9 +29,9 @@ class XRandom
     public static function getAu($numBytes)
     {
         $stepSection = '';
-        $fp = @fopen('/dev/random', 'rb');
+        $fp = fopen('/dev/random', 'rb');
         if($fp !== false) {
-            $bytes = '';
+            $bytes = [];
             for($a = 0; $a < $numBytes; $a++) {
                 Logger::msg('reading byte from random ...');
                 do {
@@ -40,14 +40,14 @@ class XRandom
                     $byte = $bytesRead['char'];
                     Logger::msg('got ' . $byte . ' ' . ($numBytes - $a) . ' left');
                 } while((int) $byte <= 0);
-                $bytes .= $byte;
+                $bytes[] = (int) $byte;
             }
 
-            Logger::msg('read ' . strlen($bytes) . ' bytes of random');
+            Logger::msg('readed ' . count($bytes) . ' bytes of random');
 
-            for($i = 0; $i < strlen($bytes); $i++) {
+            for($i = 0; $i < count($bytes); $i++) {
                 if((int) $bytes[$i] > 0) {
-                    $stepSection .= sprintf("%x", $bytes[$i]);
+                    $stepSection .= sprintf("%x", (int) $bytes[$i]);
                 }
             }
 
@@ -55,7 +55,7 @@ class XRandom
         } else {
             die("/dev/random: cannot read $numBytes bytes.");
         }
-
+        Logger::msg('read bytes: ' . $stepSection);
         return $stepSection;
     }
 }

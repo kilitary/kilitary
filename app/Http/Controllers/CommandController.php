@@ -33,7 +33,7 @@ class CommandController extends Controller
 
     public function play(Request $request)
     {
-        sscanf(XRandom::getAu(26), "%s", $val);
+        $val = XRandom::getAu(26);
         $list['val'] = $val;
 
         return view('list', compact('list'));
