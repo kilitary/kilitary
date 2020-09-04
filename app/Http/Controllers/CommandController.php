@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class CommandController extends Controller
 {
-    public function sync(Request $request)
+    public function sync()
     {
         $list['rand'] = \strtoupper(XRandom::sign(26));//::getAu(26);
 
@@ -31,12 +31,19 @@ class CommandController extends Controller
         return view('list', compact('list'));
     }
 
-    public function play(Request $request)
+    public function play()
     {
         $val = XRandom::getAu(26);
         $list['val'] = $val;
 
         return view('list', compact('list'));
+    }
+
+    public function command(Request $request, $command)
+    {
+        $ret = self::$command();
+
+        return $ret;
     }
 }
 
