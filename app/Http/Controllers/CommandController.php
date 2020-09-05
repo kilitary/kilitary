@@ -12,7 +12,7 @@ class CommandController extends Controller
 {
     public function sync(Request $request)
     {
-        $list['rand'] = \strtoupper(XRandom::sign(26));//::getAu(26);
+        $list['rand'] = '<a href="/command/sync?/">' . \strtoupper(XRandom::sign(26)) . '</a>';//::getAu(26);
 
         foreach(hash_algos() as $algo) {
             $hash = hash($algo, $list['rand']);
@@ -56,7 +56,7 @@ class CommandController extends Controller
         try {
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-            //$mail->isSMTP();                                            // Send using SMTP
+            $mail->isMail();                                            // Send using SMTP
             //$mail->Host = 'smtp1.example.com';                    // Set the SMTP server to send through
             //$mail->SMTPAuth = true;                                   // Enable SMTP authentication
             //$mail->Username = 'user@example.com';                     // SMTP username
@@ -82,9 +82,9 @@ class CommandController extends Controller
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $ret = $mail->send();
-            return ['status' => $ret];
+            return ['ok' => $ret];
         } catch(Exception $e) {
-            return ['status' => $mail->ErrorInfo];
+            return ['error' => $mail->ErrorInfo];
         }
     }
 }
