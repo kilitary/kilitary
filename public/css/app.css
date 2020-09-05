@@ -60,7 +60,7 @@ a:hover {
   color: #f00;
 }
 .blinking-red {
-  animation: blinkingRed 0.3s infinite;
+  animation: blinkingRed 0.1s infinite;
 }
 @-moz-keyframes blinkingRed {
   0% {
