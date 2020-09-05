@@ -12,7 +12,11 @@ class CommandController extends Controller
 {
     public function sync(Request $request)
     {
-        $list['rand'] = '<a href="/command/sync?/">' . \strtoupper(XRandom::sign(26)) . '</a>';//::getAu(26);
+        $list['rand'] = "<a href='/command/sync?/' style='font-size:11px;font-variant: small-caps;font-family: consolas'>" .
+            (XRandom::sign(XRandom::get(0, 32))) .
+            '</a>';
+        $list['transaction/tx'] = \Str::orderedUuid();
+        $list['transaction/rx'] = \Str::orderedUuid();
 
         foreach(hash_algos() as $algo) {
             $hash = hash($algo, $list['rand']);
