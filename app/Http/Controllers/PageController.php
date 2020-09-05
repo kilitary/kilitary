@@ -18,7 +18,7 @@ class PageController extends Controller
 
         $gdiSelected = -3;
         $chanceOf = -3;
-        $sign = '<empty>';
+        $sign = '<font color=red class="blinking-red"><< empty >></font>';
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign'));
     }
