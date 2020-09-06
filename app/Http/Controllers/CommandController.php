@@ -36,9 +36,9 @@ class CommandController extends Controller
         $list['check'] = $pass[XRandom::get(0, 2)];
 
         $anshlus = [
-            '<font color=green class="blinking-green">allowed</font>',
+            '<font color=green class="blinking-green">yes</font>',
             '<font color=red class="blinking-red">burnout</font>',
-            '<font color=orange class="blinking-orange">disallowed</font>'
+            '<font color=orange class="blinking-orange">no</font>'
         ];
         $list['fastAnshlusAllowed'] = $anshlus[XRandom::get(0, 2)];
 
