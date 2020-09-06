@@ -8,6 +8,14 @@ class UrlController extends Controller
 {
     public function create(Request $request)
     {
+        if(empty($request->input('short'))) {
+            $request['short'] = \Str::random(6);
+        }
+
+        if(empty($request->input('long'))) {
+            $request['long'] = \Str::random(6);
+        }
+
         $existent = \App\ShortUrl::where('short', $request->input('short'))->first();
 
         if(!$existent) {
