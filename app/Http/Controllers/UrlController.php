@@ -26,6 +26,8 @@ class UrlController extends Controller
     public function redirect(Request $request, $shortUrl)
     {
         $url = \App\ShortUrl::where('short', $shortUrl)->first();
+        $url->visits += 1;
+        $url->save();
 
         return redirect($url->long);
     }
