@@ -18,7 +18,7 @@
                 <div><label for="short"> short</label><input name="short" placeholder="{{$shortUrl->short}}"></div>
                 <div><label for="long"> long</label> <input name="long" placeholder="{{$shortUrl->long}}"></div>
                 <div>
-                    <button>add short/long url translation (url shortener)</button>
+                    <button>add short/long url translation (url shortener) or just click this button</button>
                 </div>
             </form>
         </div>
