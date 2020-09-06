@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
             DB::table('short_urls')
                 ->where("long", "NOT like", '%http%')
                 ->delete();
-        })->daily();
+        })->hourly();
     }
 
     /**
