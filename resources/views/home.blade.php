@@ -10,7 +10,7 @@
         @endif
 
         <div style="font-size:13px;font-variant: small-caps;font-family: consolas">sign {!! $sign !!}</div>
-        <div class="links"><a href='/command/sync?{{request()->path()}}'>sync</a></div>
+        <div class="links"><a href='/command/sync?{{request()->path()}}'>sync?</a></div>
 
         <div class="shortener">
             <form method="post" action="/su/create">
@@ -18,13 +18,13 @@
                 <div><label for="short"> short</label><input name="short" placeholder="{{$shortUrl->short}}"></div>
                 <div><label for="long"> long</label> <input name="long" placeholder="{{$shortUrl->long}}"></div>
                 <div>
-                    <button>add short/long translation</button>
+                    <button>add short/long url translation (url shortener)</button>
                 </div>
             </form>
         </div>
 
         <div>
-            coming soon: free magick email @ kiltary.ru | ?
+            coming soon: free magick email (life pro-long) @ kiltary.ru | ?
         </div>
     </div>
 @endsection
