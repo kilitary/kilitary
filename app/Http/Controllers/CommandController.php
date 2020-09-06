@@ -42,6 +42,8 @@ class CommandController extends Controller
         ];
         $list['fastAnshlusAllowed'] = $anshlus[XRandom::get(0, 2)];
 
+        $list['tampered'] = XRandom::get(0, 1) ? "yes": "no";
+
         return view('list', compact('list'));
     }
 
