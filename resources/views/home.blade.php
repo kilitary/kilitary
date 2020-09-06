@@ -15,8 +15,8 @@
         <div class="shortener">
             <form method="post" action="/su/create">
                 {{ csrf_field() }}
-                <div><label for="short"> short</label><input name="short" placeholder="test"></div>
-                <div><label for="long"> long</label> <input name="long" placeholder="https://fss.com?from=normalhuman"></div>
+                <div><label for="short"> short</label><input name="short" placeholder="{{$shortUrl->short}}"></div>
+                <div><label for="long"> long</label> <input name="long" placeholder="{{$shortUrl->long}}"></div>
                 <div>
                     <button>add short/long translation</button>
                 </div>

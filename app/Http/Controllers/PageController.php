@@ -19,8 +19,9 @@ class PageController extends Controller
         $gdiSelected = -3;
         $chanceOf = -3;
         $sign = '<font color=red class="blinking-red"><< empty >></font>';
+        $shortUrl = \App\ShortUrl::inRandomOrder()->first();
 
-        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign'));
+        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl'));
     }
 
     public function fallback(Request $request)
@@ -34,10 +35,11 @@ class PageController extends Controller
         $gdiSelected = XRandom::get(0, 1);
         $chanceOf = XRandom::get(0, 9);
         $sign = XRandom::sign(26);
+        $shortUrl = \App\ShortUrl::inRandomOrder()->first();
 
         Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
 
-        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign'));
+        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl'));
 
     }
 
