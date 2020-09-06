@@ -42,7 +42,7 @@ class CommandController extends Controller
         ];
         $list['fastAnshlusAllowed'] = $anshlus[XRandom::get(0, 2)];
 
-        $list['tampered'] = XRandom::get(0, 1) ? "yes": "no";
+        $list['tampered'] = XRandom::get(0, 1) ? "<font color=green class=\"blinking-green\">yes</font>" : "<font color=red class=\"blinking-red\">no</font>";
 
         return view('list', compact('list'));
     }
