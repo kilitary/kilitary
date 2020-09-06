@@ -22,5 +22,9 @@
                 </div>
             </form>
         </div>
+
+        <div>
+            coming soon: free email @ kiltary.ru | ?
+        </div>
     </div>
 @endsection
