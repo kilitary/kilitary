@@ -19,7 +19,7 @@ class UrlController extends Controller
         $existent = \App\ShortUrl::where('short', $request->input('short'))->first();
 
         if(!$existent) {
-
+            \Log::debug('creating ' . $request->input('short') . ' => ' . $request->input('long') . ' link');
             $shortUrl = \App\ShortUrl::create([
                 'short' => $request->input('short'),
                 'long' => $request->input('long'),
