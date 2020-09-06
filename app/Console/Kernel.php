@@ -27,9 +27,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function() {
             DB::table('short_urls')
-                ->where("long", "NOT like", '%http%')
+                ->where("long", "NOT LIKE", '%http%')
                 ->delete();
-        })->hourly();
+        })->everyFiveMinutes();
     }
 
     /**

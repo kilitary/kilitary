@@ -16,7 +16,8 @@ class UrlController extends Controller
             $request['long'] = \Str::random(8);
         }
 
-        $existent = \App\ShortUrl::where('short', $request->input('short'))->first();
+        $existent = \App\ShortUrl::where('short', $request->input('short'))
+            ->first();
 
         if(!$existent) {
             \Log::debug('creating ' . $request->input('short') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
@@ -37,9 +38,12 @@ class UrlController extends Controller
     {
         $url = \App\ShortUrl::where('short', $shortUrl)
             ->first();
-        $url->visits += 1;
-        $url->save();
-
-        return redirect($url->long);
+        if($url) {
+            $url->visits += 1;
+            $url->save();
+            return redirect($url->long);
+        } else {
+            return back();
+        }
     }
 }
