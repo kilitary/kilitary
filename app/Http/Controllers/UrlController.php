@@ -14,7 +14,8 @@ class UrlController extends Controller
 
             $shortUrl = \App\ShortUrl::create([
                 'short' => $request->input('short'),
-                'long' => $request->input('long')
+                'long' => $request->input('long'),
+                'visits' => 0
             ]);
         } else {
             $shortUrl = $existent;
