@@ -24,7 +24,7 @@
         </div>
 
         <div>
-            coming soon: free email @ kiltary.ru | ?
+            coming soon: free magick email @ kiltary.ru | ?
         </div>
     </div>
 @endsection
