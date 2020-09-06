@@ -109,6 +109,16 @@ a:hover {
 .blinking-green {
   animation: blinkingGreen 1.3s infinite;
 }
+.shortener {
+  margin: 10px;
+}
+.shortener input {
+  margin-left: 10px;
+}
+.shortener button {
+  padding: 10px;
+  margin-top: 10px;
+}
 .blinking-orange {
   animation: blinkingOrange 1.8s infinite;
 }

@@ -11,5 +11,16 @@
 
         <div style="font-size:13px;font-variant: small-caps;font-family: consolas">sign {!! $sign !!}</div>
         <div class="links"><a href='/command/sync?{{request()->path()}}'>sync</a></div>
+
+        <div class="shortener">
+            <form method="post" action="/su/create">
+                {{ csrf_field() }}
+                <div><label for="short"> short</label><input name="short" placeholder="test"></div>
+                <div><label for="long"> long</label> <input name="long" placeholder="https://fss.com?from=normalhuman"></div>
+                <div>
+                    <button>add short/long translation</button>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection
