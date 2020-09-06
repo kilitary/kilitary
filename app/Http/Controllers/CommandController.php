@@ -34,6 +34,7 @@ class CommandController extends Controller
             '<font color=orange class="blinking-orange">middleware</font>'
         ];
         $list['check'] = $pass[XRandom::get(0, 2)];
+        $list['fastAnshlusAllowed'] = XRandom::get(0, 1);
 
         return view('list', compact('list'));
     }
