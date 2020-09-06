@@ -20,3 +20,5 @@ Route::fallback('PageController@fallback');
 Route::get('/command/{command}', 'CommandController@command');
 
 Route::get('/{file}.txt', 'TextController@identify');
+
+Route::get('/su/{url}', 'UrlController@redirect');
