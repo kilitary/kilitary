@@ -33,11 +33,6 @@ class Kernel extends ConsoleKernel
                 ->where("long", "NOT LIKE", '%http%')
                 ->delete();
         })->everyFiveMinutes();
-
-        $schedule->call(function() {
-            Logger::msg('touch at ' . Carbon::now());
-            touch('working.file');
-        })->everyMinute();
     }
 
     /**
