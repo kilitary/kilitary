@@ -24,7 +24,7 @@
         </div>
 
         <div>
-            coming soon: free magick email (life pro-long) @ kiltary.ru | ?
+            coming soon: free magick email (life pro-longer) @ kilitary.ru | ?
         </div>
     </div>
 @endsection
