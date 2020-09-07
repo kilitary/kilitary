@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
             DB::table('short_urls')
                 ->where("long", "NOT LIKE", '%http%')
                 ->delete();
-        })->everyFiveMinutes();
+        })->everyFourHours();
     }
 
     /**
