@@ -30,6 +30,10 @@ class Kernel extends ConsoleKernel
                 ->where("long", "NOT LIKE", '%http%')
                 ->delete();
         })->everyFiveMinutes();
+
+        $schedule->call(function() {
+            touch('working.file');
+        })->everyMinute();
     }
 
     /**
@@ -42,5 +46,10 @@ class Kernel extends ConsoleKernel
         $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
+    }
+
+    protected function scheduleTimezone()
+    {
+        return 'Europe/Moscow';
     }
 }
