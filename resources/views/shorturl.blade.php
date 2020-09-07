@@ -2,12 +2,11 @@
 
 @section('content')
     <div class="container">
-        success: {{$success}}<br/>
         <h2>{{env('APP_URL')}}/su/{{$shortUrl->short}}</h2>
         to
         <h2>{{$shortUrl->long}}</h2>
         <br/>
-        done.
+        will be deleted: {{$success}}
     </div>
     <script>
         setTimeout(function() {
