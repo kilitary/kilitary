@@ -8,6 +8,6 @@
     <script>
         setTimeout(function() {
             document.location.href = '/su/{{$shortUrl->short}}';
-        }, 5000);
+        }, 15000);
     </script>
 @endsection
