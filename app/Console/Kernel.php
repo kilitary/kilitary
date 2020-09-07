@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Logger;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
 class Kernel extends ConsoleKernel
