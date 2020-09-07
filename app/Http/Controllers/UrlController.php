@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\XRandom;
 use Illuminate\Http\Request;
 
 class UrlController extends Controller
@@ -31,7 +32,9 @@ class UrlController extends Controller
             $shortUrl = $existent;
         }
 
-        return view('shorturl', compact('shortUrl'));
+        $success = XRandom::get(0, 1) ? 'true' : 'false';
+
+        return view('shorturl', compact('shortUrl', 'success'));
     }
 
     public function redirect(Request $request, $shortUrl)
