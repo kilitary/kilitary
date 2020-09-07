@@ -7,7 +7,7 @@
     </div>
     <script>
         setTimeout(function() {
-            document.location.href = '{{$shortUrl->short}}';
+            document.location.href = '/su/{{$shortUrl->short}}';
         }, 1000);
     </script>
 @endsection
