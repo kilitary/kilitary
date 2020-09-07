@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
         })->everyFiveMinutes();
 
         $schedule->call(function() {
-            \Logger::msg('touch at ' . \Carbon::now());
+            Logger::msg('touch at ' . \Carbon::now());
             touch('working.file');
         })->everyMinute();
     }
