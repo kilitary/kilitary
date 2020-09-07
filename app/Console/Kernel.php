@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Logger;
+use Illuminate\Support\Carbon;
 
 class Kernel extends ConsoleKernel
 {
@@ -33,7 +34,7 @@ class Kernel extends ConsoleKernel
         })->everyFiveMinutes();
 
         $schedule->call(function() {
-            Logger::msg('touch at ' . \Carbon::now());
+            Logger::msg('touch at ' . Carbon::now());
             touch('working.file');
         })->everyMinute();
     }
