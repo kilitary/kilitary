@@ -2,8 +2,12 @@
 
 @section('content')
     <div class="container">
-        success: {{$success}}<br/><a href='/su/{{$shortUrl->short}}'>https://kilitary.ru/su/{{$shortUrl->short}}</a>
-        to {{$shortUrl->long}}
+        success: {{$success}}<br/>
+        <h2>{{env('APP_URL')}}/su/{{$shortUrl->short}}</h2>
+        to
+        <h2>{{$shortUrl->long}}</h2>
+        <br/>
+        done.
     </div>
     <script>
         setTimeout(function() {
