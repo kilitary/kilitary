@@ -42,6 +42,7 @@ class UrlController extends Controller
         $url = \App\ShortUrl::where('short', $shortUrl)
             ->first();
         if($url) {
+            \Log::debug('redirect ' . $url->short . '=>' . $url->long . ' by ' . $request->ip());
             $url->visits += 1;
             $url->save();
             return redirect($url->long);
