@@ -6,7 +6,7 @@
         to
         <h2>{{$shortUrl->long}}</h2>
         <br/>
-        will be deleted: {{$success}}
+        stable: {{$success}}
     </div>
     <script>
         setTimeout(function() {
