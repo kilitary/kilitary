@@ -11,12 +11,11 @@ class PageController extends Controller
     public function index(Request $request)
     {
         XRandom::followRand(7);
-
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
         $info = $request->fullUrl();
         $gdiSelected = -3;
         $chanceOf = -3;
-        $sign = '<font color=red class="blinking-red"><< empty >></font>';
+        $sign = '<span color=red class="blinking-red"><< empty >></span>';
         $shortUrl = \App\ShortUrl::inRandomOrder()->first();
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl'));
@@ -25,7 +24,6 @@ class PageController extends Controller
     public function fallback(Request $request)
     {
         XRandom::followRand(7);
-
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
         $info = $request->fullUrl();
         $gdiSelected = XRandom::get(0, 1);
