@@ -49,7 +49,6 @@ class CommandController extends Controller
             '<font color=red class="blinking-red">burnout</font>',
             '<font color=orange class="blinking-orange">no</font>'
         ];
-        $list['fastAnshlusAllowed'] = $anshlus[XRandom::get(0, 2)];
 
         $tamper = [
             'yes',
