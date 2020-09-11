@@ -63,7 +63,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewTelescope', function($user) {
-            if(request()->has('aaa')) {
+            if(request()->ip() == '188.242.121.209') {
                 return true;
             }
             return false;
