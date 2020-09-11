@@ -21,11 +21,11 @@ class CommandController extends Controller
         $list['transaction/rx'] = \Str::orderedUuid();
         $list['balance'] = XRandom::get(0, 99) . '%';
 
-        $list['nasa_score'] = XRandom::get(0, 99) . '%';
-        $list['nsa_score'] = XRandom::get(0, 99) . '%';
-        $list['fbi_score'] = XRandom::get(0, 99) . '%';
-        $list['cia_score'] = XRandom::get(0, 99) . '%';
-        $list['fss_score'] = XRandom::get(0, 99) . '%';
+        $list['nasa_score'] = XRandom::followRand(1) + XRandom::get(0, 99) . '%';
+        $list['nsa_score'] = XRandom::followRand(1) + XRandom::get(0, 99) . '%';
+        $list['fbi_score'] = XRandom::followRand(1) + XRandom::get(0, 99) . '%';
+        $list['cia_score'] = XRandom::followRand(1) + XRandom::get(0, 99) . '%';
+        $list['fss_score'] = XRandom::followRand(1) + XRandom::get(0, 99) . '%';
 
         foreach(hash_algos() as $algo) {
             $hash = hash($algo, $list['rand']);
