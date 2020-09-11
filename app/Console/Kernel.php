@@ -7,6 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Logger;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use App\Jobs\ClearOldShit;
 
 class Kernel extends ConsoleKernel
 {
@@ -28,11 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function() {
-            DB::table('short_urls')
-                ->where("long", "not like", '%http%')
-                ->delete();
-        })->everyFourHours();
+        $schedule->job(new ClearOldShit)->everyMinute();
     }
 
     /**
