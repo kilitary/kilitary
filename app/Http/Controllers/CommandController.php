@@ -19,13 +19,13 @@ class CommandController extends Controller
             '</a>';
         $list['transaction/tx'] = \Str::orderedUuid();
         $list['transaction/rx'] = \Str::orderedUuid();
-        $list['balance'] = XRandom::get(0, 99) . '%';
+        $list['balance'] = XRandom::get(0, 100) . '%';
 
-        $list['nasa_score'] = XRandom::followRand(1) + XRandom::get(0, 99) . '%';
-        $list['nsa_score'] = XRandom::followRand(1) + XRandom::get(0, 99) . '%';
-        $list['fbi_score'] = XRandom::followRand(1) + XRandom::get(0, 99) . '%';
-        $list['cia_score'] = XRandom::followRand(1) + XRandom::get(0, 99) . '%';
-        $list['fss_score'] = XRandom::followRand(1) + XRandom::get(0, 99) . '%';
+        $list['nasa_score'] = XRandom::scaled(0, 99) . '%';
+        $list['nsa_score'] = XRandom::scaled(0, 99) . '%';
+        $list['fbi_score'] = XRandom::scaled(0, 99) . '%';
+        $list['cia_score'] = XRandom::scaled(0, 99) . '%';
+        $list['fss_score'] = XRandom::scaled(0, 99) . '%';
 
         foreach(hash_algos() as $algo) {
             $hash = hash($algo, $list['rand']);
@@ -42,7 +42,7 @@ class CommandController extends Controller
             '<font color=red class="blinking-red">fail</font>',
             '<font color=orange class="blinking-orange">middleware</font>'
         ];
-        $list['check'] = $pass[XRandom::get(0, 2)];
+        $list['check'] = $pass[XRandom::scaled(0, 2)];
 
         $anshlus = [
             '<font color=green class="blinking-green">yes</font>',
@@ -55,7 +55,7 @@ class CommandController extends Controller
             'no',
             'maybe'
         ];
-        $list['tampered'] = $tamper[XRandom::followRand(1) + XRandom::get(0, 1)];
+        $list['tampered'] = $tamper[XRandom::scaled(0, 1)];
 
         return view('list', compact('list'));
     }
