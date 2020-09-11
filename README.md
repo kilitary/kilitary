@@ -6,4 +6,4 @@ passing cross-woords
 
 define (https://kilitary.ru/core.txt)
 url shortener (https://kilitary.ru/)
-magick email (live prolong) (https://kilitary.ru/magil)
+magick email (live prolongук) (https://kilitary.ru/magil)
