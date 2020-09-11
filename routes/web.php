@@ -21,5 +21,5 @@ Route::get('/command/{command}', 'CommandController@command');
 
 Route::get('/{file}.txt', 'TextController@identify');
 
-Route::post('/su/create', 'UrlController@create');
-Route::get('/su/{url}', 'UrlController@redirect');
+Route::post('/us/create', 'UrlController@create');
+Route::get('/us/{url}', 'UrlController@redirect');
