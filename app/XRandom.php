@@ -10,7 +10,7 @@ class XRandom
 {
     public static function followRand($shift): int
     {
-        for($i = 0; $i < mt_rand(0, 3); $i++) {
+        for($i = 0; $i < mt_rand(0, 3 + $shift); $i++) {
             $m = mt_rand(0, 255);
             \file_put_contents('/dev/null', $m);
         }
@@ -18,7 +18,7 @@ class XRandom
         return self::get(0, $shift);
     }
 
-    public static function get($min, $max)
+    public static function get($min, $max): int
     {
         return mt_rand($min, $max);
     }
@@ -28,7 +28,7 @@ class XRandom
         return Str::random($max);
     }
 
-    public static function getAu($numBytes)
+    public static function getAu($numBytes): string
     {
         $stepSection = '';
         $fp = fopen('/dev/random', 'rb');
