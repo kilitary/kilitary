@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\XRandom;
 use Illuminate\Http\Request;
+use App\Logger;
 
 class UrlController extends Controller
 {
@@ -21,7 +22,7 @@ class UrlController extends Controller
             ->first();
 
         if(!$existent) {
-            \Log::debug('creating ' . $request->input('short') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
+            Loggger::msg('creating ' . $request->input('short') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
             $shortUrl = \App\ShortUrl::create([
                 'short' => $request->input('short'),
                 'long' => $request->input('long'),
@@ -42,7 +43,7 @@ class UrlController extends Controller
         $url = \App\ShortUrl::where('short', $shortUrl)
             ->first();
         if($url) {
-            \Log::debug('redirect ' . $url->short . '=>' . $url->long . ' by ' . $request->ip());
+            Loggger::msg('redirect ' . $url->short . '=>' . $url->long . ' by ' . $request->ip());
             $url->visits += 1;
             $url->save();
             return redirect($url->long);
