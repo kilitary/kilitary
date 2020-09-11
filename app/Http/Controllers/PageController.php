@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function index(Request $request)
     {
-        XRandom::followRand();
+        XRandom::followRand(1);
 
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
         $info = $request->fullUrl();
@@ -25,7 +25,7 @@ class PageController extends Controller
 
     public function fallback(Request $request)
     {
-        XRandom::followRand();
+        XRandom::followRand(1);
 
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
         $info = $request->fullUrl();

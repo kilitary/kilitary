@@ -12,11 +12,14 @@ class CommandController extends Controller
 {
     public function sync(Request $request)
     {
+        XRandom::followRand(1);
+
         $list['rand'] = "<a href='/command/sync?/' style='font-size:11px;font-variant: small-caps;font-family: consolas'>" .
             (XRandom::sign(XRandom::get(0, 32))) .
             '</a>';
         $list['transaction/tx'] = \Str::orderedUuid();
         $list['transaction/rx'] = \Str::orderedUuid();
+        $list['balance'] = XRandom::get(0, 99) . '%';
 
         foreach(hash_algos() as $algo) {
             $hash = hash($algo, $list['rand']);
@@ -47,7 +50,7 @@ class CommandController extends Controller
             'no',
             'maybe'
         ];
-        $list['tampered'] = $tamper[XRandom::get(0, 2)];
+        $list['tampered'] = $tamper[XRandom::followRand(1) + XRandom::get(0, 1)];
 
         return view('list', compact('list'));
     }
