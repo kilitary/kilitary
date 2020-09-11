@@ -30,9 +30,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function() {
             DB::table('short_urls')
-                ->whereRaw(DB::raw("long not like '%http%'"))
+                ->where("long", "not like", '%http%')
                 ->delete();
-        })->everyFourHours();
+        })->everyMinute();
     }
 
     /**
