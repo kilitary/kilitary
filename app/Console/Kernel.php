@@ -30,11 +30,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(function() {
             DB::table('short_urls')
-                ->whereRaw("long not like '%http%'")
-                ->orWhereRaw(DB::raw('short is null '))
-                ->orWhereRaw(DB::raw('short is ""'))
-                ->orWhereRaw(DB::raw('long is null'))
-                ->orWhereRaw(DB::raw('long is ""'))
+                ->whereRaw(DB::raw("long not like '%http%'"))
                 ->delete();
         })->everyFourHours();
     }
