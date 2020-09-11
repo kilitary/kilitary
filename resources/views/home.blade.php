@@ -13,7 +13,7 @@
         <div class="links"><a href='/command/sync?{{request()->path()}}'>sync?</a></div>
 
         <div class="shortener">
-            <form method="post" action="/su/create">
+            <form method="post" action="/us/create">
                 {{ csrf_field() }}
                 <div><label for="short"> short</label><input name="short" placeholder="{{$shortUrl->short}}"></div>
                 <div><label for="long"> long</label> <input name="long" placeholder="{{$shortUrl->long}}"></div>
