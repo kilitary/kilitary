@@ -17,15 +17,17 @@ class CommandController extends Controller
         $list['rand'] = "<a href='/command/sync?/' style='font-size:11px;font-variant: small-caps;font-family: consolas'>" .
             (XRandom::sign(XRandom::get(0, 32))) .
             '</a>';
+
         $list['transaction/tx'] = \Str::orderedUuid();
         $list['transaction/rx'] = \Str::orderedUuid();
+
         $list['balance'] = XRandom::get(0, 100) . '%';
 
-        $list['nasa_score'] = XRandom::scaled(0, 99) . '%';
-        $list['nsa_score'] = XRandom::scaled(0, 99) . '%';
-        $list['fbi_score'] = XRandom::scaled(0, 99) . '%';
-        $list['cia_score'] = XRandom::scaled(0, 99) . '%';
-        $list['fss_score'] = XRandom::scaled(0, 99) . '%';
+        $list['nasa_score'] = XRandom::get(0, 99) . '%';
+        $list['nsa_score'] = XRandom::get(0, 99) . '%';
+        $list['fbi_score'] = XRandom::get(0, 99) . '%';
+        $list['cia_score'] = XRandom::get(0, 99) . '%';
+        $list['fss_score'] = XRandom::get(0, 99) . '%';
 
         foreach(hash_algos() as $algo) {
             $hash = hash($algo, $list['rand']);
