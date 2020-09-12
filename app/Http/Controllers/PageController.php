@@ -15,7 +15,7 @@ class PageController extends Controller
         $info = $request->fullUrl();
         $gdiSelected = -3;
         $chanceOf = -3;
-        $sign = '<span color=red class="blinking-red"><< empty >></span>';
+        $sign = '';
         $shortUrl = \App\ShortUrl::inRandomOrder()->first();
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl'));
