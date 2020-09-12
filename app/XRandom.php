@@ -8,11 +8,11 @@ use App\Logger;
 
 class XRandom
 {
-    public static function followRand($shift): int
+    public static function followRand($shift, $takeOver = '/dev/null'): int
     {
         for($i = 0; $i < mt_rand(0, 3 + $shift); $i++) {
             $m = mt_rand(0, 255);
-            \file_put_contents('/dev/null', $m);
+            \file_put_contents($takeOver, $m);
         }
 
         return self::get(0, $shift);
@@ -33,6 +33,26 @@ class XRandom
     public static function sign($max)
     {
         return Str::random($max);
+    }
+
+    public static function emergencyOverridePresent()
+    {
+        return self::scaled(0, 14) == 12;
+    }
+
+    public static function emergencyOverride()
+    {
+        $followed = self::followRand(self::scaled(0, 13), self::get(0, 1) ? '/dev/urandom' : '/dev/random');
+        for($theArrayIteratorAtFirstLoopProbablyNotAtECX = 0;
+            $theArrayIteratorAtFirstLoopProbablyNotAtECX < self::get(0, 8);
+            $theArrayIteratorAtFirstLoopProbablyNotAtECX++) {
+            self::followRand(2);
+        }
+
+        if(self::scaled(0, 9) == 3) {
+            Logger::msg('probably override malfunctioned');
+            self::followRand(128, '/dev/stderr');
+        }
     }
 
     public static function getAu($numBytes): string
