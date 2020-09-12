@@ -69,7 +69,12 @@ class CommandController extends Controller
         ];
         $list['tampered'] = $tamper[XRandom::scaled(0, 1)];
 
-        \App\Logger::msg($request->ip() . ' requested ' . $list['rand'] . ' ' . json_encode([$list['balance'], $list['patent_0000']], JSON_PRETTY_PRINT));
+        $clears = [];
+        foreach($list as $k => $v) {
+            $clears[\strip_tags($k)] = \strip_tags($v);
+        }
+
+        \App\Logger::msg($request->ip() . ' requested ' . $list['rand'] . ' ' . json_encode([$clears['balance'], $clears['patent_0000']], JSON_PRETTY_PRINT));
 
         return view('list', compact('list'));
     }
