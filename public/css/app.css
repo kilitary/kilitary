@@ -18,6 +18,9 @@ body {
   display: box;
   min-height: 10px;
 }
+.marginleft {
+  margin: 10px;
+}
 .list-key {
   font-family: "consolas";
   font-size: 11px;
