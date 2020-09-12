@@ -11,18 +11,18 @@ class UrlController extends Controller
     public function create(Request $request)
     {
         if(empty($request->input('short'))) {
-            $request['short'] = \Str::random(8);
+            $request['shortRecord'] = \Str::random(8);
         }
 
         if(empty($request->input('long'))) {
             $request['long'] = \Str::random(8);
         }
 
-        $existent = \App\ShortUrl::where('short', $request->input('short'))
+        $existent = \App\ShortUrl::where('shortRecord', $request->input('shortRecord'))
             ->first();
 
         if(!$existent) {
-            Logger::msg('creating ' . $request->input('short') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
+            Logger::msg('creating ' . $request->input('shortRecord') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
             $shortUrl = \App\ShortUrl::create([
                 'short' => $request->input('short'),
                 'long' => $request->input('long'),
@@ -30,8 +30,8 @@ class UrlController extends Controller
                 'creater_ip' => $request->ip()
             ]);
         } else {
-            $shortUrl = $existent;
-            Logger::msg($shortUrl->short . ' => ' . $existent->long . ' by ' . $request->ip());
+            $shortRecord = $existent;
+            Logger::msg($shortRecord->short . ' => ' . $existent->long . ' by ' . $request->ip());
         }
 
         $success = XRandom::get(0, 1) ? 'true' : 'false';
@@ -41,15 +41,15 @@ class UrlController extends Controller
 
     public function redirect(Request $request, $shortUrl)
     {
-        $shortUrl = \App\ShortUrl::where('short', $shortUrl)
+        $shortRecord = \App\ShortUrl::where('short', $shortUrl)
             ->first();
-        if($shortUrl) {
-            Logger::msg('redirect ' . $shortUrl->short . '=>' . $shortUrl->long . ' by ' . $request->ip());
-            $shortUrl->visits += 1;
-            $shortUrl->save();
-            return redirect($shortUrl->long);
+        if($shortRecord) {
+            Logger::msg('redirect ' . $shortRecord->short . '=>' . $shortRecord->long . ' by ' . $request->ip());
+            $shortRecord->visits += 1;
+            $shortRecord->save();
+            return redirect($shortRecord->long);
         } else {
-            Logger::msg($shortUrl->short . ' => ' . $_SERVER['HTTP_REFERER'] . ' by ' . $request->ip());
+            Logger::msg($shortUrl . ' => ' . $_SERVER['HTTP_REFERER'] . ' by ' . $request->ip());
             return back();
         }
     }
