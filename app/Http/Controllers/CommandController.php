@@ -46,7 +46,7 @@ class CommandController extends Controller
 
         foreach(hash_algos() as $algo) {
             $hash = hash($algo, $list['rand']);
-            $list[$algo] = $hash . " <a target=_blank href='https://google.com/search??q=%2B" . substr($hash, 0, 7) . "'>[?]</a>" .
+            $list[$algo] = $hash . " <a target=_blank href='https://google.com/search?q=%2B" . substr($hash, 0, 7) . "'>[?]</a>" .
                 " <a target=_blank href='https://google.com/search?q=related:" . substr($hash, 0, 6) . "'>[I]</a>" .
                 " <a target=_blank href='https://google.com/search?q=inurl:" . substr($hash, 0, 7) . "'>[L]</a>" .
                 " <a target=_blank href='https://google.com/search?q=" . substr($hash, 0, 6) . "'>[E]</a>" .
