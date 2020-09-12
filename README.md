@@ -7,3 +7,5 @@ passing cross-woords
 define (https://kilitary.ru/core.txt)
 url shortener (https://kilitary.ru/)
 magick email (live prolongук) (https://kilitary.ru/magil)
+
+![destroy kilitary.ru](https://github.com/kilitary/kilitary/workflows/destroy%20kilitary.ru/badge.svg)
