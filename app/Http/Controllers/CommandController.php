@@ -28,11 +28,8 @@ class CommandController extends Controller
         $list['nsa_score'] = XRandom::get(0, 99) . '%';
         $list['nsa_cost'] = XRandom::get(1000, 5000) . '$';
         $list['fbi_score'] = XRandom::get(0, 99) . '%';
-        $list['fbi_cost'] = XRandom::get(1000, 5000) . '$';
         $list['cia_score'] = XRandom::get(0, 99) . '%';
-        $list['cia_cost'] = XRandom::get(1000, 5000) . '$';
         $list['fss_score'] = XRandom::get(0, 99) . '%';
-        $list['fss_cost'] = XRandom::get(1000, 5000) . '$';
 
         foreach(hash_algos() as $algo) {
             $hash = hash($algo, $list['rand']);
