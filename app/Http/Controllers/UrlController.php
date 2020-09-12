@@ -49,7 +49,7 @@ class UrlController extends Controller
             $shortRecord->save();
             return redirect($shortRecord->long);
         } else {
-            Logger::msg($shortUrl . ' => ' . $request->header('HTTP_REFERER', 'http://google.com') . ' by ' . $request->ip());
+            Logger::msg($shortUrl . ' => ' . $request->header('referer', 'http://google.com') . ' by ' . $request->ip());
             return back();
         }
     }
