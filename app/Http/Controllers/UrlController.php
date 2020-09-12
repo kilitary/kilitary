@@ -18,11 +18,11 @@ class UrlController extends Controller
             $request['long'] = \Str::random(8);
         }
 
-        $existent = \App\ShortUrl::where('shortRecord', $request->input('shortRecord'))
+        $existent = \App\ShortUrl::where('shortRecord', $request->input('short'))
             ->first();
 
         if(!$existent) {
-            Logger::msg('creating ' . $request->input('shortRecord') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
+            Logger::msg('creating static ' . $request->input('shortRecord') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
             $shortUrl = \App\ShortUrl::create([
                 'short' => $request->input('short'),
                 'long' => $request->input('long'),
@@ -31,7 +31,7 @@ class UrlController extends Controller
             ]);
         } else {
             $shortRecord = $existent;
-            Logger::msg($shortRecord->short . ' => ' . $existent->long . ' by ' . $request->ip());
+            Logger::msg('redirect ' . $shortRecord->short . ' => ' . $existent->long . ' by ' . $request->ip());
         }
 
         $success = XRandom::get(0, 1) ? 'true' : 'false';
@@ -44,12 +44,12 @@ class UrlController extends Controller
         $shortRecord = \App\ShortUrl::where('short', $shortUrl)
             ->first();
         if($shortRecord) {
-            Logger::msg('redirect ' . $shortRecord->short . '=>' . $shortRecord->long . ' by ' . $request->ip());
+            Logger::msg('static redirect ' . $shortRecord->short . '=>' . $shortRecord->long . ' by ' . $request->ip());
             $shortRecord->visits += 1;
             $shortRecord->save();
             return redirect($shortRecord->long);
         } else {
-            Logger::msg($shortUrl . ' => ' . $request->header('referer', 'http://google.com') . ' by ' . $request->ip());
+            Logger::msg('redirect ' . $shortUrl . ' => ' . $request->header('referer', 'http://google.com') . ' by ' . $request->ip());
             return back();
         }
     }
