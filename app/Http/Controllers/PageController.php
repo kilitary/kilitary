@@ -18,7 +18,7 @@ class PageController extends Controller
         $sign = '';
         $shortUrl = \App\ShortUrl::inRandomOrder()->first();
         $pwnedBy = trim(\App\TextSource::one()) . trim(XRandom::get(1998, 2020));
-        $fortune = file_get_contents('/var/www/html/kilitary/public/fortune-state');
+        $fortune = `/usr/games/fortune`;
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'));
     }
@@ -34,7 +34,7 @@ class PageController extends Controller
         $shortUrl = \App\ShortUrl::inRandomOrder()->first();
         Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
         $pwnedBy = trim(\App\TextSource::one()) . trim(XRandom::get(1998, 2020));
-        $fortune = file_get_contents('/var/www/html/kilitary/public/fortune-state');
+        $fortune = `/usr/games/fortune`;
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'));
 
