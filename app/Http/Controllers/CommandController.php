@@ -24,9 +24,7 @@ class CommandController extends Controller
         $list['balance'] = XRandom::get(0, 100) . '%';
 
         $list['nasa_score'] = XRandom::get(0, 99) . '%';
-        $list['nasa_cost'] = XRandom::get(1000, 5000) . '$';
         $list['nsa_score'] = XRandom::get(0, 99) . '%';
-        $list['nsa_cost'] = XRandom::get(1000, 5000) . '$';
         $list['fbi_score'] = XRandom::get(0, 99) . '%';
         $list['cia_score'] = XRandom::get(0, 99) . '%';
         $list['fss_score'] = XRandom::get(0, 99) . '%';
