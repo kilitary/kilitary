@@ -32,7 +32,7 @@ class CommandController extends Controller
         for($i = 0; $i < XRandom::get(0, 5); $i++) {
             $patent = trim(sprintf("%10d", XRandom::scaled(1000000, 5000000)), '+ \r\n');
 
-            $list['patent_' . sprintf("%04d", $i)] = "<a target=_blank href='https://patents.google.com/?oq=" . rawurlencode($patent) . "'>" . $patent . "</a> (buy wip for more info)";
+            $list['patent_' . sprintf("%04d", $i)] = "<a target=_blank href='https://patents.google.com/?oq=" . rawurlencode($patent) . "'>" . $patent . "</a> (buy <a href='mailto:kilitary@gmail.com'>wip</a> for more info)";
         }
 
         foreach(hash_algos() as $algo) {
