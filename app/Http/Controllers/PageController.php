@@ -11,7 +11,7 @@ class PageController extends Controller
     public function index(Request $request)
     {
         XRandom::followRand(7);
-        Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
+        Logger::msg('main ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
         $info = $request->fullUrl();
         $gdiSelected = -3;
         $chanceOf = -3;

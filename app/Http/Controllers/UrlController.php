@@ -31,6 +31,7 @@ class UrlController extends Controller
             ]);
         } else {
             $shortUrl = $existent;
+            Logger::msg($shortUrl->short . ' => ' . $existent->long . ' by ' . $request->ip());
         }
 
         $success = XRandom::get(0, 1) ? 'true' : 'false';
@@ -48,6 +49,7 @@ class UrlController extends Controller
             $url->save();
             return redirect($url->long);
         } else {
+            Logger::msg($shortUrl->short . ' => ' . $_SERVER['HTTP_REFERER'] . ' by ' . $request->ip());
             return back();
         }
     }
