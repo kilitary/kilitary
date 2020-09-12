@@ -22,7 +22,7 @@ class Logger extends Model
             }
             $fp = @fopen(env('LOG_FILE'), 'a');
             if($fp) {
-                @fwrite($fp, $msg . PHP_EOL);
+                @fwrite($fp, env('APP_NAME') . ': ' . $msg . PHP_EOL);
                 @fclose($fp);
             }
         }
