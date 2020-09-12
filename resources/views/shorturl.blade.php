@@ -7,7 +7,8 @@
         <h2>{{$shortUrl->long}}</h2>
         <br/>
         stable: {{$success}}<br/>
-        system: url shortner v 4.06.153.34.00000000001a
+        system: url shortner v 4.06.153.34.00000000001a<br/>
+        <div class="links"><a href='/command/sync?{{request()->path()}}'>sync?</a></div>
     </div>
     <script>
         setTimeout(function() {
