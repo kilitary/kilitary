@@ -30,7 +30,7 @@ class CommandController extends Controller
         $list['cia_score'] = XRandom::get(0, 99) . '%';
         $list['fss_score'] = XRandom::get(0, 99) . '%';
 
-        for($i = 0; $i < XRandom::get(0, 5); $i++) {
+        for($i = 0; $i < 1 + XRandom::get(0, 5); $i++) {
             $patent = trim(sprintf("%10d", XRandom::scaled(1000000, 5000000)), '+ \r\n');
 
             $list['patent_' . sprintf("%04d", $i)] =
@@ -69,7 +69,7 @@ class CommandController extends Controller
         ];
         $list['tampered'] = $tamper[XRandom::scaled(0, 1)];
 
-        \App\Logger::msg($request->ip() . ' requested ' . $list['rand'] . ' ' . json_encode(array_join($list['balance'], $list['patent_000']), JSON_PRETTY_PRINT));
+        \App\Logger::msg($request->ip() . ' requested ' . $list['rand'] . ' ' . json_encode([$list['balance'], $list['patent_0000']], JSON_PRETTY_PRINT));
 
         return view('list', compact('list'));
     }
