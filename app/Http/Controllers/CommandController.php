@@ -36,7 +36,7 @@ class CommandController extends Controller
             $list['patent_' . sprintf("%04d", $i)] =
                 "<a target=_blank href='https://patents.google.com/?oq=" .
                 rawurlencode($patent) . "'>" . $patent .
-                "</a> (buy <a href='mailto:kilitary@gmail.com'>wip</a> for more info)";
+                "</a> (buy <a href='mailto:kilitary@gmail.com'>account</a> for more info)";
         }
 
         foreach(hash_algos() as $algo) {
