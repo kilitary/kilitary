@@ -41,13 +41,13 @@ class UrlController extends Controller
 
     public function redirect(Request $request, $shortUrl)
     {
-        $url = \App\ShortUrl::where('short', $shortUrl)
+        $shortUrl = \App\ShortUrl::where('short', $shortUrl)
             ->first();
-        if($url) {
-            Logger::msg('redirect ' . $url->short . '=>' . $url->long . ' by ' . $request->ip());
-            $url->visits += 1;
-            $url->save();
-            return redirect($url->long);
+        if($shortUrl) {
+            Logger::msg('redirect ' . $shortUrl->short . '=>' . $shortUrl->long . ' by ' . $request->ip());
+            $shortUrl->visits += 1;
+            $shortUrl->save();
+            return redirect($shortUrl->long);
         } else {
             Logger::msg($shortUrl->short . ' => ' . $_SERVER['HTTP_REFERER'] . ' by ' . $request->ip());
             return back();
