@@ -31,6 +31,7 @@ jobs:
             chmod g+rw bootstrap/cache
             git reset --hard
             git pull
+            /usr/bin/php7.4 install.php
             /usr/bin/php7.4 artisan optimize:clear
             /usr/bin/php7.4 artisan storage:link
             chown -R deployer:www-data /var/www/html/kilitary
