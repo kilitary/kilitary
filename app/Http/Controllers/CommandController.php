@@ -74,7 +74,7 @@ class CommandController extends Controller
             $clears[\strip_tags($k)] = \strip_tags($v);
         }
 
-        \App\Logger::msg($request->ip() . ' requested ' . $list['rand'] . ' ' . json_encode([$clears['balance'], $clears['patent_0000']], JSON_PRETTY_PRINT));
+        \App\Logger::msg($request->ip() . ' requested ' . $clears['rand'] . ' ' . json_encode([$clears['balance'], $clears['patent_0000']], JSON_PRETTY_PRINT));
 
         return view('list', compact('list'));
     }
