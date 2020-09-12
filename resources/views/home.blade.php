@@ -3,7 +3,8 @@
 @section('content')
     <div class="container">
 
-        <h2>hello {{ $info }}</h2>
+        <h2>hello {{ $info }} ({{(\App\XRandom::scaled(0,1) ? 'p' : 'o')}}wned by <a
+                target=_blank href='https://twitter.com/{{$pwnedBy}}'>{{$pwnedBy}})</a></h2>
         <div class="marginleft">
             @if (isset($gdiSelected) && $gdiSelected)
                 <h3> global defense initiative selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }}

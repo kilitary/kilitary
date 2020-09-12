@@ -17,8 +17,9 @@ class PageController extends Controller
         $chanceOf = -3;
         $sign = '';
         $shortUrl = \App\ShortUrl::inRandomOrder()->first();
+        $pwnedBy = trim(\App\TextSource::one()) . trim(XRandom::get(1998, 2020));
 
-        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl'));
+        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy'));
     }
 
     public function fallback(Request $request)

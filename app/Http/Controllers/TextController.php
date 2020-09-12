@@ -11,7 +11,7 @@ class TextController extends Controller
 {
     public function identify(Request $request)
     {
-        $words = file("../american-english-huge");
+        $words = \App\TextSource::all();
 
         $num = mt_rand(0, 26) * 9;
         for($i = 0; $i < $num; $i++) {
