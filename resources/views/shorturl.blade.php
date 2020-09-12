@@ -7,7 +7,7 @@
         <h2>{{$shortUrl->long}}</h2>
         <br/>
         stable: {{$success}}<br/>
-        system: url shorter v 633456.06666.1.300004.00000000001a
+        system: url shorter v 4.06.153.34.00000000001a
     </div>
     <script>
         setTimeout(function() {
