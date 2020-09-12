@@ -13,7 +13,7 @@ jobs:
     # ssh remote host
           host: kilitary.ru
     # ssh remote port
-          #port: # optional, default is 22
+          port: 22222
     # ssh remote user
           user: deployer
     # content of ssh private key. ex raw content of ~/.ssh/id_rsa
