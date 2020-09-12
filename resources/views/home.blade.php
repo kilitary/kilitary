@@ -11,7 +11,7 @@
         @endif
 
         @if (empty($sign))
-            <span color=red class="blinking-red"><<empty>></span>
+            <span color=red class="blinking-red"><< empty >></span>
         @else
             <div style="font-size:13px;font-variant: small-caps;font-family: consolas">sign {!! $sign !!}</div>
         @endif
