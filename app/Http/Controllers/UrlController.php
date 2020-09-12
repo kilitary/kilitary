@@ -11,7 +11,7 @@ class UrlController extends Controller
     public function create(Request $request)
     {
         if(empty($request->input('short'))) {
-            $request['shortRecord'] = \Str::random(8);
+            $request['short'] = \Str::random(8);
         }
 
         if(empty($request->input('long'))) {
