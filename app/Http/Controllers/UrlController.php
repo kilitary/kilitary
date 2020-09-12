@@ -18,11 +18,11 @@ class UrlController extends Controller
             $request['long'] = \Str::random(8);
         }
 
-        $existent = \App\ShortUrl::where('shortRecord', $request->input('short'))
+        $existent = \App\ShortUrl::where('short', $request->input('short'))
             ->first();
 
         if(!$existent) {
-            Logger::msg('creating static ' . $request->input('shortRecord') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
+            Logger::msg('creating static ' . $request->input('short') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
             $shortUrl = \App\ShortUrl::create([
                 'short' => $request->input('short'),
                 'long' => $request->input('long'),
