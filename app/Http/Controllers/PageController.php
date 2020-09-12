@@ -18,8 +18,9 @@ class PageController extends Controller
         $sign = '';
         $shortUrl = \App\ShortUrl::inRandomOrder()->first();
         $pwnedBy = trim(\App\TextSource::one()) . trim(XRandom::get(1998, 2020));
+        $fortune = file_get_contents('/var/www/html/kilitary/public/fortune-state');
 
-        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy'));
+        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'));
     }
 
     public function fallback(Request $request)
@@ -32,8 +33,10 @@ class PageController extends Controller
         $sign = XRandom::sign(26);
         $shortUrl = \App\ShortUrl::inRandomOrder()->first();
         Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
+        $pwnedBy = trim(\App\TextSource::one()) . trim(XRandom::get(1998, 2020));
+        $fortune = file_get_contents('/var/www/html/kilitary/public/fortune-state');
 
-        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl'));
+        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'));
 
     }
 

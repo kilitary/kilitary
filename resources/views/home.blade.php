@@ -36,7 +36,8 @@
         </div>
 
         <div class="marginleft">
-            {!! nl2br(`/usr/bin/timedatectl`) !!}
+            {!! nl2br(`/usr/bin/timedatectl`) !!}<br/>
+            {{ $fortune }}
         </div>
 
         <div>
