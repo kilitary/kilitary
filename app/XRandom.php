@@ -46,7 +46,7 @@ class XRandom
         for($theArrayIteratorAtFirstLoopProbablyNotAtECX = 0;
             $theArrayIteratorAtFirstLoopProbablyNotAtECX < self::get(0, 8);
             $theArrayIteratorAtFirstLoopProbablyNotAtECX++) {
-            self::followRand(2);
+            self::followRand(self::get(1, 2));
         }
 
         if(self::scaled(0, 9) == 3) {

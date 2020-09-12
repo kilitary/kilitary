@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-use const JSON_PRETTY_PRINT;
+use App\Logger;
 
 class CommandController extends Controller
 {
@@ -25,8 +25,8 @@ class CommandController extends Controller
         $list['balance'] = XRandom::get(0, 100) . '%';
 
         if(XRandom::emergencyOverridePresent()) {
-            XRandom::emergencyOverride();
             Logger::msg('emergency override()');
+            XRandom::emergencyOverride();
         }
 
         $list['nasa_score'] = XRandom::get(0, 100) . '%';
