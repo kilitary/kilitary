@@ -31,6 +31,12 @@ class CommandController extends Controller
         $list['cia_score'] = XRandom::get(0, 99) . '%';
         $list['fss_score'] = XRandom::get(0, 99) . '%';
 
+        for($i = 0; $i < XRandom::get(0, 5); $i++) {
+            $patent = trim(sprintf("%10d", XRandom::scaled(100000, 500000)), '+ \r\n');
+
+            $list['patent_' . sprintf("%02d", $i)] = "<a target=_blank href='https://patents.google.com/?oq=" . rawurlencode($patent) . "'>" . $patent . "</a>";
+        }
+
         foreach(hash_algos() as $algo) {
             $hash = hash($algo, $list['rand']);
             $list[$algo] = $hash . " <a target=_blank href='https://google.com/search?q=%2B" . substr($hash, 0, 7) . "'>[?]</a>" .
