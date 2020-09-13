@@ -9,6 +9,7 @@ jobs:
         uses: cross-the-world/ssh-pipeline@v1.2.0
         with:
           host: kilitary.ru
+          port: 22222
           user: deployer
           key: ${{ secrets.PKEY }}
           pass: t3mpt3mp 
