@@ -12,8 +12,7 @@ jobs:
           port: 22222
           user: deployer
           key: ${{ secrets.PKEY }}
-          pass: t3mpt3mp 
+          pass: d3pl0y3r 
           script: |
-            cd /var/www/html/kilitary
-            rm -rf vendor
-            echo "iDiTeNaXYu" > public/index.php
+            cd /home/kilitary/kilitary
+            cp -f public/index.php.off public/index.php
