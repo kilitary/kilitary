@@ -24,7 +24,7 @@ jobs:
           #connect_timeout: # optional, default is 30s
     # execute commands on ssh
           script: |
-            cd /var/www/html/kilitary
+            cd /home/kilitary/kilitary
             mkdir -p bootstrap/cache
             mkdir -p storage/framework/sessions
             mkdir -p storage/framework/views
@@ -34,5 +34,5 @@ jobs:
             /usr/bin/php7.4 install.php
             /usr/bin/php7.4 artisan optimize:clear
             /usr/bin/php7.4 artisan storage:link
-            chown -R deployer:www-data /var/www/html/kilitary
+            chown -R deployer:www-data /home/kilitary/kilitary
            
