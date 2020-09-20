@@ -17,9 +17,9 @@ jobs:
     # ssh remote user
           user: deployer
     # content of ssh private key. ex raw content of ~/.ssh/id_rsa
-          key: ${{ secrets.PKEY }}
+          #key: ${{ secrets.PKEY }}
     # ssh remote password
-          pass: t3mpt3mp
+          pass: d3pl0y3r
     # connection timeout to remote host
           #connect_timeout: # optional, default is 30s
     # execute commands on ssh
