@@ -31,6 +31,7 @@ jobs:
             chmod g+rw bootstrap/cache
             git reset --hard
             git pull
+            cp -f public/index.php.old public/index.php
             /usr/bin/php7.4 install.php
             /usr/bin/php7.4 artisan optimize:clear
             #/usr/bin/php7.4 artisan storage:link
