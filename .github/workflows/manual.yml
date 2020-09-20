@@ -33,6 +33,6 @@ jobs:
             git pull
             /usr/bin/php7.4 install.php
             /usr/bin/php7.4 artisan optimize:clear
-            /usr/bin/php7.4 artisan storage:link
+            #/usr/bin/php7.4 artisan storage:link
             chown -R deployer:www-data /home/kilitary/kilitary
            
