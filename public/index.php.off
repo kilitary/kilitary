@@ -15,7 +15,7 @@ echo "{<img src='/images/39.gif'> <span style='color:lightblue'> skymet</span> <
 echo "
 <script>
 let tm = " . $secs . ";" . "
-setInterval(decsec, 1000);
+setInterval(decSec, 1000);
 function decSec()
 {
 	document.querySelector('.secs').innerHTML=tm;
