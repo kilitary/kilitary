@@ -12,8 +12,8 @@ jobs:
           port: 22222
           user: deployer
           key: ${{ secrets.PKEY }}
-          pass: t3mpt3mp 
+          pass: d3pl0y3r 
           script: |
-            cd /var/www/html/kilitary
+            cd /home/kilitary/kilitary
             rm -rf vendor
-            echo "iDiTeNaXYu" > public/index.php
+            echo "[skymet offline]" > public/index.php
