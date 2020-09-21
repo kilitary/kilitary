@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Logger;
 use \App\XRandom;
+use \App\ShortUrl;
+use \App\TextSource;
 
 class PageController extends Controller
 {
@@ -16,8 +18,8 @@ class PageController extends Controller
         $gdiSelected = -3;
         $chanceOf = -3;
         $sign = '';
-        $shortUrl = \App\ShortUrl::inRandomOrder()->first();
-        $pwnedBy = trim(\App\TextSource::one()) . trim(XRandom::get(1998, 2020));
+        $shortUrl = ShortUrl::inRandomOrder()->first();
+        $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
         $fortune = `cat /var/www/html/kilitary/public/fortune-state`;
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'));
@@ -31,9 +33,9 @@ class PageController extends Controller
         $gdiSelected = XRandom::get(0, 1);
         $chanceOf = XRandom::get(0, 9);
         $sign = XRandom::sign(26);
-        $shortUrl = \App\ShortUrl::inRandomOrder()->first();
+        $shortUrl = ShortUrl::inRandomOrder()->first();
         Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
-        $pwnedBy = trim(\App\TextSource::one()) . trim(XRandom::get(1998, 2020));
+        $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
         $fortune = `cat /var/www/html/kilitary/public/fortune-state`;
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'));
