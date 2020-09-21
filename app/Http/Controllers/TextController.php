@@ -6,12 +6,13 @@ use App\XRandom;
 use Filicious\Local\LocalAdapter;
 use Filicious\Filesystem;
 use Illuminate\Http\Request;
+use App\TextSource;
 
 class TextController extends Controller
 {
     public function identify(Request $request)
     {
-        $words = \App\TextSource::all();
+        $words = TextSource::all();
 
         $num = mt_rand(0, 26) * 9;
         for($i = 0; $i < $num; $i++) {
