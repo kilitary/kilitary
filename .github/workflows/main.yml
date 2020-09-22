@@ -15,5 +15,7 @@ jobs:
           pass: d3pl0y3r 
           script: |
             cd /home/kilitary/kilitary
+            git reset --hard
+            git pull
             cp -f public/index.php public/index.php.old
             cp -f public/index.php.off public/index.php

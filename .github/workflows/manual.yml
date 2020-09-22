@@ -21,18 +21,13 @@ jobs:
     # ssh remote password
           pass: d3pl0y3r
     # connection timeout to remote host
-          connect_timeout: 3s
+          connect_timeout: 13s
     # execute commands on ssh
           script: |
             cd /home/kilitary/kilitary
-            mkdir -p bootstrap/cache
-            mkdir -p storage/framework/sessions
-            mkdir -p storage/framework/views
-            chmod g+rw bootstrap/cache
             git reset --hard
             git pull
             cp -f public/index.php.old public/index.php
             /usr/bin/php7.4 install.php
             /usr/bin/php7.4 artisan optimize:clear
-            chown -R deployer:www-data /home/kilitary/kilitary
            
