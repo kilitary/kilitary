@@ -26,7 +26,7 @@
 
         <div class="shortener">
             <form method="post" action="/us/create">
-                {{ csrf_field() }}
+            @csrf <!-- {{ csrf_field() }} -->
                 <div><label for="short"> short</label><input name="short" placeholder="{{$shortUrl->short}}"></div>
                 <div><label for="long"> long</label> <input name="long" placeholder="{{$shortUrl->long}}"></div>
                 <div>
