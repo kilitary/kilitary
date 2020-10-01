@@ -23,3 +23,4 @@ Route::get('/{file}.txt', 'TextController@identify');
 
 Route::post('/us/create', 'UrlController@create');
 Route::get('/us/{url}', 'UrlController@redirect');
+Route::any('/home', 'HomeController@index');

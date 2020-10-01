@@ -19332,6 +19332,15 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+function lock() {
+  console.log('locked ' + new Date());
+  $('#app > div:nth-child(2n)').css('display', 'none').text('sdsfg sex');
+}
+
+$(function () {
+  setInterval(lock, 1000);
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
