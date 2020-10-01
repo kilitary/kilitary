@@ -1,27 +1,61 @@
 <?php
-?>
-<html>
-<head>
-	<title>kilitary.ru</title>
-	<link href='/css/app.css' rel="stylesheet">
-</head>
-<style>
-	* {font-family:impact;font-size:26px;color:white;font-variant:small-caps;letter-spacing:4px;background-color:#123433;}
-	</style>
-<body>
-<?php
-$secs = (1600623024 + 7*24*60*60) -time() ;
-echo "<img src='/images/39.gif'> <span style='color:lightblue'> skymet</span> <span style='color:red' class=\"blinking-red\">offline</span>: <span class=secs>" . $secs . '</span> seconds to control channel override';
 
-echo "
-<script>
-let tm = " . $secs . ";" . "
-setInterval(decSec, 1000);
-function decSec()
-{
-	document.querySelector('.secs').innerHTML=tm;
-	tm--;
-}
-</script>
-</body>
-</html>";
+/**
+ * Laravel - A PHP Framework For Web Artisans
+ *
+ * @package  Laravel
+ * @author   Taylor Otwell <taylor@laravel.com>
+ */
+
+define('LARAVEL_START', microtime(true));
+
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| our application. We just need to utilize it! We'll simply require it
+| into the script here so that we don't have to worry about manual
+| loading any of our classes later on. It feels great to relax.
+|
+*/
+
+require __DIR__.'/../vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
+| Turn On The Lights
+|--------------------------------------------------------------------------
+|
+| We need to illuminate PHP development, so let us turn on the lights.
+| This bootstraps the framework and gets it ready for use, then it
+| will load up this application so that we can run it and send
+| the responses back to the browser and delight our users.
+|
+*/
+
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request
+| through the kernel, and send the associated response back to
+| the client's browser allowing them to enjoy the creative
+| and wonderful application we have prepared for them.
+|
+*/
+
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+
+$response->send();
+
+$kernel->terminate($request, $response);
+
