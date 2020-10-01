@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-        hello, this is my small webpate. more info soon.
+        hello, this is my small website. more info soon.
     </div>
 @endsection
