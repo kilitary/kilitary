@@ -15,7 +15,7 @@ class PageController extends Controller
     {
         XRandom::followRand(7);
         Logger::msg('main ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
-        $info = $request->fullUrl();
+        $info = $request->input('fr');
         $gdiSelected = -3;
         $chanceOf = -3;
         $sign = '';
@@ -46,7 +46,7 @@ class PageController extends Controller
     {
         XRandom::followRand(7);
         Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
-        $info = $request->fullUrl();
+        $info = $request->input('fr');
         $gdiSelected = XRandom::get(0, 1);
         $chanceOf = XRandom::get(0, 9);
         $sign = XRandom::sign(26);
