@@ -11,8 +11,9 @@
             Views: {{$views}}
         </div>
 
-        <div class="page-content">
-            <a href="/">reTurn back</a>
+        <div class="topheadmargin page-content">
+            <a href="/delete/{{$code}}">DELETE & ERASE THIS DOC</a><br/>
+            <a href="/">return back</a>
         </div>
     </div>
 

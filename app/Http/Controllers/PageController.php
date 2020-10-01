@@ -24,7 +24,13 @@ class PageController extends Controller
         $fortune = `cat /home/kilitary/kilitary/public/fortune-state`;
         $code = \Str::random(15);
 
-        $pages = Page::query()
+        $deleted = session('currentDeleted');
+        if(!$deleted) {
+            $deleted = [];
+        }
+
+        $pages = Page::select('code', 'header')
+            ->whereNotIn('code', $deleted)
             ->limit(5)
             ->latest()
             ->inRandomOrder()
@@ -55,6 +61,11 @@ class PageController extends Controller
 
     public function page(Request $request, $code)
     {
+        $currentDeleted = session('currentDeleted');
+        if($currentDeleted && in_array($code, $currentDeleted)) {
+            return redirect('/delete/' . $code);
+        }
+
         $page = \App\Models\Page::where('code', $code)
             ->orWhere('header', $code)
             ->first();
@@ -65,13 +76,27 @@ class PageController extends Controller
             $views = $page->views;
             $page->views += (XRandom::get(0, 8) == 3 ? XRandom::get(1, 4) : 0);
             $page->save();
+
+            $content = \preg_replace("(\w{2,11})", '<strong>]]]]] $1 [[[[[</strong>', $content);
         } else {
             $content = "[no such content]";
             $header = "[no such header] (" . $code . ")";
             $views = -1;
         }
-
         return view('page', compact('code', 'content', 'header', 'views'));
+    }
+
+    public function delete(Request $request, $code)
+    {
+        $currentDeleted = session('currentDeleted');
+        if(!$currentDeleted) {
+            $currentDeleted = [];
+        }
+        $currentDeleted[] = $code;
+        session(['currentdeleted' => $currentDeleted], 100);
+        dd(session('currentDeleted'));
+
+        return view('delete', compact('code'));
     }
 
     public function record(Request $request, $code)
@@ -81,13 +106,14 @@ class PageController extends Controller
             return view('newpage', compact('code'));
         }
 
-        $content = $request->input('content');
-        $header = $request->input('header');
+        $content = $request->post('content');
+        $header = $request->post('header');
 
         if(empty($header)) {
             $header = \Str::random(40);
         }
 
+        $code = \Str::slug(\Str::substr($content, 0, 15), '-');
         $header = \Str::slug($header, '-');
 
         $pid = \DB::table('pages')

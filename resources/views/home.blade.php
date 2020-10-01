@@ -44,13 +44,14 @@
 
         @if(isset($code))
             <div class=" smallcaps">
-                create new truth page: <a href="/page/{{$code}}">+create</a>
+                create new truth here: <a href="/page/{{$code}}">+create</a>
             </div>
             <div class=" smallcaps">
                 Interesting:
                 @foreach ($interesting as $i => $v)
-                    <a href="/view/{{$v}}">{{$i}}</a>
+                    <a href="/view/{{$v}}">{{$i}}{!! ' <span class="super-small">(' . $v . ')</span>, ' !!}</a>
                 @endforeach
+                ...
             </div>
         @endif
 
