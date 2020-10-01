@@ -24,23 +24,37 @@
             <div class="links"><a href='/command/sync?{{request()->path()}}'>sync?</a></div>
         </div>
 
-        <div class="shortener">
-            <form method="post" action="/us/create">
-            @csrf <!-- {{ csrf_field() }} -->
-                <div><label for="short"> short</label><input name="short" placeholder="{{$shortUrl->short}}"></div>
-                <div><label for="long"> long</label> <input name="long" placeholder="{{$shortUrl->long}}"></div>
-                <div>
-                    <button>add short/long url translation (url shortener) or just click this button</button>
-                </div>
-            </form>
-        </div>
+        @if (isset($shortUrl))
+            <div class="shortener">
+                <form method="post" action="/us/create">
+                @csrf <!-- {{ csrf_field() }} -->
+                    <div><label for="short"> short</label><input name="short" placeholder="{{$shortUrl->short}}"></div>
+                    <div><label for="long"> long</label> <input name="long" placeholder="{{$shortUrl->long}}"></div>
+                    <div>
+                        <button>add short/long url translation (url shortener) or just click this button</button>
+                    </div>
+                </form>
+            </div>
+        @endif
 
         <div class="marginleft">
             {!! nl2br(`/usr/bin/timedatectl`) !!}<br/>
             {{ $fortune }}
         </div>
 
-        <div>
+        @if(isset($code))
+            <div class=" smallcaps">
+                create new truth page: <a href="/page/{{$code}}">+create</a>
+            </div>
+            <div class=" smallcaps">
+                Interesting:
+                @foreach ($interesting as $i => $v)
+                    <a href="/view/{{$v}}">{{$i}}</a>
+                @endforeach
+            </div>
+        @endif
+
+        <div class="topheadmargin">
             coming soon: free magick email (life pro-longer) @ kilitary.ru | ?
         </div>
     </div>

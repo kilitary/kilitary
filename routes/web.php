@@ -15,7 +15,9 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', 'PageController@index');
-Route::fallback('PageController@fallback');
+
+Route::get('/view/{page_code}', 'PageController@page');
+Route::any('/page/{page_code}', 'PageController@record');
 
 Route::get('/command/{command}', 'CommandController@command');
 
@@ -24,3 +26,5 @@ Route::get('/{file}.txt', 'TextController@identify');
 Route::post('/us/create', 'UrlController@create');
 Route::get('/us/{url}', 'UrlController@redirect');
 Route::any('/home', 'HomeController@index');
+
+Route::fallback('PageController@fallback');

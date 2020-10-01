@@ -21,6 +21,19 @@ body {
 .marginleft {
   margin: 12px;
 }
+.smallcaps {
+  font-variant: small-caps;
+  font-family: consolas;
+  font-size: 17px;
+}
+.topheadmargin {
+  margin-top: 10px;
+  padding-top: 8px;
+}
+.page-content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 .list-key {
   font-family: "consolas";
   font-size: 11px;
