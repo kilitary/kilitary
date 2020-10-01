@@ -63,7 +63,7 @@ class PageController extends Controller
             $content = $page->content;
             $header = $page->header;
             $views = $page->views;
-            $page->views += XRandom::get(0, 4) == 1 ? XRandom::get(1, 4) : 1;
+            $page->views += (XRandom::get(0, 8) == 3 ? XRandom::get(1, 4) : 0);
             $page->save();
         } else {
             $content = "[no such content]";
