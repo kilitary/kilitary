@@ -49,9 +49,9 @@
             <div class=" smallcaps">
                 Interesting:
                 @foreach ($interesting as $i => $v)
-                    <a href="/view/{{$v}}">{{$i}}{!! ' <span class="super-small">(' . $v . ')</span>, ' !!}</a>
+                    <a href="/view/{{$v}}">{{trim($i)}}{!! ' <span class="super-small">(' . $v . ')</span>,' !!}</a>
                 @endforeach
-                ...
+                <a href="../">..</a>
             </div>
         @endif
 

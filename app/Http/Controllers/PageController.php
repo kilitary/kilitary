@@ -22,16 +22,13 @@ class PageController extends Controller
         $shortUrl = ShortUrl::inRandomOrder()->first();
         $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
         $fortune = `cat /home/kilitary/kilitary/public/fortune-state`;
+
         $code = \Str::random(15);
 
-        $deleted = session('currentDeleted');
-        if(!$deleted) {
-            $deleted = [];
-        }
-
+        $deleted = session('currentDeleted', []);
         $pages = Page::select('code', 'header')
             ->whereNotIn('code', $deleted)
-            ->limit(5)
+            ->limit(15)
             ->latest()
             ->inRandomOrder()
             ->get();
@@ -59,8 +56,25 @@ class PageController extends Controller
 
     }
 
+    public function reset(Request $request)
+    {
+        session()->flush();
+
+        return redirect('/?reset=' . XRandom::get(0, 5));
+    }
+
     public function page(Request $request, $code)
     {
+        function next_word($matches)
+        {
+            if(XRandom::get(0, 5) == 3) {
+                return $matches[0];
+            }
+
+            $s = "<span style='border: 1px solid red' class='smallcaps'>$matches[1]</span>";
+            return $s;
+        }
+
         $currentDeleted = session('currentDeleted');
         if($currentDeleted && in_array($code, $currentDeleted)) {
             return redirect('/delete/' . $code);
@@ -77,7 +91,7 @@ class PageController extends Controller
             $page->views += (XRandom::get(0, 8) == 3 ? XRandom::get(1, 4) : 0);
             $page->save();
 
-            $content = \preg_replace("(\w{2,11})", '<strong>]]]]] $1 [[[[[</strong>', $content);
+            $content = \preg_replace_callback("/(\w{5,22}?)/", "next_word", $content);
         } else {
             $content = "[no such content]";
             $header = "[no such header] (" . $code . ")";
@@ -86,15 +100,13 @@ class PageController extends Controller
         return view('page', compact('code', 'content', 'header', 'views'));
     }
 
-    public function delete(Request $request, $code)
+    public function delete(Request $request, $code, $mode)
     {
-        $currentDeleted = session('currentDeleted');
-        if(!$currentDeleted) {
-            $currentDeleted = [];
-        }
+        $currentDeleted = session('currentDeleted', []);
+
         $currentDeleted[] = $code;
-        session(['currentdeleted' => $currentDeleted], 100);
-        dd(session('currentDeleted'));
+        session(['currentDeleted' => $currentDeleted]);
+        session(['delMode' => $mode]);
 
         return view('delete', compact('code'));
     }

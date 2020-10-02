@@ -7,5 +7,9 @@
             ({{$code}})
         @endif
         was deleted.
+
+        <div class="topheadmargin page-content">
+            <a href="/">return back</a>
+        </div>
     </div>
 @endsection

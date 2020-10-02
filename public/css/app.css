@@ -1,6 +1,6 @@
 body {
   font-family: "Lucida Console";
-  font-size: 19px;
+  font-size: 12px;
   border-left: 8px dashed #ffa500;
   padding-left: 10px;
   height: 100%;
@@ -33,7 +33,10 @@ body {
 }
 .topheadmargin {
   margin-top: 10px;
-  padding-top: 8px;
+  padding-top: 12px;
+}
+.alignnmiddle {
+  padding-left: 10px;
 }
 .page-content {
   padding-top: 20px;
@@ -79,7 +82,7 @@ a:visited {
   color: #117a8b;
 }
 a:hover {
-  border-bottom: 2px dotted #6495ed;
+  border-bottom: 1px dotted #6495ed;
   color: #f00;
 }
 .blinking-red {

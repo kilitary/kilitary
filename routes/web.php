@@ -18,7 +18,9 @@ Route::get('/', 'PageController@index');
 
 Route::get('/view/{page_code}', 'PageController@page');
 Route::any('/page/{page_code}', 'PageController@record');
-Route::get('/delete/{page_code}', 'PageController@delete');
+Route::get('/delete/{page_code}/{mode}', 'PageController@delete');
+
+Route::get('/reset', 'PageController@reset');
 
 Route::get('/command/{command}', 'CommandController@command');
 

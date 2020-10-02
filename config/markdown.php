@@ -6,6 +6,7 @@ return [
      |  Parsers
      | -----------------------------------------------------------------
      */
+    'safe-mode' => true,
 
     'default' => 'commonmark',
 
