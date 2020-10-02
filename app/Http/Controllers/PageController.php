@@ -132,7 +132,7 @@ class PageController extends Controller
 
         if($request->ip() == env('ADMIN_IP')) {
             $page = Page::firstWhere('code', $code);
-            if($page) {
+            if($page && !$page->blocked) {
                 $page->delete();
             }
         }
