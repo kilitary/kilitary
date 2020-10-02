@@ -8,7 +8,7 @@
         <div>
             @markdown($content)
         </div>
-        <h2 class="page-header"></h2>
+        <h2 class="page-footer"></h2>
         <div class="topheadmargin smallcaps">
             √iews: {{$views}} Edits: {{$edits}}
         </div>
