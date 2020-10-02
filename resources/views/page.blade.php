@@ -14,7 +14,7 @@
         </div>
 
         <div class=" page-content">
-            <ul>
+            <ul class="select-doc-future">
                 <li>
                     <a class=" alignnmiddle" href="/delete/{{$code}}/0">DELETE THIS DOC (free)</a>
                 </li>
