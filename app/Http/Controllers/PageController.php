@@ -150,6 +150,9 @@ class PageController extends Controller
         }
 
         $content = $request->post('content');
+        if(empty(trim($content))) {
+            $content = "operator was lazy this time";
+        }
         $header = $request->post('header');
 
         if(empty($header)) {
