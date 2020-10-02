@@ -29,7 +29,6 @@ class PageController extends Controller
         $pages = Page::select('code', 'header')
             ->whereNotIn('code', $deleted)
             ->limit(15)
-            ->latest()
             ->inRandomOrder()
             ->get();
 
@@ -78,7 +77,7 @@ class PageController extends Controller
             $content = $page->content;
             $header = $page->header;
             $views = $page->views;
-            $page->views += (XRandom::get(0, 8) == 3 ? XRandom::get(1, 4) : 0);
+            $page->views += (XRandom::get(0, 3) == 1 ? XRandom::get(1, 4) : 0);
             $page->save();
 
             $content = \preg_replace_callback("/(\w{1,22}\s+?)/u", function($matches) {

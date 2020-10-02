@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <a href="/"><-index</a><br/>
     <div class="container">
         <form method="post" action="/page/{{$code}}">
             {{ csrf_field() }}
