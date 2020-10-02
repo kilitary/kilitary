@@ -105,7 +105,7 @@ class PageController extends Controller
             $page->views += (XRandom::get(0, 3) == 1 ? XRandom::get(1, 4) : 0);
             $page->save();
 
-            $content = \preg_replace_callback("/(\w{1,22}\s+?)/u", function($matches) {
+            $content = \preg_replace_callback("/(\w{1,22})\s+?/u", function($matches) {
                 if(XRandom::get(0, 25) != 3) {
                     return $matches[0];
                 }
