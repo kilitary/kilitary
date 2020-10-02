@@ -161,7 +161,7 @@ class PageController extends Controller
             ->insertGetId([
                 'code' => $code,
                 'ip' => $request->ip(),
-                'edit' => 0,
+                'edits' => 0,
                 'views' => -1,
                 'content' => $content,
                 'header' => $header,
