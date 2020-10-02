@@ -105,7 +105,7 @@ class PageController extends Controller
         session(['currentDeleted' => $currentDeleted]);
         session(['delMode' => $mode]);
 
-        if($request->ip() == '192.168.10.1') {
+        if($request->ip() == env('ADMIN_IP')) {
             $page = Page::firstWhere('code', $code);
             if($page) {
                 $page->delete();
