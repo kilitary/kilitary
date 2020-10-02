@@ -81,14 +81,14 @@ class PageController extends Controller
             $page->views += (XRandom::get(0, 8) == 3 ? XRandom::get(1, 4) : 0);
             $page->save();
 
-            $content = \preg_replace_callback("/(\w{5,22}?)/u", function($matches) {
+            $content = \preg_replace_callback("/(\w{1,22}\s+?)/u", function($matches) {
                 if(XRandom::get(0, 25) != 3) {
                     return $matches[0];
                 }
-
                 $s = "<span class='ignited'>$matches[1]</span>";
                 return $s;
             }, $content);
+
         } else {
             $content = "[no such content]";
             $header = "[no such header] (" . $code . ")";
