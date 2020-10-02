@@ -111,7 +111,7 @@ class PageController extends Controller
                 if(XRandom::get(0, 25) != 3) {
                     return $matches[0];
                 }
-                $s = " <span class='ignited'>$matches[1]</span> ";
+                $s = "<span class='ignited'>$matches[1]</span>";
                 return $s;
             }, $content);
 
