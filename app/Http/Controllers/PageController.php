@@ -65,16 +65,6 @@ class PageController extends Controller
 
     public function page(Request $request, $code)
     {
-        function next_word($matches)
-        {
-            if(XRandom::get(0, 5) == 3) {
-                return $matches[0];
-            }
-
-            $s = "<span style='border: 1px solid red' class='smallcaps'>$matches[1]</span>";
-            return $s;
-        }
-
         $currentDeleted = session('currentDeleted');
         if($currentDeleted && in_array($code, $currentDeleted)) {
             return redirect('/delete/' . $code);
@@ -91,7 +81,14 @@ class PageController extends Controller
             $page->views += (XRandom::get(0, 8) == 3 ? XRandom::get(1, 4) : 0);
             $page->save();
 
-            $content = \preg_replace_callback("/(\w{5,22}?)/", "next_word", $content);
+            $content = \preg_replace_callback("/(\w{5,22}?)/u", function($matches) {
+                if(XRandom::get(0, 25) != 3) {
+                    return $matches[0];
+                }
+
+                $s = "<span class='ignited'>$matches[1]</span>";
+                return $s;
+            }, $content);
         } else {
             $content = "[no such content]";
             $header = "[no such header] (" . $code . ")";
