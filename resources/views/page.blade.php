@@ -13,19 +13,19 @@
             √iews: {{$views}} Edits: {{$edits}}
         </div>
 
-        <div class="topheadmargin page-content">
+        <div class=" page-content">
             <ul>
                 <li>
-                    <a class="topheadmargin alignnmiddle" href="/delete/{{$code}}/0">DELETE THIS DOC (free)</a>
+                    <a class=" alignnmiddle" href="/delete/{{$code}}/0">DELETE THIS DOC (free)</a>
                 </li>
                 <li>
-                    <a class="topheadmargin alignnmiddle" href="/delete/{{$code}}/1">
+                    <a class=" alignnmiddle" href="/delete/{{$code}}/1">
                         DELETE THIS DOC (24 writes of 1/0 per bytes in file
                         sectors (inodes)
                         24.95$)</a>
                 </li>
                 <li>
-                    <a class="topheadmargin alignnmiddle" href="/delete/{{$code}}/2">
+                    <a class=" alignnmiddle" href="/delete/{{$code}}/2">
                         DELETE THIS DOC (255 writeS of 1/0 per bytes in file
                         sectors and physically destroy
                         ONE of active RAID1 disk 94.95$)</a>
@@ -34,7 +34,7 @@
                     <a href="/edit/{{$code}}">extend</a>
                 </li>
                 <li>
-                    <a class="topheadmargin alignnmiddle" href="/">return</a>
+                    <a class=" alignnmiddle" href="/">ret</a>
                 </li>
             </ul>
         </div>

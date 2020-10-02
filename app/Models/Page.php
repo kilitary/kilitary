@@ -27,6 +27,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereViews($value)
  * @mixin \Eloquent
+ * @property int|null $edits
+ * @property int|null $blocked
+ * @property string $ip
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereBlocked($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereEdits($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereIp($value)
  */
 class Page extends Model
 {

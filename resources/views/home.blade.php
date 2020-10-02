@@ -43,15 +43,16 @@
         </div>
 
         @if(isset($code))
-            <div class=" smallcaps">
-                create new truth here: <a href="/page/{{$code}}">+create</a>
-            </div>
-            <div class=" smallcaps">
+            <div class="marginleft marginbottom">
                 Interesting:
                 @foreach ($interesting as $i => $v)
-                    <a href="/view/{{$v}}">{{trim($i)}}{!! ' <span class="super-small">(' . $v . ')</span>,' !!}</a>
+                    <a href="/view/{{$v}}" class="interestlink"
+                       title="{{trim($i)}}">{!! '' . $v . ',' !!}</a>
                 @endforeach
                 <a href="../">..</a>
+            </div>
+            <div class="marginleft smallcaps">
+                create new truth here: <a href="/page/{{$code}}">+create</a>
             </div>
         @endif
 

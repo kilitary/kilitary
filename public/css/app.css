@@ -7,7 +7,7 @@ body {
   width: 98%;
 }
 ul {
-  list-style-type: square;
+  list-style-type: circle;
 }
 .container {
   width: 100%;
@@ -38,16 +38,22 @@ ul {
   margin-top: 10px;
   padding-top: 12px;
 }
+.interestlink {
+  font-size: 12px;
+  font-family: lucida console;
+}
 .page-content {
   padding-top: 20px;
-  padding-bottom: 20px;
   font-family: "Liberation Mono";
-  font-size: 15px;
+  font-size: 11px;
 }
 .page-header {
   border-bottom: 9px dotted #d3d3d3;
   padding-bottom: 9px;
   margin-top: 1px;
+}
+.marginbottom {
+  margin-bottom: 5px;
 }
 .list-key {
   font-family: "consolas";
