@@ -38,6 +38,30 @@ class PageController extends Controller
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune', 'code', 'interesting'));
     }
 
+    public function edit(Request $request, $code)
+    {
+        $page = Page::where('code', $code)
+            ->first();
+
+        return view('edit', compact('page'));
+    }
+
+    public function update(Request $request, $code)
+    {
+        $page = Page::where('code', $code)
+            ->first();
+
+        if($page->ip != $request->ip()) {
+            return 'access denied ';
+        }
+
+        $page->content = $request->post('content');
+        $page->edits++;
+        $page->save();
+
+        return redirect('/view/' . $code);
+    }
+
     public function fallback(Request $request)
     {
         XRandom::followRand(7);
@@ -77,6 +101,7 @@ class PageController extends Controller
             $content = $page->content;
             $header = $page->header;
             $views = $page->views;
+            $edits = $page->edits;
             $page->views += (XRandom::get(0, 3) == 1 ? XRandom::get(1, 4) : 0);
             $page->save();
 
@@ -92,8 +117,9 @@ class PageController extends Controller
             $content = "[no such content]";
             $header = "[no such header] (" . $code . ")";
             $views = -1;
+            $edits = -1;
         }
-        return view('page', compact('code', 'content', 'header', 'views'));
+        return view('page', compact('code', 'content', 'header', 'views', 'edits'));
     }
 
     public function delete(Request $request, $code, $mode)

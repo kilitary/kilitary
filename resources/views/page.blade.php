@@ -8,9 +8,9 @@
         <div>
             @markdown($content)
         </div>
-        <h2 class="page-header"> </h2>
+        <h2 class="page-header"></h2>
         <div class="topheadmargin smallcaps">
-            √iews: {{$views}}
+            √iews: {{$views}} Edits: {{$edits}}
         </div>
 
         <div class="topheadmargin page-content">
@@ -29,6 +29,9 @@
                         DELETE THIS DOC (255 writeS of 1/0 per bytes in file
                         sectors and physically destroy
                         ONE of active RAID1 disk 94.95$)</a>
+                </li>
+                <li>
+                    <a href="/edit/{{$code}}">extend</a>
                 </li>
                 <li>
                     <a class="topheadmargin alignnmiddle" href="/">return</a>
