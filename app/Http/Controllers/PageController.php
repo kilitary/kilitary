@@ -52,7 +52,7 @@ class PageController extends Controller
             ->first();
 
         if($page->ip != $request->ip()) {
-            return 'access denied ';
+            return 'access denied for ' . $request->ip();
         }
 
         $page->content = $request->post('content');
