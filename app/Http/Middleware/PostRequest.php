@@ -16,6 +16,7 @@ class PostRequest
      */
     public function handle($request, Closure $next)
     {
+        \App\Logger::msg('post request of ' . $request->fullUrl());
         return $next($request);
     }
 }

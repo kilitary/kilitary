@@ -5,7 +5,7 @@
     <div class="container page-content">
         <form method="post" action="/update/{{$page->code}}">
             {{csrf_field()}}
-            <h2 class="page-header">{{$page->header}}</h2>
+            <input name="header" style="margin-bottom:10px;width:500px" value="{{$page->header}}">
             <div>
                 <textarea name="content" style="width:100%;height:700px">{{$page->content}}</textarea>
             </div>

@@ -26,6 +26,7 @@ class PageController extends Controller
         $code = \Str::random(15);
 
         $deleted = session('currentDeleted', []);
+
         $pages = Page::select('code', 'header')
             ->whereNotIn('code', $deleted)
             ->limit(15)
@@ -57,6 +58,7 @@ class PageController extends Controller
 
         $page->content = $request->post('content');
         $page->edits++;
+        $page->header = $request->post('header');
         $page->save();
 
         return redirect('/view/' . $code);
@@ -165,7 +167,8 @@ class PageController extends Controller
                 'views' => -1,
                 'content' => $content,
                 'header' => $header,
-                'active' => 1
+                'active' => 1,
+                'blocked' => 0
             ]);
 
         return redirect('/view/' . $code);
