@@ -137,6 +137,8 @@ class PageController extends Controller
             if($page && !$page->blocked) {
                 $page->delete();
             }
+        } else {
+            $code = "[access denied]";
         }
 
         return view('delete', compact('code'));
