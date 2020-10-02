@@ -160,6 +160,7 @@ class PageController extends Controller
         $pid = \DB::table('pages')
             ->insertGetId([
                 'code' => $code,
+                'ip' => $request->ip(),
                 'views' => -1,
                 'content' => $content,
                 'header' => $header,
