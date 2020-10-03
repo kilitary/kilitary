@@ -57,7 +57,7 @@
         @endif
 
         <div class="topheadmargin">
-            coming soon: free magick email (life pro-longer) @ kilitary.ru | ?
+            coming soon: free magick email (life pro-longer) @ kilitary.ru | {{request()->ip()}}?
         </div>
     </div>
 @endsection
