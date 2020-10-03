@@ -9,6 +9,22 @@
             @markdown($content)
         </div>
         <h2 class="page-footer"></h2>
+        @if (isset($comments))
+            @foreach ($comments as $comment)
+                <div class="comment">
+                    <div class="comment-date">{{ $comment['created_at']}}</div>
+                    {{$comment['comment']}}
+                </div>
+            @endforeach
+        @endif
+        <div>
+            <form method="post" action="/comment/add">
+                {{csrf_field()}}
+                <input type="hidden" name="page_id" value="{{$page_id}}">
+                <input name="comment">
+                <button>comment</button>
+            </form>
+        </div>
         <div class="topheadmargin ">
             √iews: {{$views}} Edits: {{$edits}}
         </div>

@@ -229,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'RedisManager' => Illuminate\Support\Facades\Redis::class,
+        'Carbon' => Illuminate\Support\Carbon::class
 
     ],
 

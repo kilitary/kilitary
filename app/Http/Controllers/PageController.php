@@ -40,6 +40,18 @@ class PageController extends Controller
             'pwnedBy', 'fortune', 'code', 'interesting'));
     }
 
+    public function writeComment(Request $request)
+    {
+        $comment = \App\Comment::create([
+            'comment' => $request->post('comment'),
+            'ip' => $request->ip(),
+            'username' => 'anon',
+            'email' => 'anon@anon.ru',
+            'page_id' => $request->post('page_id')
+        ]);
+        return back();
+    }
+
     public function edit(Request $request, $code)
     {
         $page = Page::where('code', $code)
@@ -126,8 +138,13 @@ class PageController extends Controller
         $description = preg_replace_array('/(\s{2,}?)/', [' '], $page->content);
         $description = \Str::words($description, 22);
 
+        $page_id = $page->id;
+
+        $comments = $page->load('comments')
+            ->comments->toArray();
+
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
-            'description'));
+            'description', 'page_id', 'comments'));
     }
 
     public function delete(Request $request, $code, $mode)

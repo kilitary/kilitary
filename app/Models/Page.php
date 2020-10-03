@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereBlocked($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereEdits($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereIp($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
+ * @property-read int|null $comments_count
  */
 class Page extends Model
 {

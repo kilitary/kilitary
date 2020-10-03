@@ -21,6 +21,7 @@ Route::any('/page/{page_code}', 'PageController@record');
 Route::get('/delete/{page_code}/{mode}', 'PageController@delete');
 Route::get('/edit/{code}', 'PageController@edit');
 Route::post('update/{code}', 'PageController@update');
+Route::post('/comment/add', 'PageController@writeComment');
 
 Route::get('/reset', 'PageController@reset');
 

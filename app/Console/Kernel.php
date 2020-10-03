@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\TelescopPrune;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Logger;
@@ -31,6 +32,10 @@ class Kernel extends ConsoleKernel
     {
         $schedule->job(new ClearOldShit)
             ->everyFiveMinutes()
+            ->sendOutputTo(base_path() . '/shedule.log');
+
+        $schedule->job(new TelescopPrune())
+            ->everyTwoHours()
             ->sendOutputTo(base_path() . '/shedule.log');
     }
 
