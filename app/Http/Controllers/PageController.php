@@ -61,11 +61,13 @@ class PageController extends Controller
 
     public function writeComment(Request $request)
     {
+        $country = Tools::getCountry($request->ip());
         $comment = \App\Comment::create([
             'comment' => $request->post('comment'),
             'ip' => $request->ip(),
             'username' => 'anon',
             'email' => 'anon@anon.ru',
+            'country' => $country,
             'page_id' => $request->post('page_id')
         ]);
         return back();
@@ -168,8 +170,8 @@ class PageController extends Controller
         $environment->addExtension(new SmartPunctExtension());
         $environment->addExtension(new StrikethroughExtension());
         $environment->addExtension(new TableExtension());
-        $environment->addExtension(new TaskListExtension());
-        $environment->addExtension(new SmartPunctExtension());
+        //$environment->addExtension(new TaskListExtension());
+        //$environment->addExtension(new SmartPunctExtension());
         $config = [
             'smartpunct' => [
                 'double_quote_opener' => '“',
@@ -179,7 +181,7 @@ class PageController extends Controller
             ],
         ];
 
-        $converter = new CommonMarkConverter($config, $environment);
+        $converter = new CommonMarkConverter([], $environment);
         $content = $converter->convertToHtml($content);
 
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
@@ -229,9 +231,7 @@ class PageController extends Controller
         $code = \Str::slug(\Str::substr($content, 0, 15), '-');
         $header = \Str::slug($header, '-');
 
-        $gi = geoip_open("/usr/share/GeoIP/GeoIP.dat", GEOIP_STANDARD);
-        $country = geoip_country_name_by_addr($gi, $request->ip());
-        geoip_close($gi);
+        $country = Tools::getCountry($request->ip());
 
         $page = Page::create([
             'code' => $code,
