@@ -33,7 +33,7 @@
             <form method="post" action="/comment/add">
                 {{csrf_field()}}
                 <input type="hidden" name="page_id" value="{{$page_id}}">
-                <input name="comment" required>
+                <input name="comment" required placeholder="inject">
                 <button>comment</button>
             </form>
         </div>

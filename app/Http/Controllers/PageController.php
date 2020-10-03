@@ -189,6 +189,9 @@ class PageController extends Controller
         if(empty(trim($content))) {
             $content = "operator was lazy this time";
         }
+
+        $content = \strip_tags($content);
+
         $header = $request->post('header');
 
         if(empty($header)) {
