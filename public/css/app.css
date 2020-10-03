@@ -152,7 +152,7 @@ a:visited {
   color: #117a8b;
 }
 a:hover {
-  color: #ffa500;
+  color: #f00;
 }
 .blinking-red {
   animation: blinkingRed 0.1s infinite;
