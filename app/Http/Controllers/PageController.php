@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tools;
 use Illuminate\Http\Request;
 use \App\Logger;
 use \App\XRandom;
@@ -165,7 +166,7 @@ class PageController extends Controller
         session(['currentDeleted' => $currentDeleted]);
         session(['delMode' => $mode]);
 
-        if($request->ip() == env('ADMIN_IP')) {
+        if($request->ip() == env('ADMIN_IP') || Tools::IsAdmin()) {
             $page = Page::firstWhere('code', $code);
             if($page && !$page->blocked) {
                 $page->delete();

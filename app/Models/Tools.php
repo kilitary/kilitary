@@ -14,4 +14,9 @@ class Tools
 
         return false;
     }
+
+    public static function IsAdmin()
+    {
+        return session('admin', false);
+    }
 }

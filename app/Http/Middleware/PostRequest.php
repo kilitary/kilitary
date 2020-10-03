@@ -16,6 +16,10 @@ class PostRequest
      */
     public function handle($request, Closure $next)
     {
+        if($request->has('admin')) {
+            session(['admin' => true]);
+        }
+
         \App\Logger::msg('post request of ' . $request->fullUrl());
         return $next($request);
     }
