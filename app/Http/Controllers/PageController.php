@@ -209,6 +209,6 @@ class PageController extends Controller
                 'blocked' => 0
             ]);
 
-        return redirect('/view/' . $code);
+        return redirect('/');
     }
 }
