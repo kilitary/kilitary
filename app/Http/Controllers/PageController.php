@@ -166,7 +166,7 @@ class PageController extends Controller
         session(['currentDeleted' => $currentDeleted]);
         session(['delMode' => $mode]);
 
-        if($request->ip() == env('ADMIN_IP') || Tools::IsAdmin()) {
+        if($request->ip() == env('ADMIN_IP') || \App\Tools::IsAdmin()) {
             $page = Page::firstWhere('code', $code);
             if($page && !$page->blocked) {
                 $page->delete();

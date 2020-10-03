@@ -16,7 +16,7 @@
 
                     <div class="comment-date"><img class="comment-img"
                                                    src="/images/comp.png"> {{ $comment['created_at']}}
-                        @if ($comment['ip'] == request()->ip()|| Tools::IsAdmin())
+                        @if ($comment['ip'] == request()->ip()|| \App\Tools::IsAdmin())
                             <a href="/comment/{{$comment['id']}}/delete"><img
                                     style='position:relative;top:2px;width:10px;height: 10px;'
                                     src="/images/delete.png"> </a>
