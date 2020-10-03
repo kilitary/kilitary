@@ -36,7 +36,8 @@ class PageController extends Controller
         $interesting = $pages->pluck('code', 'header', 'content')
             ->toArray();
 
-        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune', 'code', 'interesting'));
+        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
+            'pwnedBy', 'fortune', 'code', 'interesting'));
     }
 
     public function edit(Request $request, $code)
@@ -121,7 +122,12 @@ class PageController extends Controller
             $views = -1;
             $edits = -1;
         }
-        return view('page', compact('code', 'content', 'header', 'views', 'edits'));
+
+        $description = preg_replace_array('/(\s{2,}?)/', [' '], $page->content);
+        $description = \Str::words($description, 22);
+
+        return view('page', compact('code', 'content', 'header', 'views', 'edits',
+            'description'));
     }
 
     public function delete(Request $request, $code, $mode)

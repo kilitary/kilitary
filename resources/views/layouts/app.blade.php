@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="generator" content="Consume Not allowed Not allowed">
+    <meta name="description" content="{{$description ?? 'v2k, military, fss, fbi, cia, nsa, nasa, thales'}}">
+    <meta name="generator" content="laragen">
     <title>{{ env('APP_NAME') }}</title>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
