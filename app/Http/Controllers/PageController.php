@@ -167,8 +167,18 @@ class PageController extends Controller
         $environment->addExtension(new SmartPunctExtension());
         $environment->addExtension(new StrikethroughExtension());
         $environment->addExtension(new TableExtension());
+        $environment->addExtension(new TaskListExtension());
+        $environment->addExtension(new SmartPunctExtension());
+        $config = [
+            'smartpunct' => [
+                'double_quote_opener' => '“',
+                'double_quote_closer' => '”',
+                'single_quote_opener' => '‘',
+                'single_quote_closer' => '’',
+            ],
+        ];
 
-        $converter = new CommonMarkConverter([], $environment);
+        $converter = new CommonMarkConverter($config, $environment);
         $content = $converter->convertToHtml($content);
 
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
@@ -218,18 +228,22 @@ class PageController extends Controller
         $code = \Str::slug(\Str::substr($content, 0, 15), '-');
         $header = \Str::slug($header, '-');
 
-        $pid = \DB::table('pages')
-            ->insertGetId([
-                'code' => $code,
-                'ip' => $request->ip(),
-                'edits' => 0,
-                'views' => -1,
-                'content' => $content,
-                'header' => $header,
-                'active' => 1,
-                'blocked' => 0
-            ]);
+        $gi = geoip_open("/usr/share/GeoIP/GeoIP.dat", GEOIP_STANDARD);
+        $country = geoip_country_name_by_addr($gi, $request->ip());
+        geoip_close($gi);
 
-        return redirect('/');
+        $page = Page::create([
+            'code' => $code,
+            'ip' => $request->ip(),
+            'edits' => 0,
+            'views' => -1,
+            'content' => $content,
+            'header' => $header,
+            'active' => 1,
+            'blocked' => 0,
+            'country' => $country
+        ]);
+
+        return redirect('/?from=' . $page->id);
     }
 }

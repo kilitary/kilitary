@@ -38,7 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Page extends Model
 {
-    protected $fillable = ['content', 'header', 'visits'];
+    protected $fillable = ['content', 'header', 'visits', 'country', 'ip', 'edits', 'views', 'header', 'active', 'blocked', 'code'];
 
     public function comments()
     {

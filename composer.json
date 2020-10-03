@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.2",
         "filicious/core": "^0.9.1",
         "fruitcake/laravel-cors": "^2.0",
+        "geoip/geoip": "~1.16",
         "guzzlehttp/guzzle": "^7.1",
         "laravel/framework": "^7",
         "laravel/telescope": "^3.5",
