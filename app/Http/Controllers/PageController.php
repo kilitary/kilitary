@@ -17,7 +17,7 @@ use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
 use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\TaskList\TaskListExtension;
-
+use GeoIp2\Database\Reader;
 class PageController extends Controller
 {
     public function index(Request $request)

@@ -2,16 +2,24 @@
 
 namespace App\Models;
 
+use Exception;
+use GeoIp2\Exception\GeoIp2Exception;
 use const GEOIP_STANDARD;
+use GeoIp2\Database\Reader;
+use GeoIp2\Exception\AddressNotFoundException;
 
 class Tools
 {
     public static function getCountry($ip)
     {
-        $gi = geoip_open("/usr/share/GeoIP/GeoIP.dat", GEOIP_STANDARD);
-        $country = geoip_country_name_by_addr($gi, $request->ip());
-        geoip_close($gi);
+        try {
+            $reader = new Reader('/usr/share/GeoIP/GeoIP2-Country.mmdb');
 
+            $record = $reader->country($ip);
+            $country = $record->country->name;
+        } catch(Exception  $e) {
+            return '<unknown>';
+        }
         return $country;
     }
 
