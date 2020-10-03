@@ -28,10 +28,10 @@
             <div class="shortener">
                 <form method="post" action="/us/create">
                 @csrf <!-- {{ csrf_field() }} -->
-                    <div><label for="short"> short</label><input name="short" placeholder="{{$shortUrl->short}}"></div>
+                    <div style="padding-bottom:5px"><label for="short"> short</label><input name="short" placeholder="{{$shortUrl->short}}"></div>
                     <div><label for="long"> long</label> <input name="long" placeholder="{{$shortUrl->long}}"></div>
                     <div>
-                        <button>add short/long url translation (url shortener) or just click this button</button>
+                        <button>add short/long url translation </button>
                     </div>
                 </form>
             </div>

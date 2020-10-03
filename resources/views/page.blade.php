@@ -15,8 +15,16 @@
 
 
                     <div class="comment-date"><img class="comment-img"
-                                                   src="/images/comp.png"> {{ $comment['created_at']}}</div>
-                    <div class="comment-content"> {{$comment['comment']}}</div>
+                                                   src="/images/comp.png"> {{ $comment['created_at']}}
+                        @if ($comment['ip'] == request()->ip())
+                            <a href="/comment/{{$comment['id']}}/delete"><img style='position:relative;top:2px;width:10px;height: 10px;'
+                                                                              src="/images/delete.png"> </a>
+                        @endif
+                    </div>
+
+                    <div class="comment-content"> {{$comment['comment']}}
+
+                    </div>
                 </div>
             @endforeach
         @endif
@@ -24,7 +32,7 @@
             <form method="post" action="/comment/add">
                 {{csrf_field()}}
                 <input type="hidden" name="page_id" value="{{$page_id}}">
-                <input name="comment">
+                <input name="comment" required>
                 <button>comment</button>
             </form>
         </div>

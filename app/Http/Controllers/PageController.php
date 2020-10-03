@@ -40,6 +40,16 @@ class PageController extends Controller
             'pwnedBy', 'fortune', 'code', 'interesting'));
     }
 
+    public function deleteComment(Request $request, $commentId)
+    {
+        \App\Comment::find($commentId)
+            ->delete();
+
+        \Log::debug('user ' . $request->ip() . ' deleted comment ' . $commentId);
+
+        return back();
+    }
+
     public function writeComment(Request $request)
     {
         $comment = \App\Comment::create([
