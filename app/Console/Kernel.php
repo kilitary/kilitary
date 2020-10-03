@@ -30,7 +30,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->job(new ClearOldShit)
-            ->everyFiveMinutes();
+            ->everyFiveMinutes()
+            ->sendOutputTo(base_path() . '/shedule.log');
     }
 
     /**

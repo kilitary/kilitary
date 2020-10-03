@@ -37,4 +37,9 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
     protected $fillable = ['content', 'header', 'visits'];
+
+    public function comments()
+    {
+        return $this->hasMany('\App\Comment');
+    }
 }
