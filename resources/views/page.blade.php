@@ -8,6 +8,7 @@
         <div>
             {!! $content!!}
         </div>
+        <div class="page-country">{{$country}}</div>
         <h2 class="page-footer"></h2>
         @if (isset($comments))
             @foreach ($comments as $comment)
@@ -27,7 +28,7 @@
                     </div>
                 </div>
             @endforeach
-            <div class="page-country">{{$country}}</div>
+
         @endif
         <div class="new-comment">
             <form method="post" action="/comment/add">
