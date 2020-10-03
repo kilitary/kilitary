@@ -12,8 +12,11 @@
         @if (isset($comments))
             @foreach ($comments as $comment)
                 <div class="comment">
-                    <div class="comment-date">{{ $comment['created_at']}}</div>
-                    {{$comment['comment']}}
+
+
+                    <div class="comment-date"><img class="comment-img"
+                                                   src="/images/comp.png"> {{ $comment['created_at']}}</div>
+                    <div class="comment-content"> {{$comment['comment']}}</div>
                 </div>
             @endforeach
         @endif
