@@ -9,24 +9,24 @@
             @markdown($content)
         </div>
         <h2 class="page-footer"></h2>
-        <div class="topheadmargin smallcaps">
+        <div class="topheadmargin ">
             √iews: {{$views}} Edits: {{$edits}}
         </div>
 
         <div class=" page-content">
             <ul class="select-doc-future">
                 <li>
-                    <a class=" alignnmiddle" href="/delete/{{$code}}/0">DELETE THIS DOC (free)</a>
+                    <a class=" alignnmiddle" href="/delete/{{$code}}/0">delete this doc (free)</a>
                 </li>
                 <li>
                     <a class=" alignnmiddle" href="/delete/{{$code}}/1">
-                        DELETE THIS DOC (24 writes of 1/0 per bytes in file
+                        delete this doc (24 writes of 1/0 per bytes in file
                         sectors (inodes)
                         24.95$)</a>
                 </li>
                 <li>
                     <a class=" alignnmiddle" href="/delete/{{$code}}/2">
-                        DELETE THIS DOC (255 writeS of 1/0 per bytes in file
+                        delete this doc (255 writes of 1/0 per bytes in file
                         sectors and physically destroy
                         ONE of active RAID1 disk 94.95$)</a>
                 </li>
