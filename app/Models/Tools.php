@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use ipinfo\ipinfo\IPinfo;
 use Exception;
 use GeoIp2\Exception\GeoIp2Exception;
 use const GEOIP_STANDARD;
@@ -12,15 +13,9 @@ class Tools
 {
     public static function getCountry($ip)
     {
-        try {
-            $reader = new Reader('/usr/share/GeoIP/GeoIP2-Country.mmdb');
-
-            $record = $reader->country($ip);
-            $country = $record->country->name;
-        } catch(Exception  $e) {
-            return '<unknown>';
-        }
-        return $country;
+        $client = new IPinfo(env('IPINFO_TOKEN'));
+        $details = $client->getDetails($ip);
+        return $details->all['country_name'] ?? '<unknown>';
     }
 
     public function codeDeleted($code)
