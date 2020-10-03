@@ -9,6 +9,13 @@ use \App\XRandom;
 use \App\ShortUrl;
 use \App\TextSource;
 use \App\Models\Page;
+use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
+use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
+use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
+use League\CommonMark\Extension\Table\TableExtension;
 
 class PageController extends Controller
 {
@@ -153,6 +160,16 @@ class PageController extends Controller
 
         $comments = $page->load('comments')
             ->comments->toArray();
+
+        $environment = Environment::createCommonMarkEnvironment();
+        $environment->addExtension(new AutolinkExtension());
+        $environment->addExtension(new DisallowedRawHtmlExtension());
+        $environment->addExtension(new SmartPunctExtension());
+        $environment->addExtension(new StrikethroughExtension());
+        $environment->addExtension(new TableExtension());
+
+        $converter = new CommonMarkConverter([], $environment);
+        $content = $converter->convertToHtml($content);
 
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
             'description', 'page_id', 'comments'));

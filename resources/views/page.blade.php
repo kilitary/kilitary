@@ -6,7 +6,7 @@
 
         <h2 class="page-header">{{$header}}</h2>
         <div>
-            @markdown($content)
+            {!! $content!!}
         </div>
         <h2 class="page-footer"></h2>
         @if (isset($comments))

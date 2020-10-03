@@ -1,24 +1,22 @@
 {
-    "name": "laravel/laravel",
+    "name": "kilitary/laragen",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "The kilitary Framework.",
     "keywords": [
-        "framework",
-        "laravel"
+        "fss",
+        "v2k"
     ],
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
-        "arcanedev/laravel-markdown": "^4",
-        "blade-ui-kit/blade-heroicons": "^0.2.2",
-        "blade-ui-kit/blade-zondicons": "^0.1.4",
         "fideloper/proxy": "^4.2",
         "filicious/core": "^0.9.1",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0",
+        "guzzlehttp/guzzle": "^7.1",
         "laravel/framework": "^7",
         "laravel/telescope": "^3.5",
         "laravel/tinker": "^2.0",
+        "league/commonmark": "^1.5",
         "phpmailer/phpmailer": "^6.1",
         "predis/predis": "^1.1"
     },

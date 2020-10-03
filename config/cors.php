@@ -15,11 +15,16 @@ return [
     |
     */
 
-    'paths' => ['api/*'],
+    'paths' => [],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'https://crm.dev.salamport.ru', 'localhost', '127.0.0.1',
+        'https://localhost:8080', 'http://localhost:8080',
+        'https://ab40859c75f0.ngrok.io', '192.168.10.*', 'api.int', 'http://172.30.0.239:8000',
+        'http://localhost:80', 'https://localhost', '*.ngrok.io', 'https://efimov-test.tesonero.com'
+    ],
 
     'allowed_origins_patterns' => [],
 

@@ -21,6 +21,11 @@ textareahover {
   background-color: #9acd32;
   border: 2px dashed #f00;
 }
+blockquote {
+  border-left: 3px solid #8a2be2;
+  margin-left: 0px;
+  padding-left: 3px;
+}
 ul {
   list-style-type: circle;
 }
