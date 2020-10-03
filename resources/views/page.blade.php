@@ -17,7 +17,7 @@
                 </div>
             @endforeach
         @endif
-        <div>
+        <div class="new-comment">
             <form method="post" action="/comment/add">
                 {{csrf_field()}}
                 <input type="hidden" name="page_id" value="{{$page_id}}">
