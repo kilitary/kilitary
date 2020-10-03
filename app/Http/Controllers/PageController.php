@@ -184,8 +184,10 @@ class PageController extends Controller
         $converter = new CommonMarkConverter([], $environment);
         $content = $converter->convertToHtml($content);
 
+        $country = $page->country;
+
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
-            'description', 'page_id', 'comments'));
+            'description', 'page_id', 'comments', 'country'));
     }
 
     public function delete(Request $request, $code, $mode)

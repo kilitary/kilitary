@@ -12,11 +12,9 @@
         @if (isset($comments))
             @foreach ($comments as $comment)
                 <div class="comment">
-
-
-                    <div class="comment-date"><img class="comment-img"
-                                                   src="/images/comp.png"
-                                                   title="{{$comment['country']}}"> {{$comment['username']}}  {{ $comment['created_at']}}
+                    <div class="comment-date">
+                        <img class="comment-img" src="/images/comp.png"
+                             title="{{$comment['country']}}"> {{$comment['username']}}  {{ $comment['created_at']}}
                         @if ($comment['ip'] == request()->ip()|| \App\Models\Tools::IsAdmin())
                             <a href="/comment/{{$comment['id']}}/delete"><img
                                     style='position:relative;top:2px;width:10px;height: 10px;'
@@ -24,11 +22,12 @@
                         @endif
                     </div>
 
-                    <div class="comment-content"> {{$comment['comment']}}
-
+                    <div class="comment-content">
+                        {{$comment['comment']}}
                     </div>
                 </div>
             @endforeach
+            <div class="page-country">{{$country}}</div>
         @endif
         <div class="new-comment">
             <form method="post" action="/comment/add">
