@@ -40,6 +40,7 @@ class PageController extends Controller
         $pages = Page::select('code', 'header')
             ->whereNotIn('code', $deleted)
             ->limit(15)
+            ->latest()
             ->get();
 
         $interesting = $pages->pluck('code', 'header', 'content')
