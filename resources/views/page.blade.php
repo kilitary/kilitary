@@ -5,7 +5,7 @@
     <div class="container page-content">
 
         <h2 class="page-header">{{$header}}</h2>
-        <div>
+        <div class="content-container">
             {!! $content!!}
         </div>
         <div class="page-country">{{$country}}</div>
