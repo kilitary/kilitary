@@ -18,6 +18,7 @@ use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
 use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\TaskList\TaskListExtension;
 use GeoIp2\Database\Reader;
+
 class PageController extends Controller
 {
     public function index(Request $request)
@@ -240,8 +241,8 @@ class PageController extends Controller
             'ip' => $request->ip(),
             'edits' => 0,
             'views' => -1,
-            'content' => $content,
-            'header' => $header,
+            'content' => \Str::substr($content, 0, 65000),
+            'header' => \Str::substr($header, 0, 128),
             'active' => 1,
             'blocked' => 0,
             'country' => $country
