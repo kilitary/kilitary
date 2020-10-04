@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereIp($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Comment[] $comments
  * @property-read int|null $comments_count
+ * @property string $country
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereCountry($value)
  */
 class Page extends Model
 {

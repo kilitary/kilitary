@@ -15,7 +15,7 @@ class Pages extends Migration
     {
         Schema::create('pages', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->integer('views');
             $table->text('content');
             $table->string('header');

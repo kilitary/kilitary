@@ -150,42 +150,40 @@ class PageController extends Controller
                 return $s;
             }, $content);
 
+            $description = preg_replace_array('/(\s{2,}?)/', [' '], $page->content);
+            $description = \Str::words($description, 22);
+
+            $page_id = $page->id;
+
+            $comments = $page->load('comments')
+                ->comments->toArray();
+
+            $environment = Environment::createCommonMarkEnvironment();
+            $environment->addExtension(new AutolinkExtension());
+            $environment->addExtension(new DisallowedRawHtmlExtension());
+            $environment->addExtension(new SmartPunctExtension());
+            $environment->addExtension(new StrikethroughExtension());
+            $environment->addExtension(new TableExtension());
+            //$environment->addExtension(new TaskListExtension());
+            //$environment->addExtension(new SmartPunctExtension());
+            $config = [
+                'smartpunct' => [
+                    'double_quote_opener' => '“',
+                    'double_quote_closer' => '”',
+                    'single_quote_opener' => '‘',
+                    'single_quote_closer' => '’',
+                ],
+            ];
+
+            $converter = new CommonMarkConverter([], $environment);
+            $content = $converter->convertToHtml($content);
+            $country = $page->country;
         } else {
             $content = "[no such content]";
             $header = "[no such header] (" . $code . ")";
             $views = -1;
             $edits = -1;
         }
-
-        $description = preg_replace_array('/(\s{2,}?)/', [' '], $page->content);
-        $description = \Str::words($description, 22);
-
-        $page_id = $page->id;
-
-        $comments = $page->load('comments')
-            ->comments->toArray();
-
-        $environment = Environment::createCommonMarkEnvironment();
-        $environment->addExtension(new AutolinkExtension());
-        $environment->addExtension(new DisallowedRawHtmlExtension());
-        $environment->addExtension(new SmartPunctExtension());
-        $environment->addExtension(new StrikethroughExtension());
-        $environment->addExtension(new TableExtension());
-        //$environment->addExtension(new TaskListExtension());
-        //$environment->addExtension(new SmartPunctExtension());
-        $config = [
-            'smartpunct' => [
-                'double_quote_opener' => '“',
-                'double_quote_closer' => '”',
-                'single_quote_opener' => '‘',
-                'single_quote_closer' => '’',
-            ],
-        ];
-
-        $converter = new CommonMarkConverter([], $environment);
-        $content = $converter->convertToHtml($content);
-
-        $country = $page->country;
 
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
             'description', 'page_id', 'comments', 'country'));
