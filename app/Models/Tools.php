@@ -26,7 +26,10 @@ class Tools
 
     public static function IsAdmin()
     {
-        return session('admin', false) ? env('ADMIN_IP') == \request()->ip() : false;
+        if(session('admin', false) === true)
+            return true;
+
+        return env('ADMIN_IP') === \request()->ip();
     }
 
     public static function savePage(\App\Models\Page $page)

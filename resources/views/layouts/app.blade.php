@@ -28,6 +28,9 @@
 
 </head>
 <body>
+<header>
+
+</header>
 <div id="app">
 
     <main class="@yield('classes')">
@@ -38,6 +41,10 @@
 </div>
 
 <script src="{{ asset('js/app.js') }}"></script>
+
+<footer>
+    {{\App\Models\Tools::isAdmin()}}
+</footer>
 </body>
 </html>
 
