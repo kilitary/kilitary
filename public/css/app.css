@@ -16,7 +16,7 @@ body {
 button,
 input,
 textarea {
-  box-shadow: 0 4px 10px 0 #ffd023, 0 0px 0px 0 #ff0081;
+  box-shadow: 0 0px 23px 0 #ffd023, 0 0px 0px 0 #ff0081;
   font-family: lucida console;
   background-color: #fff;
   cursor: pointer;
@@ -25,7 +25,7 @@ textarea {
 button:hover,
 input:hover,
 textarea:hover {
-  box-shadow: 0 4px 10px 0 #a1ff25, 0 0px 0px 0 #ff0081;
+  box-shadow: 0px 1px 15px #a1ff25, 0 0px 0px 0 #ff0081;
   background-color: #fff9be !important;
   border: 2px dashed #f00 !important;
 }
