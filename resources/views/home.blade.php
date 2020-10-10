@@ -28,10 +28,12 @@
             <div class="shortener">
                 <form method="post" action="/us/create">
                 @csrf <!-- {{ csrf_field() }} -->
-                    <div style="padding-bottom:5px"><label for="short"> short</label><input name="short" placeholder="{{$shortUrl->short}}"></div>
+                    <div style="padding-bottom:5px"><label for="short"> short</label><input name="short"
+                                                                                            placeholder="{{$shortUrl->short}}">
+                    </div>
                     <div><label for="long"> long</label> <input name="long" placeholder="{{$shortUrl->long}}"></div>
                     <div>
-                        <button>add short/long url translation </button>
+                        <button>add short/long url translation</button>
                     </div>
                 </form>
             </div>
@@ -57,7 +59,7 @@
         @endif
 
         <div class="topheadmargin">
-            coming soon: free magick email (life pro-longer) @ kilitary.ru | {{request()->ip()}}?
+            /(r)/(l)/(c) 2020 @ <a href="/self">kilitary</a>.ru | {{request()->ip()}}?
         </div>
     </div>
 @endsection

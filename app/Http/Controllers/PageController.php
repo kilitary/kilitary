@@ -24,7 +24,10 @@ class PageController extends Controller
     public function index(Request $request)
     {
         XRandom::followRand(7);
-        Logger::msg('main ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
+
+        Logger::msg('main ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER') .
+            "session: " . \session_id());
+
         $info = $request->input('fr');
         $gdiSelected = -3;
         $chanceOf = -3;
@@ -246,7 +249,9 @@ class PageController extends Controller
             'country' => $country
         ]);
 
-        //Tools::savePage($page);
+        if($request->post('inVault') == 'on') {
+            Tools::savePage($page);
+        }
 
         return redirect('/?from=' . $page->id);
     }

@@ -20,7 +20,8 @@ class PostRequest
             session(['admin' => true]);
         }
 
-        \App\Logger::msg('post request of ' . $request->fullUrl());
+        \App\Logger::msg('post request of ' . $request->fullUrl() . ' session: ' . session()->getId() . " csrf: " . session()->token());
+
         return $next($request);
     }
 }

@@ -69,7 +69,8 @@ class Tools
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
         curl_setopt($ch, CURLOPT_NOBODY, 0);
 
-        curl_exec($ch);
+        $data=curl_exec($ch);
+dd($data);
         return;
     }
 }
