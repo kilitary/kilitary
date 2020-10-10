@@ -51,7 +51,7 @@
                 Interesting:
                 @foreach ($interesting as $i => $v)
                     <a href="/view/{{$v}}" class="interestlink"
-                       title="{{trim($i)}}">{!! '' . $v . ',' !!}</a>
+                       title="{{trim($i)}}">{!! '' . $v !!}</a>,
                 @endforeach
                 <a href="../">..</a>
             </div>

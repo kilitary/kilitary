@@ -81,7 +81,12 @@ ul {
 }
 .interestlink {
   font-size: 12px;
+  padding: 3px;
   font-family: lucida console;
+  box-shadow: 0 2px 8px #45ff08, 0 1px 1px 0 #34daff;
+}
+.interestlink:hover {
+  box-shadow: 1px 1px 1px #f00, 0 0px 1px 0 #34daff;
 }
 .select-doc-future {
   padding-left: 15px;
@@ -98,7 +103,7 @@ ul {
 .comment {
   display: list-item;
   margin-bottom: 8px;
-  box-shadow: 18px 3px 9px #24b8ff, 0 0px 5px 0 #b0ffd7;
+  box-shadow: 18px 3px 0px #24b8ff, 0 0px 5px 0 #b0ffd7;
 }
 .new-comment {
   padding: 10px;

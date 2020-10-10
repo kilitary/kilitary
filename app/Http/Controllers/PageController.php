@@ -18,6 +18,7 @@ use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
 use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\TaskList\TaskListExtension;
 use GeoIp2\Database\Reader;
+use Str;
 
 class PageController extends Controller
 {
@@ -36,7 +37,7 @@ class PageController extends Controller
         $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
         $fortune = `cat /home/kilitary/kilitary/public/fortune-state`;
 
-        $code = \Str::random(15);
+        $code = Str::random(15);
 
         $deleted = session('currentDeleted', []);
 
@@ -156,7 +157,7 @@ class PageController extends Controller
             }, $content);
 
             $description = preg_replace_array('/(\s{2,}?)/', [' '], $page->content);
-            $description = \Str::words($description, 22);
+            $description = Str::words($description, 22);
 
             $page_id = $page->id;
 
@@ -217,7 +218,7 @@ class PageController extends Controller
     public function record(Request $request, $code)
     {
         if($request->method() == 'GET') {
-            $code = \Str::random(15);
+            $code = Str::random(15);
             return view('newpage', compact('code'));
         }
 
@@ -230,12 +231,12 @@ class PageController extends Controller
 
         $header = $request->post('header');
 
-        if(empty($header)) {
-            $header = \Str::random(40);
+        if(empty(trim($header))) {
+            $header = Str::random(40);
         }
 
-        $code = \Str::slug(\Str::substr($content, 0, 15), '-');
-        $header = \Str::slug($header, '-');
+        $code = Str::slug(Str::substr($content, 0, 15), '-');
+        $header = Str::slug($header, '-');
 
         $country = Tools::getCountry($request->ip());
 
@@ -244,8 +245,8 @@ class PageController extends Controller
             'ip' => $request->ip(),
             'edits' => 0,
             'views' => -1,
-            'content' => \Str::substr($content, 0, 65000),
-            'header' => \Str::substr($header, 0, 128),
+            'content' => Str::substr($content, 0, 65000),
+            'header' => Str::substr($header, 0, 128),
             'active' => 1,
             'blocked' => 0,
             'country' => $country
