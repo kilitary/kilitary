@@ -28,12 +28,12 @@
                 @csrf <!-- {{ csrf_field() }} -->
                     <div style="padding-bottom:5px">
                         <label for="short" style="width:120px"> short code
-                            (https://kilitary.ru/us/{code})</label><br/><br/>
-                        <input class="url-input" required autocomplete="off" name="short"
+                            (may be blank)</label><br/><br/>
+                        <input class="url-input" autocomplete="off" name="short"
                                placeholder="{{$shortUrl->short}}">
                     </div>
                     <div>
-                        <label for="long" style="width:120px"> long uri</label><br/><br/>
+                        <label for="long" style="width:120px"> long uri (destination url)</label><br/><br/>
                         <input class="url-input" name="long" autocomplete="off" required
                                placeholder="{{$shortUrl->long}}">
                     </div>

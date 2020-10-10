@@ -9,9 +9,9 @@
             {!! $content!!}
         </div>
         @if (!empty($country))
-            <div class="page-country">Remote: {{$country}}</div>
+            <div class="page-country">Connection: {{$country}}</div>
         @else
-            <div class="page-country">Remote: $untracked</div>
+            <div class="page-country">Connection: #untracked#</div>
         @endif
 
         <h2 class="page-footer"></h2>
