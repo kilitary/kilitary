@@ -246,7 +246,7 @@ class PageController extends Controller
             'country' => $country
         ]);
 
-        Tools::savePage($page);
+        //Tools::savePage($page);
 
         return redirect('/?from=' . $page->id);
     }
