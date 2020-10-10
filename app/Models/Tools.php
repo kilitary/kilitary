@@ -26,7 +26,7 @@ class Tools
 
     public static function IsAdmin()
     {
-        return session('admin', false);
+        return session('admin', false) ? env('ADMIN_IP') == \request()->ip() : false;
     }
 
     public static function savePage(\App\Models\Page $page)
@@ -69,8 +69,8 @@ class Tools
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
         curl_setopt($ch, CURLOPT_NOBODY, 0);
 
-        $data=curl_exec($ch);
-dd($data);
+        $data = curl_exec($ch);
+        dd($data);
         return;
     }
 }

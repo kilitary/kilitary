@@ -55,10 +55,13 @@ class PageController extends Controller
 
     public function deleteComment(Request $request, $commentId)
     {
-        \App\Comment::find($commentId)
-            ->delete();
+        \Log::debug('user ' . $request->ip() . ' deleting comment ' . $commentId);
 
-        \Log::debug('user ' . $request->ip() . ' deleted comment ' . $commentId);
+        $comment = \App\Comment::find($commentId);
+
+        if($comment && $comment->ip == $request->ip() || Tools::IsAdmin()) {
+            $comment->delete();
+        }
 
         return back();
     }
@@ -200,7 +203,7 @@ class PageController extends Controller
         session(['currentDeleted' => $currentDeleted]);
         session(['delMode' => $mode]);
 
-        if($request->ip() == env('ADMIN_IP') || \App\Models\Tools::IsAdmin()) {
+        if(\App\Models\Tools::IsAdmin()) {
             $page = Page::firstWhere('code', $code);
             if($page && !$page->blocked) {
                 $page->delete();
@@ -250,7 +253,7 @@ class PageController extends Controller
         ]);
 
         if($request->post('inVault') == 'on') {
-            Tools::savePage($page);
+            //Tools::savePage($page);
         }
 
         return redirect('/?from=' . $page->id);

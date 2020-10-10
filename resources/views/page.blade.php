@@ -8,7 +8,12 @@
         <div class="content-container">
             {!! $content!!}
         </div>
-        <div class="page-country">Remote: {{$country}}</div>
+        @if (!empty($country))
+            <div class="page-country">Remote: {{$country}}</div>
+        @else
+            <div class="page-country">Remote: $untracked</div>
+        @endif
+
         <h2 class="page-footer"></h2>
         @if (isset($comments))
             @foreach ($comments as $comment)
@@ -45,19 +50,19 @@
         <div class=" page-content">
             <ul class="select-doc-future">
                 <li>
-                    <a class=" alignnmiddle" href="/delete/{{$code}}/0">delete this info (killware/0.65$)</a>
+                    <a class=" alignnmiddle" href="/delete/{{$code}}/0">delete this killware</a>
                 </li>
                 <li>
                     <a class=" alignnmiddle" href="/delete/{{$code}}/1">
                         delete this article (24 writes of 1/0 per bytes in file
-                        sectors (inodes)
+                        sectors (inodes):
                         23.97$)</a>
                 </li>
                 <li>
                     <a class=" alignnmiddle" href="/delete/{{$code}}/2">
                         delete this document (255 writes of 1/0 per bytes in file
                         sectors on TWO disks and physically destroy
-                        ONE of active RAID1 disk 94.95$)</a>
+                        ONE of active RAID1 disk: 94.95$)</a>
                 </li>
                 <li>
                     <a href="/edit/{{$code}}">extend</a>

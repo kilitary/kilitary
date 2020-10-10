@@ -4,48 +4,58 @@
     <div class="container">
 
         <h2>hello {{ $info }} ({{(\App\XRandom::scaled(0,1) ? 'p' : 'o')}}wned by <a
-                target=_blank href='https://www.google.com/search?q={{$pwnedBy}}'>{{$pwnedBy}})</a></h2>
-        <div class="marginleft">
-            @if (isset($gdiSelected) && $gdiSelected)
-                <h3> global defense initiative selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }}
+                target=_blank href='https://www.google.com/search?q={{$pwnedBy}}'>{{$pwnedBy}})</a>
+            <div class="tib-war-header">
+                @if (isset($gdiSelected) && $gdiSelected)
+                    [ global defense initiative selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }}
                     of {{$chanceOf}}
-                    )</h3>
-            @else
-                <h3> brotherhood of nod selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }} of {{$chanceOf}}
-                    )</h3>
-            @endif
+                    )]
 
+                @else
+                    brotherhood of nod selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }} of {{$chanceOf}}
+                    )
+                @endif
+            </div>
+            / list of services:
+        </h2>
+        <div class="marginleft">
+
+            <h3 class="section-h3">AN/SPY order Link</h3>
 
             @if (empty($sign))
-                <span color=red class="blinking-red"><< empty >></span>
+                sign:  <span color=red class="blinking-red"><< empty >></span>
             @else
                 <div style="font-size:13px;font-variant: small-caps;font-family: consolas">sign {!! $sign !!}</div>
             @endif
             <div class="links"><a href='/command/sync?{{request()->path()}}'>sync?</a></div>
         </div>
 
+
         @if (isset($shortUrl))
             <div class="shortener">
+                <h3 class="section-h3">link shortener</h3>
                 <form method="post" action="/us/create">
                 @csrf <!-- {{ csrf_field() }} -->
-                    <div style="padding-bottom:5px"><label for="short"> short</label><input name="short"
-                                                                                            placeholder="{{$shortUrl->short}}">
+                    <div style="padding-bottom:5px">
+                        <label for="short" style="width:120px"> short code
+                            (https://kilitary.ru/us/{code})</label><br/><br/>
+                        <input class="url-input" required name="short" placeholder="{{$shortUrl->short}}">
                     </div>
-                    <div><label for="long"> long</label> <input name="long" placeholder="{{$shortUrl->long}}"></div>
                     <div>
-                        <button>add short/long url translation</button>
+                        <label for="long" style="width:120px"> long uri</label><br/><br/>
+                        <input class="url-input" name="long" required placeholder="{{$shortUrl->long}}">
+                    </div>
+                    <div>
+                        <label for="long" style="width:120px"> </label><br/><br/>
+                        <button class="wide-button">add short/long url translation</button>
                     </div>
                 </form>
             </div>
         @endif
 
-        <div class="marginleft">
-            {!! nl2br(`/usr/bin/timedatectl`) !!}<br/>
-            {{ $fortune }}
-        </div>
-
         @if(isset($code))
             <div class="marginleft marginbottom">
+                <h3 class="section-h3">information, documents and plans</h3>
                 Interesting:
                 @foreach ($interesting as $i => $v)
                     <a href="/view/{{$v}}" class="interestlink"
@@ -58,8 +68,16 @@
             </div>
         @endif
 
+        <div class="marginleft">
+            <h3 class="section-h3">server status</h3>
+            {!! nl2br(`/usr/bin/timedatectl`) !!}<br/>
+            {{ $fortune }}
+            {{ `uptime` }}
+        </div>
+
+
         <div class="topheadmargin">
-            /(r)/(l)/(c) 2020 @ <a href="/self">kilitary</a>.ru | {{request()->ip()}}?
+            (c) 2020 @ <a href="/self">kilitary</a>.ru | {{request()->ip()}}?
         </div>
     </div>
 @endsection

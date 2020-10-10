@@ -14,15 +14,20 @@ body
     background-color #fefff5
 
 button, input, textarea
-    box-shadow 0 4px 10px 0 #68ff2a, 0 0px 0px 0 #ff0081
+    box-shadow 0 4px 10px 0 #ffd023, 0 0px 0px 0 #ff0081
     font-family lucida console
     background-color white
     cursor pointer
     border 2px dashed darkorange
 
-    &hover
-        background-color yellowgreen
-        border 2px dashed red
+    &:hover
+        background-color #fff9be !important
+        border 2px dashed red !important
+
+.url-input
+    width 300px
+    margin-top 3px
+    margin-bottom 5px
 
 blockquote
     border-left 3px solid blueviolet
@@ -31,6 +36,13 @@ blockquote
 
 ul
     list-style-type circle
+
+.section-h3
+    border-bottom 1px solid #a5f3bd
+    padding-bottom 11px
+    display border-block
+    width 20%
+    clear both
 
 .container
     width 100%
@@ -68,8 +80,12 @@ ul
     padding-left 15px
     margin-left 0px
 
-    &li
+    & li
         padding-top 5px
+
+.tib-war-header
+    font-variant small-caps
+    display inline
 
 .comment
     display block
@@ -78,6 +94,7 @@ ul
 
 .new-comment
     padding 10px
+
 
 .comment-img
     position relative
@@ -126,7 +143,7 @@ ul
     margin-right 1px
     float left
 
-    &hover
+    &:hover
         background-color rebeccapurple
         color whitesmoke
         cursor pointer
@@ -139,7 +156,7 @@ ul
     margin 0px
     width 90%
 
-    &hover
+    &:hover
         background-color #7dffae
         color black
         cursor pointer
@@ -155,6 +172,12 @@ ul
     color red
     margin-bottom 0px
     padding-bottom 0px
+
+.wide-button
+    padding 2px !important
+    margin 0px !important
+    margin-top 4px !important
+
 
 a, a:visited
     text-decoration none

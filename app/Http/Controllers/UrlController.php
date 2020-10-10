@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
 use App\XRandom;
 use Illuminate\Http\Request;
 use App\Logger;
@@ -31,6 +32,7 @@ class UrlController extends Controller
             ]);
         } else {
             Logger::msg('redirect ' . $shortRecord->short . ' => ' . $shortRecord->long . ' by ' . $request->ip());
+            $shortUrl = new Page();
         }
 
         $success = XRandom::get(0, 1) ? 'true' : 'false';
