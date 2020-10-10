@@ -27,23 +27,23 @@
             @else
                 <div style="font-size:13px;font-variant: small-caps;font-family: consolas">sign {!! $sign !!}</div>
             @endif
-            <div class="links"><a href='/command/sync?{{request()->path()}}'>sync?</a></div>
+            <div class="links"><a href='/command/sync?{{request()->path()}}'>sync</a></div>
         </div>
 
 
         @if (isset($shortUrl))
             <div class="shortener">
                 <h3 class="section-h3">link shortener</h3>
-                <form method="post" action="/us/create">
+                <form method="post" action="/us/create" autocomplete="off">
                 @csrf <!-- {{ csrf_field() }} -->
                     <div style="padding-bottom:5px">
                         <label for="short" style="width:120px"> short code
                             (https://kilitary.ru/us/{code})</label><br/><br/>
-                        <input class="url-input" required name="short" placeholder="{{$shortUrl->short}}">
+                        <input class="url-input" required autocomplete="off" name="short" placeholder="{{$shortUrl->short}}">
                     </div>
                     <div>
                         <label for="long" style="width:120px"> long uri</label><br/><br/>
-                        <input class="url-input" name="long" required placeholder="{{$shortUrl->long}}">
+                        <input class="url-input" name="long" autocomplete="off" required placeholder="{{$shortUrl->long}}">
                     </div>
                     <div>
                         <label for="long" style="width:120px"> </label><br/><br/>
@@ -77,7 +77,7 @@
 
 
         <div class="topheadmargin">
-            (cl/cpu/cpI/cpuID) 202x-204x @ <a href="mailto:kilitary@protonmail.com">kilitary</a><a
+            (cpuID) 202x-204x @ <a href="mailto:kilitary@protonmail.com">kilitary</a><a
                 href="mailto:deconf@ya.ru">.ru</a>
             | {{request()->ip()}}?
         </div>

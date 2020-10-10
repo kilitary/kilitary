@@ -152,8 +152,7 @@ class PageController extends Controller
                 if(XRandom::get(0, 25) != 3) {
                     return $matches[0];
                 }
-                $s = "<span class='ignited'>$matches[1]</span>";
-                return $s;
+                return "<span class='ignited'>$matches[1]</span>";
             }, $content);
 
             $description = preg_replace_array('/(\s{2,}?)/', [' '], $page->content);
@@ -169,8 +168,8 @@ class PageController extends Controller
             $environment->addExtension(new DisallowedRawHtmlExtension());
             $environment->addExtension(new SmartPunctExtension());
             $environment->addExtension(new StrikethroughExtension());
-            $environment->addExtension(new TableExtension());
-            //$environment->addExtension(new TaskListExtension());
+            //$environment->addExtension(new TableExtension());
+            $environment->addExtension(new TaskListExtension());
             //$environment->addExtension(new SmartPunctExtension());
             $config = [
                 'smartpunct' => [
@@ -181,7 +180,7 @@ class PageController extends Controller
                 ],
             ];
 
-            $converter = new CommonMarkConverter([], $environment);
+            $converter = new CommonMarkConverter($config, $environment);
             $content = $converter->convertToHtml($content);
             $country = $page->country;
         } else {
