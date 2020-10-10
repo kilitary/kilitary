@@ -96,12 +96,17 @@ ul {
   display: inline;
 }
 .comment {
-  display: block;
-  width: 20%;
+  display: list-item;
   margin-bottom: 8px;
+  box-shadow: -18px -3px 9px #8ef6a5, 0px 0px 5px 0 #b0ffd7;
 }
 .new-comment {
   padding: 10px;
+}
+.text-comment {
+  width: 20%;
+  height: 120px;
+  clear: both;
 }
 .comment-img {
   position: relative;

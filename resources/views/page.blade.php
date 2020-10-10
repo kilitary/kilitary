@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="comment-content">
-                        {{$comment['comment']}}
+                        {!! $converter->convertToHtml($comment['comment']) !!}
                     </div>
                 </div>
             @endforeach
@@ -39,7 +39,8 @@
             <form method="post" action="/comment/add">
                 {{csrf_field()}}
                 <input type="hidden" name="page_id" value="{{$page_id}}">
-                <input name="comment" required placeholder="inject">
+                <textarea name="comment" class="text-comment" required placeholder="inject"></textarea>
+                <br/>
                 <button>comment</button>
             </form>
         </div>

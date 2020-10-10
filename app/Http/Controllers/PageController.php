@@ -191,7 +191,7 @@ class PageController extends Controller
         }
 
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
-            'description', 'page_id', 'comments', 'country'));
+            'description', 'page_id', 'comments', 'country', 'converter'));
     }
 
     public function delete(Request $request, $code, $mode)
