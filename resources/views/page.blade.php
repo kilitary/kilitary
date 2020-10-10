@@ -68,7 +68,7 @@
                     <a href="/edit/{{$code}}">extend</a>
                 </li>
                 <li>
-                    <a class=" alignnmiddle" href="/">ret</a>
+                    <a class=" alignnmiddle" href="/">ret()
                 </li>
             </ul>
         </div>

@@ -13,7 +13,7 @@
                 <button>extend</button>
             </h2>
             <li>
-                <a class="topheadmargin alignnmiddle" href="/">ret</a>
+                <a class="topheadmargin alignnmiddle" href="/">ret()
             </li>
         </form>
     </div>

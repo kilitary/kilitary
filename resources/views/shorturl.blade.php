@@ -2,16 +2,16 @@
 
 @section('content')
     <div class="container">
-        <h2>{{env('APP_URL')}}/us/{{$shortUrl->short}}</h2>
+        <h2><a href="{{env('APP_URL')}}/us/{{$shortUrl->short}}">{{env('APP_URL')}}/us/{{$shortUrl->short}}</a></h2>
         to
         <h2>{{$shortUrl->long}}</h2>
         <br/>
         stable: {{$success}}<br/>
-        system: url shortner v 4.06.153.34.00000000001a<br/>
-        <div class="links"><a href='/command/sync?{{request()->path()}}'>sync?</a></div>
+        system: url shortner v 4.06.153.34.01b<br/>
+        <div class="links"><a href='/command/sync?{{request()->path()}}'>sync</a></div>
 
         <br/>
-        <a class="topheadmargin alignnmiddle" href="/">ret</a>
+        <a class="topheadmargin alignnmiddle" href="/">ret()
     </div>
     <script>
         setTimeout(function() {
