@@ -24,9 +24,15 @@ class UrlController extends Controller
 
         if(!$shortRecord) {
             Logger::msg('creating static ' . $request->input('short') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
+
+            $long = $request->input('long');
+            if(!strstr($long, "://")) {
+                $long = 'http://' . $long;
+            }
+
             $shortUrl = \App\ShortUrl::create([
                 'short' => $request->input('short'),
-                'long' => $request->input('long'),
+                'long' => $long,
                 'visits' => 0,
                 'creater_ip' => $request->ip()
             ]);

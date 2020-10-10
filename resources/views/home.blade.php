@@ -5,17 +5,7 @@
 
         <h2>hello {{ $info }} ({{(\App\XRandom::scaled(0,1) ? 'p' : 'o')}}wned by <a
                 target=_blank href='https://www.google.com/search?q={{$pwnedBy}}'>{{$pwnedBy}})</a>
-            <div class="tib-war-header">
-                @if (isset($gdiSelected) && $gdiSelected)
-                    [ global defense initiative selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }}
-                    of {{$chanceOf}}
-                    )]
 
-                @else
-                    brotherhood of nod selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }} of {{$chanceOf}}
-                    )
-                @endif
-            </div>
             / list of services:
         </h2>
         <div class="marginleft">
@@ -39,11 +29,13 @@
                     <div style="padding-bottom:5px">
                         <label for="short" style="width:120px"> short code
                             (https://kilitary.ru/us/{code})</label><br/><br/>
-                        <input class="url-input" required autocomplete="off" name="short" placeholder="{{$shortUrl->short}}">
+                        <input class="url-input" required autocomplete="off" name="short"
+                               placeholder="{{$shortUrl->short}}">
                     </div>
                     <div>
                         <label for="long" style="width:120px"> long uri</label><br/><br/>
-                        <input class="url-input" name="long" autocomplete="off" required placeholder="{{$shortUrl->long}}">
+                        <input class="url-input" name="long" autocomplete="off" required
+                               placeholder="{{$shortUrl->long}}">
                     </div>
                     <div>
                         <label for="long" style="width:120px"> </label><br/><br/>
@@ -77,6 +69,19 @@
 
 
         <div class="topheadmargin">
+
+            <div class="tib-war-header">
+                @if (isset($gdiSelected) && $gdiSelected)
+                    global defense initiative selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }}
+                    of {{$chanceOf}}
+                    )
+
+                @else
+                    brotherhood of nod selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }} of {{$chanceOf}}
+                    )
+                @endif
+            </div>
+
             (cpuID) 202x-204x @ <a href="mailto:kilitary@protonmail.com">kilitary</a><a
                 href="mailto:deconf@ya.ru">.ru</a>
             | {{request()->ip()}}?
