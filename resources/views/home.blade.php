@@ -61,7 +61,7 @@
         @endif
 
         <div class="marginleft">
-            <h3 class="section-h3">server status</h3>
+            <h3 class="section-h3">time status</h3>
             {!! nl2br(`/usr/bin/timedatectl`) !!}<br/>
             {{ $fortune }}
             {{ `uptime` }}
