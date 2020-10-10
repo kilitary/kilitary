@@ -103,6 +103,7 @@ ul {
 .comment {
   display: flow-root;
   margin-bottom: 8px;
+  padding-bottom: 5px;
   box-shadow: 18px 3px 0px #24b8ff, 0 0px 5px 0 #b0ffd7;
 }
 .new-comment {
