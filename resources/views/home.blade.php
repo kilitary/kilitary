@@ -20,7 +20,7 @@
         </h2>
         <div class="marginleft">
 
-            <h3 class="section-h3">AN/SPY order Link</h3>
+            <h3 class="section-h3" style="">an/spy order link</h3>
 
             @if (empty($sign))
                 sign:  <span color=red class="blinking-red"><< empty >></span>
@@ -47,7 +47,7 @@
                     </div>
                     <div>
                         <label for="long" style="width:120px"> </label><br/><br/>
-                        <button class="wide-button">add short/long url translation</button>
+                        <button class="wide-button">create redirect</button>
                     </div>
                 </form>
             </div>
@@ -77,7 +77,9 @@
 
 
         <div class="topheadmargin">
-            (c) 2020 @ <a href="/self">kilitary</a>.ru | {{request()->ip()}}?
+            (cl/cpu/cpI/cpuID) 202x-204x @ <a href="mailto:kilitary@protonmail.com">kilitary</a><a
+                href="mailto:deconf@ya.ru">.ru</a>
+            | {{request()->ip()}}?
         </div>
     </div>
 @endsection
