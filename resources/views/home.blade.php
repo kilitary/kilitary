@@ -5,8 +5,6 @@
 
         <h2>hello {{ $info }} ({{(\App\XRandom::scaled(0,1) ? 'p' : 'o')}}wned by <a
                 target=_blank href='https://www.google.com/search?q={{$pwnedBy}}'>{{$pwnedBy}})</a>
-
-            / list of services:
         </h2>
         <div class="marginleft">
 
