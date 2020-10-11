@@ -109,34 +109,16 @@ function lock() {
   }
 
   prev = parseInt($('#flagleft').css('left'));
-
-  if (prev < 12) {
-    $('#flagleft').css('left', prev + randomNumber(-5, 5) + 'px');
-  }
-
+  $('#flagleft').css('left', prev + rando(-10, 10) + 'px');
   clearTimeout(timerId);
-  prev = randomNumber(10, 120);
+  prev = rando(10, 120);
   timerId = setInterval(lock, prev);
 }
 
 function rot() {
-  var rotate = randomNumber(6, 10); //'.crysa-class').css('transform');
+  var rotate = rando(-6, 10); //'.crysa-class').css('transform');
 
   $('.crysa-class').css('transform', 'rotate(' + rotate + 'deg)');
-}
-
-function randomNumber(min, max) {
-  if (min > max) {
-    var temp = max;
-    max = min;
-    min = max;
-  }
-
-  if (min <= 0) {
-    return Math.floor(Math.random() * (max + Math.abs(min) + 1)) + min;
-  } else {
-    return Math.floor(Math.random() * max) + min;
-  }
 }
 
 $(function () {
