@@ -122,7 +122,7 @@ function rot() {
 
   if (rando(true, false)) {
     prev = parseInt($('.crysa-class').css('height'));
-    $('.crysa-class').css('height', prev + rando(-15, 15) + 'px');
+    $('.crysa-class').css('height', prev + rando(-25, 25) + 'px');
   }
 }
 

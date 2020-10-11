@@ -8,24 +8,24 @@
         </h2>
         <div class="marginleft">
 
-            <h3 class="section-h3" style="">an/spy order link</h3>
+            <h3 class="section-h3" style="">am/spy link</h3>
 
             @if (empty($sign))
-                sign:  <span color=red class="blinking-red"><< empty >></span>
+                target:  <span color=red class="blinking-red"><< unresolved >></span>
             @else
-                <div style="font-size:13px;font-variant: small-caps;font-family: consolas">sign {!! $sign !!}</div>
+                <div style="font-size:13px;font-variant: small-caps;font-family: consolas">target {!! $sign !!}</div>
             @endif
-            <div class="links"><a href='/command/sync?{{request()->path()}}'>sync</a></div>
+            <div class="links"><a href='/command/sync?{{request()->path()}}'>synC</a></div>
         </div>
 
 
         @if (isset($shortUrl))
             <div class="shortener">
-                <h3 class="section-h3">link shortener</h3>
+                <h3 class="section-h3">link shorterizer</h3>
                 <form method="post" action="/us/create" autocomplete="off">
                 @csrf <!-- {{ csrf_field() }} -->
                     <div style="padding-bottom:5px">
-                        <label for="short" style="width:120px"> short code
+                        <label for="short" style="width:120px"> alphanumerical code
                             (may be blank)</label><br/><br/>
                         <input class="url-input" autocomplete="off" name="short"
                                placeholder="{{$shortUrl->short}}">
@@ -37,7 +37,7 @@
                     </div>
                     <div>
                         <label for="long" style="width:120px"> </label><br/><br/>
-                        <button class="wide-button">create redirect</button>
+                        <button class="wide-button">create link</button>
                     </div>
                 </form>
             </div>
@@ -45,10 +45,10 @@
 
         @if(isset($code))
             <div class="marginleft marginbottom">
-                <h3 class="section-h3">information, documents and plans</h3>
+                <h3 class="section-h3">information/documents/plans/doss</h3>
                 Interesting:
                 @foreach ($interesting as $v)
-                    <a href="/view/{{$v['code']}}" data-pt-title="{{\Str::substr($v['content'], 0, 155)}}"
+                    <a href="/view/{{$v['code']}}" data-pt-title="{!! \Str::substr($v['content'], 0, 155)!!}"
                        class="protip interestlink"
                        title="{{trim($v['header'])}}">{!! '' . $v['header'] !!}</a>,
                 @endforeach
