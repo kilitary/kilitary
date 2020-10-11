@@ -23,7 +23,7 @@ class PostRequest
 
         $response = $next($request);
 
-        $record = LogRecord::whereId(session('log_id'))
+        $record = LogRecord::where('id', session('log_id'))
             ->update([
                 'http_code' => $response->getStatusCode()
             ]);
