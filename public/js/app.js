@@ -98,7 +98,7 @@ var timerId;
 function lock() {
   var prev = parseInt($('#flagright').css('top'));
 
-  if (prev < -2) {
+  if (prev < -7) {
     $('#flagright').css('top', prev + 1 + 'px');
   }
 
@@ -109,8 +109,14 @@ function lock() {
   }
 
   clearTimeout(timerId);
-  prev = randomNumber(10, 50);
+  prev = randomNumber(10, 90);
   timerId = setInterval(lock, prev);
+}
+
+function rot() {
+  var rotate = randomNumber(6, 10); //'.crysa-class').css('transform');
+
+  $('.crysa-class').css('transform', 'rotate(' + rotate + 'deg)');
 }
 
 function randomNumber(min, max) {
@@ -130,6 +136,7 @@ function randomNumber(min, max) {
 $(function () {
   $('#flagright').css('top', '-100px');
   timerId = setInterval(lock, 20);
+  setInterval(rot, 600);
 });
 
 /***/ }),
