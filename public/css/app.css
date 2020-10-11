@@ -26,15 +26,15 @@ body {
   image-rendering: pixelated;
 }
 #flagright {
-  display: inline-block;
+  display: flex;
   top: -16px;
-  width: 40px;
-  height: 70px;
+  width: 83px;
+  height: 140px;
   position: absolute;
   left: 97%;
   float: left;
   background-image: url("/images/usflagged.jpg");
-  background-position-x: 42px;
+  background-position-x: 2px;
   background-size: contain;
   border-top: 11px dashed #00bfff;
   object-fit: cover;
