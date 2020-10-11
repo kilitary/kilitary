@@ -59,9 +59,11 @@
 </header>
 
 <div id="app">
-    <main class="@yield('classes')">
-        @yield('content')
-    </main>
+    <article role="main">
+        <main class="@yield('classes')">
+            @yield('content')
+        </main>
+    </article>
 </div>
 
 <footer>

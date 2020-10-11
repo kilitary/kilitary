@@ -48,7 +48,7 @@ class PageController extends Controller
             ->get();
 
         $interesting = $pages//->pluck('code', 'header', 'content')
-            ->toArray();
+        ->toArray();
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
             'pwnedBy', 'fortune', 'code', 'interesting'));
@@ -192,6 +192,8 @@ class PageController extends Controller
             $header = "[no such header] (" . $code . ")";
             $views = -1;
             $edits = -1;
+
+            return back();
         }
 
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
