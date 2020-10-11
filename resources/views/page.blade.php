@@ -79,10 +79,19 @@
 
 @section('scripts')
     <script>
+        @if (session('playAudio', false))
+        $(function() {
+            var audio = new Audio('{{session()->pull('playAudio')}}');
+            audio.play();
+        });
+
+        @else
         $(function() {
             var audio = new Audio('/audio/ss.mp3');
             audio.play();
         });
+
+        @endif
     </script>
 @stop
 

@@ -78,6 +78,9 @@ class PageController extends Controller
             'country' => $country,
             'page_id' => $request->post('page_id')
         ]);
+
+        session(['playAudio' => '/audio/recycle.mp3']);
+
         return back();
     }
 

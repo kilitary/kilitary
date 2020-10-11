@@ -109,8 +109,22 @@ function lock() {
   }
 
   clearTimeout(timerId);
-  prev = Math.random() * 150;
+  prev = randomNumber(10, 50);
   timerId = setInterval(lock, prev);
+}
+
+function randomNumber(min, max) {
+  if (min > max) {
+    var temp = max;
+    max = min;
+    min = max;
+  }
+
+  if (min <= 0) {
+    return Math.floor(Math.random() * (max + Math.abs(min) + 1)) + min;
+  } else {
+    return Math.floor(Math.random() * max) + min;
+  }
 }
 
 $(function () {
