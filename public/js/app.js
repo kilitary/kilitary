@@ -98,7 +98,7 @@ var timerId;
 function lock() {
   var prev = parseInt($('#flagright').css('top'));
 
-  if (prev < -7) {
+  if (prev < -31) {
     $('#flagright').css('top', prev + 1 + 'px');
   }
 
