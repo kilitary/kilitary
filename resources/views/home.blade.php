@@ -80,7 +80,8 @@
                 @endif
             </div>
 
-            ( <img src="/images/USB.png">cpuID) 202x-204x @ <a href="mailto:kilitary@protonmail.com">kilitary</a><a
+            ( <a href="/cpu.txt"><img src="/images/USB.png">cpuID</a>) 202x-204x @ <a
+                href="mailto:kilitary@protonmail.com">kilitary</a><a
                 href="mailto:deconf@ya.ru">.ru</a>
             | {{request()->ip()}}?
         </div>

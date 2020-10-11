@@ -23,16 +23,10 @@ class PostRequest
 
         $response = $next($request);
 
-        $record = LogRecord::query()
-            ->latest()
-            ->first();
-
-        if($record) {
-            $record->http_code = $response->getStatusCode();
-            $record->save();
-        }
-
-        //\App\Logger::msg('post request of ' . $request->fullUrl() . ' session: ' . session()->getId() . " csrf: " . session()->token());
+        $record = LogRecord::whereId(session('log_id'))
+            ->update([
+                'http_code' => $response->getStatusCode()
+            ]);
 
         return $response;
     }

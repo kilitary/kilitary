@@ -21,6 +21,7 @@ class LogRequest
             'ua' => $request->userAgent(),
             'url' => $request->fullUrl(),
             'method' => $request->method(),
+            'http_code' => '<unfinished>',
             'info' => \json_encode(array_merge($_SERVER, $_GET, $_POST, $_COOKIE, $_FILES))
         ]);
 

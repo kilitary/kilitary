@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="ten">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,7 @@
     <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
 
     <title>{{ env('APP_NAME') }}</title>
+
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function(m, e, t, r, i, k, a) {
@@ -38,7 +39,6 @@
         function gtag() {dataLayer.push(arguments);}
 
         gtag('js', new Date());
-
         gtag('config', 'UA-179562632-1');
     </script>
 
@@ -50,6 +50,7 @@
     <div id="flagleft"></div>
     <div id="flagright"></div>
 </header>
+
 <div id="app">
     <main class="@yield('classes')">
         @yield('content')
@@ -59,15 +60,15 @@
 <footer>
     <div style="float:right;position: absolute;top: 10px;left: 100px">
         <a target=_blank href="/images/admin.jpg">
-            <img class="crysa-class" title="crysa-class server admin" src="/images/krisa.png"></a>
+            <img class="crysa-class" title="crysa class server admin" src="/images/krisa.png"></a>
     </div>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
-<script src="{{ asset('js/app.js') }}"></script>
 <script src="//min.gitcdn.xyz/repo/wintercounter/Protip/master/protip.min.js"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 @yield('scripts')
 </body>
 </html>
