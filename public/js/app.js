@@ -108,6 +108,12 @@ function lock() {
     $('#flagleft').css('top', prev - 1 + 'px');
   }
 
+  prev = parseInt($('#flagleft').css('left'));
+
+  if (prev < 12) {
+    $('#flagleft').css('left', prev + randomNumber(-5, 5) + 'px');
+  }
+
   clearTimeout(timerId);
   prev = randomNumber(10, 120);
   timerId = setInterval(lock, prev);
