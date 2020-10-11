@@ -43,6 +43,7 @@
     </script>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="//min.gitcdn.xyz/repo/wintercounter/Protip/master/protip.min.css">
 </head>
 <body>
 <header>
@@ -66,7 +67,7 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
 <script src="{{ asset('js/app.js') }}"></script>
-
+<script src="//min.gitcdn.xyz/repo/wintercounter/Protip/master/protip.min.js"></script>
 @yield('scripts')
 </body>
 </html>

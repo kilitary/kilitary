@@ -49,9 +49,10 @@
             <div class="marginleft marginbottom">
                 <h3 class="section-h3">information, documents and plans</h3>
                 Interesting:
-                @foreach ($interesting as $i => $v)
-                    <a href="/view/{{$v}}" class="interestlink"
-                       title="{{trim($i)}}">{!! '' . $v !!}</a>,
+                @foreach ($interesting as $v)
+                    <a href="/view/{{$v['code']}}" data-pt-title="{{\Str::substr($v['content'], 0, 155)}}"
+                       class="protip interestlink"
+                       title="{{trim($v['header'])}}">{!! '' . $v['header'] !!}</a>,
                 @endforeach
                 <a href="../">..</a>
             </div>

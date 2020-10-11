@@ -41,13 +41,13 @@ class PageController extends Controller
 
         $deleted = session('currentDeleted', []);
 
-        $pages = Page::select('code', 'header')
+        $pages = Page::select('code', 'header', 'content')
             ->whereNotIn('code', $deleted)
             ->limit(15)
             ->latest()
             ->get();
 
-        $interesting = $pages->pluck('code', 'header', 'content')
+        $interesting = $pages//->pluck('code', 'header', 'content')
             ->toArray();
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',

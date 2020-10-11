@@ -134,6 +134,7 @@ function randomNumber(min, max) {
 }
 
 $(function () {
+  $.protip();
   $('#flagright').css('top', '-100px');
   timerId = setInterval(lock, 20);
   setInterval(rot, 600);
