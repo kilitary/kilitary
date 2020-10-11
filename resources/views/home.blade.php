@@ -56,7 +56,7 @@
                 <a href="../">..</a>
             </div>
             <div class="marginleft smallcaps">
-                create new truth here: <a href="/page/{{$code}}">+create</a>
+                create new info here: <a href="/page/{{$code}}">+create</a>
             </div>
         @endif
 
