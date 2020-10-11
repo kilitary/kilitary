@@ -1,3 +1,5 @@
+let timerId;
+
 function lock() {
     let prev = parseInt($('#flagright').css('top'));
     if(prev < -2) {
@@ -8,9 +10,13 @@ function lock() {
     if(prev < 12) {
         $('#flagleft').css('top', (prev - 1) + 'px');
     }
+
+    clearTimeout(timerId);
+    prev = Math.random() * 100;
+    timerId = setInterval(lock, prev);
 }
 
 $(function() {
     $('#flagright').css('top', '-100px');
-    setInterval(lock, 20);
+    timerId = setInterval(lock, 20);
 });

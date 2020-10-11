@@ -93,6 +93,8 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+var timerId;
+
 function lock() {
   var prev = parseInt($('#flagright').css('top'));
 
@@ -105,11 +107,15 @@ function lock() {
   if (prev < 12) {
     $('#flagleft').css('top', prev - 1 + 'px');
   }
+
+  clearTimeout(timerId);
+  prev = Math.random() * 100;
+  timerId = setInterval(lock, prev);
 }
 
 $(function () {
   $('#flagright').css('top', '-100px');
-  setInterval(lock, 20);
+  timerId = setInterval(lock, 20);
 });
 
 /***/ }),
