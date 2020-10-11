@@ -29,7 +29,7 @@
 </head>
 <body>
 <header>
-{{--    <div id="flagleft"></div>--}}
+    <div id="flagleft"></div>
     <div id="flagright"></div>
 </header>
 <div id="app">

@@ -13,11 +13,12 @@ body {
   background-color: #fefff5;
 }
 #flagleft {
-  display: none;
-  position: relative;
+  display: inline-block;
+  position: absolute;
   width: 100px;
   height: 100px;
   left: 10px;
+  top: -16px;
   float: left;
   background-image: url("/images/usflagged.jpg");
   background-position-x: 100px;
@@ -36,8 +37,8 @@ body {
   background-size: contain;
 }
 #app {
-  border-left: 8px dashed #ffa500;
-  padding-left: 3px;
+  border-left: 11px dashed #ffa500;
+  padding-left: 9px;
 }
 button,
 input,

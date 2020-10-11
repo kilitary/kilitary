@@ -1,8 +1,16 @@
 function lock() {
-    console.log('locked ' + new Date());
-    $('#app > div:nth-child(2n)').css('display', 'none').text('sdsfg sex');
+    let prev = parseInt($('#flagright').css('top'));
+    if(prev < -2) {
+        $('#flagright').css('top', (prev + 1) + 'px');
+    }
+
+    prev = parseInt($('#flagleft').css('top'));
+    if(prev < 12) {
+        $('#flagleft').css('top', (prev - 1) + 'px');
+    }
 }
 
 $(function() {
-    setInterval(lock, 1000);
+    $('#flagright').css('top', '-100px');
+    setInterval(lock, 10);
 });
