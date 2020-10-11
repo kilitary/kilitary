@@ -24,7 +24,11 @@
 </div>
 
 <footer>
-    {{(bool) \App\Models\Tools::isAdmin()}}
+    <div style="float:right">
+        <a target=_blank href="/images/admin.jpg">
+            <img class="crysa-class" alt="crysa-class server admin"
+                 src="/images/unmanneed-little.jpg"></a>
+    </div>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"

@@ -39,9 +39,9 @@
             <form method="post" action="/comment/add">
                 {{csrf_field()}}
                 <input type="hidden" name="page_id" value="{{$page_id}}">
-                <textarea name="comment" class="text-comment" required placeholder="inject"></textarea>
+                <textarea name="comment" class="text-comment" required placeholder="inject en code / text"></textarea>
                 <br/>
-                <button>comment</button>
+                <button class="commit-button">push comment</button>
             </form>
         </div>
         <div class="topheadmargin ">
@@ -66,10 +66,10 @@
                         ONE of active RAID1 disk: 94.95$)</a>
                 </li>
                 <li>
-                    <a href="/edit/{{$code}}">extend</a>
+                    <a href="/edit/{{$code}}">extend / reformate</a>
                 </li>
                 <li>
-                    <a class=" alignnmiddle" href="/">ret()
+                    <a class=" alignnmiddle" href="/">ret()</a>
                 </li>
             </ul>
         </div>

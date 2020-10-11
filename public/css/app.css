@@ -57,11 +57,22 @@ textarea:hover {
   background-color: #fff9be !important;
   border: 2px dashed #f00 !important;
 }
-textarea {
+.crysa-class {
+  width: 90px;
+  height: 40px;
+  opacity: 0.1;
+  border-bottom: 12px dotted #ff1493;
+}
+.commit-button {
   background-image: url("/images/_n.jpg");
   background-repeat: no-repeat;
   background-position-x: right;
-  background: transparent;
+  background-size: cover;
+  color: #fff;
+  transition: background 11s;
+  background-blend-mode: difference;
+  width: 200px;
+  height: 30px;
 }
 .url-input {
   width: 300px;
@@ -144,9 +155,12 @@ ul {
   padding: 10px;
 }
 .text-comment {
-  width: 20%;
-  height: 120px;
+  width: 25%;
+  height: 100px;
   clear: both;
+  color: #000;
+  font-family: lucida console;
+  opacity: 1;
 }
 .comment-img {
   position: relative;
