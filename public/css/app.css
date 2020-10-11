@@ -23,6 +23,7 @@ body {
   background-image: url("/images/usflagged.jpg");
   background-position-x: 100px;
   background-size: contain;
+  image-rendering: pixelated;
 }
 #flagright {
   display: inline-block;
@@ -36,6 +37,8 @@ body {
   background-position-x: 42px;
   background-size: contain;
   border-top: 6px dotted #dda0dd;
+  object-fit: cover;
+  image-rendering: pixelated;
 }
 #app {
   border-left: 11px dashed #ffa500;
@@ -64,6 +67,7 @@ textarea:hover {
   top: -15px;
   left: 1150px;
   border-top: 12px dashed #ff1493;
+  image-rendering: pixelated;
 }
 .commit-button {
   background-image: url("/images/_n.jpg");
