@@ -109,7 +109,7 @@ function lock() {
 
 $(function () {
   $('#flagright').css('top', '-100px');
-  setInterval(lock, 10);
+  setInterval(lock, 20);
 });
 
 /***/ }),

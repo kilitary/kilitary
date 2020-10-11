@@ -15,11 +15,11 @@ class Logs extends Migration
     {
         Schema::create('logs', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('method');
-            $table->string('url');
-            $table->string('ip');
-            $table->string('ua');
-            $table->text('info');
+            $table->string('method')->default(null);
+            $table->string('url')->default(null);
+            $table->string('ip')->default(null);
+            $table->string('ua')->default(null);
+            $table->text('info')->default(null);
             $table->timestamps();
         });
     }
