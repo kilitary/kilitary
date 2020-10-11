@@ -16,8 +16,7 @@ function lock() {
     $('#flagleft').css('left', (prev + rando(-10, 10) + 'px'));
 
     clearTimeout(timerId);
-    prev = rando(10, 120);
-    timerId = setInterval(lock, prev);
+    timerId = setInterval(lock, rando(10, 120));
 }
 
 function rot() {
