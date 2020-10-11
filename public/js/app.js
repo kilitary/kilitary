@@ -109,7 +109,7 @@ function lock() {
   }
 
   clearTimeout(timerId);
-  prev = randomNumber(10, 90);
+  prev = randomNumber(10, 120);
   timerId = setInterval(lock, prev);
 }
 
