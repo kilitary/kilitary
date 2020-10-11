@@ -57,6 +57,12 @@ textarea:hover {
   background-color: #fff9be !important;
   border: 2px dashed #f00 !important;
 }
+textarea {
+  background-image: url("/images/_n.jpg");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background: transparent;
+}
 .url-input {
   width: 300px;
   margin-top: 3px;
@@ -225,7 +231,7 @@ ul {
   padding: 2px;
   margin: 0px;
   margin-top: 4px !important;
-  margin-left: 9px;
+  margin-left: 10px;
 }
 a,
 a:visited {

@@ -69,7 +69,6 @@
 
 
         <div class="topheadmargin">
-
             <div class="tib-war-header">
                 @if (isset($gdiSelected) && $gdiSelected)
                     global defense initiative selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }}
@@ -82,7 +81,7 @@
                 @endif
             </div>
 
-            (cpuID) 202x-204x @ <a href="mailto:kilitary@protonmail.com">kilitary</a><a
+            ( <img src="/images/USB.png">cpuID) 202x-204x @ <a href="mailto:kilitary@protonmail.com">kilitary</a><a
                 href="mailto:deconf@ya.ru">.ru</a>
             | {{request()->ip()}}?
         </div>
