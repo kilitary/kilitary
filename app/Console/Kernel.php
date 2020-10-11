@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
             ->everyFiveMinutes()
             ->sendOutputTo(base_path() . '/shedule.log');
 
-        $schedule->job(new TelescopPrune())
+        $schedule->job(new TelescopPrune)
             ->everyTwoHours()
             ->sendOutputTo(base_path() . '/shedule.log');
     }

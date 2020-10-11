@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Artisan;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -29,6 +30,7 @@ class TelescopPrune implements ShouldQueue
      */
     public function handle()
     {
-        app()->call('telescope:prune');
+        Artisan::call('telescope:prune');
+
     }
 }
