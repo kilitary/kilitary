@@ -26,8 +26,7 @@
 <footer>
     <div style="float:right;position: absolute;top: 10px;left: 100px">
         <a target=_blank href="/images/admin.jpg">
-            <img class="crysa-class" alt="crysa-class server admin"
-                 src="/images/krisa.png"></a>
+            <img class="crysa-class" title="crysa-class server admin" src="/images/krisa.png"></a>
     </div>
 </footer>
 
