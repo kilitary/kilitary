@@ -42,6 +42,13 @@
         gtag('config', 'UA-179562632-1');
     </script>
 
+    <script src="https://randojs.com/2.0.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="//min.gitcdn.xyz/repo/wintercounter/Protip/master/protip.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//min.gitcdn.xyz/repo/wintercounter/Protip/master/protip.min.css">
 </head>
@@ -63,13 +70,6 @@
             <img class="crysa-class" title="Crysa class server admin (Moulder IV 7++)" src="/images/krisa.png"></a>
     </div>
 </footer>
-
-<script src="https://randojs.com/2.0.0.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
-<script src="//min.gitcdn.xyz/repo/wintercounter/Protip/master/protip.min.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>
 @yield('scripts')
 </body>
 </html>

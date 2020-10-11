@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="/"><-index</a><br/>
+    <a href="/"><-index</a> Wind: {{mt_rand(11, 22)}}<br/>
     <div class="container page-content">
 
         <h2 class="page-header">{{$header}}</h2>
