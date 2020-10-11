@@ -77,4 +77,13 @@
 
     </div>
 
+@section('scripts')
+    <script>
+        $(function() {
+            var audio = new Audio('/audio/ss.mp3');
+            audio.play();
+        });
+    </script>
+@stop
+
 @endsection

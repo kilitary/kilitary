@@ -47,6 +47,7 @@
     gtag('config', 'UA-179562632-1');
 </script>
 
+@yield('scripts')
 </body>
 </html>
 

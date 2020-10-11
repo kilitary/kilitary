@@ -87,3 +87,12 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script>
+        $(function() {
+            var audio = new Audio('/audio/Insert.mp3');
+            audio.play();
+        });
+    </script>
+@stop

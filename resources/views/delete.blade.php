@@ -13,3 +13,13 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script>
+        $(function() {
+            var audio = new Audio('/audio/HALTSND.mp3');
+            audio.play();
+        });
+    </script>
+@stop
+
