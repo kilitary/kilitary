@@ -41,8 +41,9 @@ body {
   image-rendering: pixelated;
 }
 #app {
-  border-left: 11px dashed #ffa500;
+  border-left: 11px dashed #0ff;
   padding-left: 9px;
+  animation: falling-red 11.3s infinite;
 }
 button,
 input,
@@ -454,5 +455,37 @@ a:hover {
   }
   100% {
     color: #f00;
+  }
+}
+@-moz-keyframes falling-red {
+  30% {
+    border-left: 11px dashed #ffa500;
+  }
+  80% {
+    border-left: 11px dashed #f00;
+  }
+}
+@-webkit-keyframes falling-red {
+  30% {
+    border-left: 11px dashed #ffa500;
+  }
+  80% {
+    border-left: 11px dashed #f00;
+  }
+}
+@-o-keyframes falling-red {
+  30% {
+    border-left: 11px dashed #ffa500;
+  }
+  80% {
+    border-left: 11px dashed #f00;
+  }
+}
+@keyframes falling-red {
+  30% {
+    border-left: 11px dashed #ffa500;
+  }
+  80% {
+    border-left: 11px dashed #f00;
   }
 }

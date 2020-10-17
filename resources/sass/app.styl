@@ -41,8 +41,9 @@ body
     image-rendering pixelated
 
 #app
-    border-left 11px dashed orange
+    border-left 11px dashed cyan
     padding-left 9px
+    animation falling-red 11.3s infinite
 
 button, input, textarea
     box-shadow 0 0px 23px 0 #ffd023, 0 0px 0px 0 #ff0081
@@ -354,5 +355,14 @@ a:hover
     }
     100% {
         color red
+    }
+}
+
+@keyframes falling-red {
+    30% {
+        border-left 11px dashed orange
+    }
+    80% {
+        border-left 11px dashed red
     }
 }
