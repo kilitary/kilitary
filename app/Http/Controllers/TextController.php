@@ -14,10 +14,13 @@ class TextController extends Controller
     {
         $words = TextSource::all();
 
-        $num = mt_rand(0, 26) * 9;
+        $num = mt_rand(1, 11) * 3;
         for($i = 0; $i < $num; $i++) {
+            $signs = [' ', '+', '-'];
+            $sign = $signs[XRandom::get(0, 2)];
+
             $list[XRandom::sign(5)] = $words[XRandom::get(0, count($words) - 1)] .
-                sprintf("%s%02d ", XRandom::get(0, 4) % 2 ? '+' : '-', XRandom::get(0, 9));
+                sprintf("%s%02d ", $sign, XRandom::get(0, 9));
         }
 
         return view('list-text', compact('list'));

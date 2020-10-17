@@ -6,7 +6,7 @@
 
         <h2 class="page-header">{{$header}}</h2>
         <div class="content-container">
-            {!! $content!!}
+            {!! nl2br($content)!!}
         </div>
         @if (!empty($country))
             <div class="page-country">Connection: {{$country}}</div>
