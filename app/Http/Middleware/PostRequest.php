@@ -23,11 +23,13 @@ class PostRequest
 
         $response = $next($request);
 
-        $record = LogRecord::where('id', session('log_id'))
-            ->update([
-                'http_code' => $response->getStatusCode()
-            ]);
-
+        $logId = session('log_id', 0);
+        if($logId) {
+            $record = LogRecord::where('id', $logId)
+                ->update([
+                    'http_code' => $response->getStatusCode()
+                ]);
+        }
 
         return $response;
     }

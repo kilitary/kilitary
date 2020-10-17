@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Logger;
 
 class LogRequest
 {
@@ -16,8 +17,12 @@ class LogRequest
      */
     public function handle($request, Closure $next)
     {
-        if(collect(config('app.adminips'))->has($request->ip())) {
+        if(collect(config('app.adminips'))->contains($request->ip())) {
+            Logger::msg('not logging ' . $request->url() . ' for ' . $request->ip());
+            session(['log_id' => 0]);
             return $next($request);
+        } else {
+            //Logger::msg('logging ' . $request->url() . ' for ' . $request->ip());
         }
 
         $log = \App\Models\LogRecord::create([
