@@ -45,7 +45,7 @@
 
         @if(isset($code))
             <div class="marginleft marginbottom">
-                <h3 class="section-h3">information/documents/plans/doss</h3>
+                <h3 class="section-h3">inform/|tion on ADJACENT ORDERS AREA</h3>
                 Interesting:
                 @foreach ($interesting as $v)
                     <a href="/view/{{$v['code']}}" data-pt-title="{!! \Str::substr($v['content'], 0, 155)!!}"
