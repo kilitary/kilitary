@@ -79,7 +79,7 @@
     <img src="/images/constructionNotice.jpg" width="64" height="64" class="construct-logo"
          title="SITE IS UNDER ACTIVE DEVELOPMENT: EXPECT BUGS/ERRORS/FATALITYS AND NO INCOME">
     <div class="car">
-        <img src="/images/car.png">
+        <img src="/images/car{{(\App\XRandom::scaled(0,3)>=1?'3':'')}}.jpg">
     </div>
     @if (\App\Models\Tools::IsAdmin())
         <ul>
