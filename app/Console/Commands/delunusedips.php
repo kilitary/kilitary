@@ -40,7 +40,8 @@ class delunusedips extends Command
         $num = \DB::table('logs')
             ->whereIn('ip', config('app.adminips'))
             ->count();
-        $this->output('deleting ' . $num . ' records...');
+
+        $this->output->text('deleting ' . $num . ' records...');
 
         \DB::table('logs')
             ->whereIn('ip', config('app.adminips'))
