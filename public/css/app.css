@@ -211,6 +211,12 @@ ul {
   border-bottom: 4px dashed #ffa500;
   margin-bottom: 10px;
 }
+.car {
+  position: absolute;
+  top: 25%;
+  right: 24%;
+  opacity: 0.04;
+}
 .log-code {
   display: inline-flex;
   width: 100px;

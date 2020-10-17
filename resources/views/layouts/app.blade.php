@@ -72,7 +72,11 @@
 </div>
 
 <footer>
-    <img src="/images/constructionNotice.jpg" width="64" height="64" class="construct-logo" title="SITE IS UNDER ACTIVE DEVELOPMENT: EXPECT BUGS/ERRORS/FATALITYS AND NO INCOME">
+    <img src="/images/constructionNotice.jpg" width="64" height="64" class="construct-logo"
+         title="SITE IS UNDER ACTIVE DEVELOPMENT: EXPECT BUGS/ERRORS/FATALITYS AND NO INCOME">
+    <div class="car">
+        <img src="/images/car.png">
+    </div>
     @if (\App\Models\Tools::IsAdmin())
         <ul>
             <li><a href="/admin/logs">logs</a></li>
