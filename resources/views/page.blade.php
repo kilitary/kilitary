@@ -8,6 +8,9 @@
         <div class="content-container">
             {!! nl2br($content)!!}
         </div>
+        <div class="content-keys">
+            {{$keys}}
+        </div>
         @if (!empty($country))
             <div class="page-country">Connection: {{$country}}</div>
         @else

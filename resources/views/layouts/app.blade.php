@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-          content="{{$description ?? 'v2k, military, fss, fbi, cia, nsa, nasa, intrepol, thales of the futur e'}}">
+          content="{{$description ?? $keys ?? 'v2k, military, fss, fbi, cia, nsa, nasa, intrepol, thales of the futur e'}}">
     <meta name="generator" content="laraGEN">
     <meta name="document-state" content="dynamic">
     <meta name="csrf-token" content="{{ csrf_token() }}">

@@ -156,6 +156,9 @@ class PageController extends Controller
                 if(XRandom::get(0, 25) != 3) {
                     return $matches[0];
                 }
+
+                Tools::pushKey($matches[1]);
+
                 return "<span class='ignited'>$matches[1]</span>";
             }, $content);
 
@@ -196,8 +199,10 @@ class PageController extends Controller
             return back();
         }
 
+        $keys = Tools::getKeys();
+
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
-            'description', 'page_id', 'comments', 'country', 'converter'));
+            'description', 'page_id', 'comments', 'country', 'converter', 'keys'));
     }
 
     public function delete(Request $request, $code, $mode)

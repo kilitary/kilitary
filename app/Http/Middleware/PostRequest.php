@@ -28,7 +28,7 @@ class PostRequest
             $record = LogRecord::where('id', $logId)
                 ->update([
                     'http_code' => $response->getStatusCode(),
-                    'request_end' => 'now(6)'
+                    'request_end' => \DB::raw('now(6)')
                 ]);
         }
 

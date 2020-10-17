@@ -17,11 +17,11 @@ class LogRequest
      */
     public function handle($request, Closure $next)
     {
-        if(collect(config('app.adminips'))->contains($request->ip()) && !request()->has('yes')) {
-            Logger::msg('not logging ' . $request->url() . ' for ' . $request->ip());
-            session(['log_id' => 0]);
-            return $next($request);
-        }
+//        if(collect(config('app.adminips'))->contains($request->ip()) && !request()->has('yes')) {
+//            Logger::msg('not logging ' . $request->url() . ' for ' . $request->ip());
+//            session(['log_id' => 0]);
+//            return $next($request);
+//        }
 
         $log = \App\Models\LogRecord::create([
             'ip' => $request->ip(),
@@ -29,7 +29,7 @@ class LogRequest
             'url' => $request->fullUrl(),
             'method' => $request->method(),
             'http_code' => '<unfinished>',
-            'request_start' => 'now(6)',
+            'request_start' => \DB::raw('now(6)'),
             'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES))
         ]);
 

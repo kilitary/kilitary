@@ -61,6 +61,13 @@ textarea:hover {
   background-color: #fff9be !important;
   border: 2px dashed #f00 !important;
 }
+.content-keys {
+  font-family: "lucida console";
+  color: #2e8b57;
+  padding-left: 15px;
+  font-variant: small-caps;
+  font-size: 10px;
+}
 .crysa-class {
   height: 104px;
   opacity: 0.9;

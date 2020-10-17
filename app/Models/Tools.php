@@ -12,6 +12,18 @@ use GeoIp2\Exception\AddressNotFoundException;
 
 class Tools
 {
+    public static $allKeys = [];
+
+    public static function pushKey($key)
+    {
+        self::$allKeys[] = $key;
+    }
+
+    public static function getKeys()
+    {
+        return \implode(' ', self::$allKeys);
+    }
+
     public static function getCountry($ip)
     {
         return '-notconfigured-';
