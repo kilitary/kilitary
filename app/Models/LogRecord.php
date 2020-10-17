@@ -32,6 +32,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class LogRecord extends Model
 {
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d h:i:s',
+        'updated_at' => 'datetime:Y-m-d h:i:s',
+        'deleted_at' => 'datetime:Y-m-d h:i:s'
+    ];
     protected $table = 'logs';
     protected $fillable = ['ip', 'method', 'url', 'ua', 'info', 'http_code'];
 }

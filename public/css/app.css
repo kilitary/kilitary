@@ -200,6 +200,39 @@ ul {
   padding-top: 0px;
   margin-top: 0px;
 }
+.log-record {
+  font-size: 8px;
+  border-bottom: 4px dashed #ffa500;
+  margin-bottom: 10px;
+}
+.log-code {
+  display: inline-flex;
+  width: 100px;
+}
+.log-ip {
+  display: inline-flex;
+  width: 100px;
+}
+.log-info {
+  display: block;
+  width: 100px;
+}
+.log-info pre {
+  font-family: consolas;
+  font-size: 7px;
+}
+.log-date {
+  display: inline-flex;
+  width: 100px;
+}
+.log-method {
+  display: inline-flex;
+  width: 100px;
+}
+.log-url {
+  display: inline-flex;
+  width: 100px;
+}
 .marginbottom {
   margin-bottom: 5px;
 }

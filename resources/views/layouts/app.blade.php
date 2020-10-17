@@ -72,6 +72,11 @@
         <a target=_blank href="/images/operatoR.jpg">
             <img class="crysa-class" title="Crysa class server admin (Moulder IV 7+)" src="/images/krisa.png"></a>
     </div>
+    @if (\App\Models\Tools::IsAdmin())
+        <ul>
+            <li><a href="/admin/logs">logs</a></li>
+        </ul>
+    @endif
 </footer>
 @yield('scripts')
 </body>

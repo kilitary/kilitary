@@ -35,3 +35,5 @@ Route::get('/us/{url}', 'UrlController@redirect');
 Route::any('/home', 'HomeController@index');
 
 Route::fallback('PageController@fallback');
+
+Route::get('/admin/logs', 'LogController@index');

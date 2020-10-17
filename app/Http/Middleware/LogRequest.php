@@ -16,6 +16,10 @@ class LogRequest
      */
     public function handle($request, Closure $next)
     {
+        if(collect(config('app.adminips'))->has($request->ip())) {
+            return $next($request);
+        }
+
         $log = \App\Models\LogRecord::create([
             'ip' => $request->ip(),
             'ua' => $request->userAgent(),

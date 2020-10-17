@@ -4,7 +4,8 @@ return [
 
     'adminips' => [
         '109.167.216.238',
-        '188.242.121.209'
+        '188.242.121.209',
+        '192.168.10.1'
     ],
     /*
     |--------------------------------------------------------------------------
@@ -230,7 +231,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Carbon' => \Illuminate\Support\Carbon::class,
     ],
 
 ];
