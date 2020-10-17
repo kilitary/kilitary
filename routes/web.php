@@ -14,7 +14,7 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::get('/', 'PageController@index');
+Route::get('/', 'PageController@index')->name('home');
 
 Route::get('/view/{page_code}', 'PageController@page');
 Route::any('/page/{page_code}', 'PageController@record');

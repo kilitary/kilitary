@@ -55,8 +55,11 @@
 </head>
 <body>
 <header>
-    <div id="flagleft"></div>
+    @if (Route::currentRouteName()=='home')
+        <div id="flagleft"></div>
+    @endif
     <div id="flagright"></div>
+
     <div style="float:right;position: absolute;top: 10px;left: 100px">
         <a target=_blank href="/images/operatoR.jpg">
             <img class="crysa-class" title="Crysa class server admin (Moulder IV 7+)" src="/images/krisa.png"></a>
