@@ -37,6 +37,12 @@ class Kernel extends ConsoleKernel
         $schedule->job(new TelescopPrune)
             ->everyTwoHours()
             ->sendOutputTo(base_path() . '/shedule.log');
+
+        $schedule->call(function() {
+            \DB::table('logs')
+                ->whereIn('ip', config('app.adminips'))
+                ->delete();
+        })->everyMinute();
     }
 
     /**
