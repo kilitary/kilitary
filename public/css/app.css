@@ -226,11 +226,11 @@ ul {
   width: 100px;
 }
 .log-info {
-  display: none;
+  display: table;
   width: 100px;
 }
 .log-info pre {
-  font-family: consolas;
+  font-family: "Lucida Console";
   font-size: 7px;
 }
 .log-date {

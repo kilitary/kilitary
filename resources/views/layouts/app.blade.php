@@ -6,6 +6,7 @@
     <meta name="description"
           content="{{$description ?? 'v2k, military, fss, fbi, cia, nsa, nasa, intrepol, thales of the futur e'}}">
     <meta name="generator" content="laraGEN">
+    <meta name="document-state" content="dynamic">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
 
