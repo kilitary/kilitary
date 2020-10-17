@@ -27,7 +27,8 @@ class PostRequest
         if($logId) {
             $record = LogRecord::where('id', $logId)
                 ->update([
-                    'http_code' => $response->getStatusCode()
+                    'http_code' => $response->getStatusCode(),
+                    'request_end' => \microtime(true)
                 ]);
         }
 

@@ -57,6 +57,10 @@
 <header>
     <div id="flagleft"></div>
     <div id="flagright"></div>
+    <div style="float:right;position: absolute;top: 10px;left: 100px">
+        <a target=_blank href="/images/operatoR.jpg">
+            <img class="crysa-class" title="Crysa class server admin (Moulder IV 7+)" src="/images/krisa.png"></a>
+    </div>
 </header>
 
 <div id="app">
@@ -68,10 +72,7 @@
 </div>
 
 <footer>
-    <div style="float:right;position: absolute;top: 10px;left: 100px">
-        <a target=_blank href="/images/operatoR.jpg">
-            <img class="crysa-class" title="Crysa class server admin (Moulder IV 7+)" src="/images/krisa.png"></a>
-    </div>
+    <img src="/images/constructionNotice.jpg" width="64" height="64" class="construct-logo" title="SITE IS UNDER ACTIVE DEVELOPMENT: EXPECT BUGS/ERRORS/FATALITYS AND NO INCOME">
     @if (\App\Models\Tools::IsAdmin())
         <ul>
             <li><a href="/admin/logs">logs</a></li>

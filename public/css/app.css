@@ -192,6 +192,14 @@ ul {
   padding-top: 11px;
   margin-top: 0px;
 }
+.construct-logo {
+  padding-top: 10px;
+}
+.construct-logo:hover {
+  width: 240px;
+  height: 240px;
+  border: 5px solid #00fa9a;
+}
 .page-footer {
   border-top: 9px dotted #d3d3d3;
   padding-bottom: 0px;
