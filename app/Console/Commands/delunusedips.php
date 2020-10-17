@@ -37,8 +37,13 @@ class delunusedips extends Command
      */
     public function handle()
     {
+        $num = \DB::table('logs')
+            ->whereIn('ip', config('app.adminips'))
+            ->count();
+        $this->output('deleting ' . $num . ' records...');
+
         \DB::table('logs')
-            ->whereIn('ip', ['109.167.216.238', '188.242.121.209'])
+            ->whereIn('ip', config('app.adminips'))
             ->delete();
 
         return 0;
