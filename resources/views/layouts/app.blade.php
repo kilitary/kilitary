@@ -49,7 +49,7 @@
     <script src="//min.gitcdn.xyz/repo/wintercounter/Protip/master/protip.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 
-    <link href="https://allfont.net/allfont.css?fonts=liberation-mono" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.cdnfonts.com/css/liberation-mono" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//min.gitcdn.xyz/repo/wintercounter/Protip/master/protip.min.css">
 </head>
