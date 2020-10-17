@@ -17,8 +17,6 @@ class LogRequest
      */
     public function handle($request, Closure $next)
     {
-        $start = \microtime(true);
-
         if(collect(config('app.adminips'))->contains($request->ip()) && !request()->has('yes')) {
             Logger::msg('not logging ' . $request->url() . ' for ' . $request->ip());
             session(['log_id' => 0]);
@@ -31,7 +29,7 @@ class LogRequest
             'url' => $request->fullUrl(),
             'method' => $request->method(),
             'http_code' => '<unfinished>',
-            'request_start' => $start,
+            'request_start' => 'now(6)',
             'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES))
         ]);
 

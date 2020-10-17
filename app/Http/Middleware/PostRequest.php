@@ -28,7 +28,7 @@ class PostRequest
             $record = LogRecord::where('id', $logId)
                 ->update([
                     'http_code' => $response->getStatusCode(),
-                    'request_end' => \microtime(true)
+                    'request_end' => 'now(6)'
                 ]);
         }
 

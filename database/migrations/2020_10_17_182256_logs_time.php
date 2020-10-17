@@ -14,8 +14,8 @@ class LogsTime extends Migration
     public function up()
     {
         Schema::table('logs', function(Blueprint $table) {
-            $table->unsignedFloat('request_start')->after('ip');
-            $table->unsignedFloat('request_end')->after('request_start');
+            $table->timestamp('request_start')->after('ip');
+            $table->timestamp('request_end')->after('request_start');
         });
     }
 
