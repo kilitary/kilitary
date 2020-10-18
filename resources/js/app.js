@@ -1,21 +1,22 @@
 let timerId;
 
 function lock() {
-    let prev = parseInt($('#flagright').css('top'));
-    if(prev < -31) {
-        $('#flagright').css('top', (prev + 1) + 'px');
+    let top = parseInt($('#flagright').css('top'));
+    if(top < -31) {
+        $('#flagright').css('top', (top + 1) + 'px');
     }
 
-    prev = parseInt($('#flagleft').css('top'));
-    if(prev < 12 && rando(true, false)) {
-        $('#flagleft').css('top', (prev - 1) + 'px');
+    let topl = parseInt($('#flagleft').css('top'));
+    if(topl < 12 && rando(true, false) && topl > -116) {
+        $('#flagleft').css('top', (topl - 1) + 'px');
     }
 
     prev = parseInt($('#flagleft').css('left'));
 
-    $('#flagleft').css('left', (prev + rando(-10, 10) + 'px'));
+    if(topl > -115) {
+        $('#flagleft').css('left', (prev + rando(-10, 10) + 'px'));
+    }
 
-    $('#flagleft').css('left', (prev + rando(-10, 10) + 'px'));
     clearTimeout(timerId);
     timerId = setInterval(lock, rando(10, 120));
 }
@@ -35,3 +36,4 @@ $(function() {
     timerId = setInterval(lock, 20);
     setInterval(rot, 600);
 });
+
