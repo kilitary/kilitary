@@ -11,7 +11,7 @@
         <div class="links"><a href='/command/sync?{{request()->path()}}'>sync</a></div>
 
         <br/>
-        <a class="topheadmargin alignnmiddle" href="/">ret()
+        <a class="topheadmargin alignnmiddle" href="/">ret()</a>
     </div>
     <script>
         setTimeout(function() {

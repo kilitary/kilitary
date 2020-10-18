@@ -95,4 +95,4 @@
             audio.play();
         });
     </script>
-@stop
+@endsection

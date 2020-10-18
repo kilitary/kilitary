@@ -79,6 +79,7 @@
 
 
     </div>
+@endsection
 
 @section('scripts')
     <script>
@@ -96,6 +97,5 @@
 
         @endif
     </script>
-@stop
-
 @endsection
+

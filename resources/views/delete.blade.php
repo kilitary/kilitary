@@ -26,5 +26,5 @@
             }
         });
     </script>
-@stop
+@endsection
 
