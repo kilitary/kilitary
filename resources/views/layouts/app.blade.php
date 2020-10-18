@@ -10,8 +10,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
 
-    <link rel="icon" type="image/png" href="https://kilitary.ru/images/lock.png">
-    <link rel="icon" href="https://kilitary.ru/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" href="/images/lock.png">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <title>{{ env('APP_NAME') }}</title>
 
@@ -36,6 +37,9 @@
         <div><img src="https://mc.yandex.ru/watch/68175511" style="position:absolute; left:-9999px;" alt=""/></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-179562632-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -48,7 +52,6 @@
 
     <script src="https://randojs.com/2.0.0.js"></script>
     <script src="//min.gitcdn.xyz/repo/wintercounter/Protip/master/protip.min.js"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
 
     <link href="https://fonts.cdnfonts.com/css/liberation-mono" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

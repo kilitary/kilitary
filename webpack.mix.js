@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,5 +11,38 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js');
-    //.sass('resources/sass/app.scss', 'public/css');
+module.exports = {
+    //...
+    optimization: {
+        minimize: true,
+        minimizer: [new UglifyJsPlugin({
+            parallel: 4,
+            uglifyOptions: {
+                warnings: false,
+                parse: {},
+                compress: {},
+                mangle: true, // Note `mangle.properties` is `false` by default.
+                output: null,
+                toplevel: false,
+                nameCache: null,
+                ie8: false,
+                keep_fnames: false,
+            }
+        })]
+    }
+};
+
+// mix.webpackConfig({
+//     externals: {
+//         jquery: 'jQuery'
+//     }
+// });
+
+mix.js([
+      //  'resources/js/jquery.min.js',
+        'resources/js/app.js'
+    ]
+    , 'public/js/app.js');
+//.version();
+
+//.sass('resources/sass/app.scss', 'public/css');
