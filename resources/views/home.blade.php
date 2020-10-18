@@ -23,7 +23,7 @@
             <div class="shortener">
                 <h3 class="section-h3">link shorterizer</h3>
                 <form method="post" action="/us/create" autocomplete="off">
-                @csrf <!-- {{ csrf_field() }} -->
+                @csrf
                     <div style="padding-bottom:5px">
                         <label for="short" style="width:120px"> alphanumerical code
                             (may be blank)</label><br/><br/>
