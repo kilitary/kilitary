@@ -22,6 +22,13 @@ use Str;
 
 class PageController extends Controller
 {
+    public function relink(Request $request)
+    {
+        session()->flush();
+
+        return route('home');
+    }
+
     public function index(Request $request)
     {
         XRandom::followRand(7);

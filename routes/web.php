@@ -15,6 +15,7 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', 'PageController@index')->name('home');
+Route::get('/relink', 'PageController@relink');
 
 Route::get('/view/{page_code}', 'PageController@page');
 Route::any('/page/{page_code}', 'PageController@record');

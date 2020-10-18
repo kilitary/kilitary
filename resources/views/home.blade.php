@@ -52,7 +52,7 @@
                        class="protip interestlink"
                        title="{{trim($v['header'])}}">{!! '' . $v['header'] !!}</a>,
                 @endforeach
-                <a href="../">..</a>
+                <a href="http://kilitary.ru/relink">..</a>
             </div>
             <div class="marginleft smallcaps">
                 create new info here: <a href="/page/{{$code}}">+create</a>

@@ -17,8 +17,13 @@
 @section('scripts')
     <script>
         $(function() {
-            var audio = new Audio('/audio/HALTSND.mp3');
-            audio.play();
+            for(let i = 0; i < rando(2, 5); i++) {
+                setTimeout(function() {
+                    var audio = new Audio('/audio/HALTSND.mp3');
+                    audio.play();
+                }, rando(400, 900));
+
+            }
         });
     </script>
 @stop
