@@ -10,6 +10,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
 
+    <link rel="icon" type="image/png" href="https://kilitary.ru/images/logo.png">
+
     <title>{{ env('APP_NAME') }}</title>
 
     <!-- Yandex.Metrika counter -->
