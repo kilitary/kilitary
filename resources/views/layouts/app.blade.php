@@ -10,8 +10,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
 
-    <link rel="icon" href="https://kilitary.ru/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" href="https://kilitary.ru/images/logo.png">
+    <link rel="icon" href="https://kilitary.ru/favicon.ico" type="image/x-icon">
 
     <title>{{ env('APP_NAME') }}</title>
 
