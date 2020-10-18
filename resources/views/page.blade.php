@@ -54,7 +54,10 @@
         <div class=" page-content">
             <ul class="select-doc-future">
                 <li>
-                    <a class=" alignnmiddle" href="/delete/{{$code}}/0">delete this killware</a>
+                    <a class="alignnmiddle" href="/delete/{{$code}}/0">delete this killware</a>
+                </li>
+                <li>
+                    <a class="alignnmiddle" href="/cart/add/{{$code}}">add to cart</a>
                 </li>
                 <li>
                     <a href="/edit/{{$code}}">extend / reformate</a>
