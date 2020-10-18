@@ -23,7 +23,7 @@
             <div class="shortener">
                 <h3 class="section-h3">link shorterizer</h3>
                 <form method="post" action="/us/create" autocomplete="off">
-                @csrf
+                    @csrf
                     <div style="padding-bottom:5px">
                         <label for="short" style="width:120px"> alphanumerical code
                             (may be blank)</label><br/><br/>
@@ -48,7 +48,7 @@
                 <h3 class="section-h3">inform/|tion on ADJACENT ORDERS AREA</h3>
                 Interesting:
                 @foreach ($interesting as $v)
-                    <a href="/view/{{$v['code']}}" data-pt-title="{!! \Str::substr($v['content'], 0, 155)!!}"
+                    <a href="/view/{{$v['code']}}" data-pt-title="{{ \App\Models\Tools::titleize($v['content']) }}"
                        class="protip interestlink"
                        title="{{trim($v['header'])}}">{!! '' . $v['header'] !!}</a>,
                 @endforeach
