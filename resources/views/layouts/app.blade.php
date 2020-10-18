@@ -78,7 +78,7 @@
 </div>
 
 <footer>
-    <br/><img src="/images/flatten.png"> Your cart is empty<br/>
+    <br/><img src="/images/flatten.png"> Your cart is full<br/>
     <img src="/images/constructionNotice.jpg" width="64" height="64" class="construct-logo"
          title="SITE IS UNDER ACTIVE DEVELOPMENT: EXPECT BUGS/ERRORS/FATALITYS AND NO INCOME">
     <div class="car">
