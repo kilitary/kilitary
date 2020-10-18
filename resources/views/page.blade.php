@@ -57,18 +57,6 @@
                     <a class=" alignnmiddle" href="/delete/{{$code}}/0">delete this killware</a>
                 </li>
                 <li>
-                    <a class=" alignnmiddle" href="/delete/{{$code}}/1">
-                        delete this article (24 writes of 1/0 per bytes in file
-                        sectors (inodes):
-                        23.97$)</a>
-                </li>
-                <li>
-                    <a class=" alignnmiddle" href="/delete/{{$code}}/2">
-                        delete this document (255 writes of 1/0 per bytes in file
-                        sectors on TWO disks and physically destroy
-                        ONE of active RAID1 disk: 94.95$)</a>
-                </li>
-                <li>
                     <a href="/edit/{{$code}}">extend / reformate</a>
                 </li>
                 <li>
