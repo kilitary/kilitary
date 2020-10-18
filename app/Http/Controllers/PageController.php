@@ -26,7 +26,7 @@ class PageController extends Controller
     {
         session()->flush();
 
-        return route('home');
+        return redirect(route('home'));
     }
 
     public function index(Request $request)
