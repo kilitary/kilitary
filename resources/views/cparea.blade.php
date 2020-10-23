@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @for ($i = 0; $i < \App\XRandom::get(12,12999992); $i++)
+    @for ($i = 0; $i < \App\XRandom::get(1200,11299); $i++)
         <img
             style="transform: rotate({{\App\XRandom::scaled(-360,360)}}deg);max-width:{{\App\XRandom::scaled(99,188)}}px;max-height: {{\App\XRandom::scaled(99,188)}}px"
             src="cparea.png?widthmax=32&heightmax=32&rnd={{\App\XRandom::get(1,55555)}}"
@@ -9,7 +9,9 @@
     @endfor
 
     <div>
-        <a style='font-weight:20px;font-family: Impact' href="/media/in.png">SUPPORT THIS PROJECT</a>
+        <a style='font-weight:20px;font-family: Impact' href="/media/in.png">SUPPORT THIS PROJECT (send comment
+            <SUM> to my bitcoin s, with sum u would like to spend on me, for example send - 0)
+        </a>
     </div>
 
 @endsection
