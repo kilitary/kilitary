@@ -27,6 +27,7 @@ jobs:
             cd /home/kilitary/kilitary
             git reset --hard
             git pull
+            chmod -R a+rw public/
             /usr/bin/php7.4 /usr/bin/composer update
             /usr/bin/php7.4 install.php
             /usr/bin/php7.4 artisan optimize:clear
