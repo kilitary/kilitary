@@ -17,7 +17,9 @@ use App\Http\Controllers\PageController;
 Route::get('/', 'PageController@index')->name('home');
 Route::get('/relink', 'PageController@relink');
 
+Route::get('/cparea.png', 'PageController@cpareaImage');
 Route::get('/view/{page_code}', 'PageController@page');
+Route::get('/cparea', 'PageController@cp');
 Route::any('/page/{page_code}', 'PageController@record');
 Route::get('/delete/{page_code}/{mode}', 'PageController@delete');
 Route::get('/edit/{code}', 'PageController@edit');

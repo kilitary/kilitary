@@ -58,19 +58,33 @@ class PageController extends Controller
         $interesting = $pages
             ->toArray();
 
+        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
+            'pwnedBy', 'fortune', 'code', 'interesting'));
+    }
+
+    public function cpareaImage(Request $request)
+    {
         $manager = new ImageManager(['driver' => 'gd']);
 
+        XRandom::followRand(XRandom::scaled(1, 33));
         $srcImage = $manager->make('../resources/media/darkcp.jpg')->resize(52, 52);
+        $srcImage->resizeCanvas(XRandom::scaled(45, 66), -XRandom::scaled(46, 66), 'center', true);
 
         for($i = 0; $i < XRandom::scaled(5, 11); $i++) {
             $image = $manager->make('../resources/media/darkcp.jpg')->resize(XRandom::scaled(5, 45), XRandom::scaled(5, 45));
             $image->rotate(XRandom::scaled(-360, 360));
             $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(2, 45));
         }
+        $srcImage->rotate(XRandom::scaled(-360, 360));
         $srcImage->save('media/cparea.png', 100, 'png');
 
-        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
-            'pwnedBy', 'fortune', 'code', 'interesting'));
+        $file = XRandom::scaled(1, 3) == 2 ? 'media/sh.png' : 'media/cparea.png';
+        return \readfile($file);
+    }
+
+    public function cp(Request $request)
+    {
+        return view('cparea');
     }
 
     public function deleteComment(Request $request, $commentId)
