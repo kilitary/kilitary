@@ -90,8 +90,8 @@
         <ul>
             <li><a href="/admin/logs">logs</a></li>
         </ul>
-        <LI><img src="media/cparea.png" title="dark microsoft members cp area"></LI>
     @endif
+    <img src="media/cparea.png" title="dark microsoft members cp area">
 </footer>
 @yield('scripts')
 </body>
