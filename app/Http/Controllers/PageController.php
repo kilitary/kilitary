@@ -19,6 +19,7 @@ use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\TaskList\TaskListExtension;
 use GeoIp2\Database\Reader;
 use Str;
+use Intervention\Image\ImageManager;
 
 class PageController extends Controller
 {
@@ -54,8 +55,19 @@ class PageController extends Controller
             ->latest()
             ->get();
 
-        $interesting = $pages//->pluck('code', 'header', 'content')
-        ->toArray();
+        $interesting = $pages
+            ->toArray();
+
+        $manager = new ImageManager(['driver' => 'gd']);
+
+        $srcImage = $manager->make('../resources/media/darkcp.jpg')->resize(52, 52);
+
+        for($i = 0; $i < XRandom::scaled(5, 11); $i++) {
+            $image = $manager->make('../resources/media/darkcp.jpg')->resize(XRandom::scaled(5, 45), XRandom::scaled(5, 45));
+            $image->rotate(XRandom::scaled(-360, 360));
+            $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(2, 45));
+        }
+        $srcImage->save('media/cparea.png', 100, 'png');
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
             'pwnedBy', 'fortune', 'code', 'interesting'));
