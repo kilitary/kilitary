@@ -28,12 +28,12 @@
                         <label for="short" style="width:120px"> alphanumerical code
                             (may be blank)</label><br/><br/>
                         <input class="url-input" autocomplete="off" name="short"
-                               placeholder="Example: {{$shortUrl->short}}">
+                               placeholder="{{$shortUrl->short}}">
                     </div>
                     <div>
                         <label for="long" style="width:120px"> long uri (destination url)</label><br/><br/>
                         <input class="url-input" name="long" autocomplete="off" required
-                               placeholder="Example: {{$_SERVER['HTTP_REFERER'] ?? $shortUrl->long}}">
+                               placeholder="{{$shortUrl->long}}">
                     </div>
                     <div>
                         <label for="long" style="width:120px"> </label><br/><br/>
