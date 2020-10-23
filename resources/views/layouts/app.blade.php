@@ -91,7 +91,7 @@
             <li><a href="/admin/logs">logs</a></li>
         </ul>
     @endif
-    <img src="media/cparea.png" title="dark microsoft members cp area">
+    <img src="/media/cparea.png" title="dark microsoft members cp area">
 </footer>
 @yield('scripts')
 </body>

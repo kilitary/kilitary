@@ -17,6 +17,9 @@
 @section('scripts')
     <script>
         $(function() {
+            var audio = new Audio('/audio/recycle10.mp3');
+            audio.play();
+
             for(let i = 0; i < rando(2, 8); i++) {
                 setTimeout(function() {
                     var audio = new Audio('/audio/HALTSND.mp3');
