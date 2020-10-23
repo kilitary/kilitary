@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|LogRecord whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LogRecord whereUrl($value)
  * @mixin \Eloquent
+ * @property string|null $request_start
+ * @property string|null $request_end
+ * @method static \Illuminate\Database\Eloquent\Builder|LogRecord whereRequestEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LogRecord whereRequestStart($value)
  */
 class LogRecord extends Model
 {

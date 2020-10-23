@@ -51,7 +51,7 @@
     </script>
 
     <script src="https://randojs.com/2.0.0.js"></script>
-    <script src="//min.gitcdn.xyz/repo/wintercounter/Protip/master/protip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
 
     <link href="https://fonts.cdnfonts.com/css/liberation-mono" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
