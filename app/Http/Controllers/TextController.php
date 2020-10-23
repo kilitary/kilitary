@@ -15,6 +15,7 @@ class TextController extends Controller
         $words = TextSource::all();
 
         $num = mt_rand(1, 11) * 3;
+
         for($i = 0; $i < $num; $i++) {
             $signs = [' ', '+', '-'];
             $sign = $signs[XRandom::get(0, 2)];
@@ -23,6 +24,8 @@ class TextController extends Controller
                 sprintf("%s%02d ", $sign, XRandom::get(0, 9));
         }
 
-        return view('list-text', compact('list'));
+        return \response(view('list-text', compact('list'))
+            ->render())
+            ->header('Content-Type', 'text/plain');
     }
 }
