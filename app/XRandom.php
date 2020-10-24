@@ -20,7 +20,7 @@ class XRandom
 
     public static function scaled($min, $max): int
     {
-        $followed = self::followRand($min + 1);
+        $followed = self::followRand(self::get(1, 7));
 
         return self::get(0, 1) + $followed;
     }
