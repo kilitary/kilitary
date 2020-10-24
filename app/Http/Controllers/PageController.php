@@ -133,8 +133,6 @@ class PageController extends Controller
             'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
         ]);
 
-        session(['playAudio' => '/audio/recycle.mp3']);
-
         return back();
     }
 
