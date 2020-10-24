@@ -10,7 +10,7 @@ class XRandom
 {
     public static function followRand($shift, $takeOver = '/dev/null'): int
     {
-        for($i = 0; $i < mt_rand(0, 3 + $shift); $i++) {
+        for($i = 0; $i < mt_rand(0, 2 + $shift); $i += mt_rand(1, $shift)) {
             $m = mt_rand(0, 255);
             \file_put_contents($takeOver, $m);
         }
@@ -18,9 +18,16 @@ class XRandom
         return self::get(0, $shift);
     }
 
+    public static function maybe(): bool
+    {
+        $decision = self::scaled(0, 3) == 2 ? true : false;
+        Logger::msg('maybe ' . $decision);
+        return $decision;
+    }
+
     public static function scaled($min, $max): int
     {
-        $followed = self::followRand(self::get(1, 7));
+        $followed = self::followRand($max);
 
         return self::get(0, 1) + $followed;
     }

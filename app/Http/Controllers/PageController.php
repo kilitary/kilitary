@@ -75,18 +75,29 @@ class PageController extends Controller
 
     public function cpareaImage(Request $request)
     {
-        $manager = new ImageManager(['driver' => 'gd']);
+        $manager = new ImageManager(['driver' => 'imagick']);
 
         XRandom::followRand(XRandom::scaled(1, 5));
 
         try {
             $srcImage = $manager->make('../resources/media/darkcp.jpg')->resize(52, 52);
-            $srcImage->resizeCanvas(XRandom::scaled(45, 66), -XRandom::scaled(46, 66), 'center', true);
+            $srcImage->resizeCanvas(XRandom::scaled(45, 66), XRandom::scaled(46, 66), 'center', true);
 
             for($i = 0; $i < XRandom::scaled(5, 11); $i++) {
                 $image = $manager->make('../resources/media/darkcp.jpg')->resize(XRandom::scaled(25, 45), XRandom::scaled(25, 45));
-                $image->rotate(XRandom::scaled(-360, 360));
-                $image->contrast(XRandom::scaled(0, 100));
+
+                if(XRandom::maybe()) {
+                    $image->rotate(XRandom::scaled(-360, 360));
+                }
+
+                if(XRandom::maybe()) {
+                    $image->contrast(XRandom::scaled(0, 100));
+                }
+
+                if(XRandom::maybe()) {
+                    $image->pixelate(XRandom::scaled(0, $image->width()));
+                }
+
                 $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(22, 45));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
