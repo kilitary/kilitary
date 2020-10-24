@@ -76,17 +76,17 @@ class PageController extends Controller
     {
         $manager = new ImageManager(['driver' => 'gd']);
 
-        XRandom::followRand(XRandom::scaled(1, 33));
+        XRandom::followRand(XRandom::scaled(1, 333));
 
         try {
             $srcImage = $manager->make('../resources/media/darkcp.jpg')->resize(52, 52);
             $srcImage->resizeCanvas(XRandom::scaled(45, 66), -XRandom::scaled(46, 66), 'center', true);
 
             for($i = 0; $i < XRandom::scaled(5, 11); $i++) {
-                $image = $manager->make('../resources/media/darkcp.jpg')->resize(XRandom::scaled(5, 45), XRandom::scaled(5, 45));
+                $image = $manager->make('../resources/media/darkcp.jpg')->resize(XRandom::scaled(25, 45), XRandom::scaled(25, 45));
                 $image->rotate(XRandom::scaled(-360, 360));
                 $image->contrast(XRandom::scaled(0, 100));
-                $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(2, 45));
+                $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(22, 45));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
             $srcImage->save('media/cparea.png', 100, 'png');
