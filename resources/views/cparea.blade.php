@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <a href="/"><-index</a><br/>
     @for ($i = 0; $i < \App\XRandom::get(1200,11299); $i++)
         <img
             style="transform: rotate({{\App\XRandom::scaled(-360,360)}}deg);max-width:{{\App\XRandom::scaled(99,188)}}px;max-height: {{\App\XRandom::scaled(99,188)}}px"
