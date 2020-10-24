@@ -95,6 +95,10 @@ class PageController extends Controller
         }
 
         $file = XRandom::scaled(1, 3) == 2 ? 'media/sh.png' : 'media/cparea.png';
+        if(!is_file($file)) {
+            return response(['status' => 'possible damaged'])
+                ->header('Content-type', 'application/json');
+        }
         return \readfile($file);
     }
 
