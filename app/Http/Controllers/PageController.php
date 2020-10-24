@@ -22,6 +22,7 @@ use League\CommonMark\Extension\TaskList\TaskListExtension;
 use GeoIp2\Database\Reader;
 use Str;
 use Intervention\Image\ImageManager;
+use const PREG_SET_ORDER;
 
 class PageController extends Controller
 {
@@ -122,6 +123,34 @@ class PageController extends Controller
 
     public function writeComment(Request $request)
     {
+        $existentGay = \App\Gay::where('ip', $request->ip())
+            ->first();
+
+        if($existentGay) {
+            Logger::msg('at least one gay funded, tryed to fuck with monitor: ' . $existentGay->firewall_in . ' times');
+            $existentGay->firewall_in += 1;
+            $existentGay->save();
+            return back();
+        }
+
+        preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
+        $domainLen = 0;
+        foreach($mm as $index => $domain) {
+            $domainLen += \Str::length($domain[0]);
+        }
+
+        $difflLen = \Str::length($request->post('comment')) - $domainLen;
+        if($difflLen >= 1024) {
+            \App\Gay::create([
+                'ip' => $request->ip(),
+                'reason' => 'links/plain text overflow',
+                'degaytime' => \Carbon\Carbon::now()->addCentury(),
+                'firewall_in' => 0
+            ]);
+
+            return back();
+        }
+
         $country = Tools::getCountry($request->ip());
         $comment = \App\Comment::create([
             'comment' => $request->post('comment'),
