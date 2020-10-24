@@ -94,6 +94,7 @@
 /***/ (function(module, exports) {
 
 var timerId;
+var shithappens = false;
 
 function lock() {
   var top = parseInt($('#flagright').css('top'));
@@ -134,17 +135,16 @@ $(function () {
   $('#flagright').css('top', '-100px');
   timerId = setInterval(lock, 20);
   setInterval(rot, 600);
-});
-var shithappens = false;
-window.addEventListener('error', function (evt) {
-  if (shithappens) {
-    return;
-  }
+  window.addEventListener('error', function (evt) {
+    if (shithappens) {
+      return;
+    }
 
-  shithappens = true;
-  $('body').append("<span class='blinking-red'>Caught[via 'error' event]:  " + evt.message + " from " + evt.filename + ":" + evt.lineno + "</span>");
-  console.log(evt);
-  evt.preventDefault();
+    shithappens = true;
+    $('body').append("<span class='blinking-red'>Caught[via 'error' event]:  " + evt.message + " from " + evt.filename + ":" + evt.lineno + "</span>");
+    console.log(evt);
+    evt.preventDefault();
+  });
 });
 
 /***/ }),

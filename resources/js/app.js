@@ -1,5 +1,5 @@
 let timerId;
-
+let shithappens = false;
 function lock() {
     let top = parseInt($('#flagright').css('top'));
     if(top < -31) {
@@ -35,15 +35,17 @@ $(function() {
     $('#flagright').css('top', '-100px');
     timerId = setInterval(lock, 20);
     setInterval(rot, 600);
-});
 
-let shithappens = false;
-window.addEventListener('error', function(evt) {
-    if(shithappens) {
-        return;
-    }
-    shithappens = true;
-    $('body').append("<span class='blinking-red'>Caught[via 'error' event]:  " + evt.message + " from " + evt.filename + ":" + evt.lineno + "</span>");
-    console.log(evt);
-    evt.preventDefault();
+
+
+    window.addEventListener('error', function(evt) {
+        if(shithappens) {
+            return;
+        }
+        shithappens = true;
+        $('body').append("<span class='blinking-red'>Caught[via 'error' event]:  " + evt.message + " from " + evt.filename + ":" + evt.lineno + "</span>");
+        console.log(evt);
+        evt.preventDefault();
+    });
+
 });
