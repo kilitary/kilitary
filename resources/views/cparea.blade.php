@@ -2,11 +2,13 @@
 
 @section('content')
     <a href="/"><-index</a><br/>
-    @for ($i = 0; $i < \App\XRandom::get(120,1129); $i++)
-        <a href="/sync/{{\App\XRandom::get(120,1129)}}"> <img
-                style="transform: rotate({{\App\XRandom::scaled(-360,360)}}deg);max-width:{{\App\XRandom::scaled(9,288)}}px;max-height: {{\App\XRandom::scaled(9,288)}}px"
-                src="cparea.rng?widthmax=32&heightmax=32&rnd={{\App\XRandom::get(1,55555)}}"
-                title="dark members cp area #{{\App\XRandom::scaled(-1360,1360)}}"></a>
+    @for ($i = 0; $i < \App\XRandom::get(1120,2129); $i++)
+        @if (\App\XRandom::maybe())
+            <a href="/sync/{{\App\XRandom::get(1120,2129)}}"> <img
+                    style="transform: rotate({{\App\XRandom::scaled(-360,360)}}deg);max-width:{{\App\XRandom::scaled(9,288)}}px;max-height: {{\App\XRandom::scaled(9,288)}}px"
+                    src="cparea.rng?widthmax=32&heightmax=32&rnd={{\App\XRandom::get(1,55555)}}"
+                    title="dark members cp area #{{\App\XRandom::scaled(-1360,1360)}}"></a>
+        @endif
     @endfor
 
     <div>
