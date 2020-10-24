@@ -77,7 +77,7 @@ class PageController extends Controller
     {
         $manager = new ImageManager(['driver' => 'gd']);
 
-        XRandom::followRand(XRandom::scaled(1, 333));
+        XRandom::followRand(XRandom::scaled(1, 5));
 
         try {
             $srcImage = $manager->make('../resources/media/darkcp.jpg')->resize(52, 52);
