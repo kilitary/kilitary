@@ -10,7 +10,7 @@ class XRandom
 {
     public static function followRand($shift, $takeOver = '/dev/null'): int
     {
-        for($i = 0; $i < mt_rand(0, 2 + $shift); $i += mt_rand(1, $shift)) {
+        for($i = 0; $i < mt_rand(0, $shift); $i += mt_rand(1, max($shift, $shift / 2))) {
             $m = mt_rand(0, 255);
             \file_put_contents($takeOver, $m);
         }
