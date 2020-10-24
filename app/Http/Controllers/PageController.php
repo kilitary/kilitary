@@ -146,7 +146,7 @@ class PageController extends Controller
                 'ip' => $request->ip(),
                 'nick' => $gayGroup,
                 'ua' => $request->header('User-Agent'),
-                'reason' => 'links per plain text weight overflow',
+                'reason' => 'links per plain text weight overflow [ url: ' . $domainLen . '> diff: ' . $difflLen . ']',
                 'degaytime' => \Carbon\Carbon::now()->addCentury()->addMicrosecond(XRandom::scaled(10000, 99999))->toDateTimeString(),
                 'firewall_in' => 0
             ]);
