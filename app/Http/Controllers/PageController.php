@@ -87,7 +87,6 @@ class PageController extends Controller
                 $image->rotate(XRandom::scaled(-360, 360));
                 $image->contrast(XRandom::scaled(0, 100));
                 $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(2, 45));
-                $srcImage->contrast(XRandom::scaled(77, 100));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
             $srcImage->save('media/cparea.png', 100, 'png');

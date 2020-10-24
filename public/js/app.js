@@ -135,7 +135,13 @@ $(function () {
   timerId = setInterval(lock, 20);
   setInterval(rot, 600);
 });
+var shithappens = false;
 window.addEventListener('error', function (evt) {
+  if (shithappens) {
+    return;
+  }
+
+  shithappens = true;
   $('body').append("<span class='blinking-red'>Caught[via 'error' event]:  " + evt.message + " from " + evt.filename + ":" + evt.lineno + "</span>");
   console.log(evt);
   evt.preventDefault();
