@@ -129,7 +129,8 @@ class PageController extends Controller
             'username' => 'anon',
             'email' => 'anon@anon.ru',
             'country' => $country,
-            'page_id' => $request->post('page_id')
+            'page_id' => $request->post('page_id'),
+            'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
         ]);
 
         session(['playAudio' => '/audio/recycle.mp3']);

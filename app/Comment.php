@@ -39,5 +39,5 @@ class Comment extends Model
         'updated_at' => 'datetime:Y-m-d h:i:s',
         'deleted_at' => 'datetime:Y-m-d h:i:s'
     ];
-    protected $fillable = ['comment', 'email', 'ip', 'page_id', 'username', 'country'];
+    protected $fillable = ['comment', 'email', 'ip', 'page_id', 'username', 'country', 'info'];
 }
