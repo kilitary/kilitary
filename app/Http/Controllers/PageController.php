@@ -127,7 +127,7 @@ class PageController extends Controller
             ->first();
 
         if($existentGay) {
-            Logger::msg('at least one gay funded, tryed to fuck with monitor: ' . $existentGay->firewall_in . ' times');
+            Logger::msg('known gay funded [' . $request->ip() . '], tryed to fuck with monitor: ' . $existentGay->firewall_in . ' times');
             $existentGay->firewall_in += 1;
             $existentGay->save();
             return back();
@@ -140,19 +140,22 @@ class PageController extends Controller
         }
 
         $difflLen = \Str::length($request->post('comment')) - $domainLen;
+
         if($domainLen > 512 && $difflLen >= 1024) {
+            $reason = 'links per plain text weight overflow [ url: ' . $domainLen . '> diff: ' . $difflLen . ']';
+
             $gayGroup = \Str::random(3);
             $gay = \App\Gay::create([
                 'ip' => $request->ip(),
                 'nick' => $gayGroup,
                 'ua' => $request->header('User-Agent'),
-                'reason' => 'links per plain text weight overflow [ url: ' . $domainLen . '> diff: ' . $difflLen . ']',
+                'reason' => $reason,
                 'degaytime' => \Carbon\Carbon::now()->addCentury()->addMicrosecond(XRandom::scaled(10000, 99999))->toDateTimeString(),
                 'firewall_in' => 0
             ]);
 
             Logger::msg('new gay ' . $request->ip() . ', designated ' . $gayGroup .
-                ' appeared. DEgayTime: ' . \Carbon\Carbon::createFromDate($gay->degaytime));
+                ' appeared. DEgayTime: ' . \Carbon\Carbon::createFromDate($gay->degaytime) . "[source: " . $reason . ']');
 
             return back();
         }
