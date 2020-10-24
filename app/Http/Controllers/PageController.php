@@ -75,7 +75,7 @@ class PageController extends Controller
 
     public function cpareaImage(Request $request)
     {
-        $manager = new ImageManager(['driver' => 'imagick']);
+        $manager = new ImageManager(['driver' => 'gd']);
 
         XRandom::followRand(XRandom::scaled(1, 5));
 
