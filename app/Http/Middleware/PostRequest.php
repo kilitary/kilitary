@@ -32,6 +32,8 @@ class PostRequest
                 ]);
         }
 
-        return $response;
+        return $response->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            ->header('Pragma', 'no-cache')
+            ->header('X-CurlyBlank', 'Dont Be A Dick');;
     }
 }

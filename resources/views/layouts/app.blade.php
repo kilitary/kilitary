@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="ten">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="ten" manifest="cache.manifest">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +9,9 @@
     <meta name="document-state" content="dynamic">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 
     <link rel="icon" type="image/png" href="/images/lock.png">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">

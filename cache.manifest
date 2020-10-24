@@ -1,0 +1,15 @@
+CACHE MANIFEST
+# 2030-06-18:v2
+
+# Explicitly cached 'master entries'.
+CACHE:
+/favicon.ico
+
+# Resources that require the user to be online.
+NETWORK:
+*
+
+FALLBACK:
+/main.py /static.html
+images/
+/media
