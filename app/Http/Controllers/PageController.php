@@ -140,7 +140,7 @@ class PageController extends Controller
         }
 
         $difflLen = \Str::length($request->post('comment')) - $domainLen;
-        if($difflLen >= 1024) {
+        if($domainLen > 512 && $difflLen >= 1024) {
             \App\Gay::create([
                 'ip' => $request->ip(),
                 'reason' => 'links/plain text overflow',
