@@ -33,7 +33,9 @@ class LogRequest
             'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES))
         ]);
 
-        session(['log_id' => $log->id]);
+        $logIds = session('log_ids', []);
+        $logIds[] = $log->id;
+        session(['log_ids' => $logIds]);
 
         return $next($request);
     }

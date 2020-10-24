@@ -23,7 +23,7 @@ class PostRequest
 
         $response = $next($request);
 
-        $logId = session('log_id', 0);
+        $logId = collect(session('log_ids', []))->pop();
         if($logId) {
             $record = LogRecord::where('id', $logId)
                 ->update([
