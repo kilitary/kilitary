@@ -9,9 +9,9 @@
     <meta name="document-state" content="dynamic">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
 
     <link rel="icon" type="image/png" href="/images/lock.png">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -92,6 +92,9 @@
     @if (\App\Models\Tools::IsAdmin())
         <ul>
             <li><a href="/admin/logs">logs</a></li>
+            <li>
+                <pre id="logs">--logs--</pre>
+            </li>
         </ul>
     @endif
 

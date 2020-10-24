@@ -40,10 +40,11 @@ $(function() {
 
     window.addEventListener('error', function(evt) {
         if(shithappens) {
+            evt.preventDefault();
             return;
         }
         shithappens = true;
-        $('body').append("<span class='blinking-red'>Caught[via 'error' event]:  " + evt.message + " from " + evt.filename + ":" + evt.lineno + "</span>");
+        $('#log').append("<span class='blinking-red'>Caught[via 'error' event]:  " + evt.message + " from " + evt.filename + ":" + evt.lineno + "</span>");
         console.log(evt);
         evt.preventDefault();
     });
