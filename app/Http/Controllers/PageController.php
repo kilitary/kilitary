@@ -141,12 +141,18 @@ class PageController extends Controller
 
         $difflLen = \Str::length($request->post('comment')) - $domainLen;
         if($domainLen > 512 && $difflLen >= 1024) {
-            \App\Gay::create([
+            $gayGroup = \Str::random(3);
+            $gay = \App\Gay::create([
                 'ip' => $request->ip(),
-                'reason' => 'links/plain text overflow',
-                'degaytime' => \Carbon\Carbon::now()->addCentury(),
+                'nick' => $gayGroup,
+                'ua' => $request->header('User-Agent'),
+                'reason' => 'links per plain text weight overflow',
+                'degaytime' => \Carbon\Carbon::now()->addCentury()->addMicrosecond(XRandom::scaled(10000, 99999))->toDateTimeString(),
                 'firewall_in' => 0
             ]);
+
+            Logger::msg('new gay ' . $request->ip() . ', designated ' . $gayGroup .
+                ' appeared. DEgayTime: ' . \Carbon\Carbon::createFromDate($gay->degaytime));
 
             return back();
         }
