@@ -21,7 +21,6 @@ class XRandom
     public static function maybe(): bool
     {
         $decision = self::scaled(0, 3) == 2 ? true : false;
-        Logger::msg('maybe ' . $decision);
         return $decision;
     }
 
