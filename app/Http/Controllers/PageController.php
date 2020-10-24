@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Models\Tools;
 use Exception;
 use Illuminate\Http\Request;
@@ -63,6 +64,14 @@ class PageController extends Controller
             'pwnedBy', 'fortune', 'code', 'interesting'));
     }
 
+    public function deleteByIp(Request $request, $ip)
+    {
+        Comment::where('ip', $ip)
+            ->forceDelete();
+
+        return back();
+    }
+
     public function cpareaImage(Request $request)
     {
         $manager = new ImageManager(['driver' => 'gd']);
@@ -76,7 +85,9 @@ class PageController extends Controller
             for($i = 0; $i < XRandom::scaled(5, 11); $i++) {
                 $image = $manager->make('../resources/media/darkcp.jpg')->resize(XRandom::scaled(5, 45), XRandom::scaled(5, 45));
                 $image->rotate(XRandom::scaled(-360, 360));
+                $image->contrast(XRandom::scaled(0, 100));
                 $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(2, 45));
+                $srcImage->contrast(XRandom::scaled(77, 100));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
             $srcImage->save('media/cparea.png', 100, 'png');

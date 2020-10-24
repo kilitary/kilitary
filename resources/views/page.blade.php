@@ -28,6 +28,9 @@
                             <a href="/comment/{{$comment['id']}}/delete"><img
                                     style='position:relative;top:2px;width:10px;height: 10px;'
                                     src="/images/delete.png"> </a>
+                            <a href="/comment/{{$comment['ip']}}/delete-all-by-ip"><img
+                                    style='position:relative;top:2px;width:14px;height: 14px;'
+                                    src="/images/delete.png"> </a>
                         @endif
                     </div>
 

@@ -17,6 +17,7 @@ use App\Http\Controllers\PageController;
 Route::get('/', 'PageController@index')->name('home');
 Route::get('/relink', 'PageController@relink');
 
+Route::get('/comment/{ip}/delete-all-by-ip', 'PageController@deleteByIp');
 Route::get('/cparea.png', 'PageController@cpareaImage');
 Route::get('/view/{page_code}', 'PageController@page');
 Route::get('/cparea', 'PageController@cp');
