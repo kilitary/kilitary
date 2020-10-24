@@ -93,10 +93,10 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var timerId;
-var shithappens = false;
+var flagTimer;
+var shitHappensOnce = false;
 
-function lock() {
+function flagsMovement() {
   var top = parseInt($('#flagright').css('top'));
 
   if (top < -31) {
@@ -115,11 +115,11 @@ function lock() {
     $('#flagleft').css('left', prev + rando(-10, 10) + 'px');
   }
 
-  clearTimeout(timerId);
-  timerId = setInterval(lock, rando(10, 120));
+  clearTimeout(flagTimer);
+  flagTimer = setInterval(flagsMovement, rando(10, 120));
 }
 
-function rot() {
+function rotateKrysaClass() {
   var rotate = rando(-6, 6); //'.crysa-class').css('transform');
 
   $('.crysa-class').css('transform', 'rotate(' + rotate + 'deg)');
@@ -133,18 +133,18 @@ function rot() {
 $(function () {
   $.protip();
   $('#flagright').css('top', '-100px');
-  timerId = setInterval(lock, 20);
-  setInterval(rot, 600);
-  window.addEventListener('error', function (evt) {
-    if (shithappens) {
-      evt.preventDefault();
+  flagTimer = setInterval(flagsMovement, 20);
+  setInterval(rotateKrysaClass, 200);
+  window.addEventListener('error', function (e) {
+    if (shitHappensOnce) {
+      e.preventDefault();
       return;
     }
 
-    shithappens = true;
-    $('#log').append("<span class='blinking-red'>Caught[via 'error' event]:  " + evt.message + " from " + evt.filename + ":" + evt.lineno + "</span>");
-    console.log(evt);
-    evt.preventDefault();
+    shitHappensOnce = true;
+    $('#log').append("<span class='blinking-red'>Caught[via 'error' event]:  " + e.message + " from " + e.filename + ":" + e.lineno + "</span>");
+    console.log(e);
+    e.preventDefault();
   });
 });
 

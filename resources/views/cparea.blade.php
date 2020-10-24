@@ -11,7 +11,7 @@
 
     <div>
         <a style='font-weight:20px;font-family: Impact' href="/media/in.png">SUPPORT THIS PROJECT (send comment with
-            %SUM% to my bitcoin address, with sum u would like to spend on me, for example send - 0)
+            %SUM% to my bitcoin address, with SUM u would like to send to me  for example send - 0 (or if youre using auction, send ru S services price for terrorizing me/per hour)
         </a>
     </div>
 

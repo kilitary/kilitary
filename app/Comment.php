@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string $country
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereCountry($value)
+ * @property string|null $info
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereInfo($value)
  */
 class Comment extends Model
 {
