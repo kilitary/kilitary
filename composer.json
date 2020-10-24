@@ -15,6 +15,7 @@
         "geoip2/geoip2": "~2.0",
         "intervention/image": "^2.5",
         "ipinfo/ipinfo": "^1.1",
+        "itsgoingd/clockwork": "^4.1",
         "laravel/framework": "^7",
         "laravel/telescope": "^3.5",
         "laravel/tinker": "^2.0",

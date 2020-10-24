@@ -94,6 +94,7 @@
             <li><a href="/admin/logs">logs</a></li>
             <li>
                 <pre id="logs">--logs--</pre>
+
             </li>
         </ul>
     @endif

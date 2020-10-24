@@ -116,7 +116,11 @@ class PageController extends Controller
 
     public function cp(Request $request)
     {
-        return view('cparea');
+        $gays = \App\Gay::all();
+        if(!$gays) {
+            $gays = collect([]);
+        }
+        return view('cparea', compact('gays'));
     }
 
     public function deleteComment(Request $request, $commentId)

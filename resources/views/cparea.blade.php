@@ -16,6 +16,9 @@
             %SUM% to my bitcoin address, with SUM u would like to send to me for example send - 0 (or if youre using
             auction, send ru S services price for terrorizing me/per hour)
         </a>
+        <div>
+            gays in the database: {{ $gays->count() }}
+        </div>
     </div>
 
 @endsection
