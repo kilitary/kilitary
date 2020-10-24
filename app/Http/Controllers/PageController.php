@@ -95,7 +95,7 @@ class PageController extends Controller
                 }
 
                 if(XRandom::maybe()) {
-                    $image->pixelate(XRandom::scaled(0, $image->width()));
+                    $image->pixelate(XRandom::scaled(0, $image->width() / 6));
                 }
 
                 $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(22, 45));
