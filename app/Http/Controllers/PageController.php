@@ -85,6 +85,9 @@ class PageController extends Controller
             $srcImage->resizeCanvas(XRandom::scaled(45, 66), XRandom::scaled(46, 66), 'center', true);
 
             for($i = 0; $i < XRandom::scaled(5, 11); $i++) {
+
+                XRandom::followRand(XRandom::get(0, 255));
+
                 $image = $manager->make('../resources/media/darkcp.jpg')->resize(XRandom::scaled(25, 45), XRandom::scaled(25, 45));
 
                 if(XRandom::maybe()) {
