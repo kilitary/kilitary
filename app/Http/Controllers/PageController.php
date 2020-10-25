@@ -81,14 +81,13 @@ class PageController extends Controller
         XRandom::followRand(XRandom::scaled(1, 5));
 
         try {
-            $srcImage = $manager->make('../resources/media/darkcp.jpg')->resize(52, 52);
-            $srcImage->resizeCanvas(XRandom::scaled(45, 66), XRandom::scaled(46, 66), 'center', true);
+            $srcImage = $manager->make('../resources/media/darkcp.jpg');
 
-            for($i = 0; $i < XRandom::scaled(5, 11); $i++) {
+            for($i = 0; $i < XRandom::scaled(2, 5); $i++) {
 
-                XRandom::followRand(XRandom::get(0, 255));
+                XRandom::followRand(XRandom::get(0, 21));
 
-                $image = $manager->make('../resources/media/darkcp.jpg');
+                $image = $manager->make('../resources/media/darkcp.jpg')->resize(\App\XRandom::scaled(44, 99), \App\XRandom::scaled(44, 99));
 
                 if(XRandom::maybe()) {
                     $image->rotate(XRandom::scaled(-360, 360));
@@ -112,16 +111,18 @@ class PageController extends Controller
                 $srcImage->insert($image, 'top-left', XRandom::scaled(12, 45), XRandom::scaled(12, 45));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
+
             $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
-            $srcImage->save('media/cparea.png', 100, 'png');
+
+            $srcImage->save('media/cparea.png', 70, 'png');
         } catch(Exception $e) {
             Logger::msg('exception for images: ' . $e->getMessage());
         }
 
-        $file = XRandom::scaled(1, 3) == 2 ? 'media/sh.png' : 'media/cparea.png';
+        $file = XRandom::scaled(0, 3) == 2 ? 'media/sh.png' : 'media/cparea.png';
         if(!is_file($file)) {
-            return response(['status' => 'possible damaged'])
-                ->header('Content-type', 'application/json');
+            return response(['status' => 'possible damaged/ddos'],
+                200, ['Content-Type' => 'application/json']);
         }
 
         return \response(\file_get_contents($file), 200, ['Content-Type' => 'image/png']);
