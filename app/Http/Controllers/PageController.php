@@ -92,17 +92,21 @@ class PageController extends Controller
                 }
 
                 if(XRandom::maybe()) {
-                    $image->contrast(XRandom::scaled(0, 100));
+                    $image->contrast(XRandom::scaled(-100, 100));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->pixelate(XRandom::scaled(0, $image->width() / 6));
+                    $image->pixelate(XRandom::scaled($image->width() / 4, $image->width() / 2));
                 }
                 if(XRandom::maybe()) {
-                    $image->gamma(0.01 * XRandom::scaled(12));
+                    $image->gamma(0.01 * XRandom::scaled(32));
                 }
 
-                $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(22, 45));
+                if(XRandom::maybe()) {
+                    $image->blur(XRandom::scaled(0, 120));
+                }
+
+                $srcImage->insert($image, 'top-left', XRandom::scaled(1, 45), XRandom::scaled(1, 45));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
             $srcImage->save('media/cparea.png', 100, 'png');
