@@ -76,8 +76,6 @@ class PageController extends Controller
 
     public function cpareaImage(Request $request)
     {
-        clock()->info("generating fucking image " . $request->url());
-
         $manager = new ImageManager(['driver' => 'gd']);
 
         XRandom::followRand(XRandom::scaled(1, 5));
@@ -117,7 +115,7 @@ class PageController extends Controller
             $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
             $srcImage->save('media/cparea.png', 100, 'png');
         } catch(Exception $e) {
-            Logger::msg('exception for images: ', $e);
+            Logger::msg('exception for images: ' . $e->getMessage());
         }
 
         $file = XRandom::scaled(1, 3) == 2 ? 'media/sh.png' : 'media/cparea.png';
