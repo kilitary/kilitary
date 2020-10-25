@@ -88,7 +88,7 @@ class PageController extends Controller
 
                 XRandom::followRand(XRandom::get(0, 255));
 
-                $image = $manager->make('../resources/media/darkcp.jpg')->resize(XRandom::scaled(25, 45), XRandom::scaled(25, 45));
+                $image = $manager->make('../resources/media/darkcp.jpg');
 
                 if(XRandom::maybe()) {
                     $image->rotate(XRandom::scaled(-360, 360));

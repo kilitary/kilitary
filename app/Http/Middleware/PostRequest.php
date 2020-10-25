@@ -43,7 +43,7 @@ class PostRequest
             ->header("X-MSEdge-Ref", "Ref A: " . sprintf("%-09X", Xrandom::scaled(199111111, 9999999999)) . " Ref B: " .
                 sprintf("%-09X", Xrandom::scaled(19999111111, 999909999999)) . " Ref C: " .
                 date(DATE_RFC2822, time() + Xrandom::scaled(1111111111, 99999999999)))
-            ->header("ETag", "%s%s%s?&nbsp;&" . Xrandom::scaled(19999999, 999999999))
+            //->header("ETag", "%s%s%s?&nbsp;&" . Xrandom::scaled(19999999, 999999999))
             ->header("Via", "%[^ ]*%20\,s+`--" . Xrandom::scaled(19999999, 999999999))
             ->header("X-Powered-By", "PHP/4.0.6")
             ->header("Server", "thttpd/0.3b");
