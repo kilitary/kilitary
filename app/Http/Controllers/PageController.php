@@ -147,6 +147,7 @@ class PageController extends Controller
                 ->first();
 
             if($existentGay) {
+                \App\Audio::gayDetected();
                 Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
