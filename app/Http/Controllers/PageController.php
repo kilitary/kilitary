@@ -96,6 +96,9 @@ class PageController extends Controller
                 }
 
                 if(XRandom::maybe()) {
+                    $image->pixelate(XRandom::scaled($image->width() / 4, $image->width() / 2));
+                }
+                if(XRandom::maybe()) {
                     $image->gamma(0.31 * XRandom::scaled(2, 32));
                 }
 
@@ -103,7 +106,7 @@ class PageController extends Controller
                     $image->blur(XRandom::scaled(0, 120));
                 }
 
-                $srcImage->insert($image, 'top-left', XRandom::scaled(1, 45), XRandom::scaled(1, 45));
+                $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(22, 45));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
             $srcImage->save('media/cparea.png', 100, 'png');
