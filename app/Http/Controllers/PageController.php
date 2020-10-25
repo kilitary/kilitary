@@ -69,7 +69,7 @@ class PageController extends Controller
     public function deleteByIp(Request $request, $ip)
     {
         Comment::where('ip', $ip)
-            ->forceDelete();
+            ->delete();
 
         return back();
     }
@@ -92,21 +92,21 @@ class PageController extends Controller
                 }
 
                 if(XRandom::maybe()) {
-                    $image->contrast(XRandom::scaled(-100, 100));
+                    $image->contrast(XRandom::scaled(-20, 100));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->pixelate(XRandom::scaled($image->width() / 4, $image->width() / 2));
+                    $image->pixelate(XRandom::scaled(2, $image->width() / 4));
                 }
                 if(XRandom::maybe()) {
-                    $image->gamma(0.31 * XRandom::scaled(2, 32));
+                    $image->gamma(1 * XRandom::scaled(1.1, 3));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->blur(XRandom::scaled(0, 120));
+                    $image->blur(XRandom::scaled(50, 120));
                 }
 
-                $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(22, 45));
+                $srcImage->insert($image, 'top-left', XRandom::scaled(12, 45), XRandom::scaled(12, 45));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
             $srcImage->save('media/cparea.png', 100, 'png');
