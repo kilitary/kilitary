@@ -76,6 +76,8 @@ class PageController extends Controller
 
     public function cpareaImage(Request $request)
     {
+        clock()->info("generating fucking image " . $request->url());
+
         $manager = new ImageManager(['driver' => 'gd']);
 
         XRandom::followRand(XRandom::scaled(1, 5));
@@ -123,7 +125,8 @@ class PageController extends Controller
             return response(['status' => 'possible damaged'])
                 ->header('Content-type', 'application/json');
         }
-        return \readfile($file);
+
+        return \response(\file_get_contents($file), 200, ['Content-Type' => 'image/png']);
     }
 
     public function cp(Request $request)

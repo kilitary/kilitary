@@ -6,7 +6,7 @@
         @if (\App\XRandom::scaled(0,6) > 2)
             <a href="/sync/{{\App\XRandom::get(1120,3129)}}"> <img
                     style="transform: rotate({{\App\XRandom::scaled(-360,360)}}deg);max-width:{{\App\XRandom::scaled(9,288)}}px;max-height: {{\App\XRandom::scaled(9,288)}}px"
-                    src="cparea.png?widthmax={{\App\XRandom::scaled(1,32)}}&heightmax={{\App\XRandom::scaled(1,32)}}&rnd={{\App\XRandom::scaled(1,55555)}}"
+                    src="cparea.png?widthmax={{\App\XRandom::scaled(99,130)}}&heightmax={{\App\XRandom::scaled(99,130)}}&rnd={{\App\XRandom::scaled(1,55555)}}"
                     title="dark members cp area #{{\App\XRandom::scaled(-1360,1360)}}"></a>
         @endif
     @endfor

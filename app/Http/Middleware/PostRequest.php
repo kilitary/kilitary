@@ -34,7 +34,7 @@ class PostRequest
         }
 
         return $response
-            ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            ->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
             ->header('Pragma', 'no-cache')
             ->header('X-CurveBank', 'Dont Be A Dick')
             ->header('Client-post-version', 'arminer ' . '(0.1d-2020 0x43-b/c/AN/SPY49)')
