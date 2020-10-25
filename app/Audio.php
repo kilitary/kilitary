@@ -9,6 +9,7 @@ class Audio extends Model
     public static function gayDetected()
     {
         \App\Logger::msg('gay detected');
-        $out = `/usr/bin/mpg123.bin ../storage/mp3/b.mp3`;
+        $out = shell_exec("/usr/bin/mpg123.bin /home/kilitary/kilitary/storage/mp3/b.mp3");
+        \App\Logger::msg('gay: ' . $out);
     }
 }
