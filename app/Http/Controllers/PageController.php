@@ -96,9 +96,6 @@ class PageController extends Controller
                 }
 
                 if(XRandom::maybe()) {
-                    $image->pixelate(XRandom::scaled($image->width() / 4, $image->width() / 2));
-                }
-                if(XRandom::maybe()) {
                     $image->gamma(0.31 * XRandom::scaled(2, 32));
                 }
 
