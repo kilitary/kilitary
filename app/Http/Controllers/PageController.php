@@ -35,6 +35,7 @@ class PageController extends Controller
 
     public function index(Request $request)
     {
+        ini_set('xdebug.auto_trace', true);
         XRandom::followRand(7);
 
         Logger::msg('main ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER') .
@@ -97,6 +98,9 @@ class PageController extends Controller
                 if(XRandom::maybe()) {
                     $image->pixelate(XRandom::scaled(0, $image->width() / 6));
                 }
+                if(XRandom::maybe()) {
+                    $image->gamma(0.01 * XRandom::scaled(12));
+                }
 
                 $srcImage->insert($image, 'top-left', XRandom::scaled(22, 45), XRandom::scaled(22, 45));
             }
@@ -138,53 +142,55 @@ class PageController extends Controller
 
     public function writeComment(Request $request)
     {
-        $existentGay = \App\Gay::where('ip', $request->ip())
-            ->first();
+        \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
+            $existentGay = \App\Gay::where('ip', $request->ip())
+                ->first();
 
-        if($existentGay) {
-            Logger::msg('known gay funded [' . $request->ip() . '], tryed to fuck with monitor: ' . $existentGay->firewall_in . ' times');
-            $existentGay->firewall_in += 1;
-            $existentGay->save();
-            return back();
-        }
+            if($existentGay) {
+                Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');
+                $existentGay->firewall_in += 1;
+                $existentGay->save();
+                return back();
+            }
 
-        preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
-        $domainLen = 0;
-        foreach($mm as $index => $domain) {
-            $domainLen += \Str::length($domain[0]);
-        }
+            preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
+            $domainLen = 0;
+            foreach($mm as $index => $domain) {
+                $domainLen += \Str::length($domain[0]);
+            }
 
-        $difflLen = \Str::length($request->post('comment')) - $domainLen;
+            $difflLen = \Str::length($request->post('comment')) - $domainLen;
 
-        if($domainLen > 512 && $difflLen >= 1024) {
-            $reason = 'links per plain text weight overflow [ url: ' . $domainLen . '> diff: ' . $difflLen . ']';
+            if($domainLen > 512 && $difflLen >= 1024) {
+                $reason = 'links per plain text weight overflow [ url: ' . $domainLen . '> diff: ' . $difflLen . ']';
 
-            $gayGroup = \Str::random(3);
-            $gay = \App\Gay::create([
+                $gayGroup = \Str::random(3);
+                $gay = \App\Gay::create([
+                    'ip' => $request->ip(),
+                    'nick' => $gayGroup,
+                    'ua' => $request->header('User-Agent'),
+                    'reason' => $reason,
+                    'degaytime' => \Carbon\Carbon::now()->addCentury()->addMicrosecond(XRandom::scaled(10000, 99999))->toDateTimeString(),
+                    'firewall_in' => 0
+                ]);
+
+                Logger::msg('new gay ' . $request->ip() . ', designated ' . $gayGroup .
+                    ' appeared. DEgayTime: ' . \Carbon\Carbon::createFromDate($gay->degaytime) . "[source: " . $reason . ']');
+
+                return back();
+            }
+
+            $country = Tools::getCountry($request->ip());
+            $comment = \App\Comment::create([
+                'comment' => $request->post('comment'),
                 'ip' => $request->ip(),
-                'nick' => $gayGroup,
-                'ua' => $request->header('User-Agent'),
-                'reason' => $reason,
-                'degaytime' => \Carbon\Carbon::now()->addCentury()->addMicrosecond(XRandom::scaled(10000, 99999))->toDateTimeString(),
-                'firewall_in' => 0
+                'username' => 'anon',
+                'email' => 'anon@anon.ru',
+                'country' => $country,
+                'page_id' => $request->post('page_id'),
+                'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
             ]);
-
-            Logger::msg('new gay ' . $request->ip() . ', designated ' . $gayGroup .
-                ' appeared. DEgayTime: ' . \Carbon\Carbon::createFromDate($gay->degaytime) . "[source: " . $reason . ']');
-
-            return back();
-        }
-
-        $country = Tools::getCountry($request->ip());
-        $comment = \App\Comment::create([
-            'comment' => $request->post('comment'),
-            'ip' => $request->ip(),
-            'username' => 'anon',
-            'email' => 'anon@anon.ru',
-            'country' => $country,
-            'page_id' => $request->post('page_id'),
-            'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
-        ]);
+        });
 
         return back();
     }
