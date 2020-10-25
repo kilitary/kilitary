@@ -114,12 +114,12 @@ class PageController extends Controller
 
             $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
 
-            $srcImage->save('media/cparea.png', 70, 'png');
+            $srcImage->save('media/cparea.rng', 70, 'png');
         } catch(Exception $e) {
             Logger::msg('exception for images: ' . $e->getMessage());
         }
 
-        $file = XRandom::scaled(0, 3) == 2 ? 'media/sh.png' : 'media/cparea.png';
+        $file = XRandom::scaled(0, 3) == 2 ? 'media/sh.png' : 'media/cparea.rng';
         if(!is_file($file)) {
             return response(['status' => 'possible damaged/ddos'],
                 200, ['Content-Type' => 'application/json']);
