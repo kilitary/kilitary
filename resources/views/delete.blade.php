@@ -17,7 +17,7 @@
 @section('scripts')
     <script>
         $(function() {
-            var audio = new Audio('/audio/recycle13.mp3');
+            var audio = new Audio('/audio/recycle.mp3');
             audio.play();
 
             for(let i = 0; i < rando(2, 8); i++) {
