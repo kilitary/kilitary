@@ -35,7 +35,6 @@ class PageController extends Controller
 
     public function index(Request $request)
     {
-        ini_set('xdebug.auto_trace', true);
         XRandom::followRand(7);
 
         Logger::msg('main ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER') .
