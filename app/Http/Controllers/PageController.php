@@ -112,6 +112,7 @@ class PageController extends Controller
                 $srcImage->insert($image, 'top-left', XRandom::scaled(12, 45), XRandom::scaled(12, 45));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
+            $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
             $srcImage->save('media/cparea.png', 100, 'png');
         } catch(Exception $e) {
             Logger::msg('exception for images: ', $e);
