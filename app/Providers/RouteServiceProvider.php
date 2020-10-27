@@ -46,7 +46,16 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapDynamicFiles();
+
         //
+    }
+
+    protected function mapDynamicFiles()
+    {
+        Route::middleware('dynamic')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/dynamic.php'));
     }
 
     /**
