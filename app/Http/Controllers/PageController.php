@@ -95,7 +95,8 @@ class PageController extends Controller
 
                 XRandom::followRand(XRandom::get(1, 40));
 
-                $overlappedImage = $manager->make('../resources/media/darkcp.jpg')->resize(\App\XRandom::scaled(11, 99), \App\XRandom::scaled(11, 99));
+                $overlappedImage = $manager->make('../resources/media/darkcp.jpg')
+                    ->resize(\App\XRandom::scaled(33, 120), \App\XRandom::scaled(33, 120));
 
                 if(XRandom::maybe()) {
                     $overlappedImage->rotate(XRandom::scaled(-360, 360));
@@ -110,7 +111,11 @@ class PageController extends Controller
                 }
 
                 if(XRandom::maybe()) {
-                    $overlappedImage->gamma(XRandom::scaled(1.1, 1.9));
+                    $gamma = XRandom::scaled(1.1, 1.9);
+                    if($gamma <= 0) {
+                        Logger::msg('gamma ' . $gamma);
+                    }
+                    $overlappedImage->gamma($gamma);
                 }
 
                 if(XRandom::maybe()) {
