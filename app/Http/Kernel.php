@@ -48,7 +48,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
         'dynamic' => [
-            'throttle:1010,1',
+            'throttle:200,1',
         ]
     ];
 

@@ -62,8 +62,14 @@ class PageController extends Controller
         $interesting = $pages
             ->toArray();
 
+        $gaysCount = \App\Gay::query()
+            ->count();
+        if(!$gaysCount) {
+            $gaysCount = collect([]);
+        }
+
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
-            'pwnedBy', 'fortune', 'code', 'interesting'));
+            'pwnedBy', 'fortune', 'code', 'interesting', 'gaysCount'));
     }
 
     public function deleteByIp(Request $request, $ip)
@@ -84,6 +90,7 @@ class PageController extends Controller
             $srcImage = $manager->make('../resources/media/darkcp.jpg');
 
             $maxI = XRandom::scaled(2, 15);
+
             for($i = 0; $i < $maxI; $i++) {
 
                 XRandom::followRand(XRandom::get(0, 21));
@@ -136,6 +143,7 @@ class PageController extends Controller
         if(!$gays) {
             $gays = collect([]);
         }
+
         return view('cparea', compact('gays'));
     }
 

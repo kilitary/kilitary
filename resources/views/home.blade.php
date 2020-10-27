@@ -61,8 +61,11 @@
 
         <div class="marginleft">
             <h3 class="section-h3">time status</h3>
-            {!! nl2br(`/usr/bin/timedatectl`) !!}<br/>
+            {!! date(DATE_ATOM) !!}<br/>
             {{ $fortune }}
+        </div>
+        <div class="marginleft">
+            <h3 class="section-h3">server status</h3>
             {{ `uptime` }}
         </div>
 
@@ -84,7 +87,7 @@
                 href="mailto:kilitary@protonmail.com">kil</a><a
                 href="mailto:kilitary@x25.cc">it</a>ary<a
                 href="mailto:deconf@ya.ru">.ru</a>
-            | {{request()->ip()}}?
+            | {{request()->ip()}}? | {{ $gaysCount }} gay(s) in db
         </div>
     </div>
 @endsection
