@@ -111,7 +111,7 @@ class PageController extends Controller
                 }
 
                 if(XRandom::maybe()) {
-                    $gamma = XRandom::scaled(1.1, 1.9);
+                    $gamma = 0.1 + XRandom::scaled(1.1, 1.9);
                     if($gamma <= 0) {
                         Logger::msg('gamma ' . $gamma);
                     }
