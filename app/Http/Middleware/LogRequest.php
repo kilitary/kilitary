@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Logger;
+use Illuminate\Support\Facades\Redis;
 
 class LogRequest
 {
@@ -33,8 +34,10 @@ class LogRequest
         session(['log_ids' => $logIds]);
 
         $isGay = \App\Gay::where('ip', '=', $request->ip())
-            ->exists();
+            ->count();
         session(['isGay' => $isGay]);
+
+        Redis::command('set', ['isGay' . $request->ip(), (boolean) $isGay]);
 
         return $next($request);
     }

@@ -18,6 +18,7 @@ return [
     'except' => [
         'telescope*',
         'horizon*',
+        'ts*'
     ],
 
     /*
@@ -79,7 +80,7 @@ return [
      | in the Messages tab.
      |
      */
-    'error_handler' => false,
+    'error_handler' => true,
 
     /*
      |--------------------------------------------------------------------------

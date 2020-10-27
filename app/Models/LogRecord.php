@@ -33,6 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $request_end
  * @method static \Illuminate\Database\Eloquent\Builder|LogRecord whereRequestEnd($value)
  * @method static \Illuminate\Database\Eloquent\Builder|LogRecord whereRequestStart($value)
+ * @property string|null $referer
+ * @method static \Illuminate\Database\Eloquent\Builder|LogRecord whereReferer($value)
  */
 class LogRecord extends Model
 {
