@@ -185,18 +185,19 @@ class PageController extends Controller
             if($domainLen > 512 && $difflLen >= 1024) {
                 $reason = 'links per plain text weight overflow [ url: ' . $domainLen . '> diff: ' . $difflLen . ']';
 
-                $gayGroup = \Str::random(3);
+                $gayGroup = \Str::upper(\Str::random(3));
+                $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
                 $gay = \App\Gay::create([
                     'ip' => $request->ip(),
                     'nick' => $gayGroup,
                     'ua' => $request->header('User-Agent'),
                     'reason' => $reason,
-                    'degaytime' => \Carbon\Carbon::now()->addCentury()->addMicrosecond(XRandom::scaled(10000, 99999))->toDateTimeString(),
+                    'degaytime' => $degayTime,
                     'firewall_in' => 0
                 ]);
 
                 Logger::msg('new gay ' . $request->ip() . ', designated ' . $gayGroup .
-                    ' appeared. DEgayTime: ' . \Carbon\Carbon::createFromDate($gay->degaytime) . "[source: " . $reason . ']');
+                    ' appeared. DEgayTime: ' . $degayTime . "[source: " . $reason . ']');
 
                 return back();
             }
