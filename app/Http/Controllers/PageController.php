@@ -22,6 +22,7 @@ use League\CommonMark\Extension\TaskList\TaskListExtension;
 use GeoIp2\Database\Reader;
 use Str;
 use Intervention\Image\ImageManager;
+use const JSON_PRETTY_PRINT;
 use const PREG_SET_ORDER;
 
 class PageController extends Controller
@@ -99,8 +100,9 @@ class PageController extends Controller
                 if(XRandom::maybe()) {
                     $image->pixelate(XRandom::scaled(2, $image->width() / 4));
                 }
+
                 if(XRandom::maybe()) {
-                    $image->gamma(1 * XRandom::scaled(1.1, 3));
+                    $image->gamma(XRandom::scaled(1.0, 2.0));
                 }
 
                 if(XRandom::maybe()) {
@@ -111,11 +113,11 @@ class PageController extends Controller
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
 
-            $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
+            $srcImage->resize($request->get('widthmax'), $request->get('heightmax'))->sharpen(XRandom::scaled(0, 100));
 
-            $srcImage->save('media/cparea.rng', 70, 'png');
+            $srcImage->save('media/cparea.rng', 70, 'jpg');
         } catch(Exception $e) {
-            Logger::msg('exception for images: ' . $e->getMessage());
+            Logger::msg('exception: ' . $e->getMessage());
         }
 
         $file = XRandom::scaled(0, 3) == 2 ? 'media/sh.png' : 'media/cparea.rng';
@@ -124,7 +126,7 @@ class PageController extends Controller
                 200, ['Content-Type' => 'application/json']);
         }
 
-        return \response(\file_get_contents($file), 200, ['Content-Type' => 'image/png']);
+        return \response()->file($file, ['Content-Type' => 'image/jpg']);
     }
 
     public function cp(Request $request)

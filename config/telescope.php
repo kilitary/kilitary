@@ -92,7 +92,7 @@ return [
     */
 
     'ignore_paths' => [
-        'nova-api*',
+        'nova-api*','*.rng'
     ],
 
     'ignore_commands' => [
