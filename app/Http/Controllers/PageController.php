@@ -84,40 +84,40 @@ class PageController extends Controller
     {
         $manager = new ImageManager(['driver' => 'gd']);
 
-        XRandom::followRand(XRandom::scaled(1, 5));
+        XRandom::followRand(XRandom::scaled(1, 15));
 
         try {
             $srcImage = $manager->make('../resources/media/darkcp.jpg');
 
-            $maxI = XRandom::scaled(2, 15);
+            $maxI = XRandom::scaled(2, 3);
 
             for($i = 0; $i < $maxI; $i++) {
 
-                XRandom::followRand(XRandom::get(0, 21));
+                XRandom::followRand(XRandom::get(1, 4));
 
-                $image = $manager->make('../resources/media/darkcp.jpg')->resize(\App\XRandom::scaled(44, 99), \App\XRandom::scaled(44, 99));
+                $image = $manager->make('../resources/media/darkcp.jpg')->resize(\App\XRandom::scaled(33, 99), \App\XRandom::scaled(33, 99));
 
                 if(XRandom::maybe()) {
                     $image->rotate(XRandom::scaled(-360, 360));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->contrast(XRandom::scaled(-20, 100));
+                    $image->contrast(XRandom::scaled(-10, 100));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->pixelate(XRandom::scaled(2, $image->width() / 4));
+                    $image->pixelate(XRandom::scaled(1, $image->width() / 2));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->gamma(XRandom::scaled(1.0, 2.0));
+                    $image->gamma(XRandom::scaled(1.1, 1.9));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->blur(XRandom::scaled(50, 120));
+                    $image->blur(XRandom::scaled(30, 120));
                 }
 
-                $srcImage->insert($image, XRandom::maybe() ? 'top-left' : 'center', XRandom::scaled(12, 45), XRandom::scaled(12, 45))->sharpen(XRandom::scaled(0, 100));
+                $srcImage->insert($image, XRandom::maybe() ? 'top-left' : 'center', XRandom::scaled(1, 99), XRandom::scaled(1, 99))->sharpen(XRandom::scaled(1, 100));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
 

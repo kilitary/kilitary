@@ -87,7 +87,7 @@
                 href="mailto:kilitary@protonmail.com">kil</a><a
                 href="mailto:kilitary@x25.cc">it</a>ary<a
                 href="mailto:deconf@ya.ru">.ru</a>
-            | {{request()->ip()}}? | {{ $gaysCount }} gay(s) in db
+            | {{request()->ip()}}? | {{ isset($gaysCount) ? $gaysCount . "gay(s) in db" : "" }}
         </div>
     </div>
 @endsection

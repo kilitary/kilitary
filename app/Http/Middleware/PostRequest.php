@@ -36,6 +36,12 @@ class PostRequest
         $count = collect(session('log_ids'))->count();
         \Debugbar::addMessage('there is ' . $count . ' past-log-ids');
 
+        $isGay = \App\Gay::select('id')->where('ip', $request->ip())->limit(1)->exists();
+
+        if($isGay) {
+            \Debugbar::alert('you are gay');
+        }
+
         return $response
             ->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
             ->header('Pragma', 'no-cache')
