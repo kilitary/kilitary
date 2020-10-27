@@ -172,7 +172,6 @@ class PageController extends Controller
 
             if($existentGay) {
                 Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');
-                \App\Audio::gayDetected();
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
                 return back();
@@ -202,6 +201,8 @@ class PageController extends Controller
 
                 Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
                     ', deGayTime: ' . $degayTime . "[source: " . $reason . ']');
+
+                \App\Audio::gayDetected();
 
                 return back();
             }
