@@ -28,6 +28,7 @@ class LogRequest
             'ua' => $request->userAgent(),
             'url' => $request->fullUrl(),
             'method' => $request->method(),
+            'referer' => $request->server('HTTP_REFERER', '<empty>'),
             'http_code' => '<unfinished>',
             'request_start' => \DB::raw('now(6)'),
             'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES))
