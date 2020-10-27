@@ -89,35 +89,38 @@ class PageController extends Controller
         try {
             $srcImage = $manager->make('../resources/media/darkcp.jpg');
 
-            $maxI = XRandom::scaled(2, 3);
+            $maxI = XRandom::scaled(1, 8);
 
             for($i = 0; $i < $maxI; $i++) {
 
-                XRandom::followRand(XRandom::get(1, 4));
+                XRandom::followRand(XRandom::get(1, 40));
 
-                $image = $manager->make('../resources/media/darkcp.jpg')->resize(\App\XRandom::scaled(33, 99), \App\XRandom::scaled(33, 99));
+                $overlappedImage = $manager->make('../resources/media/darkcp.jpg')->resize(\App\XRandom::scaled(33, 99), \App\XRandom::scaled(33, 99));
 
                 if(XRandom::maybe()) {
-                    $image->rotate(XRandom::scaled(-360, 360));
+                    $overlappedImage->rotate(XRandom::scaled(-360, 360));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->contrast(XRandom::scaled(-10, 100));
+                    $overlappedImage->contrast(XRandom::scaled(-10, 100));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->pixelate(XRandom::scaled(1, $image->width() / 2));
+                    $overlappedImage->pixelate(XRandom::scaled(1, $overlappedImage->width() / 2));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->gamma(XRandom::scaled(1.1, 1.9));
+                    $overlappedImage->gamma(XRandom::scaled(1.1, 1.9));
                 }
 
                 if(XRandom::maybe()) {
-                    $image->blur(XRandom::scaled(30, 120));
+                    $overlappedImage->blur(XRandom::scaled(30, 120));
                 }
 
-                $srcImage->insert($image, XRandom::maybe() ? 'top-left' : 'center', XRandom::scaled(1, 99), XRandom::scaled(1, 99))->sharpen(XRandom::scaled(1, 100));
+                $coords = ['top-left', 'center', 'top-right', 'bottom-left', 'bottom-right'];
+
+                $srcImage->insert($overlappedImage, $coords[XRandom::scaled(0, count($coords) - 1)],
+                    XRandom::scaled(1, 99), XRandom::scaled(1, 99))->sharpen(XRandom::scaled(1, 100));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
 
@@ -134,7 +137,7 @@ class PageController extends Controller
                 200, ['Content-Type' => 'application/json']);
         }
 
-        return \response()->file($file, ['Content-Type' => 'image/png']);
+        return \response()->file($file, ['Content-Type' => 'overlappedImage/png']);
     }
 
     public function cp(Request $request)
