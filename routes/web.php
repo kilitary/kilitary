@@ -14,7 +14,7 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::middleware(['cache.headers', 'throttle:1020,1'])->group(function() {
+Route::middleware(['cache.headers', 'throttle:5020,10'])->group(function() {
     Route::any('/home', 'HomeController@index');
 
     Route::get('/', 'PageController@index')->name('home');
