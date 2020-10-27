@@ -45,7 +45,7 @@ class PageController extends Controller
         $gdiSelected = -3;
         $chanceOf = -3;
         $sign = '';
-        $shortUrl = ShortUrl::inRandomOrder()->first();
+        $shortUrl = ShortUrl::inRandomOrder(XRandom::scaled(0, 999999999))->first();
         $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
         $fortune = `cat /home/kilitary/kilitary/public/fortune-state`;
 
@@ -55,7 +55,7 @@ class PageController extends Controller
 
         $pages = Page::select('code', 'header', 'content')
             ->whereNotIn('code', $deleted)
-            ->limit(15)
+            ->limit(25)
             ->latest()
             ->get();
 
@@ -83,7 +83,8 @@ class PageController extends Controller
         try {
             $srcImage = $manager->make('../resources/media/darkcp.jpg');
 
-            for($i = 0; $i < XRandom::scaled(2, 5); $i++) {
+            $maxI = XRandom::scaled(2, 15);
+            for($i = 0; $i < $maxI; $i++) {
 
                 XRandom::followRand(XRandom::get(0, 21));
 
@@ -109,7 +110,7 @@ class PageController extends Controller
                     $image->blur(XRandom::scaled(50, 120));
                 }
 
-                $srcImage->insert($image, 'top-left', XRandom::scaled(12, 45), XRandom::scaled(12, 45))->sharpen(XRandom::scaled(0, 100));
+                $srcImage->insert($image, XRandom::maybe() ? 'top-left' : 'center', XRandom::scaled(12, 45), XRandom::scaled(12, 45))->sharpen(XRandom::scaled(0, 100));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
 

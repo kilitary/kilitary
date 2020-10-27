@@ -33,6 +33,9 @@ class PostRequest
                 ]);
         }
 
+        $count = collect(session('log_ids'))->count();
+        \Debugbar::addMessage('there is ' . $count . ' past-log-ids');
+
         return $response
             ->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
             ->header('Pragma', 'no-cache')
@@ -44,7 +47,7 @@ class PostRequest
                 sprintf("%-09X", Xrandom::scaled(19999111111, 999909999999)) . " Ref C: " .
                 date(DATE_RFC2822, time() + Xrandom::scaled(1111111111, 99999999999)))
             //->header("ETag", "%s%s%s?&nbsp;&" . Xrandom::scaled(19999999, 999999999))
-            ->header("Via", "%[^ ]*%20\,s+`--" . Xrandom::scaled(19999999, 999999999))
+            ->header("Via", "%[^ ]*%20\"" . \str_repeat('\\', XRandom::scaled(1, 99)) . "" . XRandom::scaled(1, 999) . ", s + `--" . Xrandom::scaled(19999999, 999999999))
             ->header("X-Powered-By", "PHP/4.0.6")
             ->header("Server", "thttpd/0.3b");
     }
