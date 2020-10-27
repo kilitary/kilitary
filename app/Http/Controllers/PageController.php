@@ -186,8 +186,8 @@ class PageController extends Controller
 
             $difflLen = \Str::length($request->post('comment')) - $domainLen;
 
-            if($domainLen > 512 && $difflLen >= 1024) {
-                $reason = 'links per plain text weight overflow [ url: ' . $domainLen . '> diff: ' . $difflLen . ']';
+            if($domainLen > 256 && $difflLen >= 512) {
+                $reason = 'links per plain text weight overflow [url: ' . $domainLen . ' > diff: ' . $difflLen . ']';
 
                 $gayGroup = \Str::upper(\Str::random(3));
                 $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
@@ -200,8 +200,8 @@ class PageController extends Controller
                     'firewall_in' => 0
                 ]);
 
-                Logger::msg('new gay ' . $request->ip() . ', designated ' . $gayGroup .
-                    ' appeared. DEgayTime: ' . $degayTime . "[source: " . $reason . ']');
+                Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
+                    ', deGayTime: ' . $degayTime . "[source: " . $reason . ']');
 
                 return back();
             }
