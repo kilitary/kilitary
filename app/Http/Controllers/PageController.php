@@ -168,9 +168,10 @@ class PageController extends Controller
     public function writeComment(Request $request)
     {
         \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
-            $existentGay = \App\Gay::firstWhere('ip', $request->ip());
 
-            if($existentGay) {
+            $isGay = session('isGay', false);
+            if($isGay) {
+                $existentGay = \App\Gay::firstWhere('ip', $request->ip());
                 Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');
                 $existentGay->firewall_in += 1;
                 $existentGay->save();

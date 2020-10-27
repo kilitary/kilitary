@@ -36,10 +36,7 @@ class PostRequest
         $count = collect(session('log_ids'))->count();
         \Debugbar::addMessage('there is ' . $count . ' past-log-ids');
 
-        $isGay = \App\Gay::query()
-            ->where('ip', $request->ip())
-            ->count();
-
+        $isGay = session('isGay', falsed);
         if($isGay) {
             \Debugbar::alert('you are gay');
         }
