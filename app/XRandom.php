@@ -20,8 +20,7 @@ class XRandom
 
     public static function maybe(): bool
     {
-        $decision = self::scaled(0, 3) == 2 ? true : false;
-        return $decision;
+        return self::scaled(0, 3) == 2 ? true : false;
     }
 
     public static function scaled($min, $max): int

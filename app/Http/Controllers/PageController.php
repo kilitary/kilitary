@@ -109,13 +109,13 @@ class PageController extends Controller
                     $image->blur(XRandom::scaled(50, 120));
                 }
 
-                $srcImage->insert($image, 'top-left', XRandom::scaled(12, 45), XRandom::scaled(12, 45));
+                $srcImage->insert($image, 'top-left', XRandom::scaled(12, 45), XRandom::scaled(12, 45))->sharpen(XRandom::scaled(0, 100));
             }
             $srcImage->rotate(XRandom::scaled(-360, 360));
 
-            $srcImage->resize($request->get('widthmax'), $request->get('heightmax'))->sharpen(XRandom::scaled(0, 100));
+            $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
 
-            $srcImage->save('media/cparea.rng', 70, 'jpg');
+            $srcImage->save('media/cparea.rng', 70, 'png');
         } catch(Exception $e) {
             Logger::msg('exception: ' . $e->getMessage());
         }
@@ -126,7 +126,7 @@ class PageController extends Controller
                 200, ['Content-Type' => 'application/json']);
         }
 
-        return \response()->file($file, ['Content-Type' => 'image/jpg']);
+        return \response()->file($file, ['Content-Type' => 'image/png']);
     }
 
     public function cp(Request $request)

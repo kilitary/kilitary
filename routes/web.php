@@ -14,9 +14,10 @@ use App\Http\Controllers\PageController;
 |
 */
 
+Route::any('/home', 'HomeController@index');
+
 Route::get('/', 'PageController@index')->name('home');
 Route::get('/relink', 'PageController@relink');
-
 Route::get('/comment/{ip}/delete-all-by-ip', 'PageController@deleteByIp');
 Route::get('/view/{page_code}', 'PageController@page');
 Route::get('/cparea', 'PageController@cp');
@@ -26,7 +27,6 @@ Route::get('/edit/{code}', 'PageController@edit');
 Route::post('update/{code}', 'PageController@update');
 Route::post('/comment/add', 'PageController@writeComment');
 Route::get('/comment/{id}/delete', 'PageController@deleteComment');
-
 Route::get('/reset', 'PageController@reset');
 
 Route::get('/command/{command}', 'CommandController@command');
@@ -35,8 +35,7 @@ Route::get('/{file}.txt', 'TextController@identify');
 
 Route::post('/us/create', 'UrlController@create');
 Route::get('/us/{url}', 'UrlController@redirect');
-Route::any('/home', 'HomeController@index');
-
-Route::fallback('PageController@fallback');
 
 Route::get('/admin/logs', 'LogController@index');
+
+Route::fallback('PageController@fallback');
