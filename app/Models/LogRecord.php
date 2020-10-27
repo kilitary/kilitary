@@ -42,5 +42,5 @@ class LogRecord extends Model
         'deleted_at' => 'datetime:Y-m-d h:i:s'
     ];
     protected $table = 'logs';
-    protected $fillable = ['ip', 'method', 'url', 'ua', 'info', 'http_code', 'request_start'];
+    protected $fillable = ['ip', 'method', 'url', 'ua', 'info', 'http_code', 'request_start', 'referer'];
 }
