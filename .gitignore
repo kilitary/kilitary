@@ -20,3 +20,4 @@ o.id
 cachegrind*
 public/kilitary
 /public/media/*
+*.rng
