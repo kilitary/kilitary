@@ -168,12 +168,11 @@ class PageController extends Controller
     public function writeComment(Request $request)
     {
         \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
-            $existentGay = \App\Gay::where('ip', $request->ip())
-                ->first();
+            $existentGay = \App\Gay::firstWhere('ip', $request->ip());
 
             if($existentGay) {
-                \App\Audio::gayDetected();
                 Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');
+                \App\Audio::gayDetected();
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
                 return back();
