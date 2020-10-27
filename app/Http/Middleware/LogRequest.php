@@ -32,8 +32,9 @@ class LogRequest
         $logIds[] = $log->id;
         session(['log_ids' => $logIds]);
 
-        $isGay = \App\Gay::firstWhere('ip', $request->ip());
-        session(['isGay' => true]);
+        $isGay = \App\Gay::where('ip', $request->ip())
+            ->exists();
+        session(['isGay' => $isGay]);
 
         return $next($request);
     }

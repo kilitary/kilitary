@@ -171,7 +171,7 @@ class PageController extends Controller
 
             $isGay = session('isGay', false);
             if($isGay) {
-                $existentGay = \App\Gay::firstWhere('ip', $request->ip());
+                $existentGay = \App\Gay::firstWhere('ip', '=', $request->ip());
                 Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
