@@ -122,15 +122,15 @@ class PageController extends Controller
                     $overlappedImage->blur(XRandom::scaled(30, 120));
                 }
 
+                $overlappedImage->rotate(XRandom::scaled(-360, 360));
+
                 $coords = ['top-left', 'center', 'top-right', 'bottom-left', 'bottom-right'];
 
                 $srcImage->insert($overlappedImage, $coords[XRandom::scaled(0, count($coords) - 1)],
                     XRandom::scaled(1, 99), XRandom::scaled(1, 99))->sharpen(XRandom::scaled(1, 100));
             }
-            $srcImage->rotate(XRandom::scaled(-360, 360));
 
             $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
-
             $srcImage->save('media/cparea.rng', 70, 'png');
         } catch(Exception $e) {
             Logger::msg('exception: ' . $e->getMessage());
