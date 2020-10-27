@@ -13,7 +13,7 @@ class LogReferer extends Migration
      */
     public function up()
     {
-        Schema::table('gays', function(Blueprint $table) {
+        Schema::table('logs', function(Blueprint $table) {
             $table->string('referer')->nullable()->after('ua');
         });
     }
