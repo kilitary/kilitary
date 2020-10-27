@@ -64,9 +64,6 @@ class PageController extends Controller
 
         $gaysCount = \App\Gay::query()
             ->count();
-        if(!$gaysCount) {
-            $gaysCount = collect([]);
-        }
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
             'pwnedBy', 'fortune', 'code', 'interesting', 'gaysCount'));
@@ -131,18 +128,18 @@ class PageController extends Controller
             }
 
             $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
-            $srcImage->save('media/cparea.rng', 70, 'png');
+            $srcImage->save('storage/cparea.rng', 70, 'png');
         } catch(Exception $e) {
             Logger::msg('exception: ' . $e->getMessage());
         }
 
-        $file = XRandom::scaled(0, 3) == 2 ? 'media/sh.png' : 'media/cparea.rng';
+        $file = XRandom::maybe() ? 'media/sh.png' : 'storage/cparea.rng';
         if(!is_file($file)) {
             return response(['status' => 'possible damaged/ddos'],
                 200, ['Content-Type' => 'application/json']);
         }
 
-        return \response()->file($file, ['Content-Type' => 'overlappedImage/png']);
+        return \response()->file($file, ['Content-Type' => 'image/png']);
     }
 
     public function cp(Request $request)
