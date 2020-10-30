@@ -30,6 +30,13 @@ class LogRequest
         ]);
 
         Redis::rPush(\App\Models\Tools::getUserId() . ':ip_log_ids', $log->id);
+        Redis::rPush(\App\Models\Tools::getUserId() . ':request_logs',
+            $request->fingerprint() . ':' .
+            $request->method() . ':' .
+            $request->fullUrl() . ':' .
+            ($_SERVER['HTTP_REFERER'] ?? '<empty ref>') . ':' .
+            $_SERVER['REMOTE_PORT'] . ':' .
+            \microtime(true));
 
         $isGay = \App\Gay::where('ip', '=', $request->ip())
             ->count();
