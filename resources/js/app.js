@@ -1,9 +1,14 @@
 let flagTimer;
 let shitHappensOnce = false;
+let humanWorks = false;
+
+function toggleHuman() {
+    humanWorks = !humanWorks;
+}
 
 function flagsMovement() {
     let top = parseInt($('#flagright').css('top'));
-    if(top < -31) {
+    if(top < -31 && humanWorks) {
         $('#flagright').css('top', (top + 1) + 'px');
     }
 
@@ -38,6 +43,7 @@ $(function() {
 
     flagTimer = setInterval(flagsMovement, 20);
 
+    setInterval(toggleHuman, 800);
     setInterval(rotateKrysaClass, 200);
 
     window.addEventListener('error', function(e) {
