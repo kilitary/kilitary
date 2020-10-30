@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="ten" manifest="/cache.manifest">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="王宇ー！のドッ" manifest="/cache.manifest">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
