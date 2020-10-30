@@ -264,7 +264,7 @@ class PageController extends Controller
         $fortune = `cat /home/kilitary/kilitary/public/fortune-state`;
 
         return response(view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'),
-            200));
+            303));
 
     }
 
