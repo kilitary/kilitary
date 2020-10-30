@@ -129,18 +129,11 @@ class PageController extends Controller
             }
 
             $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
-            $srcImage->save('storage/cparea.rng', 70, 'png');
         } catch(Exception $e) {
             Logger::msg('exception: ' . $e->getMessage());
         }
 
-        $file = XRandom::maybe() ? 'media/sh.png' : 'storage/cparea.rng';
-        if(!is_file($file)) {
-            return response(['status' => 'possible damaged/ddos'],
-                200, ['Content-Type' => 'application/json']);
-        }
-
-        return \response()->file($file, ['Content-Type' => 'image/png']);
+        return XRandom::maybe() ? \response()->file('media/sh.png', ['Content-Type' => 'image/png']) : $srcImage->response('image/png');
     }
 
     public function cp(Request $request)
