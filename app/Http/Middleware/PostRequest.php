@@ -25,7 +25,7 @@ class PostRequest
 
         $response = $next($request);
 
-        $logId = Redis::lIndex(\App\Models\Tools::getUserId() . ':ip_log_ids', -1);
+        $logId = Redis::get($request->fingerprint() . ':log_id');
 
         if($logId) {
             $record = LogRecord::where('id', $logId)

@@ -29,6 +29,7 @@ class LogRequest
             'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES))
         ]);
 
+        Redis::setEx($request->fingerprint() . ':log_id', 55, $log->id);
         Redis::rPush(\App\Models\Tools::getUserId() . ':ip_log_ids', $log->id);
         Redis::rPush(\App\Models\Tools::getUserId() . ':request_logs',
             $request->fingerprint() . ':' .
