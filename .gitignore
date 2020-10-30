@@ -21,3 +21,4 @@ cachegrind*
 public/kilitary
 /public/media/*
 *.rng
+!/public/fortune-state
