@@ -263,7 +263,8 @@ class PageController extends Controller
         $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
         $fortune = `cat /home/kilitary/kilitary/public/fortune-state`;
 
-        return response()->view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'), 303);
+        return response()->view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'),
+            \App\XRandom::maybe() ? 303 : 402);
 
     }
 
