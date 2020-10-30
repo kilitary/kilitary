@@ -131,10 +131,10 @@ class PageController extends Controller
             Logger::msg('exception: ' . $e->getMessage());
         }
 
-        return (XRandom::maybe() ?
+        return XRandom::maybe() ?
             \response()->file('media/sh.png', ['Content-Type' => 'image/png'])
             :
-            XRandom::maybe()) ? \response('', 410) : $srcImage->response('image/png');
+            (XRandom::maybe() ? \response('', 410) : $srcImage->response('image/png'));
     }
 
     public function cp(Request $request)
