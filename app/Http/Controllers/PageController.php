@@ -11,6 +11,7 @@ use \App\XRandom;
 use \App\ShortUrl;
 use \App\TextSource;
 use \App\Models\Page;
+use Illuminate\Support\Facades\Redis;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
@@ -169,7 +170,7 @@ class PageController extends Controller
     {
         \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
 
-            $isGay = session('isGay', false);
+            $isGay = Redis::command('get', [$request->ip() . ':isGay']);
             if($isGay) {
                 $existentGay = \App\Gay::firstWhere('ip', '=', $request->ip());
                 Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');

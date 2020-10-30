@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\LogRecord;
 use Closure;
 use \App\XRandom;
+use Illuminate\Support\Facades\Redis;
 
 class PostRequest
 {
@@ -24,19 +25,23 @@ class PostRequest
 
         $response = $next($request);
 
-        $logId = collect(session('log_ids', []))->pop();
+        $logId = Redis::lIndex($request->ip() . ':log_ids', -1);
+
         if($logId) {
             $record = LogRecord::where('id', $logId)
                 ->update([
                     'http_code' => $response->getStatusCode(),
                     'request_end' => \DB::raw('now(6)')
                 ]);
+        } else {
+            \App\Logger::msg('fatal: redis log_ids error');
         }
 
-        $count = collect(session('log_ids'))->count();
+        $count = Redis::lLen($request->ip() . ':log_ids');
         \Debugbar::addMessage('there is ' . $count . ' past-log-ids');
 
-        $isGay = session('isGay', false);
+        $isGay = Redis::command('get', [$request->ip() . ':isGay']);
+
         if($isGay) {
             \Debugbar::alert('you are gay');
         }
