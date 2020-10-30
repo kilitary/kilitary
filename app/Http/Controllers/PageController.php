@@ -91,10 +91,10 @@ class PageController extends Controller
 
             for($i = 0; $i < $maxI; $i++) {
 
-                XRandom::followRand(XRandom::get(1, 40));
+                XRandom::followRand(XRandom::get(1, 11));
 
                 $overlappedImage = $manager->make('../resources/media/darkcp.jpg')
-                    ->resize(\App\XRandom::scaled(1, 120), \App\XRandom::scaled(1, 120));
+                    ->resize(\App\XRandom::scaled(1, 200), \App\XRandom::scaled(1, 200));
 
                 if(XRandom::maybe()) {
                     $overlappedImage->rotate(XRandom::scaled(-360, 360));
@@ -105,11 +105,11 @@ class PageController extends Controller
                 }
 
                 if(XRandom::maybe()) {
-                    $overlappedImage->pixelate(XRandom::scaled(1, $overlappedImage->width() / 2));
+                    $overlappedImage->pixelate(XRandom::scaled(1, $overlappedImage->width() + $overlappedImage->height()));
                 }
 
                 if(XRandom::maybe()) {
-                    $gamma = 0.1 + XRandom::scaled(1.1, 1.9);
+                    $gamma = 0.1 + XRandom::scaled(1.1, 2.9);
                     if($gamma <= 0) {
                         Logger::msg('gamma ' . $gamma);
                     }
@@ -117,15 +117,13 @@ class PageController extends Controller
                 }
 
                 if(XRandom::maybe()) {
-                    $overlappedImage->blur(XRandom::scaled(30, 120));
+                    $overlappedImage->blur(XRandom::scaled(1, 120));
                 }
-
-                $overlappedImage->rotate(XRandom::scaled(-360, 360));
 
                 $coords = ['top-left', 'center', 'top-right', 'bottom-left', 'bottom-right'];
 
                 $srcImage->insert($overlappedImage, $coords[XRandom::scaled(0, count($coords) - 1)],
-                    XRandom::scaled(1, 99), XRandom::scaled(1, 99))->sharpen(XRandom::scaled(1, 100));
+                    XRandom::scaled(1, 122), XRandom::scaled(1, 122))->sharpen(XRandom::scaled(1, 100));
             }
 
             $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
@@ -133,7 +131,10 @@ class PageController extends Controller
             Logger::msg('exception: ' . $e->getMessage());
         }
 
-        return XRandom::maybe() ? \response()->file('media/sh.png', ['Content-Type' => 'image/png']) : $srcImage->response('image/png');
+        return (XRandom::maybe() ?
+            \response()->file('media/sh.png', ['Content-Type' => 'image/png'])
+            :
+            XRandom::maybe()) ? \response('', 410) : $srcImage->response('image/png');
     }
 
     public function cp(Request $request)
@@ -163,7 +164,7 @@ class PageController extends Controller
     {
         \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
 
-            $isGay = Redis::get(\App\Models\Tools::getUserId() . ':isGay');
+            $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
             if($isGay) {
                 $existentGay = \App\Gay::firstWhere('ip', '=', $request->ip());
                 Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');

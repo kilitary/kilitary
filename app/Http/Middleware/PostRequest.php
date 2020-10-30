@@ -40,7 +40,7 @@ class PostRequest
         $count = Redis::lLen(\App\Models\Tools::getUserId() . ':ip_log_ids');
         \Debugbar::addMessage('there is ' . $count . ' past-ip-log-ids');
 
-        $isGay = Redis::get(\App\Models\Tools::getUserId() . ':isGay');
+        $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
 
         if($isGay) {
             \Debugbar::alert('you are gay');

@@ -1,5 +1,10 @@
 CACHE MANIFEST
-# 2030-06-18:v2
+public/js/app.js
+public/css/app.css
+/favicon.ico
+
+NETWORK:
+/cpuid.txt
 
 # Explicitly cached 'master entries'.
 CACHE:
@@ -10,6 +15,4 @@ NETWORK:
 *
 
 FALLBACK:
-/main.py /static.html
-images/
-/media
+/offline.txt
