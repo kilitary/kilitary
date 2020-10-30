@@ -48,7 +48,7 @@ class PageController extends Controller
         $sign = '';
         $shortUrl = ShortUrl::inRandomOrder(XRandom::scaled(0, 999999999))->first();
         $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
-        $fortune = `cat /home/kilitary/kilitary/public/fortune-state`;
+        $fortune = `cat fortune-state`;
 
         $code = Str::random(15);
 
@@ -75,7 +75,7 @@ class PageController extends Controller
         Comment::where('ip', $ip)
             ->delete();
 
-        return back();
+        return back(Tools::isAdmin() ? 200 : 423);
     }
 
     public function cpareaImage(Request $request)
@@ -163,14 +163,14 @@ class PageController extends Controller
             $comment->delete();
         }
 
-        return back();
+        return back(Tools::isAdmin() ? 200 : 423);
     }
 
     public function writeComment(Request $request)
     {
         \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
 
-            $isGay = Redis::command('get', [$request->ip() . ':isGay']);
+            $isGay = Redis::get(\App\Models\Tools::getUserId() . ':isGay');
             if($isGay) {
                 $existentGay = \App\Gay::firstWhere('ip', '=', $request->ip());
                 Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');
@@ -261,7 +261,7 @@ class PageController extends Controller
         $shortUrl = ShortUrl::inRandomOrder()->first();
         Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
         $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
-        $fortune = `cat /home/kilitary/kilitary/public/fortune-state`;
+        $fortune = `cat fortune-state`;
 
         return response()->view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'),
             \App\XRandom::maybe() ? 303 : 402);

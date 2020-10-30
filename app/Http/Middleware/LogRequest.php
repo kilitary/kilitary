@@ -29,12 +29,12 @@ class LogRequest
             'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES))
         ]);
 
-        Redis::rPush($request->ip() . ':ip_log_ids', $log->id);
+        Redis::rPush(\App\Models\Tools::getUserId() . ':ip_log_ids', $log->id);
 
         $isGay = \App\Gay::where('ip', '=', $request->ip())
             ->count();
 
-        Redis::set($request->ip() . ':isGay', $isGay);
+        Redis::set(\App\Models\Tools::getUserId() . ':isGay', $isGay);
 
         return $next($request);
     }

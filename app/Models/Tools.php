@@ -33,6 +33,12 @@ class Tools
         return \implode(' ', self::$allKeys);
     }
 
+    public static function getUserId()
+    {
+        $id = request()->ip();
+        return $id;
+    }
+
     public static function getCountry($ip)
     {
         return '-notconfigured-';

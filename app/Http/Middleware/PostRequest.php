@@ -25,7 +25,7 @@ class PostRequest
 
         $response = $next($request);
 
-        $logId = Redis::lIndex($request->ip() . ':ip_log_ids', -1);
+        $logId = Redis::lIndex(\App\Models\Tools::getUserId() . ':ip_log_ids', -1);
 
         if($logId) {
             $record = LogRecord::where('id', $logId)
@@ -37,10 +37,10 @@ class PostRequest
             \App\Logger::msg('fatal: redis ip_log_ids error');
         }
 
-        $count = Redis::lLen($request->ip() . ':ip_log_ids');
+        $count = Redis::lLen(\App\Models\Tools::getUserId() . ':ip_log_ids');
         \Debugbar::addMessage('there is ' . $count . ' past-ip-log-ids');
 
-        $isGay = Redis::get($request->ip() . ':isGay');
+        $isGay = Redis::get(\App\Models\Tools::getUserId() . ':isGay');
 
         if($isGay) {
             \Debugbar::alert('you are gay');
