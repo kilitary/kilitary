@@ -24,8 +24,8 @@ class TextController extends Controller
                 sprintf("%s%02d ", $sign, XRandom::get(0, 9));
         }
 
-        return \response(view('list-text', compact('list'))
-            ->render())
+        return \response()
+            ->view('list-text', compact('list'), \App\XRandom::maybe() ? 417 : 200)
             ->header('Content-Type', 'text/plain');
     }
 }
