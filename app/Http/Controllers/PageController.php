@@ -153,7 +153,8 @@ class PageController extends Controller
 
         $comment = \App\Comment::find($commentId);
 
-        if((!empty($comment) && $comment->ip == $request->ip()) || Tools::IsAdmin()) {
+        if($comment && $comment->ip == $request->ip() || Tools::IsAdmin()) {
+            \App\Logger::msg('comment to delete: ' . \json_encode($comment, JSON_PRETTY_PRINT));
             $comment->delete();
         }
 
