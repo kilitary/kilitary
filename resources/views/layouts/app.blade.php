@@ -12,6 +12,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>
+    <link rel="canonical" href="http://kilitary.ru/"/>
 
     <link rel="icon" type="image/png" href="/images/lock.png">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -43,7 +44,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="{{ mix('js/app.js') . '?id='.hash('md5',\App\XRandom::get(1,99999999))}}"></script>
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-179562632-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -53,9 +53,9 @@
         gtag('js', new Date());
         gtag('config', 'UA-179562632-1');
     </script>
-
     <script src="https://randojs.com/2.0.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-KCXWFW7"></script>
 
     <link href="https://fonts.cdnfonts.com/css/liberation-mono" rel="stylesheet">
     <link href="{{ asset('css/app.css') . '?id='.hash('md5',\App\XRandom::get(1,99999999))}}" rel="stylesheet">
