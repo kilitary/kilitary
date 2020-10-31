@@ -14,6 +14,19 @@ class Tools
 {
     public static $allKeys = [];
 
+    public static function isGay($ip)
+    {
+        return (boolean) \App\Gay::where('ip', '=', $ip)
+            ->count();
+    }
+
+    public static function recordIp($ip)
+    {
+        \App\IpInfo::firstOrCreate([
+            'ip' => $ip
+        ]);
+    }
+
     public static function titleize($string)
     {
         $str = strip_tags(\Str::substr($string, 0, 155));

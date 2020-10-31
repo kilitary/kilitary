@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\IpInfo;
+use App\Models\Tools;
 use Closure;
 use App\Logger;
 use Illuminate\Support\Facades\Redis;
@@ -30,7 +31,7 @@ class LogRequest
             'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES))
         ]);
 
-        Redis::setEx($request->fingerprint() . ':log_id', 55, $log->id);
+        Redis::setEx($request->fingerprint() . ':current_log_id', 55, $log->id);
         Redis::rPush(\App\Models\Tools::getUserId() . ':ip_log_ids', $log->id);
         Redis::rPush(\App\Models\Tools::getUserId() . ':request_logs',
             hash('sha256', $request->ip() . $request->header('remote_port') . $request->method() . $request->fullUrl()) . ':' .
@@ -41,12 +42,9 @@ class LogRequest
             $_SERVER['REMOTE_PORT'] . ':' .
             \microtime(true));
 
-        $isGay = \App\Gay::where('ip', '=', $request->ip())
-            ->count();
+        $isGay = \App\Models\Tools::isGay($request->ip());
 
-        IpInfo::firstOrCreate([
-            'ip' => $request->ip()
-        ]);
+        \App\Models\Tools::recordIp($request->ip());
 
         Redis::set(\App\Models\Tools::getUserId() . ':is_gay', $isGay);
 

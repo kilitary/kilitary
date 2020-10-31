@@ -25,7 +25,7 @@ class PostRequest
 
         $response = $next($request);
 
-        $logId = Redis::get($request->fingerprint() . ':log_id');
+        $logId = Redis::get($request->fingerprint() . ':current_log_id');
 
         if($logId) {
             $record = LogRecord::where('id', $logId)
@@ -34,11 +34,14 @@ class PostRequest
                     'request_end' => \DB::raw('now(6)')
                 ]);
         } else {
-            \App\Logger::msg('fatal: redis ip_log_ids error');
+            \App\Logger::msg('fatal: redis current_log_id not exist (timeout?)');
         }
 
         $count = Redis::lLen(\App\Models\Tools::getUserId() . ':ip_log_ids');
-        \Debugbar::addMessage('there is ' . $count . ' past-ip-log-ids');
+
+        \Debugbar::addMessage('there is ' . $count . ' past-ip-log-ids for ' .
+            \App\Models\Tools::getUserId() .
+            ' crc: 0x' . sprintf("%X", \crc32(\App\Models\Tools::getUserId())));
 
         $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
 
