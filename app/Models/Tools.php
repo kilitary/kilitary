@@ -24,6 +24,9 @@ class Tools
     public static function ipInfo($ip)
     {
         $info = \App\IpInfo::firstWhere('ip', $ip);
+        if(!$info) {
+            return '<empty/secured>';
+        }
         $info = \json_encode(\json_decode($info->info), JSON_PRETTY_PRINT);
         $info = \str_replace('"', "'", $info);
         return $info;
