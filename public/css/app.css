@@ -47,7 +47,7 @@ body {
 #app {
   border-left: 9px dashed #0ff;
   padding-left: 9px;
-  animation: falling-red 17.3s infinite;
+  animation: falling-red 27.3s infinite;
 }
 button,
 input,

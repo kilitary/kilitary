@@ -241,8 +241,7 @@ class PageController extends Controller
 
     public function update(Request $request, $code)
     {
-        $page = Page::where('code', $code)
-            ->first();
+        $page = Page::firstWhere('code', $code);
 
         if($page->ip != $request->ip() && !\App\Models\Tools::IsAdmin()) {
             return 'access denied for ' . $request->ip();
