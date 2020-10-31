@@ -25,7 +25,7 @@ class Tools
     {
         $info = \App\IpInfo::firstWhere('ip', $ip);
         if(!$info) {
-            return '<empty/secured>';
+            return '#empty/secured#';
         }
         $info = \json_encode(\json_decode($info->info), JSON_PRETTY_PRINT);
         $info = \str_replace('"', "'", $info);
