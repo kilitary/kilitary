@@ -348,8 +348,10 @@ class PageController extends Controller
 
         $keys = Tools::getKeys();
 
+        $ip = $page->ip;
+
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
-            'description', 'page_id', 'comments', 'country', 'converter', 'keys'));
+            'description', 'page_id', 'comments', 'country', 'converter', 'keys', 'ip'));
     }
 
     public function delete(Request $request, $code, $mode)

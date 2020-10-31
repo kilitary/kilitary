@@ -11,18 +11,21 @@
         <div class="content-keys">
             {{$keys}}
         </div>
-        @if (!empty($country))
-            <div class="page-country">Connection: {{$country}}</div>
-        @else
-            <div class="page-country">Connection: #untracked#</div>
-        @endif
+        <div class="page-country">
+                <span data-pt-placement="corner-right-top" data-pt-width='1200' data-pt-scheme="leaf"
+                      data-pt-classes="protip-mine"
+                      data-pt-title="<pre class='protip-mine'>{{\App\Models\Tools::ipInfo($ip)}}</pre>"
+                      class="comment-img protip"
+                >Connection<-
+                </span>
+        </div>
 
         <h2 class="page-footer"></h2>
         @if (isset($comments))
             @foreach ($comments as $comment)
                 <div class="comment">
                     <div class="comment-date">
-                        <img data-pt-width='1200' data-pt-scheme="leaf"
+                        <img data-pt-placement="corner-right-top" data-pt-width='1200' data-pt-scheme="leaf"
                              data-pt-classes="protip-mine"
                              data-pt-title="<pre class='protip-mine'>{{\App\Models\Tools::ipInfo($comment['ip'])}}</pre>"
                              class="comment-img protip" src="/images/comp.png"
