@@ -168,16 +168,17 @@ class PageController extends Controller
             $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
             if($isGay) {
                 $existentGay = \App\Gay::firstWhere('ip', '=', $request->ip());
-                Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');
-                $existentGay->firewall_in += 1;
-                $existentGay->save();
 
                 $randomCode = \App\Models\Page::select('code')
                     ->inRandomOrder()
                     ->limit(1)
                     ->value('code');
 
-                return redirect('/view/' . $randomCode);
+                Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times, redirect to ' . $randomCode);
+                $existentGay->firewall_in += 1;
+                $existentGay->save();
+
+                return response()->redirectTo('/view/' . $randomCode);
             }
 
             preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
@@ -224,7 +225,7 @@ class PageController extends Controller
                     ->limit(1)
                     ->value('code');
 
-                return redirect('/view/' . $randomCode);
+                return response()->redirectTo('/view/' . $randomCode);
             }
 
             $country = Tools::getCountry($request->ip());
