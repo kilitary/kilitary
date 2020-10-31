@@ -213,7 +213,12 @@ class PageController extends Controller
 
                 \App\Audio::gayDetected();
 
-                return back();
+                $randomCode = \App\Models\Page::select('code')
+                    ->inRandomOrder()
+                    ->limit(1)
+                    ->value('code');
+
+                return redirect('/view/' . $randomCode);
             }
 
             $country = Tools::getCountry($request->ip());
