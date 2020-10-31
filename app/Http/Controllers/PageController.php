@@ -306,7 +306,7 @@ class PageController extends Controller
 
                 Tools::pushKey($matches[1]);
 
-                return "<span class='ignited'>$matches[1]</span>";
+                return $matches[1];
             }, $content);
 
             $description = preg_replace_array('/(\s{2,}?)/', [' '], $page->content);
