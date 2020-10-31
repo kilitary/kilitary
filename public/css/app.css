@@ -481,7 +481,7 @@ a:hover {
     border-left: 9px dashed #a1ff25;
   }
   80% {
-    border-left: 9px dashed #f5deb3;
+    border-left: 9px dashed #f00;
   }
 }
 @-webkit-keyframes falling-red {
@@ -492,7 +492,7 @@ a:hover {
     border-left: 9px dashed #a1ff25;
   }
   80% {
-    border-left: 9px dashed #f5deb3;
+    border-left: 9px dashed #f00;
   }
 }
 @-o-keyframes falling-red {
@@ -503,7 +503,7 @@ a:hover {
     border-left: 9px dashed #a1ff25;
   }
   80% {
-    border-left: 9px dashed #f5deb3;
+    border-left: 9px dashed #f00;
   }
 }
 @keyframes falling-red {
@@ -514,6 +514,6 @@ a:hover {
     border-left: 9px dashed #a1ff25;
   }
   80% {
-    border-left: 9px dashed #f5deb3;
+    border-left: 9px dashed #f00;
   }
 }
