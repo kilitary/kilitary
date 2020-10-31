@@ -184,7 +184,7 @@ class PageController extends Controller
 
             Logger::msg('comment spam analyze: domainLen: ' . $domainLen . ' diffLen: ' . $difflLen);
             if($domainLen > 256 && $difflLen >= 512) {
-                $reason = 'links per plain text weight overflow [url: ' . $domainLen . ' > diff: ' . $difflLen . ']';
+                $reason = 'links per plain text weight overflow <url: ' . $domainLen . ' > diff: ' . $difflLen . '>';
 
                 $gayGroup = \Str::upper(\Str::random(3));
                 $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
@@ -201,9 +201,15 @@ class PageController extends Controller
                 $spamDbCount = Redis::lLen('spammed_text');
 
                 Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
-                    ', deGayTime: ' . $degayTime . "[reason: " . $reason . ' spam_db: ' . $spamDbCount . ']');
+                    ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ']');
 
                 Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
+
+                preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
+                foreach($mm as $m) {
+                    \App\Logger::msg('add spammed domain ' . $m[1]);
+                    Redis::hIncrBy('spam_domains', $m[1], 1);
+                }
 
                 \App\Audio::gayDetected();
 
@@ -247,7 +253,7 @@ class PageController extends Controller
         $page->header = $request->post('header');
         $page->save();
 
-        return redirect(' / view / ' . $code);
+        return redirect('/view/' . $code);
     }
 
     public function fallback(Request $request)
