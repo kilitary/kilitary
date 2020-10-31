@@ -45,9 +45,9 @@ body {
   image-rendering: pixelated;
 }
 #app {
-  border-left: 11px dashed #0ff;
+  border-left: 9px dashed #0ff;
   padding-left: 9px;
-  animation: falling-red 11.3s infinite;
+  animation: falling-red 17.3s infinite;
 }
 button,
 input,
@@ -474,34 +474,46 @@ a:hover {
   }
 }
 @-moz-keyframes falling-red {
-  30% {
-    border-left: 11px dashed #ffa500;
+  20% {
+    border-left: 9px dashed #0ff;
+  }
+  60% {
+    border-left: 9px dashed #a1ff25;
   }
   80% {
-    border-left: 11px dashed #f00;
+    border-left: 9px dashed #f5deb3;
   }
 }
 @-webkit-keyframes falling-red {
-  30% {
-    border-left: 11px dashed #ffa500;
+  20% {
+    border-left: 9px dashed #0ff;
+  }
+  60% {
+    border-left: 9px dashed #a1ff25;
   }
   80% {
-    border-left: 11px dashed #f00;
+    border-left: 9px dashed #f5deb3;
   }
 }
 @-o-keyframes falling-red {
-  30% {
-    border-left: 11px dashed #ffa500;
+  20% {
+    border-left: 9px dashed #0ff;
+  }
+  60% {
+    border-left: 9px dashed #a1ff25;
   }
   80% {
-    border-left: 11px dashed #f00;
+    border-left: 9px dashed #f5deb3;
   }
 }
 @keyframes falling-red {
-  30% {
-    border-left: 11px dashed #ffa500;
+  20% {
+    border-left: 9px dashed #0ff;
+  }
+  60% {
+    border-left: 9px dashed #a1ff25;
   }
   80% {
-    border-left: 11px dashed #f00;
+    border-left: 9px dashed #f5deb3;
   }
 }
