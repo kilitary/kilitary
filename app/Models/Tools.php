@@ -22,9 +22,10 @@ class Tools
 
     public static function recordIp($ip)
     {
-        \App\IpInfo::firstOrCreate([
-            'ip' => $ip
-        ]);
+        \DB::table('ip_info')
+            ->insertOrIgnore([
+                'ip' => $ip
+            ]);
     }
 
     public static function titleize($string)

@@ -233,12 +233,12 @@ ul {
 .log-code {
   font-family: consolas;
   display: inline-flex;
-  width: 100px;
+  width: 22px;
 }
 .log-ip {
   font-family: consolas;
-  display: inline-flex;
-  width: 100px;
+  display: block;
+  color: #20b2aa;
 }
 .log-info {
   font-family: consolas;
@@ -250,17 +250,27 @@ ul {
 .log-date {
   font-family: consolas;
   display: inline-flex;
-  width: 100px;
+  width: 134px;
+  word-break: break-all;
+  color: #789;
 }
 .log-method {
   font-family: consolas;
   display: inline-flex;
+  width: 24px;
+  color: #e83e8c;
+}
+.log-ua {
+  font-family: consolas;
+  display: table-footer-group;
   width: 100px;
+  color: #87cefa;
 }
 .log-url {
   font-family: consolas;
-  display: inline-flex;
+  display: flex;
   width: 100px;
+  color: #9acd32;
 }
 .marginbottom {
   margin-bottom: 5px;

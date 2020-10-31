@@ -12,6 +12,7 @@ class LogController extends Controller
         $logs = \Debugbar::measure('getting logs', function() use ($request) {
             return \App\Models\LogRecord::select('id', 'ip', 'http_code', 'method', 'url', 'ua', 'info', 'created_at')
                 ->where('ip', '!=', $request->ip())
+                ->with('ipInfo')
                 ->limit(10)
                 ->latest()
                 ->get();;
