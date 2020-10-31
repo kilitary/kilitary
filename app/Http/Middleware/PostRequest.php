@@ -51,7 +51,7 @@ class PostRequest
 
         return $response
             //->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
-            ->header('X-At-War', \App\Xrandom::scaled(-4, 394) == 384 ? 1 : 0)
+            ->header('X-At-War', Xrandom::scaled(-4, 394) == 384 ? 1 : 0)
             //->header('Pragma', 'no-cache')
             ->header('X-CurveBank', 'Dont Be A Dick')
             ->header('Client-post-version', 'arminer ' . '(0.1d-2020 0x43-b/c/AN/SPY49)')
