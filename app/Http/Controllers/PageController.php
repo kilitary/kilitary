@@ -238,6 +238,8 @@ class PageController extends Controller
                 'page_id' => $request->post('page_id'),
                 'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
             ]);
+
+            return back();
         });
 
         return $response;
