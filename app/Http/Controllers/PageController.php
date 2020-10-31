@@ -171,7 +171,13 @@ class PageController extends Controller
                 Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times');
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
-                return back();
+
+                $randomCode = \App\Models\Page::select('code')
+                    ->inRandomOrder()
+                    ->limit(1)
+                    ->value('code');
+
+                return redirect('/view/' . $randomCode);
             }
 
             preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
