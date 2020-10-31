@@ -201,7 +201,7 @@ class PageController extends Controller
                 Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
                     ', deGayTime: ' . $degayTime . "[source: " . $reason . ']');
 
-                Redis::rPush('spam_contents', $request->post('comment'));
+                Redis::rPush('spammed_text', $request->post('comment'));
 
                 \App\Audio::gayDetected();
 
