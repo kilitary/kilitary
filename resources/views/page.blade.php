@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="comment-content">
-                        {!! $converter->convertToHtml($comment['comment']) !!}
+                        {!! $comment['comment'] !!}
                     </div>
                 </div>
             @endforeach

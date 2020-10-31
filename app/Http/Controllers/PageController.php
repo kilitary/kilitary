@@ -384,7 +384,7 @@ class PageController extends Controller
             $content = "operator was lazy this time";
         }
 
-        $content = \strip_tags($content);
+        $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
 
         $header = $request->post('header');
 
