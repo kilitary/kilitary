@@ -58,9 +58,10 @@
 
     {{--<script src="https://www.googleoptimize.com/optimize.js?id=OPT-KCXWFW7"></script> --}}
     <link href="https://fonts.cdnfonts.com/css/liberation-mono" rel="stylesheet">
-    <link href="{{ asset('css/app.css') . '?id='.hash('md5',\App\XRandom::get(1,99999999))}}" rel="stylesheet">
     <link rel="stylesheet"
           href="https://min.gitcdn.xyz/cdn/wintercounter/Protip/560ff44ee30c7fdbb9b6d7c6131ab5ce560ee999/protip.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="{{ asset('css/app.css') . '?id='.hash('md5',\App\XRandom::get(1,99999999))}}" rel="stylesheet">
 </head>
 <body>
 <header>

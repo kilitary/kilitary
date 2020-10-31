@@ -49,6 +49,7 @@
                 Interesting:
                 @foreach ($interesting as $v)
                     <a href="/view/{{$v['code']}}"
+                       data-pt-animate="bounceIn" data-pt-size='tiny'
                        data-pt-title="<span class='protip-on-main'>{{ \App\Models\Tools::titleize($v['content']) }}</span>"
                        class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
                        title="{{trim($v['header'])}}">{!! '' . $v['header'] !!}</a>,
