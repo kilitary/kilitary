@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\IpInfo;
 use Closure;
 use App\Logger;
 use Illuminate\Support\Facades\Redis;
@@ -43,8 +44,9 @@ class LogRequest
         $isGay = \App\Gay::where('ip', '=', $request->ip())
             ->count();
 
-        \DB::table('ip_info')
-            ->insertOrIgnore(['ip' => $request->ip()]);
+        IpInfo::firstOrCreate([
+            'ip' => $request->ip
+        ]);
 
         Redis::set(\App\Models\Tools::getUserId() . ':is_gay', $isGay);
 
