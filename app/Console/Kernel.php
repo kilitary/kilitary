@@ -9,6 +9,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Logger;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use App\Jobs\IpInfoResolver;
 use App\Jobs\ClearOldShit;
 
 class Kernel extends ConsoleKernel
