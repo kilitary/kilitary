@@ -153,7 +153,7 @@ class PageController extends Controller
 
         $comment = \App\Comment::find($commentId);
 
-        if(!\is_null($comment) && $comment->ip == $request->ip() || Tools::IsAdmin()) {
+        if($comment && ($comment->ip == $request->ip() || Tools::IsAdmin())) {
             \App\Logger::msg('comment to delete: ' . \json_encode($comment, JSON_PRETTY_PRINT));
             $comment->delete();
         }
@@ -163,7 +163,7 @@ class PageController extends Controller
 
     public function writeComment(Request $request)
     {
-        $response = \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
+        return \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
 
             $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
             if($isGay) {
@@ -178,7 +178,8 @@ class PageController extends Controller
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
 
-                return response()->redirectTo('/view/' . $randomCode);
+                return response()
+                    ->redirectTo('/view/' . $randomCode);
             }
 
             preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
@@ -196,7 +197,11 @@ class PageController extends Controller
                 $gayGroup = \Str::upper(\Str::random(3));
                 $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
 
-                $gay = \App\Gay::create([
+                $spamDbCount = Redis::lLen('spammed_text');
+                Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
+                    ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ']');
+
+                \App\Gay::create([
                     'ip' => $request->ip(),
                     'nick' => $gayGroup,
                     'ua' => $request->header('User-Agent'),
@@ -204,11 +209,6 @@ class PageController extends Controller
                     'degaytime' => $degayTime,
                     'firewall_in' => 0
                 ]);
-
-                $spamDbCount = Redis::lLen('spammed_text');
-
-                Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
-                    ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ']');
 
                 Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
 
@@ -225,7 +225,8 @@ class PageController extends Controller
                     ->limit(1)
                     ->value('code');
 
-                return response()->redirectTo('/view/' . $randomCode);
+                return response()
+                    ->redirectTo('/view/' . $randomCode);
             }
 
             $country = Tools::getCountry($request->ip());
@@ -239,10 +240,10 @@ class PageController extends Controller
                 'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
             ]);
 
+            Logger::msg('comment ' . $comment->id . ' created OK');
+
             return back();
         });
-
-        return $response;
     }
 
     public function edit(Request $request, $code)
