@@ -163,7 +163,7 @@ class PageController extends Controller
 
     public function writeComment(Request $request)
     {
-        \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
+        $response = \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
 
             $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
             if($isGay) {
@@ -240,7 +240,7 @@ class PageController extends Controller
             ]);
         });
 
-        return back();
+        return $response;
     }
 
     public function edit(Request $request, $code)
