@@ -198,10 +198,12 @@ class PageController extends Controller
                     'firewall_in' => 0
                 ]);
 
-                Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
-                    ', deGayTime: ' . $degayTime . "[source: " . $reason . ']');
+                $spamDbCount = Redis::lLen('spammed_text');
 
-                Redis::rPush('spammed_text', $request->post('comment'));
+                Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
+                    ', deGayTime: ' . $degayTime . "[reason: " . $reason . ' spam_db: ' . $spamDbCount . ']');
+
+                Redis::rPush('spammed_text', \stripslashes($reason->post('comment')));
 
                 \App\Audio::gayDetected();
 
