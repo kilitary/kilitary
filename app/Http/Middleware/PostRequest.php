@@ -63,7 +63,7 @@ class PostRequest
             //->header("ETag", "%s%s%s?&nbsp;&" . Xrandom::scaled(19999999, 999999999))
             ->header("Via", "%[^ ]*%20\"" . \str_repeat('\\', XRandom::scaled(1, 99)) . "" . XRandom::scaled(1, 999) . ", s + `--" . Xrandom::scaled(19999999, 999999999))
             ->header("X-Powered-By", "PHP/4.0.6")
-            ->header('X-Gay', (int) $isGay)
+            ->header('X-Like-Gay', (int) $isGay)
             ->header("Server", "thttpd/0.3b");
     }
 }
