@@ -45,7 +45,7 @@ class LogRequest
             ->count();
 
         IpInfo::firstOrCreate([
-            'ip' => $request->ip
+            'ip' => $request->ip()
         ]);
 
         Redis::set(\App\Models\Tools::getUserId() . ':is_gay', $isGay);
