@@ -188,6 +188,7 @@ class PageController extends Controller
 
                 $gayGroup = \Str::upper(\Str::random(3));
                 $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
+
                 $gay = \App\Gay::create([
                     'ip' => $request->ip(),
                     'nick' => $gayGroup,
@@ -199,6 +200,8 @@ class PageController extends Controller
 
                 Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
                     ', deGayTime: ' . $degayTime . "[source: " . $reason . ']');
+
+                Redis::rPush('spam_contents', $request->post('comment'));
 
                 \App\Audio::gayDetected();
 
