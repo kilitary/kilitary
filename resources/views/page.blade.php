@@ -12,8 +12,7 @@
             {{$keys}}
         </div>
         <div class="page-country">
-                <span data-pt-placement="corner-right-top" data-pt-width='1200' data-pt-scheme="leaf"
-                      data-pt-classes="protip-mine"
+                <span data-pt-placement="corner-right-top" data-pt-width='1200' data-pt-scheme="white"
                       data-pt-title="<pre class='protip-mine'>{{\App\Models\Tools::ipInfo($ip)}}</pre>"
                       class="ip-info-page protip"
                 >Connection<-
@@ -25,8 +24,7 @@
             @foreach ($comments as $comment)
                 <div class="comment">
                     <div class="comment-date">
-                        <img data-pt-placement="corner-right-top" data-pt-width='1200' data-pt-scheme="leaf"
-                             data-pt-classes="protip-mine"
+                        <img data-pt-placement="corner-right-top" data-pt-width='1200' data-pt-scheme="white"
                              data-pt-title="<pre class='protip-mine'>{{\App\Models\Tools::ipInfo($comment['ip'])}}</pre>"
                              class="comment-img protip" src="/images/comp.png"
                         > {{$comment['username']}}  {{ $comment['created_at']}}

@@ -105,6 +105,8 @@ textarea:hover {
   font-family: consolas;
   font-size: 12px;
   line-height: 17px;
+  border: 12px dashed #ffa500;
+  background-color: #ffdab9;
 }
 blockquote {
   border-left: 3px solid #8a2be2;
