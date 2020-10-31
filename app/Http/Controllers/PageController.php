@@ -203,7 +203,7 @@ class PageController extends Controller
                 Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
                     ', deGayTime: ' . $degayTime . "[reason: " . $reason . ' spam_db: ' . $spamDbCount . ']');
 
-                Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
+                Redis::rPush('spammed_text', '[' . Tools::getUserId() . '@' . \time() . '] ' . \stripslashes($request->post('comment')));
 
                 \App\Audio::gayDetected();
 
@@ -215,7 +215,7 @@ class PageController extends Controller
                 'comment' => $request->post('comment'),
                 'ip' => $request->ip(),
                 'username' => 'anon',
-                'email' => 'anon@anon.ru',
+                'email' => 'anon@anon . ru',
                 'country' => $country,
                 'page_id' => $request->post('page_id'),
                 'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
@@ -247,7 +247,7 @@ class PageController extends Controller
         $page->header = $request->post('header');
         $page->save();
 
-        return redirect('/view/' . $code);
+        return redirect(' / view / ' . $code);
     }
 
     public function fallback(Request $request)
@@ -272,14 +272,14 @@ class PageController extends Controller
     {
         session()->flush();
 
-        return redirect('/?reset=' . XRandom::get(0, 5));
+        return redirect(' /?reset = ' . XRandom::get(0, 5));
     }
 
     public function page(Request $request, $code)
     {
         $currentDeleted = session('currentDeleted');
         if($currentDeleted && in_array($code, $currentDeleted)) {
-            return redirect('/delete/' . $code);
+            return redirect(' / delete / ' . $code);
         }
 
         $page = \App\Models\Page::where('code', $code)
