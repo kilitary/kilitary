@@ -50,7 +50,8 @@ class PostRequest
         }
 
         return $response
-            ->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
+            //->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
+            ->header('X-At-War', 0)
             ->header('Pragma', 'no-cache')
             ->header('X-CurveBank', 'Dont Be A Dick')
             ->header('Client-post-version', 'arminer ' . '(0.1d-2020 0x43-b/c/AN/SPY49)')
@@ -63,7 +64,6 @@ class PostRequest
             ->header("Via", "%[^ ]*%20\"" . \str_repeat('\\', XRandom::scaled(1, 99)) . "" . XRandom::scaled(1, 999) . ", s + `--" . Xrandom::scaled(19999999, 999999999))
             ->header("X-Powered-By", "PHP/4.0.6")
             ->header('X-Gay', (int) $isGay)
-            ->header('X-At-War', 0)
             ->header("Server", "thttpd/0.3b");
     }
 }
