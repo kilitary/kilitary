@@ -21,9 +21,11 @@
         @if (isset($comments))
             @foreach ($comments as $comment)
                 <div class="comment">
-                    <div class="comment-date">
-                        <img class="comment-img" src="/images/comp.png"
-                             title="{{$comment['country']}}"> {{$comment['username']}}  {{ $comment['created_at']}}
+                    <div class="comment-date protip" data-pt-width='1200' data-pt-scheme="leaf"
+                         data-pt-classes="protip-mine"
+                         data-pt-title="<pre class='protip-mine'>{{\App\Models\Tools::ipInfo($comment['ip'])}}</pre>">
+                        <img class="comment-img " src="/images/comp.png"
+                        > {{$comment['username']}}  {{ $comment['created_at']}}
                         @if ($comment['ip'] == request()->ip()|| \App\Models\Tools::IsAdmin())
                             <a href="/comment/{{$comment['id']}}/delete"><img
                                     style='position:relative;top:2px;width:10px;height: 10px;'

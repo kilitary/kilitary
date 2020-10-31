@@ -47,14 +47,8 @@ $(function() {
     setInterval(rotateKrysaClass, 200);
 
     window.addEventListener('error', function(e) {
-        if(shitHappensOnce) {
-            e.preventDefault();
-            return;
-        }
-        shitHappensOnce = true;
         $('#log').append("<span class='blinking-red'>Caught[via 'error' event]:  " + e.message + " from " + e.filename + ":" + e.lineno + "</span>");
-        console.log(e);
         e.preventDefault();
     });
-
+    console.log('func done');
 });

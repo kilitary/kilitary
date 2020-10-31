@@ -9,6 +9,7 @@ use const CURLOPT_TIMEOUT;
 use const GEOIP_STANDARD;
 use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
+use const JSON_PRETTY_PRINT;
 
 class Tools
 {
@@ -18,6 +19,14 @@ class Tools
     {
         return (boolean) \App\Gay::where('ip', '=', $ip)
             ->count();
+    }
+
+    public static function ipInfo($ip)
+    {
+        $info = \App\IpInfo::firstWhere('ip', $ip);
+        $info = \json_encode(\json_decode($info->info), JSON_PRETTY_PRINT);
+        $info = \str_replace('"', "'", $info);
+        return $info;
     }
 
     public static function recordIp($ip)

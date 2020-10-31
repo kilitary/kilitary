@@ -96,6 +96,11 @@ textarea:hover {
   margin-top: 3px;
   margin-bottom: 5px;
 }
+.protip-mine {
+  font-family: consolas;
+  font-size: 12px;
+  line-height: 17px;
+}
 blockquote {
   border-left: 3px solid #8a2be2;
   margin-left: 0px;
