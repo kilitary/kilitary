@@ -43,10 +43,10 @@ class Tools
     public static function titleize($string)
     {
         $str = strip_tags(\Str::substr($string, 0, 155));
-        $str = \preg_replace("#(\W+|\s{2})#Usmi", ' ', $str);
+        $str = \preg_replace("#(\s{2,}?|\W+?)#Usmi", ' ', $str);
         $str = \substr_replace($str, ['"', ' '], ' ', 0);
 
-        return trim($str, " \t\n\r\0\x0B\"'");
+        return trim($str, " \t\n\r\0\x0B\"'") . '...';
     }
 
     public static function pushKey($key)

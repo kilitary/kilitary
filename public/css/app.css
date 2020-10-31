@@ -108,6 +108,13 @@ textarea:hover {
   border: 12px dashed #ffa500;
   background-color: #ffdab9;
 }
+.protip-on-main {
+  font-family: consolas;
+  font-size: 12px;
+  line-height: 17px;
+  background-color: #98ccf7;
+  padding: 4px;
+}
 blockquote {
   border-left: 3px solid #8a2be2;
   margin-left: 0px;
