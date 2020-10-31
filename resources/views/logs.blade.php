@@ -11,6 +11,9 @@
                 <span class="log-method">{{$log->method}}</span>
                 <span class="log-url">{{$log->url}}</span>
                 <span class="log-info"><pre>{{json_encode(json_decode($log->info),JSON_PRETTY_PRINT)}}</pre></span>
+                @if ($log->ipInfo)
+                    <span class="ip-info"><pre class="ip-info">{{json_encode(json_decode($log->ipInfo->info),JSON_PRETTY_PRINT)}}</pre></span>
+                @endif
             </div>
         @endforeach
     </div>
