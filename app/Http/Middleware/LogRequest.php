@@ -43,6 +43,9 @@ class LogRequest
         $isGay = \App\Gay::where('ip', '=', $request->ip())
             ->count();
 
+        \DB::table('ip_info')
+            ->insertOrIgnore(['ip' => $request->ip()]);
+
         Redis::set(\App\Models\Tools::getUserId() . ':is_gay', $isGay);
 
         return $next($request);

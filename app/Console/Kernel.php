@@ -48,6 +48,9 @@ class Kernel extends ConsoleKernel
         $schedule->job(new RedisSaver)
             ->everyTwoHours();
 
+        $schedule->job(new IpInfoResolver)
+            ->everyFiveMinutes();
+
     }
 
     /**
