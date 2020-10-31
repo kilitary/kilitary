@@ -32,9 +32,10 @@ class LogRequest
         Redis::setEx($request->fingerprint() . ':log_id', 55, $log->id);
         Redis::rPush(\App\Models\Tools::getUserId() . ':ip_log_ids', $log->id);
         Redis::rPush(\App\Models\Tools::getUserId() . ':request_logs',
-            $request->fingerprint() . ':' .
+            hash('sha256', $request->ip() . $request->header('remote_port') . $request->method() . $request->fullUrl()) . ':' .
             $request->method() . ':' .
             $request->fullUrl() . ':' .
+            $request->session()->getId() . ':' .
             ($_SERVER['HTTP_REFERER'] ?? '<empty ref>') . ':' .
             $_SERVER['REMOTE_PORT'] . ':' .
             \microtime(true));

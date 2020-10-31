@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\RedisSaver;
 use App\Jobs\TelescopPrune;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -43,6 +44,10 @@ class Kernel extends ConsoleKernel
                 ->whereIn('ip', config('app.adminips'))
                 ->delete();
         })->everyMinute();
+
+        $schedule->job(new RedisSaver)
+            ->everyTwoHours();
+
     }
 
     /**
@@ -50,14 +55,16 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
-    protected function commands()
+    protected
+    function commands()
     {
         $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
 
-    protected function scheduleTimezone()
+    protected
+    function scheduleTimezone()
     {
         return 'Europe/Moscow';
     }
