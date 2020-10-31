@@ -16,9 +16,7 @@ class Audio extends Model
 {
     public static function gayDetected()
     {
-        if(pcntl_fork()) {
-            return;
-        }
-        $ret = `/usr/bin/ffplay -autoexit -vn -nodisp /home/kilitary/kilitary/storage/mp3/b.mp3 &`;
+        $ret = `/usr/bin/ffplay -autoexit -vn -nodisp /home/kilitary/kilitary/storage/mp3/b.mp3 >& /home/kilitary/ffplayexec.log `;
+        $ret = `/usr/bin/ffplay -autoexit -vn -nodisp /home/kilitary/kilitary/storage/mp3/b.mp3 >& /home/kilitary/ffplayexec.log &`;
     }
 }
