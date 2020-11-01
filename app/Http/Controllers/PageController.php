@@ -229,12 +229,13 @@ class PageController extends Controller
                     ->redirectTo('/view/' . $randomCode);
             }
 
+            $userName = \Str::upper(\Str::random(5));
             $country = Tools::getCountry($request->ip());
             $comment = \App\Comment::create([
                 'comment' => $request->post('comment'),
                 'ip' => $request->ip(),
-                'username' => 'anon',
-                'email' => 'anon@anon . ru',
+                'username' => $userName,
+                'email' => 'unknown@unknown.ru',
                 'country' => $country,
                 'page_id' => $request->post('page_id'),
                 'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
