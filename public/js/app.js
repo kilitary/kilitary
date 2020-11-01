@@ -141,11 +141,20 @@ $(function () {
   flagTimer = setInterval(flagsMovement, 20);
   setInterval(toggleHuman, 800);
   setInterval(rotateKrysaClass, 200);
-  window.addEventListener('error', function (e) {
-    $('#log').append("<span class='blinking-red'>Caught[via 'error' event]:  " + e.message + " from " + e.filename + ":" + e.lineno + "</span>");
-    e.preventDefault();
-  });
-  console.log('func done');
+
+  window.onerror = function (message, source, lineno, columnNumber, error) {
+    var errorInfo = {
+      column: columnNumber,
+      component: component,
+      line: lineno,
+      message: error.message,
+      name: error.name,
+      source_url: source,
+      stack: error.stack
+    };
+    chrome.errorReporting.reportError(errorInfo);
+    console.log('error ' + errorInfo);
+  };
 });
 
 /***/ }),
