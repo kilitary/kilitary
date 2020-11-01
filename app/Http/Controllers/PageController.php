@@ -164,7 +164,6 @@ class PageController extends Controller
     public function writeComment(Request $request)
     {
         return \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
-
             $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
             if($isGay) {
                 $existentGay = \App\Gay::firstWhere('ip', '=', $request->ip());
@@ -180,8 +179,7 @@ class PageController extends Controller
 
                 \App\Audio::gayRedirected();
 
-                return response()
-                    ->redirectTo('/view/' . $randomCode);
+                return redirect('/view/' . $randomCode);
             }
 
             preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
@@ -227,8 +225,7 @@ class PageController extends Controller
                     ->limit(1)
                     ->value('code');
 
-                return response()
-                    ->redirectTo('/view/' . $randomCode);
+                return redirect('/view/' . $randomCode);
             }
 
             $userName = \Str::upper(\Str::random(5));
