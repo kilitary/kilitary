@@ -54,14 +54,14 @@
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://randojs.com/2.0.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
-    <script src="{{ mix('js/app.js') . '?id='.hash('crc32',\App\XRandom::get(1,99999999))}}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     {{--<script src="https://www.googleoptimize.com/optimize.js?id=OPT-KCXWFW7"></script> --}}
     <link href="https://fonts.cdnfonts.com/css/liberation-mono" rel="stylesheet">
     <link rel="stylesheet"
           href="https://min.gitcdn.xyz/cdn/wintercounter/Protip/560ff44ee30c7fdbb9b6d7c6131ab5ce560ee999/protip.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link href="{{ asset('css/app.css') . '?id='.hash('md5',\App\XRandom::get(1,99999999))}}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <header>
