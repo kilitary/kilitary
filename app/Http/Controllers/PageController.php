@@ -164,6 +164,7 @@ class PageController extends Controller
     public function writeComment(Request $request)
     {
         return \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
+            Logger::msg('write comment: ', $request->all());
             $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
             if($isGay) {
                 $existentGay = \App\Gay::firstWhere('ip', '=', $request->ip());
