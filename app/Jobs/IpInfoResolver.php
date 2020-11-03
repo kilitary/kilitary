@@ -55,6 +55,11 @@ class IpInfoResolver implements ShouldQueue
             } else {
                 \App\Logger::msg('error fetching ip info (' . $response->status() . '): ' . $response->serverError() . ':' . $response->clientError());
             }
+
+            if($response->status() == 401) {
+                \App\Logger::msg('limit reached, sleeping ...');
+                break;
+            }
         }
     }
 }
