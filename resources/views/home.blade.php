@@ -66,7 +66,7 @@
 
             <a href="/proxy"
                 data-pt-animate="bounceIn"
-               data-pt-title="<span class='protip-on-main'>socks4/socks4a/socks5/http/https proxy/socks list</span>"
+               data-pt-title="<span class='protip-on-main'>socks4/socks4a/socks5/http/https/smtp proxy/socks list</span>"
                class="protip interestlink" data-pt-scheme="white"
                title="free">proxy/socks list</a>
         </div>

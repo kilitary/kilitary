@@ -10,6 +10,7 @@ use const GEOIP_STANDARD;
 use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
 use const JSON_PRETTY_PRINT;
+use Illuminate\Support\Facades\Redis;
 
 class Tools
 {
@@ -23,12 +24,18 @@ class Tools
 
     public static function ipInfo($ip)
     {
-        $info = \App\IpInfo::firstWhere('ip', $ip);
-        if(!$info || empty($info->info)) {
-            return '#empty/secured#';
+        $info = Redis::get($ip . ':info', null);
+        if(empty($info)) {
+            $info = \App\IpInfo::firstWhere('ip', $ip);
+            if(!$info || empty($info->info)) {
+                $info = 'details: #empty/secured#';
+            } else {
+                $info = \json_encode(\json_decode($info->info), JSON_PRETTY_PRINT);
+                $info = \str_replace('"', "'", $info);
+            }
+
+            Redis::setEx($ip . ':info', 3600, $info);
         }
-        $info = \json_encode(\json_decode($info->info), JSON_PRETTY_PRINT);
-        $info = \str_replace('"', "'", $info);
         return $info;
     }
 
