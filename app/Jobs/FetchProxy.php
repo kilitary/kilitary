@@ -53,6 +53,11 @@ class FetchProxy implements ShouldQueue
                     'source' => $source,
                     'type' => \Str::lower($match[3])
                 ]);
+
+            \DB::table('ip_info')
+                ->insertOrIgnore([
+                    'ip' => $match[1]
+                ]);
         }
         \App\Logger::msg('done job [fetch proxy]');
     }

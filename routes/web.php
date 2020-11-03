@@ -38,6 +38,8 @@ Route::middleware(['cache.headers'])
                 Route::get('/{file}.txt', 'TextController@identify');
 
                 Route::any('/page/{page_code}', 'PageController@record');
+
+                Route::get('/proxy', 'ProxyController@list');
             });
 
         Route::any('/home', 'HomeController@index');

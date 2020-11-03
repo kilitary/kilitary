@@ -125,6 +125,39 @@ blockquote {
 ul {
   list-style-type: disc;
 }
+.proxy-table {
+  margin: 10px;
+  padding: 10px;
+}
+.proxy-header th {
+  padding: 5px;
+  margin: 5px;
+  padding-left: 0px;
+  margin-left: 0px;
+  text-align: left;
+}
+.proxy-item td {
+  padding: 8px;
+  margin: 3px;
+}
+.proxy-type-http {
+  color: #639;
+}
+.proxy-type-https {
+  color: #e83e8c;
+}
+.proxy-type-socks4 {
+  color: #146838;
+}
+.proxy-type-socks4a {
+  color: #955ae7;
+}
+.proxy-type-socks5 {
+  color: #117a8b;
+}
+.proxy-type-smtp-relay {
+  color: #899aa9;
+}
 .section-h3 {
   border-bottom: 1px solid #ebf8ff;
   padding-bottom: 11px;
