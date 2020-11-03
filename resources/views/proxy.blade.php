@@ -17,9 +17,9 @@
                 <tr class="proxy-item proxy-type-{{$proxy['type']}}">
                     <td><a href="/proxy"
                            data-pt-gravity="top 10 15; bottom 0 55" data-pt-animate="bounceIn"
-                           data-pt-title="<span class='protip-on-main'>info:???</span>"
+                           data-pt-title="<span class='protip-on-main'>{{\App\Models\Tools::ipInfo($proxy['host'])}}</span>"
                            class="protip interestlink" data-pt-gravity="top-right" data-pt-scheme="white"
-                           title="proxy/socks {{$proxy['host'].':'.$proxy['port']}}">{{\App\Models\Tools::ipInfo($proxy['host'])}}
+                           title="proxy/socks {{$proxy['host'].':'.$proxy['port']}}">{{$proxy['host']}}
                         </a>
                     </td>
                     <td>{{$proxy['port']}}</td>
