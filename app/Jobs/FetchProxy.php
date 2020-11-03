@@ -31,34 +31,45 @@ class FetchProxy implements ShouldQueue
     public function handle()
     {
         \App\Logger::msg('running job [fetch proxy]');
-        $source = 'hidemy.name';
-        $response = Http::withHeaders([
-            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36 Edg/86.0.622.58'
-        ])->get('https://hidemy.name/ru/proxy-list/');
+        $start = 0;
+        do {
+            $foundProxys = 0;
+            $source = 'hidemy.name';
 
-        if($response->status() != 200) {
-            \App\Logger::msg($source . ': fetch status => ' . $response->status());
-            \App\Logger::msg($response->serverError());
-            \App\Logger::msg($response->clientError());
-        }
-        preg_match_all("#<td>(\d{1,3}?\.\d{1,3}?\.\d{1,3}?\.\d{1,3}?)<.*?<td>(\d{1,5}).*?(so\w+|htt\w+).*?<#mi", $response->body(), $mm, \PREG_SET_ORDER);
-        foreach($mm as $match) {
-            \App\Logger::msg($source . ': found proxy type ' . $match[3] . ' ' . $match[1] . ':' . $match[2]);
+            $response = Http::withHeaders([
+                'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36 Edg/86.0.622.58'
+            ])->get('https://hidemy.name/ru/proxy-list/?start=' . $start . '#list');
+            $start += 64;
 
-            \DB::table('proxys')
-                ->updateOrInsert([
-                    'host' => $match[1],
-                ], [
-                    'port' => $match[2],
-                    'source' => $source,
-                    'type' => \Str::lower($match[3])
-                ]);
+            \App\Logger::msg('page ' . ($start - 64) . '-' . $start);
 
-            \DB::table('ip_info')
-                ->insertOrIgnore([
-                    'ip' => $match[1]
-                ]);
-        }
+            if($response->status() != 200) {
+                \App\Logger::msg($source . ': fetch status => ' . $response->status());
+                \App\Logger::msg($response->serverError());
+                \App\Logger::msg($response->clientError());
+            }
+
+            $foundProxys = preg_match_all("#<td>(\d{1,3}?\.\d{1,3}?\.\d{1,3}?\.\d{1,3}?)<.*?<td>(\d{1,5}).*?(so\w+|htt\w+).*?<#mi", $response->body(), $mm, \PREG_SET_ORDER);
+
+            foreach($mm as $match) {
+                \App\Logger::msg($source . ': found proxy type ' . $match[3] . ' ' . $match[1] . ':' . $match[2]);
+
+                \DB::table('proxys')
+                    ->updateOrInsert([
+                        'host' => $match[1],
+                    ], [
+                        'port' => $match[2],
+                        'source' => $source,
+                        'type' => \Str::lower($match[3])
+                    ]);
+
+                \DB::table('ip_info')
+                    ->insertOrIgnore([
+                        'ip' => $match[1]
+                    ]);
+            }
+        } while($foundProxys > 0);
+
         \App\Logger::msg('done job [fetch proxy]');
     }
 }
