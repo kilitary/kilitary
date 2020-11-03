@@ -118,26 +118,27 @@ textarea:hover {
   box-shadow: 0 0px 13px 0 #00fa9a, 0 10px 20px 0 #ff0;
 }
 .protip-ip-info {
-  font-family: "consolas";
-  font-size: 11px;
-  line-height: 13px;
+  font-family: "lucida console";
+  font-size: 10px;
+  line-height: 18px;
   background-color: #b0ffd7;
   padding: 4px;
   margin: 18px;
   box-shadow: 10px 10px 27px 0 #adff2f, 0 28px 22px 0 #aedcc1;
-  border-top: 10px dashed #ff8c00;
-  border-bottom: 10px dashed #ff8c00;
+  border-top: 14px dashed #ff8c00;
+  border-bottom: 14px dashed #ff8c00;
 }
 .iplink {
   font-size: 12px;
   padding: 3px;
+  text-align: right;
   font-family: lucida console;
   width: 100%;
-  display: flex;
+  display: flow-root;
   box-shadow: 0 2px 8px #add8e6, 0 1px 11px 0 #adff2f;
 }
 .iplink:hover {
-  box-shadow: 1px 1px 1px #f00, 0 0px 1px 0 #34daff;
+  box-shadow: 1px 3px 10px #f00, 0 0px 30px 0 #34daff;
 }
 blockquote {
   border-left: 3px solid #8a2be2;

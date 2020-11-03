@@ -15,14 +15,14 @@
             </tr>
             @foreach ($proxys as $proxy)
                 <tr class="proxy-item proxy-type-{{$proxy['type']}}">
-                    <td>
+                    <td align="right">
                         <span class="ips" style="display:none">{{$proxy['host'] . ':' . $proxy['port']}}</span>
 
                         <a href="/proxy"
-                           data-pt-animate="bounceIn" data-pt-width="800px"
+                           data-pt-animate="bounceIn" data-pt-width="900px"
                            data-pt-title="<pre class='protip-ip-info'>{{\App\Models\Tools::ipInfo($proxy['host'])}}</pre>"
                            class="protip iplink" data-pt-scheme="white"
-                           title="proxy/socks {{$proxy['host'].':'.$proxy['port']}}">{{$proxy['host']}}
+                           title="{{\App\XRandom::get(100,400) . 'ms'}}">{{$proxy['host']}}
                         </a>
                     </td>
                     <td>{{$proxy['port']}}</td>
