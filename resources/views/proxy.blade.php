@@ -15,10 +15,13 @@
             </tr>
             @foreach ($proxys as $proxy)
                 <tr class="proxy-item proxy-type-{{$proxy['type']}}">
-                    <td><a href="/proxy"
-                           data-pt-gravity="top 10 15; bottom 0 55" data-pt-animate="bounceIn"
-                           data-pt-title="<span class='protip-on-main'>{{\App\Models\Tools::ipInfo($proxy['host'])}}</span>"
-                           class="protip interestlink" data-pt-gravity="top-right" data-pt-scheme="white"
+                    <td>
+                        <span class="ips" style="display:none">{{$proxy['host'] . ':' . $proxy['port']}}</span>
+
+                        <a href="/proxy"
+                           data-pt-animate="bounceIn" data-pt-width="800px"
+                           data-pt-title="<pre class='protip-ip-info'>{{\App\Models\Tools::ipInfo($proxy['host'])}}</pre>"
+                           class="protip iplink" data-pt-scheme="white"
                            title="proxy/socks {{$proxy['host'].':'.$proxy['port']}}">{{$proxy['host']}}
                         </a>
                     </td>
