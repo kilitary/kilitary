@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\FetchProxy;
 use App\Jobs\RedisSaver;
 use App\Jobs\TelescopPrune;
 use Illuminate\Console\Scheduling\Schedule;
@@ -51,6 +52,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->job(new IpInfoResolver)
             ->everyFiveMinutes();
+
+        $schedule->job(new FetchProxy)
+            ->everyTwoHours();
 
     }
 
