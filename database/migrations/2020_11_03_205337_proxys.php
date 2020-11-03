@@ -22,6 +22,7 @@ class Proxys extends Migration
             $table->string('source')->nullable()->index();
             $table->string('speed')->nullable();
             $table->text('info')->nullable();
+            $table->string('software')->nullable()->default('unknown');
             $table->timestamp('checked_at')->nullable()->index();
             $table->timestamp('created_at')->useCurrent();
         });
