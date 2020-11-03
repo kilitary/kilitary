@@ -21,11 +21,11 @@ class Audio extends Model
 
     public static function gayDetected()
     {
-        $ret = exec('/usr/bin/ffplay -autoexit -vn -nodisp /home/kilitary/kilitary/storage/mp3/perfect.mp3');
+        $ret = exec('/usr/bin/ffplay -autoexit -vn -nodisp /home/kilitary/kilitary/storage/mp3/wickedsick.mp3');
     }
 
     public static function gayRedirected()
     {
-        $ret = exec('/usr/bin/ffplay -autoexit -vn -nodisp /home/kilitary/kilitary/storage/mp3/perfect.mp3');
+        $ret = exec('/usr/bin/ffplay -autoexit -vn -nodisp /home/kilitary/kilitary/storage/mp3/wickedsick.mp3');
     }
 }
