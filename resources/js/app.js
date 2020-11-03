@@ -96,9 +96,9 @@ $(function() {
     setInterval(toggleHuman, 800);
     setInterval(rotateKrysaClass, 200);
 
-    document.getElementById("copyButton").addEventListener("click", function() {
-        copyToClipboard(document.getElementById("copyTarget"));
-    });
+    // document.getElementById("copyButton").addEventListener("click", function() {
+    //     copyToClipboard(document.getElementById("copyTarget"));
+    // });
 
     $('.ips').click(function(e){
         copyToClipboard(document.getElementById("copyTarget"));

@@ -65,10 +65,10 @@
             <h3 class="section-h3">tools area</h3>
 
             <a href="/proxy"
-               data-pt-gravity="top 10 15; bottom 0 55" data-pt-animate="bounceIn"
+                data-pt-animate="bounceIn"
                data-pt-title="<span class='protip-on-main'>socks4/socks4a/socks5/http/https proxy/socks list</span>"
-               class="protip interestlink" data-pt-gravity="top-right" data-pt-scheme="white"
-               title="proxy/socks list">proxy/socks list</a>
+               class="protip interestlink" data-pt-scheme="white"
+               title="free">proxy/socks list</a>
         </div>
 
         <div class="marginleft">

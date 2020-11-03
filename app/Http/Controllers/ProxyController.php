@@ -12,7 +12,7 @@ class ProxyController extends Controller
         $proxys = \App\Proxy::select('host', 'port', 'created_at', 'type', 'anonymity', 'speed', 'created_at')
             ->orderBy('created_at', 'DESC')
             ->orderBy('checked_at', 'DESC')
-            ->limit(100)
+            ->limit(200)
             ->get();
 
         $description = 'Список бесплатных прокси, рабочие proxy socks сервера, Экспорт в txt, csv, либо по API.';

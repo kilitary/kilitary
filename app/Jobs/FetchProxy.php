@@ -30,6 +30,12 @@ class FetchProxy implements ShouldQueue
      */
     public function handle()
     {
+        \DB::table('proxys')
+            ->whereNotIn('type', ['socks5', 'socks4', 'socks4a', 'http', 'https', 'smtp'])
+            ->update([
+                'type' => 'unknown'
+            ]);
+
         \App\Logger::msg('running job [fetch proxy]');
         $start = 0;
         do {

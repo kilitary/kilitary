@@ -196,10 +196,10 @@ $(function () {
   $('#flagright').css('top', '-100px');
   flagTimer = setInterval(flagsMovement, 20);
   setInterval(toggleHuman, 800);
-  setInterval(rotateKrysaClass, 200);
-  document.getElementById("copyButton").addEventListener("click", function () {
-    copyToClipboard(document.getElementById("copyTarget"));
-  });
+  setInterval(rotateKrysaClass, 200); // document.getElementById("copyButton").addEventListener("click", function() {
+  //     copyToClipboard(document.getElementById("copyTarget"));
+  // });
+
   $('.ips').click(function (e) {
     copyToClipboard(document.getElementById("copyTarget"));
   });

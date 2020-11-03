@@ -53,6 +53,8 @@ class PostRequest
             //->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
             ->header('X-At-War', Xrandom::scaled(-4, 394) == 384 ? 1 : 0)
             //->header('Pragma', 'no-cache')
+            ->header('cf-ray', \Str::random(10) . '-' . \Str::upper(\Str::random(3)))
+            ->header('expect-pdd', 'max-age=' . \App\XRandom::get(100, 9999))
             ->header('X-CurveBank', 'Dont Be A Dick')
             ->header('Client-post-version', 'arminer ' . '(0.1d-2020 0x43-b/c/AN/SPY49)')
             ->header("Proxy-connection-class", "%s%s%s?&nbsp;&" . Xrandom::scaled(1999999, 999999999))

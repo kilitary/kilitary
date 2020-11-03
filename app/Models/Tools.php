@@ -24,7 +24,7 @@ class Tools
     public static function ipInfo($ip)
     {
         $info = \App\IpInfo::firstWhere('ip', $ip);
-        if(!$info) {
+        if(!$info || empty($info->info)) {
             return '#empty/secured#';
         }
         $info = \json_encode(\json_decode($info->info), JSON_PRETTY_PRINT);
