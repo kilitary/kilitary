@@ -56,7 +56,7 @@
     <script src="{{ mix('js/app.js') }}"></script>
 
     {{--<script src="https://www.googleoptimize.com/optimize.js?id=OPT-KCXWFW7"></script> --}}
-    <link async href="/css/liberation-mono" rel="stylesheet">
+    <link async href="/css/liberation-mono.css" rel="stylesheet">
     <link async rel="stylesheet"
           href="/css/protip.min.css">
     <link async rel="stylesheet" href="/css/animate.min.css"/>
