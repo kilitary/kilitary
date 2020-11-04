@@ -57,8 +57,8 @@ class Kernel extends ConsoleKernel
         $schedule->job(new FetchProxy)
             ->daily();
 
-        $schedule->job(new ProxyCheck)
-            ->hourly();
+//        $schedule->job(new ProxyCheck)
+//            ->hourly();
 
     }
 

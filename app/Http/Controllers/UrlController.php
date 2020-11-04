@@ -50,14 +50,17 @@ class UrlController extends Controller
     {
         $shortRecord = \App\ShortUrl::where('short', $shortUrl)
             ->first();
+
         if($shortRecord) {
             Logger::msg('static redirect ' . $shortRecord->short . '=>' . $shortRecord->long . ' by ' . $request->ip());
+
             $shortRecord->visits += 1;
             $shortRecord->save();
+
             return redirect($shortRecord->long);
-        } else {
-            Logger::msg('redirect ' . $shortUrl . ' => ' . $request->header('referer', 'http://google.com') . ' by ' . $request->ip());
-            return back();
         }
+
+        Logger::msg('redirect ' . $shortUrl . ' => ' . $request->header('referer', 'http://google.com') . ' by ' . $request->ip());
+        return back();
     }
 }

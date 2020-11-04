@@ -40,20 +40,22 @@ class ProxyCheck implements ShouldQueue
         \App\Logger::msg('job: proxy check started with ' . $proxys->count() . ' records');
 
         ini_set("default_socket_timeout", 3);
+
         foreach($proxys as $proxy) {
             \App\Logger::msg('[proxy check] testing ' . $proxy->host . ':' . $proxy->port);
             $loop = \React\EventLoop\Factory::create();
             $connector = new \React\Socket\Connector($loop, [
-                'dns' => true,
+                'dns' => '1.1.1.1',
                 'tls' => false,
-                'timeout' => true
+                'tcp' => true,
+                'timeout' => 0.3
             ]);
 
             $loop->addPeriodicTimer('1', function() {
                 \App\Logger::msg(\App\XRandom::get(0, 1) ? 'tick' : 'tack');
             });
             //$client = new \Clue\React\Socks\Client($proxy->host . ':' . $proxy->port, $connector);
-            $client = new \Clue\React\Socks\Client('127.0.0.1:9050', $connector);
+            $client = new \Clue\React\Socks\Client('socks://127.0.0.1:9050', $connector);
 
             $loop->addSignal(SIGINT, function() {
                 \App\Logger::msg('signal received');
