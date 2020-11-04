@@ -160,7 +160,7 @@ class PageController extends Controller
             $comment->delete();
         }
 
-        return back(Tools::isAdmin() ? 303 : 423);
+        return back();
     }
 
     public function writeComment(Request $request)
