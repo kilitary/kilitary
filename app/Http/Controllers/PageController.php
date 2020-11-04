@@ -403,48 +403,53 @@ class PageController extends Controller
 
     public function record(Request $request, $code)
     {
-        if($request->method() == 'GET') {
-            $code = Str::random(15);
-            return view('newpage', compact('code'));
-        }
+        try {
+            if($request->method() == 'GET') {
+                $code = Str::random(15);
+                return view('newpage', compact('code'));
+            }
 
-        $content = $request->post('content');
-        if(empty(trim($content))) {
-            $content = "operator was lazy this time";
-        }
+            $content = $request->post('content');
+            if(empty(trim($content))) {
+                $content = "operator was lazy this time";
+            }
 
-        if(preg_match("#^take\s+(http.*)$#Usi", $content, $matches)) {
-            $extractionResult = WebArticleExtractor\Extract::extractFromURL($matches[1]);
-            $content = \str_replace("\r\n", "<br/><br/>", $extractionResult->text);
-        } else {
-            $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
-        }
+            if(preg_match("#^take\s+(http.*)$#Usi", $content, $matches)) {
 
-        $header = $request->post('header');
+                $extractionResult = WebArticleExtractor\Extract::extractFromURL($matches[1]);
+                $content = \str_replace("\r\n", "<br/><br/>", $extractionResult->text);
+            } else {
+                $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
+            }
 
-        if(empty(trim($header))) {
-            $header = Str::random(40);
-        }
+            $header = $request->post('header');
 
-        $code = Str::slug(Str::substr($content, 0, 15), '-');
-        $header = Str::slug($header, '-');
+            if(empty(trim($header))) {
+                $header = Str::random(40);
+            }
 
-        $country = Tools::getCountry($request->ip());
+            $code = Str::slug(Str::substr($content, 0, 15), '-');
+            $header = Str::slug($header, '-');
 
-        $page = Page::create([
-            'code' => $code,
-            'ip' => $request->ip(),
-            'edits' => 0,
-            'views' => -1,
-            'content' => Str::substr($content, 0, 65000),
-            'header' => Str::substr($header, 0, 128),
-            'active' => 1,
-            'blocked' => 0,
-            'country' => $country
-        ]);
+            $country = Tools::getCountry($request->ip());
 
-        if($request->post('inVault') == 'on') {
-            //Tools::savePage($page);
+            $page = Page::create([
+                'code' => $code,
+                'ip' => $request->ip(),
+                'edits' => 0,
+                'views' => -1,
+                'content' => Str::substr($content, 0, 65000),
+                'header' => Str::substr($header, 0, 128),
+                'active' => 1,
+                'blocked' => 0,
+                'country' => $country
+            ]);
+
+            if($request->post('inVault') == 'on') {
+                //Tools::savePage($page);
+            }
+        } catch(Exception $e) {
+            \App\Logger::msg('record()#exception: ' . $e->getMessage());
         }
 
         return redirect('/view/' . $code);

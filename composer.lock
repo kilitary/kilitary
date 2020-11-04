@@ -1274,13 +1274,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kilitary/PHP-Web-Article-Extractor.git",
-                "reference": "f0944b8a7447f7bbef558a7675b33aeaa68881f4"
+                "url": "https://github.com/kilitary/Article-Extractor.git",
+                "reference": "3b28546e9699f04b7c506b7e263af6d6e36bf062"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kilitary/PHP-Web-Article-Extractor/zipball/f0944b8a7447f7bbef558a7675b33aeaa68881f4",
-                "reference": "f0944b8a7447f7bbef558a7675b33aeaa68881f4",
+                "url": "https://api.github.com/repos/kilitary/Article-Extractor/zipball/3b28546e9699f04b7c506b7e263af6d6e36bf062",
+                "reference": "3b28546e9699f04b7c506b7e263af6d6e36bf062",
                 "shasum": ""
             },
             "require": {
@@ -1303,9 +1303,10 @@
             "description": "Web Article Extractor",
             "homepage": "https://github.com/kilitary/php-web-article-extractor",
             "support": {
-                "source": "https://github.com/kilitary/PHP-Web-Article-Extractor/tree/v0.1.3"
+                "issues": "https://github.com/kilitary/Article-Extractor/issues",
+                "source": "https://github.com/kilitary/Article-Extractor/tree/master"
             },
-            "time": "2020-11-04T03:03:40+00:00"
+            "time": "2020-11-04T14:10:23+00:00"
         },
         {
             "name": "laravel/framework",
