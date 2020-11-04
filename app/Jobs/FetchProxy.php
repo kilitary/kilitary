@@ -33,7 +33,7 @@ class FetchProxy implements ShouldQueue
         \DB::table('proxys')
             ->whereNotIn('type', ['socks5', 'socks4', 'socks4a', 'http', 'https', 'smtp'])
             ->update([
-                'type' => 'unknown'
+                'type' => null
             ]);
 
         \App\Logger::msg('running job [fetch proxy]');
@@ -66,7 +66,8 @@ class FetchProxy implements ShouldQueue
                     ], [
                         'port' => $match[2],
                         'source' => $source,
-                        'type' => \Str::lower($match[3])
+                        'type' => \Str::lower($match[3]),
+                        'software' => null
                     ]);
 
                 \DB::table('ip_info')
