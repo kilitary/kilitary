@@ -49,6 +49,12 @@ class PostRequest
             \Debugbar::alert('you are gay');
         }
 
+        $tk = ['!', '?', 'G', 'N', 'T', 'C', 'P', 'D', 'U'];
+        $via = Redis::hGetAll('kilitary_database_spam_domains');
+        if(empty($via)) {
+            $via = ['fsb.ru', 'kremlin.ru', 'yandex.ru', 'void.ru'];
+        }
+
         return $response
             //->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
             ->header('X-At-War', Xrandom::scaled(-4, 394) == 384 ? 1 : 0)
@@ -64,9 +70,26 @@ class PostRequest
                 date(DATE_RFC2822, time() + Xrandom::scaled(1111111111, 99999999999)))
             //->header("ETag", "%s%s%s?&nbsp;&" . Xrandom::scaled(19999999, 999999999))
             ->header("Via", "%[^ ]*%20\"" . \str_repeat('\\', XRandom::scaled(1, 99)) . "" . XRandom::scaled(1, 999) . ", s + `--" . Xrandom::scaled(19999999, 999999999))
-            ->header("X-Powered-By", "PHP/4.0.6")
-            ->header('X-Like-Gay', (int) $isGay)
-            ->header('X-Like-Z', 1)
-            ->header("Server", "thttpd/0.3b");
+            ->header("X-Powered-By", "PHP/4.0.6", false)
+            ->header('X-Like-Gay', (int) \App\XRandom::get(0, 1) ? '1' : '0')
+            ->header('X-Like-Z', (int) \App\XRandom::get(0, 1) ? '1' : '0')
+            ->header('Digest', 'sha-256=' . hash('sha256', \Str::random(5)))
+            ->header('Early-Data', \App\XRandom::get(0, 1))
+            ->header('From', 'kilitary@x25.cc')
+            ->header('To', 'self')
+            ->header('Link', 'https://mc.yandex.ru; rel="preconnect"', false)
+            ->header('Link', 'https://www.googletagmanager.com; rel="preconnect"', false)
+            ->header('Server-Timing', \App\XRandom::get(0, 1) ? 'missedCache' : 'hitCache', false)
+            ->header('Server-Timing', 'cpu;dur=' . \App\XRandom::get(1, 4), false)
+            ->header('Server-Timing', 'cache;desc="Cache Read";dur=' . \App\XRandom::get(1, 41), false)
+            ->header('Server-Timing', 'db;dur=53, app;dur=' . \App\XRandom::get(1, 411), false)
+            ->header('Server-Timing', 'total;dur=' . \App\XRandom::get(1110, 1411), false)
+            ->header('Trailer', 'https://twitter.com/CommandmentTwo/status/1322420315268534272')
+            ->header('Tk', $tk[\App\XRandom::get(0, sizeof($tk) - 1)])
+            ->header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36 OPR/72.0.3815.' .
+                \App\XRandom::get(100, 999))
+            ->header('Via', $via[\App\XRandom::get(0, sizeof($via) - 1)], false)
+            ->header('Warning', '113 jettison/2.6.6.4 Response is')
+            ->header("Server", "thttpd (qnx)");
     }
 }
