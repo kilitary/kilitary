@@ -8,12 +8,25 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use App\Logger;
+use \WebArticleExtractor;
 
 class CommandController extends Controller
 {
+    public function content(Request $request)
+    {
+        $extractionResult = WebArticleExtractor\Extract::extractFromURL(
+            'https://vc.ru/services/144398-top-15-luchshih-proksi-servisov-v-2020-godu');
+        $data = \mb_convert_encoding($extractionResult->text, "utf-8");
+        //$articleTextForDisplay = str_replace("\r\n",'<br />',$extractionResult->text);
+        // echo sprintf('<b>Extracted Title:</b><br />%s<br /><br /><b>Extracted Article content:</b><br />%s<br /><br /><b>Detected Language:</b><br />%s<br /><br /><b>Source:</b><br />%s<br /><br /><b>Extracted Keywords:</b><br />',
+        //$extractionResult->title,$articleTextForDisplay,$extractionResult->language,$extractionResult->source);
+        //   dd($extractionResult);
+        return view('data', compact('data'));
+    }
+
     public function sync(Request $request)
     {
-        XRandom::followRand(1);
+        XRandom::followRand(2);
 
         $list['rand'] = "<a href='/command/sync?/' style='font-size:11px;font-variant: small-caps;font-family: consolas'>" .
             (XRandom::sign(XRandom::get(0, 32))) .
