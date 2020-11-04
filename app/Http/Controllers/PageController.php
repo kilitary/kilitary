@@ -389,13 +389,11 @@ class PageController extends Controller
 
             \App\Logger::msg('deleting page code: ' . $code . ' mode: ' . $mode);
 
-            if(\App\Models\Tools::IsAdmin()) {
-                $page = Page::firstWhere('code', $code);
-                if($page && !$page->blocked) {
-                    $page->delete();
-                }
-            } else {
+            $page = Page::firstWhere('code', $code);
+            if($page && !$page->blocked) {
+                $page->delete();
                 $code = "[access denied]";
+            } else {
                 \App\Logger::msg('deleting page [access denied]');
             }
         } catch(Exception $e) {
