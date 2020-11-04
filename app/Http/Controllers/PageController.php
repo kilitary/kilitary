@@ -141,17 +141,14 @@ class PageController extends Controller
 
     public function cp(Request $request)
     {
-        $gays = \App\Gay::all();
-        if(!$gays) {
-            $gays = collect([]);
-        }
+        $gays = \App\Gay::all() ?? collect([]);
 
         return view('cparea', compact('gays'));
     }
 
     public function deleteComment(Request $request, $commentId)
     {
-        \Log::debug('user ' . $request->ip() . ' deleting comment ' . $commentId);
+        \App\Logger::msg('user ' . $request->ip() . ' deleting comment ' . $commentId);
 
         $comment = \App\Comment::find($commentId);
 
@@ -404,6 +401,7 @@ class PageController extends Controller
     public function record(Request $request, $code)
     {
         try {
+            \App\Logger::msg('new info creation: code: ' . $code . ' len: ' . \mb_strlen($request->post('content')));
             if($request->method() == 'GET') {
                 $code = Str::random(15);
                 return view('newpage', compact('code'));
@@ -414,21 +412,28 @@ class PageController extends Controller
                 $content = "operator was lazy this time";
             }
 
-            if(preg_match("#^take\s+(http.*)$#Usi", $content, $matches)) {
+            $header = $request->post('header');
 
+            if(preg_match("#^take\s+(http\S*)\s*?(d?)$#Usi", $content, $matches)) {
+                \App\Logger::msg('taking article from ' . $matches[1]);
                 $extractionResult = WebArticleExtractor\Extract::extractFromURL($matches[1]);
+                if($matches[2] == 'd') {
+                    dd($extractionResult);
+                }
                 $content = \str_replace("\r\n", "<br/><br/>", $extractionResult->text);
-            } else {
-                $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
+
+                if(empty(trim($header))) {
+                    $header = $extractionResult->title;
+                }
             }
 
-            $header = $request->post('header');
+            $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
 
             if(empty(trim($header))) {
                 $header = Str::random(40);
             }
 
-            $code = Str::slug(Str::substr($content, 0, 15), '-');
+            $code = Str::slug(Str::substr($content, 0, 20), '-');
             $header = Str::slug($header, '-');
 
             $country = Tools::getCountry($request->ip());
@@ -438,8 +443,8 @@ class PageController extends Controller
                 'ip' => $request->ip(),
                 'edits' => 0,
                 'views' => -1,
-                'content' => Str::substr($content, 0, 65000),
-                'header' => Str::substr($header, 0, 128),
+                'content' => $content,
+                'header' => Str::substr($header, 0, 255),
                 'active' => 1,
                 'blocked' => 0,
                 'country' => $country
