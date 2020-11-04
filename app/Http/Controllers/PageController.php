@@ -21,6 +21,7 @@ use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
 use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\TaskList\TaskListExtension;
 use GeoIp2\Database\Reader;
+use Predis\Command\ConnectionQuit;
 use Str;
 use Intervention\Image\ImageManager;
 use const JSON_PRETTY_PRINT;
@@ -288,6 +289,17 @@ class PageController extends Controller
 
     }
 
+    public function touch(Request $request, $code)
+    {
+        $page = \App\Models\Page::where('code', $code)
+            ->first();
+
+        $page->updated_at = \Carbon::now();
+        $page->save();
+
+        return back();
+    }
+
     public function reset(Request $request)
     {
         session()->flush();
@@ -366,7 +378,7 @@ class PageController extends Controller
         $ip = $page->ip;
 
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
-            'description', 'page_id', 'comments', 'country', 'converter', 'keys', 'ip'));
+            'description', 'page_id', 'comments', 'country', 'converter', 'keys', 'ip', 'page'));
     }
 
     public function delete(Request $request, $code, $mode)

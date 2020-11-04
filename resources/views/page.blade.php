@@ -15,8 +15,8 @@
                 <span data-pt-placement="corner-right-top" data-pt-width='1200' data-pt-scheme="white"
                       data-pt-title="<pre class='protip-mine'>{{\App\Models\Tools::ipInfo($ip)}}</pre>"
                       class="ip-info-page protip"
-                >Connection<-
-                </span>
+                >Connection<-</span>
+
         </div>
 
         <h2 class="page-footer"></h2>
@@ -54,8 +54,10 @@
                 <button class="commit-button">push comment</button>
             </form>
         </div>
-        <div class="topheadmargin ">
-            √iews: {{$views}} Edits: {{$edits}}
+        <div class="topheadmargin page-info">
+            <span class="page-info-item"><strong>√</strong>iews: {{$views}}</span>
+            <span class="page-info-item"> Edits: {{$edits}}</span>
+            <span class="page-info-item">Updated: {{$page['updated_at']}}</span>
         </div>
 
         <div class=" page-content">
@@ -65,6 +67,9 @@
                 </li>
                 <li>
                     <a class="alignnmiddle" href="/cart/add/{{$code}}">add to cart</a>
+                </li>
+                <li>
+                    <a class="alignnmiddle" href="/touch/{{$code}}">touch</a>
                 </li>
                 <li>
                     <a href="/edit/{{$code}}">extend / reformate</a>

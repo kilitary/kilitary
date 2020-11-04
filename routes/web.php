@@ -30,6 +30,8 @@ Route::middleware(['cache.headers'])
                 Route::post('/comment/add', 'PageController@writeComment');
                 Route::get('/comment/{id}/delete', 'PageController@deleteComment');
                 Route::get('/reset', 'PageController@reset');
+
+                Route::get('/touch/{code}', 'PageController@touch');
             });
 
         Route::middleware('cacheResponse:34')
