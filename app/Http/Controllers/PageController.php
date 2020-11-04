@@ -380,19 +380,26 @@ class PageController extends Controller
 
     public function delete(Request $request, $code, $mode)
     {
-        $currentDeleted = session('currentDeleted', []);
+        try {
+            $currentDeleted = session('currentDeleted', []);
 
-        $currentDeleted[] = $code;
-        session(['currentDeleted' => $currentDeleted]);
-        session(['delMode' => $mode]);
+            $currentDeleted[] = $code;
+            session(['currentDeleted' => $currentDeleted]);
+            session(['delMode' => $mode]);
 
-        if(\App\Models\Tools::IsAdmin()) {
-            $page = Page::firstWhere('code', $code);
-            if($page && !$page->blocked) {
-                $page->delete();
+            \App\Logger::msg('deleting page code: ' . $code . ' mode: ' . $mode);
+
+            if(\App\Models\Tools::IsAdmin()) {
+                $page = Page::firstWhere('code', $code);
+                if($page && !$page->blocked) {
+                    $page->delete();
+                }
+            } else {
+                $code = "[access denied]";
+                \App\Logger::msg('deleting page [access denied]');
             }
-        } else {
-            $code = "[access denied]";
+        } catch(Exception $e) {
+            \App\Logger::msg('delete()#exception: ' . $e->getMessage());
         }
 
         return view('delete', compact('code'));
