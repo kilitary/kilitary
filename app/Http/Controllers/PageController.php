@@ -25,6 +25,7 @@ use Str;
 use Intervention\Image\ImageManager;
 use const JSON_PRETTY_PRINT;
 use const PREG_SET_ORDER;
+use \WebArticleExtractor;
 
 class PageController extends Controller
 {
@@ -402,7 +403,14 @@ class PageController extends Controller
             $content = "operator was lazy this time";
         }
 
-        $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
+        if(preg_match("#take\s+(http.*)#", $content, $matches)) {
+            $extractionResult = WebArticleExtractor\Extract::extractFromURL(
+                $matches[1]);
+
+            $content = \str_replace("\r\n", "<br/>", $extractionResult->text);
+        } else {
+            $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
+        }
 
         $header = $request->post('header');
 

@@ -65,6 +65,10 @@ textarea:hover {
   background-color: #fff9be !important;
   border: 2px dashed #f00 !important;
 }
+.interesting-block {
+  width: 1200px;
+  line-height: 28px;
+}
 .content-keys {
   font-family: "lucida console";
   color: #2e8b57;

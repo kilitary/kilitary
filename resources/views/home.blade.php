@@ -44,17 +44,19 @@
         @endif
 
         @if(isset($code))
-            <div class="marginleft marginbottom">
+            <div class="marginleft marginbottom ">
                 <h3 class="section-h3">inform/|tion on ADJACENT ORDERS AREA</h3>
                 Interesting:
-                @foreach ($interesting as $v)
-                    <a href="/view/{{$v['code']}}"
-                       data-pt-gravity="top 10 -5; bottom 0 55" data-pt-animate="bounceIn"
-                       data-pt-title="<span class='protip-on-main'>{{ \App\Models\Tools::titleize($v['content']) }}</span>"
-                       class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
-                       title="{{trim($v['header'])}}">{!! '' . $v['header'] !!}</a>,
-                @endforeach
-                <a href="/relink">..</a>
+                <div class="interesting-block">
+                    @foreach ($interesting as $v)
+                        <a href="/view/{{$v['code']}}"
+                           data-pt-gravity="top 10 -5; bottom 0 55" data-pt-animate="bounceIn"
+                           data-pt-title="<span class='protip-on-main'>{{ \App\Models\Tools::titleize($v['content']) }}</span>"
+                           class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
+                           title="{{trim($v['header'])}}">{!! '' . $v['header'] !!}</a>,
+                    @endforeach
+                    <a href="/relink">..</a>
+                </div>
             </div>
             <div class="marginleft smallcaps">
                 create new info here: <a href="/page/{{$code}}">+create</a>
@@ -65,7 +67,7 @@
             <h3 class="section-h3">tools area</h3>
 
             <a href="/proxy"
-                data-pt-animate="bounceIn"
+               data-pt-animate="bounceIn"
                data-pt-title="<span class='protip-on-main'>socks4/socks4a/socks5/http/https/smtp/web proxy/socks list</span>"
                class="protip interestlink" data-pt-scheme="white"
                title="free">proxy/socks list</a>

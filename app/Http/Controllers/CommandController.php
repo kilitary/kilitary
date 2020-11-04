@@ -16,11 +16,9 @@ class CommandController extends Controller
     {
         $extractionResult = WebArticleExtractor\Extract::extractFromURL(
             'https://vc.ru/services/144398-top-15-luchshih-proksi-servisov-v-2020-godu');
-        $data = \mb_convert_encoding($extractionResult->text, "utf-8");
-        //$articleTextForDisplay = str_replace("\r\n",'<br />',$extractionResult->text);
-        // echo sprintf('<b>Extracted Title:</b><br />%s<br /><br /><b>Extracted Article content:</b><br />%s<br /><br /><b>Detected Language:</b><br />%s<br /><br /><b>Source:</b><br />%s<br /><br /><b>Extracted Keywords:</b><br />',
-        //$extractionResult->title,$articleTextForDisplay,$extractionResult->language,$extractionResult->source);
-        //   dd($extractionResult);
+
+        $data = \str_replace("\r\n", "<br/>", $extractionResult->text);
+        //dd( $extractionResult->textBlocks);
         return view('data', compact('data'));
     }
 

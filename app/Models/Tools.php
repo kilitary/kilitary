@@ -49,9 +49,10 @@ class Tools
 
     public static function titleize($string)
     {
-        $str = strip_tags(\Str::substr($string, 0, 155));
-        $str = \preg_replace("#(\s{2,}?|\W+?)#Usmi", ' ', $str);
+        $str = strip_tags($string);
+        $str = \preg_replace("#(\s{2,}?)#Usmi", ' ', $str);
         $str = \substr_replace($str, ['"', ' '], ' ', 0);
+        $str = \Str::substr($str, 0, 155);
 
         return trim($str, " \t\n\r\0\x0B\"'") . '...';
     }

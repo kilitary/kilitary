@@ -9,9 +9,8 @@
     <meta name="document-state" content="dynamic">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-    <meta http-equiv="Pragma" content="no-cache"/>
-    <meta http-equiv="Expires" content="0"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Sergey Efimov"/>
     <link rel="canonical" href="{{request()->fullUrl()}}"/>
 
     <link rel="icon" type="image/png" href="/images/lock.png">
