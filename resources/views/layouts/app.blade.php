@@ -13,8 +13,7 @@
     <meta name="author" content="Sergey Efimov"/>
     <link rel="canonical" href="{{request()->fullUrl()}}"/>
 
-    <link rel="icon" type="image/png" href="/images/lock.png">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/lock.png" type="image/png">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <title>{{ env('APP_NAME') }}</title>
