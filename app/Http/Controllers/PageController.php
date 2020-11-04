@@ -392,9 +392,9 @@ class PageController extends Controller
             $page = Page::firstWhere('code', $code);
             if($page && ($page->ip == $request->ip() || \App\Models\Tools::isAdmin()) && !$page->blocked) {
                 $page->delete();
-                $code = "[access denied]";
             } else {
                 \App\Logger::msg('deleting page [access denied]');
+                $code = "[access denied]";
             }
         } catch(Exception $e) {
             \App\Logger::msg('delete()#exception: ' . $e->getMessage());
