@@ -31,7 +31,7 @@ class IpInfoResolver implements ShouldQueue
     public function handle()
     {
         $ips = \DB::table('ip_info')
-            ->select('ip')
+            ->select('ip', 'info')
             ->whereNull('info')
             ->get();
 
