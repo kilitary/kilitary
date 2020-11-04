@@ -179,8 +179,6 @@ class PageController extends Controller
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
 
-                \App\Audio::gayRedirected();
-
                 return redirect('/view/' . $randomCode);
             }
 
