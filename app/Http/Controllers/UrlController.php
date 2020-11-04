@@ -60,7 +60,7 @@ class UrlController extends Controller
             return redirect($shortRecord->long);
         }
 
-        Logger::msg('redirect ' . $shortUrl . ' => ' . $request->header('referer', 'http://google.com') . ' by ' . $request->ip());
+        Logger::msg('redirect ' . $shortUrl . ' => ' . $request->header('referer') . ' by ' . $request->ip());
         return back();
     }
 }
