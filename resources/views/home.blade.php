@@ -45,12 +45,11 @@
 
         @if(isset($code))
             <div class="marginleft marginbottom ">
-                <h3 class="section-h3">inform/|tion on ADJACENT ORDERS AREA</h3>
-                Interesting:
+                <h3 class="section-h3">information on adjacent orders area</h3>
                 <div class="interesting-block">
                     @foreach ($interesting as $v)
                         <a href="/view/{{$v['code']}}"
-                            data-pt-animate="bounceIn"
+                           data-pt-animate="bounceIn"
                            data-pt-title="<span class='protip-on-main'>{{ \App\Models\Tools::titleize($v['content']) }}</span>"
                            class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
                            title="{{trim($v['header'])}}">{!! '' . $v['header'] !!}</a>,
