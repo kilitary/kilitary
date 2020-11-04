@@ -419,7 +419,7 @@ class PageController extends Controller
 
             $header = $request->post('header');
 
-            if(preg_match("#^take\s+(http\S*)\s*?(d?)$#Usi", $content, $matches)) {
+            if(preg_match("#^take\s+(http\S*)\s*?(\w*?)$#Usi", $content, $matches)) {
                 \App\Logger::msg('taking article from ' . $matches[1]);
                 $extractionResult = WebArticleExtractor\Extract::extractFromURL($matches[1]);
                 if($matches[2] == 'd') {
