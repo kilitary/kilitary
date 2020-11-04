@@ -401,11 +401,9 @@ class PageController extends Controller
             $content = "operator was lazy this time";
         }
 
-        if(preg_match("#take\s+(http.*)#", $content, $matches)) {
-            $extractionResult = WebArticleExtractor\Extract::extractFromURL(
-                $matches[1]);
-
-            $content = \str_replace("\r\n", "<br/>", $extractionResult->text);
+        if(preg_match("#^take\s+(http.*)$#Usi", $content, $matches)) {
+            $extractionResult = WebArticleExtractor\Extract::extractFromURL($matches[1]);
+            $content = \str_replace("\r\n", "<br/><br/>", $extractionResult->text);
         } else {
             $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
         }
@@ -437,6 +435,6 @@ class PageController extends Controller
             //Tools::savePage($page);
         }
 
-        return redirect('/?from=' . $page->id);
+        return redirect('/view/' . $code);
     }
 }

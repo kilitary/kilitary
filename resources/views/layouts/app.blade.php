@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="！王のッ">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="en" xml:x-lang="！王のッ">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,18 +49,18 @@
         gtag('js', new Date());
         gtag('config', 'UA-179562632-1');
     </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    <script src="/js/jquery-3.5.1.min.js"
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://randojs.com/2.0.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/protip@1.4.21/protip.min.js"></script>
+    <script src="/js/2.0.0.js"></script>
+    <script src="/js/protip.min.js"></script>
     <script src="{{ mix('js/app.js') }}"></script>
 
     {{--<script src="https://www.googleoptimize.com/optimize.js?id=OPT-KCXWFW7"></script> --}}
-    <link href="https://fonts.cdnfonts.com/css/liberation-mono" rel="stylesheet">
-    <link rel="stylesheet"
-          href="https://min.gitcdn.xyz/cdn/wintercounter/Protip/560ff44ee30c7fdbb9b6d7c6131ab5ce560ee999/protip.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link async href="/css/liberation-mono" rel="stylesheet">
+    <link async rel="stylesheet"
+          href="/css/protip.min.css">
+    <link async rel="stylesheet" href="/css/animate.min.css"/>
+    <link async href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <header>

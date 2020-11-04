@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Liberation Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Liberation Mono'), url('https://fonts.cdnfonts.com/s/276/LiberationMono-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'Liberation Mono';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Liberation Mono'), url('https://fonts.cdnfonts.com/s/276/LiberationMono-Italic.woff') format('woff');
+}
+@font-face {
+    font-family: 'Liberation Mono';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Liberation Mono'), url('https://fonts.cdnfonts.com/s/276/LiberationMono-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'Liberation Mono';
+    font-style: italic;
+    font-weight: 700;
+    src: local('Liberation Mono'), url('https://fonts.cdnfonts.com/s/276/LiberationMono-BoldItalic.woff') format('woff');
+}
+
+
