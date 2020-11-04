@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Jobs\FetchProxy;
+use App\Jobs\ProxyCheck;
 use App\Jobs\RedisSaver;
 use App\Jobs\TelescopPrune;
 use Illuminate\Console\Scheduling\Schedule;
@@ -55,6 +56,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->job(new FetchProxy)
             ->daily();
+
+        $schedule->job(new ProxyCheck)
+            ->hourly();
 
     }
 

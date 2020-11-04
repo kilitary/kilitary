@@ -52,7 +52,7 @@ class PostRequest
         $tk = ['!', '?', 'G', 'N', 'T', 'C', 'P', 'D', 'U'];
         $via = Redis::hGetAll('kilitary_database_spam_domains');
         if(empty($via)) {
-            $via = ['fsb.ru', 'kremlin.ru', 'yandex.ru', 'void.ru'];
+            $via = ['fsb.ru', 'yandex.ru', 'void.ru', 'fbi.gov', 'cia.gov', 'whitehouse.gov', 'nasa.gov'];
         }
 
         return $response
@@ -89,7 +89,9 @@ class PostRequest
             ->header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36 OPR/72.0.3815.' .
                 \App\XRandom::get(100, 999))
             ->header('Via', $via[\App\XRandom::get(0, sizeof($via) - 1)], false)
-            ->header('Warning', '113 jettison/2.6.6.4 Response is')
-            ->header("Server", "thttpd (qnx)");
+            ->header('Warning', '113 jettison/2.6.6.4 Response is', false)
+            ->header('Warning', '299 A system receiving this warning MUST NOT take any automated action"', false)
+            ->header('Warning', '214 xyz-patch applyed (' . hash('crc32', json_encode(array_merge($_COOKIE, $_GET, $_POST))) . ')', false)
+            ->header("Server", "thttpd (QNX)");
     }
 }
