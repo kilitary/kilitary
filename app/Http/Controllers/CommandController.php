@@ -17,8 +17,8 @@ class CommandController extends Controller
         $extractionResult = WebArticleExtractor\Extract::extractFromURL(
             'https://vc.ru/services/144398-top-15-luchshih-proksi-servisov-v-2020-godu');
 
-        $data = \str_replace("\r\n", "<br/>", $extractionResult->text);
-        //dd( $extractionResult->textBlocks);
+        //$data = \str_replace("\r\n", "<br/>", $extractionResult->text);
+        dd( $extractionResult);
         return view('data', compact('data'));
     }
 
