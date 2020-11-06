@@ -60,6 +60,11 @@ class FetchProxy implements ShouldQueue
             foreach($mm as $match) {
                 \App\Logger::msg($source . ': found proxy type ' . $match[3] . ' ' . $match[1] . ':' . $match[2]);
 
+                if(preg_match("#^172\.#mi", $match[1])) {
+                    \App\Logger::msg('skip cloudflare ' . $match[1] . ':' . $match[2]);
+                    continue;
+                }
+
                 \DB::table('proxys')
                     ->updateOrInsert([
                         'host' => $match[1],
