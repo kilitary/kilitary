@@ -303,14 +303,14 @@ class PageController extends Controller
     {
         session()->flush();
 
-        return redirect(' /?reset = ' . XRandom::get(0, 5));
+        return redirect('/?reset = ' . XRandom::get(0, 5));
     }
 
     public function page(Request $request, $code)
     {
         $currentDeleted = session('currentDeleted');
         if($currentDeleted && in_array($code, $currentDeleted)) {
-            return redirect(' / delete / ' . $code);
+            return redirect('/delete/' . $code);
         }
 
         $page = \App\Models\Page::where('code', $code)
