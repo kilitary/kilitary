@@ -38,6 +38,7 @@ Route::middleware(['cache.headers'])
             ->group(function() {
                 Route::get('/view/{page_code}', 'PageController@page');
                 Route::get('/{file}.txt', 'TextController@identify');
+                Route::get('/{file}.htm', 'TextController@identify');
 
                 Route::any('/page/{page_code}', 'PageController@record');
 
