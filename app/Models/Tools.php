@@ -80,12 +80,12 @@ class Tools
 
     public static function getCountry($ip)
     {
-        $country = \DB::table('ip_info')
-            ->select('info->country_name as country')
+        $info = \DB::table('ip_info')
+            ->select('info->country_name as country_name')
             ->where('ip', $ip)
             ->first();
 
-        return $country == null ? '#unresolved#' : $country->country;
+        return $info == null ? '#unresolved#' : $info->country_name;
     }
 
     public function codeDeleted($code)
