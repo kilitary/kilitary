@@ -32,6 +32,7 @@ class IpInfoResolver implements ShouldQueue
     {
         $ips = \DB::table('ip_info')
             ->select('ip', 'info')
+            ->whereNotIn('ip', ['127.0.0.1'])
             ->whereNull('info')
             ->get();
 
@@ -48,7 +49,6 @@ class IpInfoResolver implements ShouldQueue
                 \App\Logger::msg('response: ' . $response->status() . ' data: ' . $data);
                 \DB::table('ip_info')
                     ->where('ip', $ip->ip)
-                    ->whereNotIn('ip', ['127.0.0.1'])
                     ->update([
                         'info' => $data,
                         'type' => 'ipgeolocation.io'
