@@ -62,6 +62,11 @@ class Tools
         self::$allKeys[] = $key;
     }
 
+    public static function getArrayKeys()
+    {
+        return self::$allKeys;
+    }
+
     public static function getKeys()
     {
         return \implode(' ', self::$allKeys);

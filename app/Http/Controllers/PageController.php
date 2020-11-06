@@ -362,7 +362,7 @@ class PageController extends Controller
 
             $converter = new CommonMarkConverter($config, $environment);
             $content = $converter->convertToHtml($content);
-            $country = $page->country;
+            $country = \App\Models\Tools::getCountry($page->ip);
         } else {
             $content = "[no such content]";
             $header = "[no such header] (" . $code . ")";
@@ -372,7 +372,12 @@ class PageController extends Controller
             return back();
         }
 
-        $keys = Tools::getKeys();
+        $keys = Tools::getArrayKeys();
+        $keys = collect($keys);
+        if($keys->count() > 1) {
+            $keys->put(\App\XRandom::scaled(0, $keys->count() - 1), '!');
+        }
+        $keys = $keys->implode(' ');
 
         $ip = $page->ip;
 
