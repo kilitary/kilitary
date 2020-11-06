@@ -31,12 +31,10 @@ class FetchProxy implements ShouldQueue
     public function handle()
     {
         \DB::table('proxys')
-            ->whereNotIn('type', ['socks5', 'socks4', 'socks4a', 'http', 'https', 'smtp'])
-            ->update([
-                'type' => null
-            ]);
+            ->truncate();
 
         \App\Logger::msg('running job [fetch proxy]');
+
         $start = 0;
         do {
             $foundProxys = 0;
@@ -45,14 +43,16 @@ class FetchProxy implements ShouldQueue
             $response = Http::withHeaders([
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36 Edg/86.0.622.58'
             ])->get('https://hidemy.name/ru/proxy-list/?start=' . $start . '#list');
+
             $start += 64;
 
-            \App\Logger::msg('page ' . ($start - 64) . '-' . $start);
+            \App\Logger::msg('index ' . ($start - 64) . ' - ' . $start);
 
             if($response->status() != 200) {
                 \App\Logger::msg($source . ': fetch status => ' . $response->status());
                 \App\Logger::msg($response->serverError());
                 \App\Logger::msg($response->clientError());
+                break;
             }
 
             $foundProxys = preg_match_all("#<td>(\d{1,3}?\.\d{1,3}?\.\d{1,3}?\.\d{1,3}?)<.*?<td>(\d{1,5}).*?(so\w+|htt\w+).*?<#mi", $response->body(), $mm, \PREG_SET_ORDER);
