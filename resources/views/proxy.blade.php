@@ -11,6 +11,7 @@
                 <th width="100px">anonymity</th>
                 <th width="70px">speed</th>
                 <th width="70px">software</th>
+                <th width="170px">country</th>
                 <th width="210px">added</th>
                 <th width="170px">checked</th>
             </tr>
@@ -31,6 +32,7 @@
                     <td>{{$proxy['anonymity']}}</td>
                     <td>{{$proxy['speed']??'?'}}</td>
                     <td>{{$proxy['software']??'?'}}</td>
+                    <td>{{\App\Models\Tools::getCountry($proxy['host'])}}</td>
                     <td>{{$proxy['created_at']->format('h:m:s d/m/Y')}}</td>
                     <td>{{$proxy['checked_at']??'?'}}</td>
                 </tr>

@@ -75,10 +75,12 @@ class Tools
 
     public static function getCountry($ip)
     {
-        return '-notconfigured-';
-        $client = new IPinfo(env('IPINFO_TOKEN'));
-        $details = $client->getDetails($ip);
-        return $details->all['country_name'] ?? '<unknown>';
+        $country = \DB::table('ip_info')
+            ->select('info->country_name as country')
+            ->where('ip', $ip)
+            ->first();
+
+        return $country == null ? '#unresolved#' : $country->country;
     }
 
     public function codeDeleted($code)

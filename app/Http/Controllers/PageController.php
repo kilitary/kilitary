@@ -173,7 +173,9 @@ class PageController extends Controller
                     ->limit(1)
                     ->value('code');
 
-                Logger::msg('known gay detected [' . $request->ip() . '], tryed to inject his shit: ' . $existentGay->firewall_in . ' times, redirect to ' . $randomCode);
+                Logger::msg('known gay from "' .
+                    \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit: ' .
+                    $existentGay->firewall_in . ' times, redirect to ' . $randomCode);
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
 

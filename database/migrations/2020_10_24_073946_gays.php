@@ -19,6 +19,7 @@ class Gays extends Migration
             $table->string('reason')->nullable();
             $table->integer('firewall_in')->nullable();
             $table->dateTime('degaytime')->nullable();
+            $table->timestamps();
         });
     }
 
