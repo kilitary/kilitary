@@ -160,6 +160,14 @@ class PageController extends Controller
         return back();
     }
 
+    public function addToCart(Request $request, $code)
+    {
+        \App\Logger::msg('adding to cart: ' . $code);
+        \App\Models\Tools::addToCart($code);
+
+        return back();
+    }
+
     public function donate(Request $request)
     {
         return view('donate');

@@ -87,6 +87,25 @@ class Tools
         return $id;
     }
 
+    public static function addToCart($item)
+    {
+        Redis::sadd(\request()->ip() . ':cart_items', $item);
+    }
+
+    public static function getCart()
+    {
+        static $items;
+
+        if($items != null) {
+            return $items;
+        }
+
+        $items = Redis::smembers(\request()->ip() . ':cart_items');
+        \Debugbar::addMessage('cart items: ' . ($items ? count($items) : 0));
+
+        return $items ?? [];
+    }
+
     public static function getCountry($ip)
     {
         $info = Cache::remember($ip . ':info', 3600, function() use ($ip) {

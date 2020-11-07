@@ -59,7 +59,8 @@
     <link async rel="stylesheet"
           href="/css/protip.min.css">
     <link async rel="stylesheet" href="/css/animate.min.css"/>
-    <link async href="{{ asset('css/app.css') . '?ver='.hash('crc32',\file_get_contents('css/app.css')) }}" rel="stylesheet">
+    <link async href="{{ asset('css/app.css') . '?ver='.hash('crc32',\file_get_contents('css/app.css')) }}"
+          rel="stylesheet">
 </head>
 <body>
 <header>
@@ -83,7 +84,10 @@
 </div>
 
 <footer>
-    <br/><img src="/images/flatten.png"> Your cart is empty<br/>
+    <br/><img src="/images/flatten.png"> Your cart {{\App\Models\Tools::getCart() ? 'items: ':'is empty'}}
+    @foreach (\App\Models\Tools::getCart() as $item)
+        <span class="cart-item"><a href="/view/{{$item}}">{{ $item }}</a></span>
+    @endforeach
     <div>
         <a href="/donate" class="donate-link">i NEED support</a>
     </div>

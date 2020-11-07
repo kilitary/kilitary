@@ -365,6 +365,13 @@ ul {
   width: 24px;
   color: #e83e8c;
 }
+.cart-item {
+  box-shadow: 8px 4px 16px #f5f5f5, 1px 1px 44px 11px #fff9be;
+  border-bottom: 1px dashed #8a2be2;
+  margin: 10px;
+  color: #125d32;
+  padding: 4px;
+}
 .log-ua {
   font-family: consolas;
   display: table-footer-group;

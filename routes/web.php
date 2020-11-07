@@ -45,6 +45,8 @@ Route::middleware(['cache.headers'])
                 Route::get('/proxy', 'ProxyController@list');
 
                 Route::get('/donate', 'PageController@donate');
+
+                Route::get('/cart/add/{code}', 'PageController@addToCart');
             });
 
         Route::any('/home', 'HomeController@index');
