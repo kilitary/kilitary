@@ -408,7 +408,7 @@ class PageController extends Controller
                 $code = "[access denied]";
             }
         } catch(Exception $e) {
-            \App\Logger::msg('delete()#exception: ' . $e->getMessage());
+            \App\Logger::msg('delete()#exception: ' . $e->getMessage() . "\r\n" . $e->getTraceAsString());
         }
 
         return view('delete', compact('code'));
@@ -453,9 +453,10 @@ class PageController extends Controller
                 $header = Str::slug(Str::substr($content, 0, 11), '-');
             }
 
-            do {
+            $code = Str::slug(Str::substr($content, 0, 20), '-');
+            while(Page::firstWhere('code', $code)) {
                 $code = Str::slug(Str::substr($content, 0, 20), '-') . '-' . \Str::random(3);
-            } while(Page::firstWhere('code', $code));
+            }
 
             $header = Str::slug($header, '-');
 
@@ -481,7 +482,7 @@ class PageController extends Controller
 //                //Tools::savePage($page);
 //            }
         } catch(Exception $e) {
-            \App\Logger::msg('record()#exception: ' . $e->getMessage() . '\r\n' . $e->getTraceAsString());
+            \App\Logger::msg('record()#exception: ' . $e->getMessage() . "\r\n" . $e->getTraceAsString());
         }
 
         return redirect('/view/' . $code);
