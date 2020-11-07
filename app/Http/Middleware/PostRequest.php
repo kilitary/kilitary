@@ -55,13 +55,15 @@ class PostRequest
             $via = ['fsb.ru', 'yandex.ru', 'void.ru', 'fbi.gov', 'cia.gov', 'whitehouse.gov', 'nasa.gov'];
         }
 
+        $wors = ['Dick', 'Moron', 'idiot', 'kretin', 'eblan', 'mudak', 'monkey'];
+
         return $response
             //->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
             ->header('X-At-War', Xrandom::scaled(-4, 394) == 384 ? 1 : 0)
             //->header('Pragma', 'no-cache')
             ->header('cf-ray', \Str::random(10) . '-' . \Str::upper(\Str::random(3)))
-            ->header('expect-pdd', 'max-age=' . \App\XRandom::get(100, 9999))
-            ->header('X-CurveBank', 'Dont Be A Dick')
+            ->header('expect-dtp', 'max-age=' . \App\XRandom::get(0, 2) . 'd')
+            ->header('X-CurveBank', 'Dont Be A ' . $wors[\App\XRandom::get(0, sizeof($wors) - 1)])
             ->header('Client-post-version', 'arminer ' . '(0.1d-2020 0x43-b/c/AN/SPY49)')
             ->header("Proxy-connection-class", "%s%s%s?&nbsp;&" . Xrandom::scaled(1999999, 999999999))
             ->header("Last-chain", Xrandom::scaled(10000000, 9899909999))

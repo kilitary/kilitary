@@ -11,6 +11,7 @@ use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
 use const JSON_PRETTY_PRINT;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 
 class Tools
 {
@@ -88,10 +89,12 @@ class Tools
 
     public static function getCountry($ip)
     {
-        $info = \DB::table('ip_info')
-            ->select('info->country_name as country_name')
-            ->where('ip', $ip)
-            ->first();
+        $info = Cache::remember($ip . ':info', 3600, function() use ($ip) {
+            return \DB::table('ip_info')
+                ->select('info->country_name as country_name')
+                ->where('ip', $ip)
+                ->first();
+        });
 
         return $info == null ? '#unresolved#' : $info->country_name;
     }
