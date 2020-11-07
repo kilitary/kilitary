@@ -93,7 +93,7 @@
         </span>
     @endforeach
     <div class="support-box">
-        <a href="/donate" class="donate-link">i NEED</a> support
+        <a href="/donate" class="donate-link"><strong>i NEED</strong> support</a>
     </div>
     <a href="/cparea"><img src="/images/constructionNotice.jpg" width="64" height="64" class="construct-logo"
                            title="SITE IS UNDER ACTIVE DEVELOPMENT: EXPECT BUGS/ERRORS/FATALITYS AND NO INCOME"></a>
