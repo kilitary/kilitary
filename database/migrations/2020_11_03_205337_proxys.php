@@ -25,6 +25,7 @@ class Proxys extends Migration
             $table->string('software')->nullable()->default('unknown');
             $table->timestamp('checked_at')->nullable()->index();
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
