@@ -16,15 +16,9 @@ class Tools
 {
     public static $allKeys = [];
 
-    public static function visits()
+    public static function ipVisits()
     {
-        $ip = request()->ip();
-
-        $key = $ip . ':ip_log_ids';
-
-        $val = Redis::llen($key);
-
-        return $val;
+        return Redis::llen(request()->ip() . ':ip_log_ids');
     }
 
     public static function isGay($ip)

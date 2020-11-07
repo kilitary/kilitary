@@ -42,7 +42,7 @@ class PageController extends Controller
         XRandom::followRand(7);
 
         Logger::msg('index> remote: ' . $request->ip() . ':' . $_SERVER['REMOTE_PORT'] . ' uri: ' . $request->fullUrl() . ' from: ' . $request->header('referer') .
-            " session: " . session()->getId() . ' visits: ' . ((int) \App\Models\Tools::visits()));
+            " session: " . session()->getId() . ' visits: ' . ((int) \App\Models\Tools::ipVisits()));
 
         $info = $request->input('fr');
         $gdiSelected = -3;
