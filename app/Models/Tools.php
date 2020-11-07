@@ -30,9 +30,11 @@ class Tools
             ->where('code', $item)
             ->value('cost');
 
-        $costs[$item] = $cost ?? 0.0;
+        $costs[$item] = $cost;
 
-        return $costs[$item];
+        \App\Logger::msg('cost for ' . $item . ': ' . ($cost === null), $cost);
+
+        return (float) $costs[$item];
     }
 
     public static function ipVisits()
