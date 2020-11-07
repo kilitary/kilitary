@@ -14,7 +14,7 @@ class CountryComments extends Migration
     public function up()
     {
         Schema::table('comments', function(Blueprint $table) {
-            $table->string('country')->default(null)->after('ip');
+            $table->string('country')->nullable()->default(null)->after('ip');
         });
     }
 

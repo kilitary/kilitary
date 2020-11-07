@@ -251,6 +251,10 @@ class PageController extends Controller
         $page = Page::where('code', $code)
             ->first();
 
+        if(!$page) {
+            return redirect('/');
+        }
+
         return view('edit', compact('page'));
     }
 
@@ -322,7 +326,7 @@ class PageController extends Controller
             $header = $page->header;
             $views = $page->views;
             $edits = $page->edits;
-            $page->views += (XRandom::get(0, 3) == 1 ? XRandom::get(1, 4) : 0);
+            $page->views += 1;
             $page->save();
 
             $content = \preg_replace_callback('#(\w{1,22}\W+?)#u', function($matches) {
@@ -426,29 +430,37 @@ class PageController extends Controller
 
             $header = $request->post('header');
 
-            if(preg_match("#^take\s+(http\S*)\s*?(\w*?)$#Usi", $content, $matches)) {
+            if(preg_match("#^take\s{1}?([0-9a-zA-Z://\.]*)(?:\s+(\w+)|)$#Usi", $content, $matches)) {
                 \App\Logger::msg('taking article from ' . $matches[1]);
-                $extractionResult = WebArticleExtractor\Extract::extractFromURL($matches[1]);
-                if($matches[2] == 'd') {
+                $uri = $matches[1];
+                if(!\Str::contains($uri, 'http')) {
+                    $uri = 'http://' . $uri;
+                }
+                $extractionResult = WebArticleExtractor\Extract::extractFromURL($uri);
+                if(isset($matches[2]) && $matches[2] == 'd') {
                     dd($extractionResult);
                 }
                 $content = \str_replace("\r\n", "<br/><br/>", $extractionResult->text);
 
                 if(empty(trim($header))) {
-                    $header = $extractionResult->title;
+                    $header = Str::substr($extractionResult->title, 0, 10);
                 }
             }
 
             $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
 
             if(empty(trim($header))) {
-                $header = Str::random(40);
+                $header = Str::slug(Str::substr($content, 0, 11), '-');
             }
 
-            $code = Str::slug(Str::substr($content, 0, 20), '-');
+            do {
+                $code = Str::slug(Str::substr($content, 0, 20), '-') . '-' . \Str::random(3);
+            } while(Page::firstWhere('code', $code));
+
             $header = Str::slug($header, '-');
 
             $country = Tools::getCountry($request->ip());
+            $header = Str::substr($header, 0, 255);
 
             $page = Page::create([
                 'code' => $code,
@@ -456,17 +468,20 @@ class PageController extends Controller
                 'edits' => 0,
                 'views' => -1,
                 'content' => $content,
-                'header' => Str::substr($header, 0, 255),
+                'header' => $header,
                 'active' => 1,
                 'blocked' => 0,
                 'country' => $country
             ]);
 
-            if($request->post('inVault') == 'on') {
-                //Tools::savePage($page);
-            }
+            \App\Logger::msg('new page code: ' . $code . ' len: ' . strlen($content) . ' header: ' . $header . ' country: ' . $country);
+
+            // TODO: save in vault
+//            if($request->post('inVault') == 'on') {
+//                //Tools::savePage($page);
+//            }
         } catch(Exception $e) {
-            \App\Logger::msg('record()#exception: ' . $e->getMessage());
+            \App\Logger::msg('record()#exception: ' . $e->getMessage() . '\r\n' . $e->getTraceAsString());
         }
 
         return redirect('/view/' . $code);
