@@ -16,6 +16,17 @@ class Tools
 {
     public static $allKeys = [];
 
+    public static function visits()
+    {
+        $ip = request()->ip();
+
+        $key = $ip . ':ip_log_ids';
+
+        $val = Redis::llen($key);
+
+        return $val;
+    }
+
     public static function isGay($ip)
     {
         return (boolean) \App\Gay::where('ip', '=', $ip)

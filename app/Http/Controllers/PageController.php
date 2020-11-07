@@ -41,8 +41,8 @@ class PageController extends Controller
     {
         XRandom::followRand(7);
 
-        Logger::msg('main ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER') .
-            "session: " . \session_id());
+        Logger::msg('index> remote: ' . $request->ip() . ':' . $_SERVER['REMOTE_PORT'] . ' uri: ' . $request->fullUrl() . ' from: ' . $request->header('referer') .
+            " session: " . session()->getId() . ' visits: ' . ((int) \App\Models\Tools::visits()));
 
         $info = $request->input('fr');
         $gdiSelected = -3;
@@ -87,7 +87,7 @@ class PageController extends Controller
         XRandom::followRand(XRandom::scaled(1, 15));
 
         try {
-            $srcImage = $manager->make('../resources/media/darkcp.jpg');
+            $srcImage = $manager->make(' ../resources / media / darkcp . jpg');
 
             $maxI = XRandom::scaled(1, 8);
 
@@ -95,7 +95,7 @@ class PageController extends Controller
 
                 XRandom::followRand(XRandom::get(1, 11));
 
-                $overlappedImage = $manager->make('../resources/media/darkcp.jpg')
+                $overlappedImage = $manager->make(' ../resources / media / darkcp . jpg')
                     ->resize(\App\XRandom::scaled(1, 200), \App\XRandom::scaled(1, 200));
 
                 if(XRandom::maybe()) {
@@ -122,7 +122,7 @@ class PageController extends Controller
                     $overlappedImage->blur(XRandom::scaled(1, 120));
                 }
 
-                $coords = ['top-left', 'center', 'top-right', 'bottom-left', 'bottom-right'];
+                $coords = ['top - left', 'center', 'top - right', 'bottom - left', 'bottom - right'];
 
                 $srcImage->insert($overlappedImage, $coords[XRandom::scaled(0, count($coords) - 1)],
                     XRandom::scaled(1, 122), XRandom::scaled(1, 122))->sharpen(XRandom::scaled(1, 100));
@@ -134,9 +134,9 @@ class PageController extends Controller
         }
 
         return XRandom::maybe() ?
-            \response()->file('media/sh.png', ['Content-Type' => 'image/png'])
+            \response()->file('media / sh . png', ['Content - Type' => 'image / png'])
             :
-            (XRandom::maybe() ? \response('', 410) : $srcImage->response('image/png'));
+            (XRandom::maybe() ? \response('', 410) : $srcImage->response('image / png'));
     }
 
     public function cp(Request $request)
@@ -166,7 +166,7 @@ class PageController extends Controller
             Logger::msg('write comment: ', $request->all());
             $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
             if($isGay) {
-                $existentGay = \App\Gay::firstWhere('ip', '=', $request->ip());
+                $existentGay = \App\Gay::firstWhere('ip', ' = ', $request->ip());
 
                 $randomCode = \App\Models\Page::select('code')
                     ->inRandomOrder()
@@ -179,7 +179,7 @@ class PageController extends Controller
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
 
-                return redirect('/view/' . $randomCode);
+                return redirect(' / view / ' . $randomCode);
             }
 
             preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
@@ -246,7 +246,8 @@ class PageController extends Controller
         });
     }
 
-    public function edit(Request $request, $code)
+    public
+    function edit(Request $request, $code)
     {
         $page = Page::where('code', $code)
             ->first();
@@ -258,7 +259,8 @@ class PageController extends Controller
         return view('edit', compact('page'));
     }
 
-    public function update(Request $request, $code)
+    public
+    function update(Request $request, $code)
     {
         $page = Page::firstWhere('code', $code);
 
@@ -274,7 +276,8 @@ class PageController extends Controller
         return redirect('/view/' . $code);
     }
 
-    public function touch(Request $request, $code)
+    public
+    function touch(Request $request, $code)
     {
         $page = \App\Models\Page::where('code', $code)
             ->first();
@@ -285,14 +288,16 @@ class PageController extends Controller
         return back();
     }
 
-    public function reset(Request $request)
+    public
+    function reset(Request $request)
     {
         session()->flush();
 
         return redirect('/?reset = ' . XRandom::get(0, 5));
     }
 
-    public function page(Request $request, $code)
+    public
+    function page(Request $request, $code)
     {
         $currentDeleted = session('currentDeleted');
         if($currentDeleted && in_array($code, $currentDeleted)) {
@@ -371,7 +376,8 @@ class PageController extends Controller
             'description', 'page_id', 'comments', 'country', 'converter', 'keys', 'ip', 'page'));
     }
 
-    public function delete(Request $request, $code, $mode)
+    public
+    function delete(Request $request, $code, $mode)
     {
         try {
             $currentDeleted = session('currentDeleted', []);
@@ -396,7 +402,8 @@ class PageController extends Controller
         return view('delete', compact('code'));
     }
 
-    public function record(Request $request, $code)
+    public
+    function record(Request $request, $code)
     {
         try {
             \App\Logger::msg('new info creation: code: ' . $code . ' len: ' . \mb_strlen($request->post('content')));
