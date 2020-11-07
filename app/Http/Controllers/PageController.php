@@ -87,7 +87,7 @@ class PageController extends Controller
         XRandom::followRand(XRandom::scaled(1, 15));
 
         try {
-            $srcImage = $manager->make(' ../resources / media / darkcp . jpg');
+            $srcImage = $manager->make('../resources/media/darkcp.jpg');
 
             $maxI = XRandom::scaled(1, 8);
 
@@ -95,7 +95,7 @@ class PageController extends Controller
 
                 XRandom::followRand(XRandom::get(1, 11));
 
-                $overlappedImage = $manager->make(' ../resources / media / darkcp . jpg')
+                $overlappedImage = $manager->make('../resources/media/darkcp.jpg')
                     ->resize(\App\XRandom::scaled(1, 200), \App\XRandom::scaled(1, 200));
 
                 if(XRandom::maybe()) {
@@ -134,9 +134,9 @@ class PageController extends Controller
         }
 
         return XRandom::maybe() ?
-            \response()->file('media / sh . png', ['Content - Type' => 'image / png'])
+            \response()->file('media/sh.png', ['Content-Type' => 'image/png'])
             :
-            (XRandom::maybe() ? \response('', 410) : $srcImage->response('image / png'));
+            (XRandom::maybe() ? \response('', 410) : $srcImage->response('image/png'));
     }
 
     public function cp(Request $request)
@@ -181,7 +181,7 @@ class PageController extends Controller
                     $existentGay->save();
                 }
 
-                return redirect(' / view / ' . $randomCode);
+                return redirect('/view/' . $randomCode);
             }
 
             preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
