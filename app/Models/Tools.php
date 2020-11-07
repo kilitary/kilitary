@@ -17,6 +17,24 @@ class Tools
 {
     public static $allKeys = [];
 
+    public static function getItemCost($item)
+    {
+        static $costs = [];
+
+        if(isset($costs[$item])) {
+            return $costs[$item];
+        }
+
+        $cost = \DB::table('pages')
+            ->select('cost')
+            ->where('code', $item)
+            ->value('cost');
+
+        $costs[$item] = $cost ?? 0.0;
+
+        return $costs[$item];
+    }
+
     public static function ipVisits()
     {
         return Redis::llen(request()->ip() . ':ip_log_ids');
