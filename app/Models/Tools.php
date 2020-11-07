@@ -59,7 +59,10 @@ class Tools
 
     public static function pushKey($key)
     {
-        self::$allKeys[] = $key;
+        $key = trim(\strip_tags(trim($key)));
+        if(strlen($key) && $key != 'br/') {
+            self::$allKeys[] = $key;
+        }
     }
 
     public static function getArrayKeys()

@@ -52,6 +52,6 @@ Route::middleware(['cache.headers'])
         Route::post('/us/create', 'UrlController@create');
         Route::get('/us/{url}', 'UrlController@redirect');
 
-        Route::fallback('PageController@fallback');
+        Route::fallback('PageController@index');
     });
 

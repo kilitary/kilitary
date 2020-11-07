@@ -274,24 +274,6 @@ class PageController extends Controller
         return redirect('/view/' . $code);
     }
 
-    public function fallback(Request $request)
-    {
-        XRandom::followRand(7);
-        Logger::msg('fallback ' . $_SERVER['REMOTE_ADDR'] . ' ' . $request->fullUrl() . ' from ' . $request->header('HTTP_REFERER'));
-        $info = $request->input('fr');
-        $gdiSelected = XRandom::get(0, 1);
-        $chanceOf = XRandom::get(0, 9);
-        $sign = XRandom::sign(26);
-        $shortUrl = ShortUrl::inRandomOrder()->first();
-        Logger::msg('gdiSelected:  ' . $gdiSelected . ' chanceOf: ' . $chanceOf . ' sign: ' . $sign);
-        $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
-        $fortune = `cat fortune-state`;
-
-        return response()->view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl', 'pwnedBy', 'fortune'),
-            \App\XRandom::maybe() ? 303 : 402);
-
-    }
-
     public function touch(Request $request, $code)
     {
         $page = \App\Models\Page::where('code', $code)
@@ -430,9 +412,10 @@ class PageController extends Controller
 
             $header = $request->post('header');
 
-            if(preg_match("#^take\s{1}?([0-9a-zA-Z://\.]*)(?:\s+(\w+)|)$#Usi", $content, $matches)) {
+            if(preg_match("#^take\s{1}?([0-9a-zA-Z:/\-\.]*)(?:\s+(\w+)|)$#Usi", $content, $matches)) {
                 \App\Logger::msg('taking article from ' . $matches[1]);
                 $uri = $matches[1];
+
                 if(!\Str::contains($uri, 'http')) {
                     $uri = 'http://' . $uri;
                 }
@@ -441,6 +424,7 @@ class PageController extends Controller
                     dd($extractionResult);
                 }
                 $content = \str_replace("\r\n", "<br/><br/>", $extractionResult->text);
+                \App\Logger::msg('page len:' . strlen($content));
 
                 if(empty(trim($header))) {
                     $header = Str::substr($extractionResult->title, 0, 10);
@@ -449,6 +433,10 @@ class PageController extends Controller
 
             $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
 
+            if(strlen($content) <= 5) {
+                \App\Logger::msg('content length too small: ' . strlen($content));
+                return back();
+            }
             if(empty(trim($header))) {
                 $header = Str::slug(Str::substr($content, 0, 11), '-');
             }
