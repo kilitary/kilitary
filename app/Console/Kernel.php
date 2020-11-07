@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use App\Jobs\IpInfoResolver;
 use App\Jobs\ClearOldShit;
+use App\Jobs\ProxySoftwareNamer;
 
 class Kernel extends ConsoleKernel
 {
@@ -49,16 +50,20 @@ class Kernel extends ConsoleKernel
         })->everyMinute();
 
         $schedule->job(new RedisSaver)
-            ->everyTenMinutes();
+            ->everyTenMinutes()
+            ->withoutOverlapping();
 
         $schedule->job(new IpInfoResolver)
-            ->everyFiveMinutes();
+            ->everyFiveMinutes()
+            ->withoutOverlapping();
 
         $schedule->job(new FetchProxy)
-            ->everyFourHours();
+            ->everyFourHours()
+            ->withoutOverlapping();
 
-//        $schedule->job(new ProxyCheck)
-//            ->hourly();
+        $schedule->job(new ProxySoftwareNamer)
+            ->everyTenMinutes()
+            ->withoutOverlapping();
 
     }
 
