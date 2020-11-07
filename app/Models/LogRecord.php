@@ -46,6 +46,7 @@ class LogRecord extends Model
     ];
     protected $table = 'logs';
     protected $fillable = ['ip', 'method', 'url', 'ua', 'info', 'http_code', 'request_start', 'referer'];
+    protected $dispatchesEvents = false;
 
     public function ipInfo()
     {
