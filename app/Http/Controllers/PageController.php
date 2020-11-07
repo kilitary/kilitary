@@ -175,9 +175,11 @@ class PageController extends Controller
 
                 Logger::msg('known gay from "' .
                     \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit: ' .
-                    $existentGay->firewall_in . ' times, redirect to ' . $randomCode);
-                $existentGay->firewall_in += 1;
-                $existentGay->save();
+                    ($existentGay ? $existentGay->firewall_in : -1) . ' times, redirect to ' . $randomCode);
+                if($existentGay) {
+                    $existentGay->firewall_in += 1;
+                    $existentGay->save();
+                }
 
                 return redirect(' / view / ' . $randomCode);
             }
