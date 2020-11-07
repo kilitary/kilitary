@@ -289,6 +289,7 @@ class PageController extends Controller
         $page->content = $request->post('content');
         $page->edits++;
         $page->header = $request->post('header');
+        $page->cost = $request->post('cost');
         $page->save();
 
         return redirect('/view/' . $code);

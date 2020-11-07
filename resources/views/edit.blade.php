@@ -5,9 +5,20 @@
     <div class="container page-content">
         <form method="post" action="/update/{{$page->code}}">
             {{csrf_field()}}
-            <input name="header" style="margin-bottom:10px;width:500px" value="{{$page->header}}">
             <div>
-                <textarea name="content" style="width:100%;height:700px">{{$page->content}}</textarea>
+                <label class="edit-label" for="header">header</label>
+                <input name="header" style="margin-bottom:10px;width:500px" placeholder="example: my super header"
+                       value="{{$page->header}}">
+            </div>
+            <div>
+                <label class="edit-label" for="cost">cost (in USD)</label>
+                <input name="cost" style="margin-bottom:10px;width:500px" placeholder="example: 1.95"
+                       value="{{$page->cost}}">
+            </div>
+            <div>
+                <label class="edit-label" for="content">content</label>
+                <textarea name="content" placeholder="water is wet"
+                          style="width:100%;height:700px">{{$page->content}}</textarea>
             </div>
             <h2 class="page-header">
                 <button>extend</button>

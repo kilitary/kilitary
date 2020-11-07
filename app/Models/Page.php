@@ -40,7 +40,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Page extends Model
 {
-    protected $fillable = ['content', 'header', 'visits', 'country', 'ip', 'edits', 'views', 'header', 'active', 'blocked', 'code'];
+    protected $fillable = ['content', 'cost', 'header', 'visits', 'country', 'ip', 'edits', 'views', 'header', 'active', 'blocked', 'code'];
 
     public function comments()
     {

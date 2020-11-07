@@ -328,6 +328,12 @@ ul {
   border-bottom: 4px dashed #ffa500;
   margin-bottom: 10px;
 }
+.edit-label {
+  box-shadow: 0 120px 1122px 0 #00fa9a, 0 1px 111px 0 #00fa9a;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  display: table-cell;
+}
 .car {
   position: absolute;
   top: 25%;

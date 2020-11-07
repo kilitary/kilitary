@@ -16,6 +16,7 @@
                       data-pt-title="<pre class='protip-mine'>{{\App\Models\Tools::ipInfo($ip)}}</pre>"
                       class="ip-info-page protip"
                 >Connection<-</span>
+            <span>Cost: ${{$page->cost}}</span>
 
         </div>
 
