@@ -166,7 +166,8 @@ class PageController extends Controller
             Logger::msg('write comment: ', $request->all());
             $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
             if($isGay) {
-                $existentGay = \App\Gay::firstWhere('ip', ' = ', $request->ip());
+                $existentGay = \App\Gay::where('ip', $request->ip())
+                    ->first();
 
                 $randomCode = \App\Models\Page::select('code')
                     ->inRandomOrder()
