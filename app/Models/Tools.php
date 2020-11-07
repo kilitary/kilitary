@@ -32,8 +32,6 @@ class Tools
 
         $costs[$item] = $cost;
 
-        \App\Logger::msg('cost for ' . $item . ': ' . ($cost === null), $cost);
-
         return (float) $costs[$item];
     }
 

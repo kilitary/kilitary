@@ -207,7 +207,7 @@ class PageController extends Controller
             $difflLen = \Str::length($request->post('comment')) - $domainLen;
 
             Logger::msg('comment spam analyze: domainLen: ' . $domainLen . ' diffLen: ' . $difflLen);
-            if($domainLen > 256 && $difflLen >= 512) {
+            if($domainLen > 64 && $difflLen >= 128) {
                 $reason = 'links per plain text weight overflow <url: ' . $domainLen . ' > diff: ' . $difflLen . '>';
 
                 $gayGroup = \Str::upper(\Str::random(3));
