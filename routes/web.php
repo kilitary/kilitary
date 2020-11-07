@@ -43,6 +43,8 @@ Route::middleware(['cache.headers'])
                 Route::any('/page/{page_code}', 'PageController@record');
 
                 Route::get('/proxy', 'ProxyController@list');
+
+                Route::get('/donate', 'PageController@donate');
             });
 
         Route::any('/home', 'HomeController@index');

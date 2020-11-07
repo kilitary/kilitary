@@ -297,6 +297,10 @@ ul {
   padding-top: 11px;
   margin-top: 0px;
 }
+.donate-link {
+  color: #f00;
+  box-shadow: 0 10px 1px 0 #fffee9, 0 11px 1px 0 #f00;
+}
 .construct-logo {
   padding-top: 10px;
 }
@@ -310,6 +314,11 @@ ul {
   padding-bottom: 0px;
   padding-top: 0px;
   margin-top: 0px;
+}
+.donate-area {
+  padding: 20px;
+  line-height: 30px;
+  border-bottom: 1px solid #f00;
 }
 .log-record {
   font-family: consolas;

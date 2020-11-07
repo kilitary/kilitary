@@ -160,6 +160,11 @@ class PageController extends Controller
         return back();
     }
 
+    public function donate(Request $request)
+    {
+        return view('donate');
+    }
+
     public function writeComment(Request $request)
     {
         return \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
