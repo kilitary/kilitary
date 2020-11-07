@@ -60,7 +60,7 @@ class PostRequest
         return $response
             //->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
             ->header('X-At-War', Xrandom::scaled(-4, 394) == 384 ? 1 : 0)
-            //->header('Pragma', 'no-cache')
+            ->header('Pragma', 'no-cache')
             ->header('cf-ray', \Str::random(10) . '-' . \Str::upper(\Str::random(3)))
             ->header('expect-dtp', 'max-age=' . \App\XRandom::get(0, 2) . 'd')
             ->header('X-CurveBank', 'Dont Be A ' . $wors[\App\XRandom::get(0, sizeof($wors) - 1)])
