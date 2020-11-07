@@ -103,7 +103,6 @@
                 href="mailto:kilitary@x25.cc">it</a>ary<a
                 href="mailto:deconf@ya.ru">.ru</a>
             | {{request()->ip()}}? | {{ isset($gaysCount) ? $gaysCount . " gay(s) in db" : "" }}
-            | <a href="/donate" class="donate-link">i NEED support</a>
         </div>
     </div>
 @endsection

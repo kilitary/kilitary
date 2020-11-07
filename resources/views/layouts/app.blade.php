@@ -83,12 +83,17 @@
 </div>
 
 <footer>
-    <br/><img src="/images/flatten.png"> Your cart is full<br/>
+    <br/><img src="/images/flatten.png"> Your cart is empty<br/>
+    <div>
+        <a href="/donate" class="donate-link">i NEED support</a>
+    </div>
     <a href="/cparea"><img src="/images/constructionNotice.jpg" width="64" height="64" class="construct-logo"
                            title="SITE IS UNDER ACTIVE DEVELOPMENT: EXPECT BUGS/ERRORS/FATALITYS AND NO INCOME"></a>
+
     <div class="car">
         <img height='400px' src="/images/car{{(\App\XRandom::scaled(0,2) == 1 ? '3' : '')}}.jpg">
     </div>
+
     @if (\App\Models\Tools::IsAdmin())
         <ul>
             <li><a href="/admin/logs">logs</a></li>
