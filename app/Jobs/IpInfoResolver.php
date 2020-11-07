@@ -30,6 +30,7 @@ class IpInfoResolver implements ShouldQueue
      */
     public function handle()
     {
+        \App\Logger::msg('job -> ip info resolve starting');
         $ips = \DB::table('ip_info')
             ->select('ip', 'info')
             ->whereNotIn('ip', ['127.0.0.1'])
@@ -62,5 +63,6 @@ class IpInfoResolver implements ShouldQueue
                 break;
             }
         }
+        \App\Logger::msg('job -> ip info resolve done');
     }
 }
