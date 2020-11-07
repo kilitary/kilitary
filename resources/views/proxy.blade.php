@@ -33,7 +33,7 @@
                     <td>{{$proxy['speed']??'?'}}</td>
                     <td>{{$proxy['software']??'?'}}</td>
                     <td>{{\App\Models\Tools::getCountry($proxy['host'])}}</td>
-                    <td>{{$proxy['created_at']->format('h:m:s d/m/Y')}}</td>
+                    <td>{{isset($proxy['created_at']) ? $proxy['created_at']->format('h:m:s d/m/Y') :'?'}}</td>
                     <td>{{$proxy['checked_at']??'?'}}</td>
                 </tr>
             @endforeach
