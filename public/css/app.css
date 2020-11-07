@@ -305,9 +305,9 @@ ul {
   padding-top: 10px;
 }
 .construct-logo:hover {
-  width: 240px;
-  height: 240px;
-  border: 5px solid #00fa9a;
+  box-shadow: 0 10px 12px 0 #0ff, 0 11px 111px 0 #20b2aa;
+  background-color: #b0ffd7;
+  padding-right: 5px;
 }
 .page-footer {
   border-top: 9px dotted #d3d3d3;
@@ -333,6 +333,10 @@ ul {
   margin-bottom: 20px;
   padding-bottom: 10px;
   display: table-cell;
+}
+.support-box {
+  font-family: Consolas;
+  padding: 15px 0px 15px 0px;
 }
 .car {
   position: absolute;

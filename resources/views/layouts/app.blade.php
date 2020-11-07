@@ -92,7 +92,7 @@
             <a href="/view/{{$item}}">{{ $item }}</a>
         </span>
     @endforeach
-    <div>
+    <div class="support-box">
         <a href="/donate" class="donate-link">i NEED support</a>
     </div>
     <a href="/cparea"><img src="/images/constructionNotice.jpg" width="64" height="64" class="construct-logo"
