@@ -52,14 +52,14 @@
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="/js/2.0.0.js"></script>
     <script src="/js/protip.min.js"></script>
-    <script src="{{ mix('js/app.js') . '?'.hash('crc32',\App\XRandom::get(0,999999)) }}"></script>
+    <script src="{{ mix('js/app.js') . '?ver='.hash('crc32',\file_get_contents('js/app.js')) }}"></script>
 
     {{--<script src="https://www.googleoptimize.com/optimize.js?id=OPT-KCXWFW7"></script> --}}
     <link async href="/css/liberation-mono.css" rel="stylesheet">
     <link async rel="stylesheet"
           href="/css/protip.min.css">
     <link async rel="stylesheet" href="/css/animate.min.css"/>
-    <link async href="{{ asset('css/app.css') . '?'.hash('crc32',\App\XRandom::get(0,999999)) }}" rel="stylesheet">
+    <link async href="{{ asset('css/app.css') . '?ver='.hash('crc32',\file_get_contents('css/app.css')) }}" rel="stylesheet">
 </head>
 <body>
 <header>
