@@ -7,6 +7,7 @@
             <tr>
                 <th>ip</th>
                 <th>пушо</th>
+                <th>ордер</th>
                 <th>унбано</th>
             </tr>
             @foreach ($gays as $gay)
@@ -18,6 +19,9 @@
                     </td>
                     <td>
                         {{$gay->reason}}
+                    </td>
+                    <td>
+                        {{$gay->nick}}
                     </td>
                     <td>
                         {{$gay->degaytime}}
