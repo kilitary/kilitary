@@ -5,6 +5,13 @@ body {
   height: 100%;
   width: 98%;
 }
+.cpu-item {
+  font-family: "Consolas";
+}
+.cpu-item:hover {
+  box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+  color: #197d44;
+}
 .content-container {
   box-shadow: 0 0px 0px #2abaff, 0 0px 32px 0 #ffefa2;
   padding-top: 5px;
@@ -386,6 +393,11 @@ ul {
   margin: 10px;
   color: #125d32;
   padding: 4px;
+}
+.cart-item:hover {
+  color: #f00;
+  cursor: pointer;
+  box-shadow: 3px 2px 16px #f5f5f5, 1px 1px 10px 10px #cef4de;
 }
 .protip-cart-item {
   margin: 0px;
