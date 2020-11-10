@@ -18,10 +18,17 @@
                 >Connection<-</span>
             <span>Cost: ${{$page->cost}}</span>
 
-            <span class="social-twitter"><a data-size="small" class="twitter-share-button"
-                                            href="https://twitter.com/intent/tweet?hashtags=kilitary,deconf,x25&via=router&text=kilitary.ru make out ">
+            <div class="social-buttons">
+                <span class="social-twitter"><a data-size="small" class="twitter-share-button"
+                                                href="https://twitter.com/intent/tweet?hashtags=kilitary,deconf,x25&via=router&text=kilitary.ru make out ">
                 Tweet</a>
                     </span>
+
+                <span class="fb-share-button social-facebook" data-href="{{request()->fullUrl()}}" data-layout="button_count"
+                     data-size="small"><a target="_blank"
+                                          href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(request()->fullUrl())}}&src=sdkpreparse"
+                                          class="fb-xfbml-parse-ignore">share</a></span>
+            </div>
 
         </div>
 
@@ -89,6 +96,7 @@
 
 
     </div>
+    <div id="fb-root"></div>
 @endsection
 
 @section('scripts')
@@ -124,5 +132,8 @@
 
             return t;
         }(document, "script", "twitter-wjs"));</script>
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v9.0"
+            nonce="YLGawk8W"></script>
 @endsection
 
