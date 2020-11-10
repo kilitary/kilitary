@@ -61,9 +61,9 @@ class Kernel extends ConsoleKernel
             ->everyFourHours()
             ->withoutOverlapping();
 
-        $schedule->job(new ProxySoftwareNamer)
-            ->everyTenMinutes()
-            ->withoutOverlapping();
+//        $schedule->job(new ProxySoftwareNamer)
+//            ->everyTenMinutes()
+//            ->withoutOverlapping();
 
     }
 
