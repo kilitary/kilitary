@@ -27,6 +27,7 @@ use Intervention\Image\ImageManager;
 use const JSON_PRETTY_PRINT;
 use const PREG_SET_ORDER;
 use \WebArticleExtractor;
+use Illuminate\Support\Facades\Cache;
 
 class PageController extends Controller
 {
@@ -264,8 +265,7 @@ class PageController extends Controller
         });
     }
 
-    public
-    function edit(Request $request, $code)
+    public function edit(Request $request, $code)
     {
         $page = Page::where('code', $code)
             ->first();
@@ -277,8 +277,7 @@ class PageController extends Controller
         return view('edit', compact('page'));
     }
 
-    public
-    function update(Request $request, $code)
+    public function update(Request $request, $code)
     {
         $page = Page::firstWhere('code', $code);
 
@@ -295,8 +294,7 @@ class PageController extends Controller
         return redirect('/view/' . $code);
     }
 
-    public
-    function touch(Request $request, $code)
+    public function touch(Request $request, $code)
     {
         $page = \App\Models\Page::where('code', $code)
             ->first();
@@ -307,16 +305,14 @@ class PageController extends Controller
         return back();
     }
 
-    public
-    function reset(Request $request)
+    public function reset(Request $request)
     {
         session()->flush();
 
         return redirect('/?reset = ' . XRandom::get(0, 5));
     }
 
-    public
-    function page(Request $request, $code)
+    public function page(Request $request, $code)
     {
         $currentDeleted = session('currentDeleted');
         if($currentDeleted && in_array($code, $currentDeleted)) {
@@ -395,8 +391,7 @@ class PageController extends Controller
             'description', 'page_id', 'comments', 'country', 'converter', 'keys', 'ip', 'page'));
     }
 
-    public
-    function delete(Request $request, $code, $mode)
+    public function delete(Request $request, $code, $mode)
     {
         try {
             $currentDeleted = session('currentDeleted', []);
@@ -421,8 +416,16 @@ class PageController extends Controller
         return view('delete', compact('code'));
     }
 
-    public
-    function record(Request $request, $code)
+    public function gays(Request $request)
+    {
+        $gays = Cache::remember('gays', 1440, function() {
+            return \App\Gay::all();
+        });
+
+        return view('gays', compact('gays'));
+    }
+
+    public function record(Request $request, $code)
     {
         try {
             \App\Logger::msg($request->method() . '> new info creation: code: ' . $code . ' len: ' . \mb_strlen($request->post('content')));
