@@ -23,7 +23,7 @@ class Logger extends Model
             $fp = @fopen(env('LOG_FILE'), 'a');
             if($fp) {
                 $at = \Carbon::now()->format('Y-m-d H:i:s.u');
-                @fwrite($fp, env('APP_NAME') . ' ' . $at . ': ' . $msg . PHP_EOL);
+                @fwrite($fp, $at . ' ' . env('APP_NAME') . ': ' . $msg . PHP_EOL);
                 @fclose($fp);
             }
         }
