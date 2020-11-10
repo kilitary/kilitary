@@ -18,10 +18,10 @@
                 >Connection<-</span>
             <span>Cost: ${{$page->cost}}</span>
 
-            <div class="social-twitter"><a data-size="small" class="twitter-share-button"
-                     href="https://twitter.com/intent/tweet?hashtags=kilitary&via=router&text=kilitary.ru make out ">
+            <span class="social-twitter"><a data-size="small" class="twitter-share-button"
+                                            href="https://twitter.com/intent/tweet?hashtags=kilitary&via=router&text=kilitary.ru make out ">
                 Tweet</a>
-            </div>
+                    </span>
 
         </div>
 
