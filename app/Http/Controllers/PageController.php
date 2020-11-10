@@ -303,7 +303,7 @@ class PageController extends Controller
         $page->updated_at = $touchTime;
         $page->save();
 
-        \App\Logger::msg($request->ip() . ' touched ' . $page->code . '@' . $touchTime);
+        \App\Logger::msg($request->ip() . ' touched ' . $page->code . ' @ ' . $touchTime);
 
         return back();
     }

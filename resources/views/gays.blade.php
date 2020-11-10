@@ -3,18 +3,24 @@
 @section('content')
     <a href="/"><-index</a><br/>
     <div class="container page-content">
-        <table>
+        <table class="gay-list-table">
             <tr>
                 <th>ip</th>
                 <th>пушо</th>
+                <th>унбано</th>
             </tr>
             @foreach ($gays as $gay)
                 <tr>
                     <td>
-                        {{$gay->ip}}
+                        <span data-pt-placement="corner-right-top" data-pt-width='800'
+                              data-pt-title="<pre class='protip-mine'>{{ \App\Models\Tools::ipInfo($gay->ip) }}</pre>"
+                              class="protip interestlink" data-pt-scheme="white">{{$gay->ip}}</span>
                     </td>
                     <td>
                         {{$gay->reason}}
+                    </td>
+                    <td>
+                        {{$gay->degaytime}}
                     </td>
                 </tr>
             @endforeach
