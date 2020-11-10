@@ -102,7 +102,7 @@
                 href="mailto:kilitary@protonmail.com">kil</a><a
                 href="mailto:kilitary@x25.cc">it</a><a href="mailto:deconf@kilitary.ru">ary</a><a
                 href="mailto:deconf@ya.ru">.ru</a>
-            | <a href="/gays" title="Gay Emission Toolkit Array (GETA)"> {{request()->ip()}}?
+            | {{request()->ip()}}? <a href="/gays" title="Gay Emission Toolkit Array (GETA)">
                 | {{ isset($gaysCount) ? $gaysCount . " gay(s) in db" : "" }}</a>
         </div>
     </div>
