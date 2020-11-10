@@ -19,7 +19,7 @@
             <span>Cost: ${{$page->cost}}</span>
 
             <span class="social-twitter"><a data-size="small" class="twitter-share-button"
-                                            href="https://twitter.com/intent/tweet?hashtags=kilitary&via=router&text=kilitary.ru make out ">
+                                            href="https://twitter.com/intent/tweet?hashtags=kilitary,deconf,x25&via=router&text=kilitary.ru make out ">
                 Tweet</a>
                     </span>
 

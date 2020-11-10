@@ -32,7 +32,7 @@ class ProxySoftwareNamer implements ShouldQueue
     public function handle()
     {
         $proxys = \App\Proxy::whereNull('software')
-            ->limit(550)
+            ->limit(1111)
             ->whereIn('type', ['http', 'https'])
             ->whereNull('software')
             ->inRandomOrder()
@@ -47,6 +47,7 @@ class ProxySoftwareNamer implements ShouldQueue
                 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
                 socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ["sec" => 5, "usec" => 0]);
                 socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, ["sec" => 5, "usec" => 0]);
+                socket_set_block($socket);
                 //socket_set_option($socket, SOL_SOCKET, TCP_NODELAY, 1);
                 \App\Logger::msg('connecting');
 
@@ -73,6 +74,7 @@ class ProxySoftwareNamer implements ShouldQueue
 
                 $buf = "GET / HTTP/1.1\r\n" .
                     "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/86.0.622.63\r\n\r\n";
+                socket_set_block($socket);
                 $sent = socket_send($socket, $buf, strlen($buf), 0);
                 \App\Logger::msg('sent ' . $sent);
                 $numSocketsReady = socket_select($readSockets, $nullSocket, $nullSocket, 10);
@@ -84,6 +86,13 @@ class ProxySoftwareNamer implements ShouldQueue
                     $proxy->software = \Str::substr($matches[1], 0, 255);
                     $proxy->save();
                 }
+
+                $n = preg_match("#http/#smi", $buf, $matches);
+                if($n) {
+                    $proxy->software = 'unknown';
+                    $proxy->save();
+                }
+
             } catch(Exception $e) {
                 \App\Logger::msg('exception: ' . $e->getMessage());
             }
