@@ -390,8 +390,11 @@ class PageController extends Controller
 
         $ip = $page->ip;
 
+        $precomment = $request->has('precomment') ? $request->input('precomment') : null;
+
         return view('page', compact('code', 'content', 'header', 'views', 'edits',
-            'description', 'page_id', 'comments', 'country', 'converter', 'keys', 'ip', 'page'));
+            'description', 'page_id', 'comments', 'country', 'converter', 'keys', 'ip', 'page',
+            'precomment'));
     }
 
     public function delete(Request $request, $code, $mode)

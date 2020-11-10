@@ -50,7 +50,8 @@
             <form method="post" action="/comment/add">
                 {{csrf_field()}}
                 <input type="hidden" name="page_id" value="{{$page_id}}">
-                <textarea name="comment" class="text-comment" required placeholder="inject en code / text"></textarea>
+                <textarea name="comment" class="text-comment" required
+                          placeholder="inject en code / text">{{$precomment ?? ''}}</textarea>
                 <br/>
                 <button class="commit-button">push comment</button>
             </form>
