@@ -299,8 +299,11 @@ class PageController extends Controller
         $page = \App\Models\Page::where('code', $code)
             ->first();
 
-        $page->updated_at = \Carbon::now();
+        $touchTime = \Carbon::now();
+        $page->updated_at = $touchTime;
         $page->save();
+
+        \App\Logger::msg($request->ip() . ' touched ' . $page->code . '@' . $touchTime);
 
         return back();
     }
