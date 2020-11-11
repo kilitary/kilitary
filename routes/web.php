@@ -34,7 +34,7 @@ Route::middleware(['cache.headers'])
 
                 Route::get('/touch/{code}', 'PageController@touch');
 
-                Route::get('/self', 'PageController@self');
+                Route::get('/self', 'PageController@self')->name('self');
             });
 
         Route::middleware('cacheResponse:34')
