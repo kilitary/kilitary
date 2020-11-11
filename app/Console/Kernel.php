@@ -50,11 +50,11 @@ class Kernel extends ConsoleKernel
         })->everyMinute();
 
         $schedule->job(new RedisSaver)
-            ->everyTenMinutes()
+            ->everyFiveMinutes()
             ->withoutOverlapping();
 
         $schedule->job(new IpInfoResolver)
-            ->everyFiveMinutes()
+            ->everyTwoMinutes()
             ->withoutOverlapping();
 
         $schedule->job(new FetchProxy)
