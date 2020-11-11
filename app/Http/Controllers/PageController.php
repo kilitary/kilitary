@@ -470,7 +470,6 @@ class PageController extends Controller
     public function record(Request $request, $code)
     {
         try {
-            \App\Logger::msg($request->method() . '> new info creation: code: ' . $code . ' len: ' . \mb_strlen($request->post('content')));
             if($request->method() == 'GET') {
                 $code = Str::random(15);
                 return view('newpage', compact('code'));
@@ -484,7 +483,7 @@ class PageController extends Controller
             $header = $request->post('header');
 
             if(preg_match("#^take\s?([0-9a-zA-Z:/\-\.]*)(?:\s+(\w+)|)$#Usi", $content, $matches)) {
-                \App\Logger::msg('taking article from ' . $matches[1]);
+                \App\Logger::msg('new info: taking article from ' . $matches[1]);
                 $uri = $matches[1];
 
                 if(!\Str::contains($uri, 'http')) {
