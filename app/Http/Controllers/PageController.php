@@ -300,14 +300,17 @@ class PageController extends Controller
         $filtered = $headers->filter(function($value, $key) {
             return !strstr($key, "HTTP");
         });
+
         $all = '';
         foreach($filtered->toArray() as $key => $value) {
             echo "$key:" . json_encode($value) . "\r\n";
             $all .= $key . \json_encode($value);
         }
-        echo "key:" . hash('md5', $request->ip() . "--") . "\r\n";
-        echo "crc:" . hash('crc32', $all);
-        exit;
+
+        $keyStr = "key:" . hash('md5', $request->ip() . "--") . "\r\n";
+        echo 'crc[' . hash('crc32', $all . $keyStr) . ']';
+
+        return \response()->terminate();
     }
 
     public function touch(Request $request, $code)
