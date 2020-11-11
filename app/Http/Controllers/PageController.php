@@ -302,15 +302,16 @@ class PageController extends Controller
         });
 
         $all = '';
+        $content = '';
         foreach($filtered->toArray() as $key => $value) {
-            echo "$key:" . json_encode($value) . "\r\n";
+            $content .= "$key:" . json_encode($value) . "\r\n";
             $all .= $key . \json_encode($value);
         }
 
         $keyStr = "key:" . hash('md5', $request->ip() . "--") . "\r\n";
-        echo 'crc[' . hash('crc32', $all . $keyStr) . ']';
+        $content .= 'crc[' . hash('crc32', $all . $keyStr) . ']';
 
-        return \response()->terminate();
+        return \response($content, 299);
     }
 
     public function touch(Request $request, $code)
