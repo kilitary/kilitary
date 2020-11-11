@@ -94,6 +94,6 @@ class PostRequest
             ->header('Warning', '113 jettison/2.6.6.4 Response is', false)
             ->header('Warning', '299 A system receiving this warning MUST NOT take any automated action"', false)
             ->header('Warning', '214 xyz-patch applyed (' . hash('crc32', json_encode(array_merge($_COOKIE, $_GET, $_POST))) . ')', false)
-            ->header("Server", "thttpd (QNX" . ($request->route()->named('self') ? "-info" : "") . ")");
+            ->header("Server", "thttpd (QNX" . ($request->route()->named('self') ? "-info-x25" : "") . ")");
     }
 }
