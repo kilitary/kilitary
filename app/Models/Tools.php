@@ -42,13 +42,13 @@ class Tools
 
     public static function isGay($ip)
     {
-        return (boolean) \App\Gay::where('ip', '=', $ip)
-            ->count();
+        return intval(\App\Gay::where('ip', '=', $ip)
+            ->count());
     }
 
     public static function probablyGay()
     {
-        return Redis::get(\App\Models\Tools::getUserId() . ':probably_gay');
+        return intval(Redis::get(\App\Models\Tools::getUserId() . ':probably_gay'));
     }
 
     public static function ipInfo($ip)
