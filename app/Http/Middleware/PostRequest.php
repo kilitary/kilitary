@@ -82,6 +82,8 @@ class PostRequest
                 ->header('Early-Data', \App\XRandom::get(0, 1))
                 ->header('From', 'kilitary@x25.cc')
                 ->header('To', 'self')
+                ->header('Link', 'https://platform.twitter.com; rel="preconnect"', false)
+                ->header('Link', 'https://www.facebook.com; rel="preconnect"', false)
                 ->header('Link', 'https://mc.yandex.ru; rel="preconnect"', false)
                 ->header('Link', 'https://www.googletagmanager.com; rel="preconnect"', false)
                 ->header('Server-Timing', \App\XRandom::get(0, 1) ? 'missedCache' : 'hitCache', false)
