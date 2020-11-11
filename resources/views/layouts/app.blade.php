@@ -81,8 +81,8 @@
     "@type": "Person",
     "name": "deconf"
   },
-  "dateModified": "{{\Carbon::now()->subDays(1)}}",
-  "datePublished": "{{\Carbon::now()->subDays(1)}}",
+  "dateModified": "{{\Carbon::now()->sub('1 hour')}}",
+  "datePublished": "{{\Carbon::now()->sub('2 days')}}",
   "headline": "{{isset($page) ? $page->header : 'military'}}",
   "url": "{{request()->url()}}",
   "commentCount": {{$comments->count ?? 0}},
@@ -101,6 +101,7 @@
   },
   "image": "/logo.png"
 }
+
 
 </script>
 <header>
