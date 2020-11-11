@@ -82,7 +82,7 @@
     "name": "deconf"
   },
   "dateModified": "{{\Carbon::now()->sub('1 hour')}}",
-  "datePublished": "{{\Carbon::now()->sub('2 days')}}",
+  "datePublished": "{{isset($page) ? $page->created_at : \Carbon::now())}",
   "headline": "{{isset($page) ? $page->header : 'military'}}",
   "url": "{{request()->url()}}",
   "commentCount": {{$comments->count ?? 0}},
@@ -101,6 +101,10 @@
   },
   "image": "/logo.png"
 }
+
+
+
+
 
 
 </script>
