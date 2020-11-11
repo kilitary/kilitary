@@ -14,5 +14,23 @@
             1NEBErkfreiSAoERiTGaLtwCiT2vjZ7sEP<br/>
             <img src="/images/bitoinaddr.png">
         </div>
+        <div class="marginbottom donate-area">
+            by perfect money:<br/>
+            <form action="https://perfectmoney.com/api/step1.asp" method="POST">
+                <input type="hidden" name="PAYEE_ACCOUNT" value="E26648808">
+                <input type="hidden" name="PAYEE_NAME" value="deconf">
+                <input type="hidden" name="PAYMENT_ID" value="anytext">
+                <input type="hidden" name="PAYMENT_AMOUNT" value="49.95">
+                <input type="hidden" name="PAYMENT_UNITS" value="EUR">
+                <input type="hidden" name="STATUS_URL" value="https://kilitary.ru/payment/status">
+                <input type="hidden" name="PAYMENT_URL" value="https://kilitary.ru/payment/ok">
+                <input type="hidden" name="PAYMENT_URL_METHOD" value="post">
+                <input type="hidden" name="NOPAYMENT_URL" value="https://kilitary.ru/payment/failed">
+                <input type="hidden" name="NOPAYMENT_URL_METHOD" value="post">
+                <input type="hidden" name="SUGGESTED_MEMO" value="">
+                <input type="hidden" name="BAGGAGE_FIELDS" value="">
+                <input type="submit" name="PAYMENT_METHOD" value="Pay Now!">
+            </form>
+        </div>
     </div>
 @endsection
