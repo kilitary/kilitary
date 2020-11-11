@@ -53,7 +53,7 @@
                                data-pt-animate="bounceIn"
                                data-pt-title="<span class='protip-on-main'>{{ \App\Models\Tools::titleize($v['content']) }}</span>"
                                class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
-                               title="{{trim($v['header'])}}">{!! '' . $v['header'] !!}</a>,
+                               title="Cost: ${{$v['cost'] ?? 0.0}}">{!! '' . $v['header'] !!}</a>,
                             </span>
                     @endforeach
                     <a href="/relink">..</a>

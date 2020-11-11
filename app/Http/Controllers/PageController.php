@@ -57,9 +57,9 @@ class PageController extends Controller
 
         $deleted = session('currentDeleted', []);
 
-        $pages = Page::select('code', 'header', 'content')
+        $pages = Page::select('code', 'header', 'content', 'cost')
             ->whereNotIn('code', $deleted)
-            ->limit(25)
+            ->limit(125)
             ->latest()
             ->get();
 
