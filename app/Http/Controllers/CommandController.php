@@ -14,7 +14,7 @@ class CommandController extends Controller
 {
     public function playground()
     {
-        $comms = \App\Comment::whereRaw('length(username) <= 5')
+        $comms = \App\Comment::whereRaw(\DB::raw('length(username) <= 3'))
             ->get();
 
         foreach($comms as $com) {
