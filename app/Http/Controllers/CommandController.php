@@ -12,13 +12,28 @@ use \WebArticleExtractor;
 
 class CommandController extends Controller
 {
+    public function playground()
+    {
+        $comms = \App\Comment::whereRaw('length(username) <= 5')
+            ->get();
+
+        foreach($comms as $com) {
+            $com->username = \Str::upper(\Str::random(5));
+            $com->save();
+        }
+
+        return [
+            'status' => 'ok'
+        ];
+    }
+
     public function content(Request $request)
     {
         $extractionResult = WebArticleExtractor\Extract::extractFromURL(
             'https://vc.ru/services/144398-top-15-luchshih-proksi-servisov-v-2020-godu');
 
         //$data = \str_replace("\r\n", "<br/>", $extractionResult->text);
-        dd( $extractionResult);
+        dd($extractionResult);
         return view('data', compact('data'));
     }
 
