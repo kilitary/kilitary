@@ -87,7 +87,7 @@
 
         <div class="topheadmargin">
             <div class="tib-war-header">
-                @if (isset($gdiSelected) && $gdiSelected)
+                @if(\App\XRandom::get(0,6) == 4)
                     global defense initiative selected (in {{ \App\XRandom::scaled(0,1) ? 'case' : 'state' }}
                     of {{$chanceOf}}
                     )
@@ -105,6 +105,9 @@
             | {{request()->ip()}}? <a href="/gays" title="Gay Emission Toolkit Array (GETA)">
                 | {{ isset($gaysCount) ? $gaysCount . " gay(s) in db" : "" }}</a>
             | {!! \App\Models\Tools::probablyGay() ? '<span color=red class="blinking-red">probably the gay detected</span>':""!!}
+            <span class="destroy-link">
+                [<a title="you have 10 destroys left" href="/destroy">destroy site</a>]
+            </span>
         </div>
     </div>
 @endsection

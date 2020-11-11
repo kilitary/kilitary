@@ -458,6 +458,15 @@ class PageController extends Controller
         return view('gays', compact('gays'));
     }
 
+    public function destroy(Request $request)
+    {
+        Redis::setEx($request->ip() . ':destroy', 240, true);
+
+        \App\Logger::msg('user ' . $request->ip() . ' destroyed site');
+
+        return back();
+    }
+
     public function record(Request $request, $code)
     {
         try {

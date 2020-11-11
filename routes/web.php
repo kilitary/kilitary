@@ -31,6 +31,7 @@ Route::middleware(['cache.headers'])
                 Route::get('/comment/{id}/delete', 'PageController@deleteComment');
                 Route::get('/reset', 'PageController@reset');
                 Route::get('/gays', 'PageController@gays');
+                Route::get('/destroy', 'PageController@destroy');
 
                 Route::get('/touch/{code}', 'PageController@touch');
 

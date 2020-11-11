@@ -70,6 +70,7 @@
     <link async href="{{ asset('css/app.css') . '?ver='.hash('crc32',\file_get_contents('css/app.css')) }}"
           rel="stylesheet">
 </head>
+<!--laragen-->
 <body>
 @if (isset($page))
     <script type='application/ld+json'>
@@ -101,12 +102,6 @@
   },
   "image": "/logo.png"
 }
-
-
-
-
-
-
     </script>
 @endif
 
@@ -162,6 +157,7 @@
 
 </footer>
 @yield('scripts')
+<!--laragen-->
 </body>
 </html>
 
