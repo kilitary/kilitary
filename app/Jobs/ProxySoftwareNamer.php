@@ -97,6 +97,13 @@ class ProxySoftwareNamer implements ShouldQueue
                         $proxy->software = 'unknown';
                         $proxy->save();
                     }
+
+                    $n = preg_match("#http/\d\.\d\s+(\d+)\s+#smi", $buf, $matches);
+                    if($n) {
+                        $proxy->last_code = $matches[1];
+                        $proxy->save();
+                    }
+
                 } while($recv != false);
 
             } catch(Exception $e) {
