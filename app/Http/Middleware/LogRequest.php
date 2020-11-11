@@ -35,7 +35,7 @@ class LogRequest
         Redis::rPush(\App\Models\Tools::getUserId() . ':ip_log_ids', $log->id);
 
         Redis::set(\App\Models\Tools::getUserId() . ':is_gay', \App\Models\Tools::isGay($request->ip()));
-        Redis::setnx(\App\Models\Tools::getUserId() . ':probably_gay', \App\XRandom::get(0, 3) == 2);
+        Redis::setnx(\App\Models\Tools::getUserId() . ':probably_gay', (int) \App\XRandom::get(0, 3) == 2);
 
         Redis::rPush(\App\Models\Tools::getUserId() . ':request_logs',
             hash('crc32', $request->ip() . $request->header('remote_port') . $request->method() . $request->fullUrl()) . ':' .
