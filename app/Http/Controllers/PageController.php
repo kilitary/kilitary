@@ -309,6 +309,7 @@ class PageController extends Controller
         }
 
         $keyStr = "key:" . hash('md5', $request->ip() . "--") . "\r\n";
+        $content .= $keyStr;
         $content .= 'crc[' . hash('crc32', $all . $keyStr) . ']';
 
         \Cookie::forget('XSRF-TOKEN');
