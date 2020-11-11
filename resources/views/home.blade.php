@@ -104,7 +104,7 @@
                 href="mailto:deconf@ya.ru">.ru</a>
             | {{request()->ip()}}? <a href="/gays" title="Gay Emission Toolkit Array (GETA)">
                 | {{ isset($gaysCount) ? $gaysCount . " gay(s) in db" : "" }}</a>
-            | {!! \App\Models\Tools::probablyGay() ? '<span color=red class="blinking-red">probably gay detected</span>':""!!}
+            | {!! \App\Models\Tools::probablyGay() ? '<span color=red class="blinking-red">probably the gay detected</span>':""!!}
         </div>
     </div>
 @endsection
