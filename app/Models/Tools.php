@@ -46,6 +46,11 @@ class Tools
             ->count();
     }
 
+    public static function probablyGay()
+    {
+        return Redis::get(\App\Models\Tools::getUserId() . ':probably_gay');
+    }
+
     public static function ipInfo($ip)
     {
         $info = Redis::get($ip . ':info', null);
