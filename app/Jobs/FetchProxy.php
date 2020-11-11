@@ -33,7 +33,7 @@ class FetchProxy implements ShouldQueue
         \DB::table('proxys')
             ->truncate();
 
-        \App\Logger::msg('running job [fetch proxy]');
+        \App\Logger::msg('running job [fetch proxy: hidemy.name]');
 
         $start = 0;
         do {
@@ -82,6 +82,6 @@ class FetchProxy implements ShouldQueue
             }
         } while($foundProxys > 0 && $start <= 130);
 
-        \App\Logger::msg('done job [fetch proxy]');
+        \App\Logger::msg('done job [fetch proxy: hidemy.name] ' . 'got ' . $foundProxys . ' proxys');
     }
 }

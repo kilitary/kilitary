@@ -124,7 +124,7 @@ class ProxySoftwareNamer implements ShouldQueue
 
                     $n = preg_match("#(?:forwarded\-for|via)#smi", $buf, $matches);
                     if($n) {
-                        \App\Logger::msg('proxy is transparent');
+                        \App\Logger::msg('proxy is fully transparent');
                         $proxy->self = $buf;
                         $proxy->save();
                     }
