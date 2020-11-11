@@ -166,7 +166,7 @@ class PageController extends Controller
         \App\Logger::msg('adding to cart: ' . $code);
         \App\Models\Tools::addToCart($code);
 
-        return back();
+        return back()->with('message', 'item ' . $code . ' added to cart');
     }
 
     public function donate(Request $request)
@@ -247,10 +247,15 @@ class PageController extends Controller
                 return redirect('/view/' . $randomCode);
             }
 
+            $content = $request->post('comment');
+            if(!\App\Models\Tools::IsAdmin()) {
+                $content = strip_tags($content);
+            }
+
             $userName = \Str::upper(\Str::random(5));
             $country = Tools::getCountry($request->ip());
             $comment = \App\Comment::create([
-                'comment' => $request->post('comment'),
+                'comment' => $content,
                 'ip' => $request->ip(),
                 'username' => $userName,
                 'email' => 'unknown@unknown.ru',
@@ -261,7 +266,7 @@ class PageController extends Controller
 
             Logger::msg('comment ' . $comment->id . ' created OK');
 
-            return back();
+            return back()->with('message', 'comment added, CRC32: ' . hash('crc32', $content));
         });
     }
 
@@ -285,13 +290,14 @@ class PageController extends Controller
             return 'access denied for ' . $request->ip();
         }
 
-        $page->content = $request->post('content');
+        $content = $request->post('content');
+        $page->content = $content;
         $page->edits++;
         $page->header = $request->post('header');
         $page->cost = $request->post('cost');
         $page->save();
 
-        return redirect('/view/' . $code);
+        return redirect('/view/' . $code)->with('message', 'content updated, CRC32: ' . hash('crc32', $content));
     }
 
     public function self(Request $request)
@@ -324,7 +330,7 @@ class PageController extends Controller
 
         \App\Logger::msg($request->ip() . ' touched ' . $page->code . ' @ ' . $touchTime);
 
-        return back();
+        return back()->with('message', 'touch applyed');
     }
 
     public function reset(Request $request)
@@ -420,24 +426,25 @@ class PageController extends Controller
     {
         try {
             $currentDeleted = session('currentDeleted', []);
-
+            $result = null;
             $currentDeleted[] = $code;
             session(['currentDeleted' => $currentDeleted]);
             session(['delMode' => $mode]);
 
-            \App\Logger::msg('deleting page code: ' . $code . ' mode: ' . $mode);
-
             $page = Page::firstWhere('code', $code);
             if($page && ($page->ip == $request->ip() || \App\Models\Tools::isAdmin()) && !$page->blocked) {
                 $page->delete();
+                $result = true;
             } else {
                 \App\Logger::msg('deleting page [access denied]');
-                $code = "[access denied]";
+                $result = false;
             }
         } catch(Exception $e) {
             \App\Logger::msg('delete()#exception: ' . $e->getMessage() . "\r\n" . $e->getTraceAsString());
+            $result = false;
         }
 
+        \App\Logger::msg('user ' . \App\Models\Tools::getUserId() . ' command: delete pageCode: ' . $code . ' mode: ' . $mode . ' result: ' . intval($result));
         return view('delete', compact('code'));
     }
 
@@ -527,6 +534,6 @@ class PageController extends Controller
             \App\Logger::msg('record()#exception: ' . $e->getMessage(), $e->getTraceAsString());
         }
 
-        return redirect('/view/' . $code);
+        return redirect('/view/' . $code)->with('message', 'page created, crc32: ' . hash('crc32', $content));
     }
 }

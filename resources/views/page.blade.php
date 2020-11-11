@@ -5,6 +5,8 @@
     <div class="container page-content">
 
         <h2 class="page-header">{{$header}}</h2>
+
+
         <div class="content-container">
             {!! nl2br($content)!!}
         </div>
@@ -24,10 +26,11 @@
                 Tweet</a>
                     </span>
 
-                <span class="fb-share-button social-facebook" data-href="{{request()->fullUrl()}}" data-layout="button_count"
-                     data-size="small"><a target="_blank"
-                                          href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(request()->fullUrl())}}&src=sdkpreparse"
-                                          class="fb-xfbml-parse-ignore">share</a></span>
+                <span class="fb-share-button social-facebook" data-href="{{request()->fullUrl()}}"
+                      data-layout="button_count"
+                      data-size="small"><a target="_blank"
+                                           href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(request()->fullUrl())}}&src=sdkpreparse"
+                                           class="fb-xfbml-parse-ignore">share</a></span>
             </div>
 
         </div>

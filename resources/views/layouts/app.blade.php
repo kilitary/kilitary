@@ -103,6 +103,10 @@
 }
 
 
+
+
+
+
     </script>
 @endif
 
@@ -121,6 +125,11 @@
 <div id="app">
     <article role="main">
         <main class="@yield('classes')">
+            @if(session('message'))
+                <div class="message">
+                    <span style="font-variant: all-petite-caps">system> {{session('message')}}</span>
+                </div>
+            @endif
             @yield('content')
         </main>
     </article>

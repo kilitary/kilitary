@@ -72,6 +72,17 @@ textarea:hover {
   background-color: #fff9be !important;
   border: 2px dashed #f00 !important;
 }
+.message {
+  color: #32d175;
+  font-family: "lucida console";
+  border-bottom: 3px #00ced1;
+  font-size: 15px;
+  padding-top: 2px;
+  margin-bottom: 8px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  box-shadow: 11px 1px 5px #a1ff25, 0 2px 0px 0 #fff382;
+}
 .interesting-block {
   width: 75%;
   line-height: 28px;
