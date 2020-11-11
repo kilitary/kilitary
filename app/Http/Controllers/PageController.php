@@ -302,7 +302,7 @@ class PageController extends Controller
         });
 
         $all = '';
-        $content = '-------------------------------------------------';
+        $content = '-------------------------------------------------' . "\r\n";
         foreach($filtered->toArray() as $key => $value) {
             $content .= "$key:" . json_encode($value) . "\r\n";
             $all .= $key . \json_encode($value);
