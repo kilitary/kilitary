@@ -294,6 +294,12 @@ class PageController extends Controller
         return redirect('/view/' . $code);
     }
 
+    public function self(Request $request)
+    {
+        print_r($_SERVER);
+        exit;
+    }
+
     public function touch(Request $request, $code)
     {
         $page = \App\Models\Page::where('code', $code)

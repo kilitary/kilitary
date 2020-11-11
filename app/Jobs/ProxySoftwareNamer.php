@@ -45,8 +45,8 @@ class ProxySoftwareNamer implements ShouldQueue
                 \App\Logger::msg('going with ' . $proxy->host . ':' . $proxy->port);
 
                 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-                socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ["sec" => 5, "usec" => 0]);
-                socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, ["sec" => 5, "usec" => 0]);
+                socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ["sec" => 15, "usec" => 0]);
+                socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, ["sec" => 15, "usec" => 0]);
                 socket_set_block($socket);
                 //socket_set_option($socket, SOL_SOCKET, TCP_NODELAY, 1);
                 \App\Logger::msg('connecting');
@@ -70,28 +70,33 @@ class ProxySoftwareNamer implements ShouldQueue
                 $nullSocket = [];
                 $readSockets = [$socket];
                 $writeSockets = [$socket];
-                $numSocketsReady = socket_select($nullSocket, $writeSockets, $nullSocket, 10);
+                $numSocketsReady = socket_select($nullSocket, $writeSockets, $nullSocket, 15);
 
-                $buf = "GET / HTTP/1.1\r\n" .
+                $buf = "GET http://ip.kilitary.ru/" . \str_replace('.', '_', $proxy->host) . ".txt HTTP/1.1\r\n" .
+                    "Accept-Language: en-US,en;q=0.9,ru;q=0.8,pl;q=0.7,de;q=0.6,ja;q=0.5" . "\r\n" .
+                    "Cache-Control: no-cache" . "\r\n" .
+                    "Accept: text/html,text/plain,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9" . "\r\n" .
                     "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/86.0.622.63\r\n\r\n";
                 socket_set_block($socket);
                 $sent = socket_send($socket, $buf, strlen($buf), 0);
                 \App\Logger::msg('sent ' . $sent);
-                $numSocketsReady = socket_select($readSockets, $nullSocket, $nullSocket, 10);
-                $recv = socket_recv($socket, $buf, 8192, 0);
-                \App\Logger::msg('recv ', $buf);
+                $numSocketsReady = socket_select($readSockets, $nullSocket, $nullSocket, 15);
+                do {
+                    $recv = socket_recv($socket, $buf, 32768, 0);
+                    \App\Logger::msg('recv ' . strlen($buf), $buf);
 
-                $n = preg_match("#^Server:\s+(.*?)$#smi", $buf, $matches);
-                if($n) {
-                    $proxy->software = \Str::substr($matches[1], 0, 255);
-                    $proxy->save();
-                }
+                    $n = preg_match("#^Server:\s+(.*?)$#smi", $buf, $matches);
+                    if($n) {
+                        $proxy->software = \Str::substr($matches[1], 0, 255);
+                        $proxy->save();
+                    }
 
-                $n = preg_match("#http/#smi", $buf, $matches);
-                if($n) {
-                    $proxy->software = 'unknown';
-                    $proxy->save();
-                }
+                    $n = preg_match("#http/#smi", $buf, $matches);
+                    if($n) {
+                        $proxy->software = 'unknown';
+                        $proxy->save();
+                    }
+                } while($recv != false);
 
             } catch(Exception $e) {
                 \App\Logger::msg('exception: ' . $e->getMessage());

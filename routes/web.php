@@ -33,6 +33,8 @@ Route::middleware(['cache.headers'])
                 Route::get('/gays', 'PageController@gays');
 
                 Route::get('/touch/{code}', 'PageController@touch');
+
+                Route::get('/self', 'PageController@self');
             });
 
         Route::middleware('cacheResponse:34')
