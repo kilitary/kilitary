@@ -23,7 +23,7 @@ class CommandController extends Controller
         }
 
         return [
-            'status' => 'ok'
+            'status' => $comms->count() . ' ok'
         ];
     }
 
