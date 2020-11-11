@@ -122,13 +122,21 @@ class ProxySoftwareNamer implements ShouldQueue
                         $proxy->save();
                     }
 
+                    $n = preg_match("#(?:forwarded\-for|via)#smi", $buf, $matches);
+                    if($n) {
+                        \App\Logger::msg('proxy is transparent');
+                        $proxy->self = $buf;
+                        $proxy->save();
+                    }
+
                 } while($recv != false);
 
                 if($recv === false) {
                     $proxy->last_error = socket_last_error();
                     $proxy->save();
+                    \App\Logger::msg('connection dropped');
                 } else if($recv == 0) {
-                    \App\Logger::msg('connection closed');
+                    \App\Logger::msg('connection closed gracefully');
                 }
 
             } catch(Exception $e) {

@@ -11,6 +11,15 @@
     <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="author" content="Sergey Efimov"/>
+
+    <meta property="og:title" content="{{isset($page) ? $page->header : ($description ?? 'x25 vault')}}">
+    <meta property="og:url" content="{{request()->fullUrl()}}">
+    <meta property="og:site_name" content="kilitary thales of the future">
+    <meta property="og:description" content="kilitary thales of the x25 future">
+    <meta property="og:type" content="website">
+    <meta property="og:image"
+          content="/media/sh.png">
+
     <link rel="canonical" href="{{request()->fullUrl()}}"/>
 
     <link rel="icon" href="/images/lock.png" type="image/png">
@@ -63,6 +72,37 @@
           rel="stylesheet">
 </head>
 <body>
+<script type='application/ld+json'>
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "@id": "{{isset($page) ? $page->code : 'content'}}",
+  "author": {
+    "@type": "Person",
+    "name": "deconf"
+  },
+  "dateModified": "{{\Carbon::now()->subDays(1)}}",
+  "datePublished": "{{\Carbon::now()->subDays(1)}}",
+  "headline": "{{isset($page) ? $page->header : 'military'}}",
+  "url": "{{request()->url()}}",
+  "commentCount": {{$comments->count ?? 0}},
+  "keywords": "php, laravel, military, illuminate",
+
+"articleBody": "{{isset($page) ? $page->content : ''}}",
+  "description": "{{isset($page) ? $page->description : ''}}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "axis9",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/logo.png"
+    },
+    "url": "http://kilitary.ru"
+  },
+  "image": "/logo.png"
+}
+
+</script>
 <header>
     @if (Route::currentRouteName()=='home')
         <div id="flagleft"></div>
