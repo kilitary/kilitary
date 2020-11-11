@@ -296,7 +296,13 @@ class PageController extends Controller
 
     public function self(Request $request)
     {
-        print_r($_SERVER);
+        $headers = collect($request->headers);
+        $filtered = $headers->filter(function($value, $key) {
+            return !strstr($key, "HTTP");
+        });
+        foreach($filtered->toArray() as $key => $value) {
+            echo "$key: " . json_encode($value) . "\r\n";
+        }
         exit;
     }
 

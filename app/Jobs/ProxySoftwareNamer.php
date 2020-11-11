@@ -45,8 +45,8 @@ class ProxySoftwareNamer implements ShouldQueue
                 \App\Logger::msg('going with ' . $proxy->host . ':' . $proxy->port);
 
                 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-                socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ["sec" => 15, "usec" => 0]);
-                socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, ["sec" => 15, "usec" => 0]);
+                socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, ["sec" => 25, "usec" => 0]);
+                socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, ["sec" => 25, "usec" => 0]);
                 socket_set_block($socket);
                 //socket_set_option($socket, SOL_SOCKET, TCP_NODELAY, 1);
                 \App\Logger::msg('connecting');
@@ -54,9 +54,10 @@ class ProxySoftwareNamer implements ShouldQueue
                 // TODO: do better check
                 //$ret = 0;
                 //do {
+                $start = time();
                 $ret = socket_connect($socket, $proxy->host, $proxy->port);
                 if($ret == true) {
-                    \App\Logger::msg('connected');
+                    \App\Logger::msg('connected in ' . (time() - $start));
                 } else {
                     \App\Logger::msg('error: ' . socket_strerror(socket_last_error()) . '(#' . socket_last_error() . ')');
                 }
@@ -70,9 +71,9 @@ class ProxySoftwareNamer implements ShouldQueue
                 $nullSocket = [];
                 $readSockets = [$socket];
                 $writeSockets = [$socket];
-                $numSocketsReady = socket_select($nullSocket, $writeSockets, $nullSocket, 15);
+                $numSocketsReady = socket_select($nullSocket, $writeSockets, $nullSocket, 4);
 
-                $buf = "GET http://ip.kilitary.ru/" . \str_replace('.', '_', $proxy->host) . ".txt HTTP/1.1\r\n" .
+                $buf = "GET http://ip.kilitary.ru/self HTTP/1.1\r\n" .
                     "Accept-Language: en-US,en;q=0.9,ru;q=0.8,pl;q=0.7,de;q=0.6,ja;q=0.5" . "\r\n" .
                     "Cache-Control: no-cache" . "\r\n" .
                     "Accept: text/html,text/plain,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9" . "\r\n" .
@@ -80,7 +81,7 @@ class ProxySoftwareNamer implements ShouldQueue
                 socket_set_block($socket);
                 $sent = socket_send($socket, $buf, strlen($buf), 0);
                 \App\Logger::msg('sent ' . $sent);
-                $numSocketsReady = socket_select($readSockets, $nullSocket, $nullSocket, 15);
+                $numSocketsReady = socket_select($readSockets, $nullSocket, $nullSocket, 25);
                 do {
                     $recv = socket_recv($socket, $buf, 32768, 0);
                     \App\Logger::msg('recv ' . strlen($buf), $buf);
