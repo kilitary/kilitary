@@ -302,18 +302,17 @@ class PageController extends Controller
         });
 
         $all = '';
-        $content = '';
+        $content = '-------------------------------------------------';
         foreach($filtered->toArray() as $key => $value) {
             $content .= "$key:" . json_encode($value) . "\r\n";
             $all .= $key . \json_encode($value);
         }
 
         $keyStr = "key:" . hash('sha256', $request->ip() . "--") . "\r\n";
-        $content .= $keyStr;
-        $content .= 'crc[' . hash('crc32', $all . $keyStr) . ']';
+        $content .= '-------------------------------------------------' . "\r\n" . 'crc[' . hash('crc32', $all . $keyStr) . ']';
 
-        \Cookie::forget('XSRF-TOKEN');
-        \Cookie::forget('kilookie');
+//        \Cookie::forget('XSRF-TOKEN');
+//        \Cookie::forget('kilookie');
 
         return \response($content, 299);
     }
