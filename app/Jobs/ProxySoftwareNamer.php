@@ -49,7 +49,7 @@ class ProxySoftwareNamer implements ShouldQueue
                 socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, ["sec" => 25, "usec" => 0]);
                 socket_set_block($socket);
                 //socket_set_option($socket, SOL_SOCKET, TCP_NODELAY, 1);
-                \App\Logger::msg('connecting');
+                \App\Logger::msg('connecting ...');
 
                 // TODO: do better check
                 //$ret = 0;
@@ -57,16 +57,12 @@ class ProxySoftwareNamer implements ShouldQueue
                 $start = time();
                 $ret = socket_connect($socket, $proxy->host, $proxy->port);
                 if($ret == true) {
-                    \App\Logger::msg('connected in ' . (time() - $start));
+                    \App\Logger::msg('connected in ' . (time() - $start) . ' secs');
                 } else {
                     \App\Logger::msg('error: ' . socket_strerror(socket_last_error()) . '(#' . socket_last_error() . ')');
-                }
-                //} while($ret == 115 || $ret != true);
-
-                if($ret == false) {
-                    \App\Logger::msg('failed to connect');
                     continue;
                 }
+                //} while($ret == 115 || $ret != true);
 
                 $nullSocket = [];
                 $readSockets = [$socket];
@@ -77,14 +73,22 @@ class ProxySoftwareNamer implements ShouldQueue
                     "Accept-Language: en-US,en;q=0.9,ru;q=0.8,pl;q=0.7,de;q=0.6,ja;q=0.5" . "\r\n" .
                     "Cache-Control: no-cache" . "\r\n" .
                     "Accept: text/html,text/plain,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9" . "\r\n" .
-                    "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/86.0.622.63\r\n\r\n";
+                    "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/82.0.622.62\r\n\r\n";
+
                 socket_set_block($socket);
                 $sent = socket_send($socket, $buf, strlen($buf), 0);
+
                 \App\Logger::msg('sent ' . $sent);
+
                 $numSocketsReady = socket_select($readSockets, $nullSocket, $nullSocket, 25);
+
                 do {
                     $recv = socket_recv($socket, $buf, 32768, 0);
-                    \App\Logger::msg('recv ' . strlen($buf), $buf);
+                    if($recv) {
+                        \App\Logger::msg('recv ' . strlen($buf), $buf);
+                    } else {
+                        break;
+                    }
 
                     $n = preg_match("#^Server:\s+(.*?)$#smi", $buf, $matches);
                     if($n) {
@@ -104,7 +108,19 @@ class ProxySoftwareNamer implements ShouldQueue
                         $proxy->save();
                     }
 
+                    $id = hash('md5', $proxy->host . "--");
+                    $n = preg_match("#$id#smi", $buf, $matches);
+                    if($n) {
+                        \App\Logger::msg('id ' . $id . ' found');
+                        $proxy->self = $buf;
+                        $proxy->save();
+                    }
+
                 } while($recv != false);
+
+                if($recv == 0) {
+                    \App\Logger::msg('connection closed');
+                }
 
             } catch(Exception $e) {
                 \App\Logger::msg('exception: ' . $e->getMessage());
