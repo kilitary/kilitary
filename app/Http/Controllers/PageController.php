@@ -301,20 +301,16 @@ class PageController extends Controller
             return !strstr($key, "HTTP");
         });
 
-        $all = '';
-        $content = '-------------------------------------------------' . "\r\n";
+        $content = '--------------------------------------------------' . "\r\n";
         foreach($filtered->toArray() as $key => $value) {
             $content .= "$key:" . json_encode($value) . "\r\n";
-            $all .= $key . \json_encode($value);
         }
 
-        $keyStr = "key:" . hash('sha256', $request->ip() . "--") . "\r\n";
-        $content .= '-------------------------------------------------' . "\r\n" . $keyStr . "\r\n" . 'crc[' . hash('crc32', $all . $keyStr) . ']';
+        $content .= "key:" . hash('sha256', $request->ip() . "--") . "\r\n";
+        $content .= '-------------------------------------------------' . "\r\n";
+        $content .= 'crc[' . hash('crc32', $content) . ']';
 
-//        \Cookie::forget('XSRF-TOKEN');
-//        \Cookie::forget('kilookie');
-
-        return \response($content, 299);
+        return \response($content, \App\XRandom::get(0, 2) == 1 ? 200 : 299);
     }
 
     public function touch(Request $request, $code)
