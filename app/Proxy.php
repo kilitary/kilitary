@@ -33,6 +33,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereSpeed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereType($value)
  * @mixin \Eloquent
+ * @property int|null $last_error
+ * @property int|null $last_code
+ * @property string|null $self
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereLastCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereLastError($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereSelf($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereUpdatedAt($value)
  */
 class Proxy extends Model
 {

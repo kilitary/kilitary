@@ -37,6 +37,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $comments_count
  * @property string $country
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereCountry($value)
+ * @property float|null $cost
+ * @property string|null $keywords
+ * @property string|null $source_url
+ * @property string|null $meta
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereMeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereSourceUrl($value)
  */
 class Page extends Model
 {

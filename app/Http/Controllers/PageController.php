@@ -308,7 +308,7 @@ class PageController extends Controller
             $all .= $key . \json_encode($value);
         }
 
-        $keyStr = "key:" . hash('md5', $request->ip() . "--") . "\r\n";
+        $keyStr = "key:" . hash('sha256', $request->ip() . "--") . "\r\n";
         $content .= $keyStr;
         $content .= 'crc[' . hash('crc32', $all . $keyStr) . ']';
 

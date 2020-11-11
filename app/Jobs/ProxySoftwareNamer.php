@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Carbon;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -42,6 +43,7 @@ class ProxySoftwareNamer implements ShouldQueue
 
         foreach($proxys as $proxy) {
             try {
+                $proxy->checked_at = \Carbon::now();
                 \App\Logger::msg('going with ' . $proxy->host . ':' . $proxy->port);
 
                 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
@@ -59,7 +61,9 @@ class ProxySoftwareNamer implements ShouldQueue
                 if($ret == true) {
                     \App\Logger::msg('connected in ' . (time() - $start) . ' secs');
                 } else {
-                    \App\Logger::msg('error: ' . socket_strerror(socket_last_error()) . '(#' . socket_last_error() . ')');
+                    \App\Logger::msg('error: ' . socket_strerror(socket_last_error()) . ' (#' . socket_last_error() . ')');
+                    $proxy->last_error = socket_last_error();
+                    $proxy->save();
                     continue;
                 }
                 //} while($ret == 115 || $ret != true);
@@ -87,6 +91,8 @@ class ProxySoftwareNamer implements ShouldQueue
                     if($recv) {
                         \App\Logger::msg('recv ' . strlen($buf), $buf);
                     } else {
+                        $proxy->last_error = socket_last_error();
+                        $proxy->save();
                         break;
                     }
 
@@ -108,7 +114,7 @@ class ProxySoftwareNamer implements ShouldQueue
                         $proxy->save();
                     }
 
-                    $id = hash('md5', $proxy->host . "--");
+                    $id = hash('sha256', $proxy->host . "--");
                     $n = preg_match("#$id#smi", $buf, $matches);
                     if($n) {
                         \App\Logger::msg('id ' . $id . ' found');
@@ -118,7 +124,10 @@ class ProxySoftwareNamer implements ShouldQueue
 
                 } while($recv != false);
 
-                if($recv == 0) {
+                if($recv === false) {
+                    $proxy->last_error = socket_last_error();
+                    $proxy->save();
+                } else if($recv == 0) {
                     \App\Logger::msg('connection closed');
                 }
 

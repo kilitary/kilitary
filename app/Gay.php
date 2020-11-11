@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Gay whereReason($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Gay whereUa($value)
  * @mixin \Eloquent
+ * @property string|null $created_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Gay whereCreatedAt($value)
  */
 class Gay extends Model
 {
