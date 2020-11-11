@@ -311,6 +311,9 @@ class PageController extends Controller
         $keyStr = "key:" . hash('md5', $request->ip() . "--") . "\r\n";
         $content .= 'crc[' . hash('crc32', $all . $keyStr) . ']';
 
+        \Cookie::forget('XSRF-TOKEN');
+        \Cookie::forget('kilookie');
+
         return \response($content, 299);
     }
 
