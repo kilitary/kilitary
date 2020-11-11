@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-        <h2>hello {{ $info }} ({{(\App\XRandom::scaled(0,1) ? 'p' : 'o')}}wned by <a
+        <h2>hello {{ $info }} (first ip-based server, {{(\App\XRandom::scaled(0,1) ? 'p' : 'o')}}wned by <a
                 target=_blank href='https://www.google.com/search?q={{$pwnedBy}}'>{{$pwnedBy}})</a>
         </h2>
         <div class="marginleft">
