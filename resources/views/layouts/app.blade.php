@@ -72,6 +72,7 @@
           rel="stylesheet">
 </head>
 <body>
+@if (isset($page))
 <script type='application/ld+json'>
 {
   "@context": "http://schema.org",
@@ -102,12 +103,9 @@
   "image": "/logo.png"
 }
 
+ </script>
+@endif
 
-
-
-
-
-</script>
 <header>
     @if (Route::currentRouteName()=='home')
         <div id="flagleft"></div>
