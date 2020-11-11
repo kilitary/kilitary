@@ -44,9 +44,9 @@
         @endif
 
         @if(isset($code))
-            <div class="marginleft marginbottom ">
+            <div class="marginleft marginbottom interesting-block">
                 <h3 class="section-h3">information on adjacent orders area</h3>
-                <div class="interesting-block">
+                <div class="interesting-block-inner">
                     @foreach ($interesting as $v)
                         <span style="display:inline-table">
                             <a href="/view/{{$v['code']}}"

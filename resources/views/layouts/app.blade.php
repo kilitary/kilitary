@@ -17,8 +17,7 @@
     <meta property="og:site_name" content="kilitary thales of the future">
     <meta property="og:description" content="kilitary thales of the x25 future">
     <meta property="og:type" content="website">
-    <meta property="og:image"
-          content="/media/sh.png">
+    <meta property="og:image" content="/media/sh.png">
 
     <link rel="canonical" href="{{request()->fullUrl()}}"/>
 
@@ -73,7 +72,7 @@
 </head>
 <body>
 @if (isset($page))
-<script type='application/ld+json'>
+    <script type='application/ld+json'>
 {
   "@context": "http://schema.org",
   "@type": "Article",
@@ -103,7 +102,8 @@
   "image": "/logo.png"
 }
 
- </script>
+
+    </script>
 @endif
 
 <header>

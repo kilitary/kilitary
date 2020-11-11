@@ -73,7 +73,7 @@ textarea:hover {
   border: 2px dashed #f00 !important;
 }
 .interesting-block {
-  width: 1400px;
+  width: 75%;
   line-height: 28px;
 }
 .content-keys {
