@@ -78,6 +78,8 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|Gay whereReason($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Gay whereUa($value)
  * @mixin \Eloquent
+ * @property string|null $created_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Gay whereCreatedAt($value)
  */
 	class Gay extends \Eloquent {}
 }
@@ -101,6 +103,7 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|IpInfo whereIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IpInfo whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|IpInfo whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class IpInfo extends \Eloquent {}
 }
@@ -188,8 +191,58 @@ namespace App\Models{
  * @property-read int|null $comments_count
  * @property string $country
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereCountry($value)
+ * @property float|null $cost
+ * @property string|null $keywords
+ * @property string|null $source_url
+ * @property string|null $meta
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereCost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereMeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereSourceUrl($value)
  */
 	class Page extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\Proxy
+ *
+ * @property int $id
+ * @property string $host
+ * @property int $port
+ * @property string|null $type
+ * @property string $anonymity
+ * @property string|null $source
+ * @property string|null $speed
+ * @property string|null $info
+ * @property string|null $software
+ * @property \Illuminate\Support\Carbon|null $checked_at
+ * @property \Illuminate\Support\Carbon $created_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereAnonymity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereCheckedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereHost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy wherePort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereSoftware($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereSource($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereSpeed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereType($value)
+ * @mixin \Eloquent
+ * @property int|null $last_error
+ * @property int|null $last_code
+ * @property string|null $self
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereLastCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereLastError($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereSelf($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Proxy whereUpdatedAt($value)
+ */
+	class Proxy extends \Eloquent {}
 }
 
 namespace App{

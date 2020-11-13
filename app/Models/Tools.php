@@ -17,6 +17,34 @@ class Tools
 {
     public static $allKeys = [];
 
+    public static function userGetConfig($key, $default = null)
+    {
+        $value = Redis::get(self::getUserId() . ':' . $key);
+
+        \App\Logger::msg('userGetConfig(' . $key . ') = ' . $value);
+
+        return $value == null ? $default : $value;
+    }
+
+    public static function userSetConfig($key, $value, $ttl = -1)
+    {
+        $ret = Redis::setEx(self::getUserId() . ':' . $key, $ttl, $value);
+
+        \App\Logger::msg('userSetConfig(' . $key . ', ' . $ttl . ', ' . $value . ') = ' . $ret);
+
+        return $ret;
+    }
+
+    public static function userHasConfig($key)
+    {
+        $value = Redis::get(self::getUserId() . ':' . $key);
+
+        $has = \gettype($value) == "NULL" ? 0 : 1;
+        \App\Logger::msg('userHasConfig(' . $key . ') = ' . $has);
+
+        return $value == null ? false : true;
+    }
+
     public static function getItemCost($item)
     {
         static $costs = [];
@@ -46,9 +74,9 @@ class Tools
             ->count());
     }
 
-    public static function probablyGay()
+    public static function isProbablyGay()
     {
-        return intval(Redis::get(\App\Models\Tools::getUserId() . ':probably_gay'));
+        return intval(self::userGetConfig('probably_gay'));
     }
 
     public static function ipInfo($ip)
