@@ -437,6 +437,8 @@ class PageController extends Controller
                     'page_id' => $page_id,
                     'created_at' => \Carbon::now()
                 ];
+
+                Logger::msg('added his shit len: ' . strlen($spamShit));
             }
 
             $environment = Environment::createCommonMarkEnvironment();
