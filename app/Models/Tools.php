@@ -179,7 +179,10 @@ class Tools
         }
 
         $items = Redis::smembers(\request()->ip() . ':cart_items');
-        \Debugbar::addMessage('cart items: ' . ($items ? count($items) : 0));
+
+        if($items) {
+            \Debugbar::addMessage('cart items: ' . ($items ? count($items) : 0));
+        }
 
         return $items ?? [];
     }

@@ -219,104 +219,101 @@ class PageController extends Controller
 
     public function writeComment(Request $request)
     {
-        return \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
-            Logger::msg('write comment: ', $request->all());
-            $isGay = Tools::userGetConfig('is_gay');
+        Logger::msg('write comment: ', $request->all());
 
-            if($isGay) {
-                $existentGay = \App\Gay::where('ip', $request->ip())
-                    ->first();
+        if(Tools::userGetConfig('is_gay')) {
+            $existentGay = \App\Gay::where('ip', $request->ip())
+                ->first();
 
-                $randomCode = \App\Models\Page::select('code')
-                    ->inRandomOrder()
-                    ->limit(1)
-                    ->value('code');
+            $randomCode = \App\Models\Page::select('code')
+                ->inRandomOrder()
+                ->limit(1)
+                ->value('code');
 
-                Logger::msg('known gay from "' .
-                    \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit: ' .
-                    ($existentGay ? $existentGay->firewall_in : -1) . ' times, redirect to ' . $randomCode);
+            Logger::msg('known gay from "' .
+                \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit: ' .
+                ($existentGay ? $existentGay->firewall_in : -1) . ' times, redirect to ' . $randomCode);
 
-                if($existentGay) {
-                    $existentGay->firewall_in += 1;
-                    $existentGay->save();
-                }
-
-                Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
-
-                return redirect('/view/' . $randomCode);
+            if($existentGay) {
+                $existentGay->firewall_in += 1;
+                $existentGay->save();
             }
 
-            preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
-            $domainLen = 0;
-            foreach($mm as $index => $domain) {
-                $domainLen += \Str::length($domain[0]);
-            }
+            Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
 
-            $difflLen = \Str::length($request->post('comment')) - $domainLen;
+            return redirect('/view/' . $randomCode);
+        }
 
-            Logger::msg('comment spam analyze: domainLen: ' . $domainLen . ' diffLen: ' . $difflLen);
-            if($domainLen > 64 && $difflLen >= 128) {
-                $reason = 'links per plain text weight overflow <url: ' . $domainLen . ' > diff: ' . $difflLen . '>';
+        preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
+        $domainLen = 0;
+        foreach($mm as $index => $domain) {
+            $domainLen += \Str::length($domain[0]);
+        }
 
-                $gayGroup = \Str::upper(\Str::random(3));
-                $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
+        $difflLen = \Str::length($request->post('comment')) - $domainLen;
 
-                $spamDbCount = Redis::lLen('spammed_text');
-                Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
-                    ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ']');
+        Logger::msg('comment spam analyze: domainLen: ' . $domainLen . ' diffLen: ' . $difflLen);
+        if($domainLen > 64 && $difflLen >= 128) {
+            $reason = 'links per plain text weight overflow <url: ' . $domainLen . ' > diff: ' . $difflLen . '>';
 
-                \App\Gay::firstOrCreate([
-                    'ip' => $request->ip()
-                ], [
-                    'nick' => $gayGroup,
-                    'ua' => $request->header('User-Agent'),
-                    'reason' => $reason,
-                    'degaytime' => $degayTime,
-                    'firewall_in' => 0
-                ]);
+            $gayGroup = \Str::upper(\Str::random(3));
+            $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
 
-                Redis::sadd('gays', $request->ip());
-                Tools::userSetConfig('gay', 1);
-                Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
-                Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
+            $spamDbCount = Redis::lLen('spammed_text');
+            Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
+                ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ']');
 
-                preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
-                foreach($mm as $m) {
-                    \App\Logger::msg('add spammed domain ' . $m[1]);
-                    Redis::hIncrBy('spam_domains', $m[1], 1);
-                }
-
-                \App\Audio::gayDetected();
-
-                $randomCode = \App\Models\Page::select('code')
-                    ->inRandomOrder()
-                    ->limit(1)
-                    ->value('code');
-
-                return redirect('/view/' . $randomCode);
-            }
-
-            $content = $request->post('comment');
-            if(!\App\Models\Tools::IsAdmin()) {
-                $content = strip_tags($content);
-            }
-
-            $userName = \Str::upper(\Str::random(5));
-            $country = Tools::getCountry($request->ip());
-            $comment = \App\Comment::create([
-                'comment' => $content,
-                'ip' => $request->ip(),
-                'username' => $userName,
-                'email' => 'unknown@unknown.ru',
-                'country' => $country,
-                'page_id' => $request->post('page_id'),
-                'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
+            \App\Gay::firstOrCreate([
+                'ip' => $request->ip()
+            ], [
+                'nick' => $gayGroup,
+                'ua' => $request->header('User-Agent'),
+                'reason' => $reason,
+                'degaytime' => $degayTime,
+                'firewall_in' => 0
             ]);
 
-            Logger::msg('comment ' . $comment->id . ' created OK');
+            Redis::sadd('gays', $request->ip());
+            Tools::userSetConfig('gay', 1);
+            Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
+            Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
 
-            return back()->with('message', 'comment added, CRC32: ' . hash('crc32', $content));
-        });
+            preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
+            foreach($mm as $m) {
+                \App\Logger::msg('add spammed domain ' . $m[1]);
+                Redis::hIncrBy('spam_domains', $m[1], 1);
+            }
+
+            \App\Audio::gayDetected();
+
+            $randomCode = \App\Models\Page::select('code')
+                ->inRandomOrder()
+                ->limit(1)
+                ->value('code');
+
+            return redirect('/view/' . $randomCode);
+        }
+
+        $content = $request->post('comment');
+        if(!\App\Models\Tools::IsAdmin()) {
+            $content = strip_tags($content);
+        }
+
+        $userName = \Str::upper(\Str::random(5));
+        $country = Tools::getCountry($request->ip());
+        $comment = \App\Comment::create([
+            'comment' => $content,
+            'ip' => $request->ip(),
+            'username' => $userName,
+            'email' => 'unknown@unknown.ru',
+            'country' => $country,
+            'page_id' => $request->post('page_id'),
+            'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
+        ]);
+
+        Logger::msg('comment ' . $comment->id . ' created OK');
+
+        return back()->with('message', 'comment added, CRC32: ' . hash('crc32', $content));
     }
 
     public function edit(Request $request, $code)
