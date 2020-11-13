@@ -7,6 +7,7 @@ use App\Models\Tools;
 use Closure;
 use App\Logger;
 use Illuminate\Support\Facades\Redis;
+use  \App\Models\LogRecord;
 
 class LogRequest
 {
@@ -20,7 +21,7 @@ class LogRequest
      */
     public function handle($request, Closure $next)
     {
-        $log = \App\Models\LogRecord::create([
+        $log = LogRecord::create([
             'ip' => $request->ip(),
             'ua' => $request->userAgent(),
             'url' => $request->fullUrl(),
@@ -31,16 +32,16 @@ class LogRequest
             'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES))
         ]);
 
-        Redis::setEx($request->fingerprint() . ':current_log_id', 55, $log->id);
-        Redis::rPush(\App\Models\Tools::getUserId() . ':ip_log_ids', $log->id);
+        Tools::userSetConfig('current_log_id', $log->id, 55);
+        Redis::rPush(Tools::getUserId() . ':ip_log_ids', $log->id);
 
-        Redis::set(\App\Models\Tools::getUserId() . ':is_gay', \App\Models\Tools::isGay($request->ip()));
+        Tools::userSetConfig('is_gay', Tools::isGay($request->ip()));
 
-        if(!\App\Models\Tools::userHasConfig('probably_gay')) {
-            \App\Models\Tools::userSetConfig('probably_gay', intval(\App\XRandom::get(0, 26) == 21), 3600);
+        if(!Tools::userHasConfig('probably_gay')) {
+            Tools::userSetConfig('probably_gay', intval(\App\XRandom::get(0, 29) == 22), 3600);
         }
 
-        Redis::rPush(\App\Models\Tools::getUserId() . ':request_logs',
+        Redis::rPush(Tools::getUserId() . ':request_logs',
             hash('crc32', $request->ip() . $request->header('remote_port') . $request->method() . $request->fullUrl()) . ':' .
             $request->method() . ':' .
             $request->session()->getId() . ':' .
@@ -48,7 +49,7 @@ class LogRequest
             $request->header('remote_port') . ':' .
             \microtime(true));
 
-        \App\Models\Tools::recordIp($request->ip());
+        Tools::recordIp($request->ip());
 
         return $next($request);
     }
