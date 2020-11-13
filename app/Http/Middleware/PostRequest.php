@@ -6,6 +6,7 @@ use App\Models\LogRecord;
 use Closure;
 use \App\XRandom;
 use Illuminate\Support\Facades\Redis;
+use \App\Models\Tools;
 
 class PostRequest
 {
@@ -25,7 +26,7 @@ class PostRequest
 
         $response = $next($request);
 
-        $logId = \App\Models\Tools::userGetConfig('current_log_id');
+        $logId = Tools::userGetConfig('current_log_id');
 
         if($logId) {
             $record = LogRecord::where('id', $logId)
@@ -37,13 +38,13 @@ class PostRequest
             \App\Logger::msg('fatal: redis current_log_id not exist (timeout?)');
         }
 
-        $count = Redis::lLen(\App\Models\Tools::getUserId() . ':ip_log_ids');
+        $count = Redis::lLen(Tools::getUserId() . ':ip_log_ids');
 
         \Debugbar::addMessage('there is ' . $count . ' past-ip-log-ids for ' .
-            \App\Models\Tools::getUserId() .
-            ' crc: 0x' . sprintf("%X", \crc32(\App\Models\Tools::getUserId())));
+            Tools::getUserId() .
+            ' crc: 0x' . sprintf("%X", \crc32(Tools::getUserId())));
 
-        $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
+        $isGay = Redis::get(Tools::getUserId() . ':is_gay');
 
         if($isGay) {
             \Debugbar::alert('you are gay');
