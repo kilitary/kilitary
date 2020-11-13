@@ -51,8 +51,8 @@ Route::middleware(['cache.headers'])
                 Route::get('/donate', 'PageController@donate');
 
                 Route::get('/cart/add/{code}', 'PageController@addToCart');
-                Route::get('/cart/submit', 'PageController@cartSubmit');
-                Route::get('/cart/final-submit', 'PageController@cartFinalSubmit');
+                Route::get('/cart/submit', 'PageController@cartSubmit')->name('submit');
+                Route::get('/cart/final-submit', 'PageController@cartFinalSubmit')->name('final-submit');
             });
 
         Route::any('/home', 'HomeController@index');

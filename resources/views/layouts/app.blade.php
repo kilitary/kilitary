@@ -103,6 +103,7 @@
   "image": "/logo.png"
 }
 
+
     </script>
 @endif
 
@@ -132,17 +133,20 @@
 </div>
 
 <footer>
-    <br/><img src="/images/flatten.png"> Your cart {{\App\Models\Tools::getCart() ? 'items: ':'is empty'}}
-    @foreach (\App\Models\Tools::getCart() as $item)
-        <span data-pt-scheme="white" class=" cart-item protip" data-pt-animate="bounceIn"
-              data-pt-gravity="top-left"
-              data-pt-title="<span class='protip-cart-item'>${{\App\Models\Tools::getItemCost($item)}}</span>">
+    @if (!request()->is('*cart*'))
+        <br/><img src="/images/flatten.png"> Your cart {{\App\Models\Tools::getCart() ? 'items: ':'is empty'}}
+        @foreach (\App\Models\Tools::getCart() as $item)
+            <span data-pt-scheme="white" class=" cart-item protip" data-pt-animate="bounceIn"
+                  data-pt-gravity="top-left"
+                  data-pt-title="<span class='protip-cart-item'>${{\App\Models\Tools::getItemCost($item)}}</span>">
             <a href="/view/{{$item}}">{{ $item }}</a>
         </span>
-    @endforeach
-    @if (count(\App\Models\Tools::getCart()))
-        [<a href="/cart/submit">submit cart</a>]
+        @endforeach
+        @if (count(\App\Models\Tools::getCart()))
+            [<a href="/cart/submit">submit cart</a>]
+        @endif
     @endif
+
     <div class="support-box">
         <a href="/donate" class="donate-link"><strong>i NEED</strong> support</a>
     </div>
