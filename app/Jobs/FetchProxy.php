@@ -80,7 +80,7 @@ class FetchProxy implements ShouldQueue
                         'ip' => $match[1]
                     ]);
             }
-        } while($foundProxys > 0 && $start <= 130);
+        } while($foundProxys > 0 && $start <= 65);
 
         \App\Logger::msg('done job [fetch proxy: hidemy.name] ' . 'got ' . $foundProxys . ' proxys');
     }
