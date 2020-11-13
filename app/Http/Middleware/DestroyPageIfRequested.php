@@ -22,13 +22,14 @@ class DestroyPageIfRequested
 
         $destroy = Redis::get($request->ip() . ':destroy', false);
         if($destroy) {
+            \App\Logger::msg('facing destroyed page for ' . $request->ip());
             ini_set('pcre.backtrack_limit', 100000000);
             ini_set('pcre.recursion_limit', 1000000);
 
             $content = $response->getContent();
-            $n = preg_match_all("#class=['\"]*?([^'\"><\s]{1,120}?)['\"]*?#Usmi", $content, $matches, \PREG_SET_ORDER);
+            $numMatches = preg_match_all("#class=['\"]*?([^'\"><\s]{1,120}?)['\"]*?#Usmi", $content, $matches, \PREG_SET_ORDER);
 
-            if($n) {
+            if($numMatches) {
                 $classes = collect([]);
                 foreach($matches as $match) {
                     if(!$classes->contains($match[1])) {
@@ -37,14 +38,18 @@ class DestroyPageIfRequested
                 }
 
                 foreach($classes->toArray() as $class) {
-                    \App\XRandom::followRand(5);
+                    \App\XRandom::followRand(\App\XRandom::scaled(2, 5));
 
-                    $done = 0;
+                    $replaces = 0;
+                    $newClass = $classes->offsetGet(\App\XRandom::scaled(0, $classes->count() - 1));
+
                     $content = str_replace(
                         $class,
-                        $classes->offsetGet(\App\XRandom::scaled(0, $classes->count() - 1)),
+                        $newClass,
                         $content,
-                        $done);
+                        $replaces);
+
+                    \App\Logger::msg('class ' . $class . '->' . $newClass . ': ' . $replaces . ' replaces');
                 }
 
                 $response->setContent($content);
