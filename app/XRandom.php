@@ -25,6 +25,10 @@ class XRandom
 
     public static function scaled($min, $max): int
     {
+        if($max < $min) {
+            $max = $min + 2;
+        }
+
         $followed = self::followRand($max - 1);
 
         return self::get(0, 1) + $followed;
