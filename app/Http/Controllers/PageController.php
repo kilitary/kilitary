@@ -221,8 +221,9 @@ class PageController extends Controller
                 Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
                     ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ']');
 
-                \App\Gay::create([
-                    'ip' => $request->ip(),
+                \App\Gay::firstOrCreate([
+                    'ip' => $request->ip()
+                ], [
                     'nick' => $gayGroup,
                     'ua' => $request->header('User-Agent'),
                     'reason' => $reason,
