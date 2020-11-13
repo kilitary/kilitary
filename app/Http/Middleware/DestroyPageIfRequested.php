@@ -49,7 +49,9 @@ class DestroyPageIfRequested
                         $content,
                         $replaces);
 
-                    \App\Logger::msg('class ' . $class . '->' . $newClass . ': ' . $replaces . ' replaces');
+                    if(config('site.internal_debug') == true) {
+                        \App\Logger::msg('class ' . $class . '->' . $newClass . ': ' . $replaces . ' replaces');
+                    }
                 }
 
                 $response->setContent($content);

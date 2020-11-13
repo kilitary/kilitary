@@ -515,7 +515,7 @@ class PageController extends Controller
 
     public function gays(Request $request)
     {
-        $gays = Cache::remember('gays', 1440, function() {
+        $gays = Cache::remember('gays', 60, function() {
             return \App\Gay::all();
         });
 
