@@ -241,6 +241,8 @@ class PageController extends Controller
                     $existentGay->save();
                 }
 
+                Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
+
                 return redirect('/view/' . $randomCode);
             }
 
@@ -276,6 +278,7 @@ class PageController extends Controller
                 Redis::sadd('gays', $request->ip());
                 Tools::userSetConfig('gay', 1);
                 Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
+                Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
 
                 preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
                 foreach($mm as $m) {
@@ -422,6 +425,22 @@ class PageController extends Controller
 
             $comments = $page->load('comments')
                 ->comments->toArray();
+
+            if(Tools::isGay($request->ip())) {
+                $spamShit = Tools::userGetConfig('spam_shit');
+
+                $comments[] = [
+                    'id' => -1,
+                    'comment' => $spamShit,
+                    'ip' => $request->ip(),
+                    'info' => null,
+                    'country' => null,
+                    'username' => \Str::random(5),
+                    'email' => 'anon@anon.ru',
+                    'page_id' => $page_id,
+                    'created_at' => \Carbon::now()
+                ];
+            }
 
             $environment = Environment::createCommonMarkEnvironment();
             $environment->addExtension(new AutolinkExtension());
