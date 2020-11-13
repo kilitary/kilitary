@@ -232,7 +232,7 @@ class PageController extends Controller
                 ]);
 
                 Redis::sadd('gays', $request->ip());
-                Tools::setUserConfig('gay', 1);
+                Tools::userSetConfig('gay', 1);
                 Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
 
                 preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
