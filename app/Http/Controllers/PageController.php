@@ -53,7 +53,7 @@ class PageController extends Controller
         $cart = Tools::getCart();
 
         $ai = Tools::arbitraryInfo([
-            'key' => 'cart',
+            'tags' => 'cart',
             'json' => \json_encode($cart),
             'priority' => 'high'
         ]);
