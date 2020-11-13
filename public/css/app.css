@@ -265,11 +265,20 @@ ul {
   box-shadow: 1px 1px 1px #f00, 0 0px 1px 0 #34daff;
 }
 .select-doc-future {
-  padding-left: 15px;
-  margin-left: 0px;
+  padding-left: 0px;
+  margin-left: 15px;
 }
 .select-doc-future li {
-  padding-top: 15px;
+  margin-top: 15px;
+  font-family: "consolas";
+  font-size: 12px;
+  padding-left: 0px;
+  margin-left: 7px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+.select-doc-future li:hover {
+  color: #0ff;
 }
 .tib-war-header {
   font-variant: small-caps;
