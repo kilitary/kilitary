@@ -179,7 +179,8 @@ class PageController extends Controller
     {
         return \Debugbar::measure('adding comment for ' . $request->ip(), function() use ($request) {
             Logger::msg('write comment: ', $request->all());
-            $isGay = Redis::get(\App\Models\Tools::getUserId() . ':is_gay');
+            $isGay = Tools::userGetConfig('is_gay');
+
             if($isGay) {
                 $existentGay = \App\Gay::where('ip', $request->ip())
                     ->first();
@@ -192,6 +193,7 @@ class PageController extends Controller
                 Logger::msg('known gay from "' .
                     \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit: ' .
                     ($existentGay ? $existentGay->firewall_in : -1) . ' times, redirect to ' . $randomCode);
+
                 if($existentGay) {
                     $existentGay->firewall_in += 1;
                     $existentGay->save();
@@ -229,7 +231,7 @@ class PageController extends Controller
                 ]);
 
                 Redis::sadd('gays', $request->ip());
-                Redis::hset($request->ip, 'gay', 1);
+                Tools::setUserConfig('gay', 1);
                 Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
 
                 preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
