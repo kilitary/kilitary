@@ -35,6 +35,10 @@ class PageController extends Controller
     {
         $cart = collect(Tools::getCart());
 
+        if(!$cart) {
+            return redirect('/')->with('message', 'empty cart');
+        }
+
         $total = 0.0;
         $cart->transform(function($item, $key) use ($request, &$total) {
             $record['cost'] = Tools::getItemCost($item);
@@ -51,6 +55,10 @@ class PageController extends Controller
     public function cartFinalSubmit(Request $request)
     {
         $cart = Tools::getCart();
+
+        if(!$cart) {
+            return redirect('/')->with('message', 'empty cart');
+        }
 
         $ai = Tools::arbitraryInfo([
             'tags' => 'cart',
@@ -467,7 +475,7 @@ class PageController extends Controller
             $views = -1;
             $edits = -1;
 
-            return back();
+            return back()->with('message', $content);
         }
 
         $keys = Tools::getArrayKeys();
