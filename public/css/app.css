@@ -264,6 +264,30 @@ ul {
 .interestlink:hover {
   box-shadow: 1px 1px 1px #f00, 0 0px 1px 0 #34daff;
 }
+.cart-button-submit {
+  padding: 10px;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+.cart-button-submit:hover {
+  color: #f00;
+}
+.cart-item-name {
+  display: inline-block;
+}
+.cart-item-cost {
+  width: 100%;
+  text-align: right;
+  display: inline-block;
+}
+.cart-total {
+  padding-left: 7px;
+  font-family: "lucida console";
+  font-size: 20px;
+}
+.cart-item {
+  width: 400px;
+}
 .select-doc-future {
   padding-left: 0px;
   margin-left: 15px;

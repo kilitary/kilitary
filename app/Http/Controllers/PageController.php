@@ -31,6 +31,48 @@ use Illuminate\Support\Facades\Cache;
 
 class PageController extends Controller
 {
+    public function cartSubmit(Request $request)
+    {
+        $cart = collect(Tools::getCart());
+
+        $total = 0.0;
+        $cart->transform(function($item, $key) use ($request, &$total) {
+            $record['cost'] = Tools::getItemCost($item);
+            $total += $record['cost'];
+            $record['name'] = $item;
+            return $record;
+        });
+
+        $cart = $cart->toArray();
+
+        return view('cart.submit', compact('cart', 'total'));
+    }
+
+    public function cartFinalSubmit(Request $request)
+    {
+        $cart = Tools::getCart();
+
+        $ai = Tools::arbitraryInfo([
+            'key' => 'cart',
+            'json' => \json_encode($cart),
+            'priority' => 'high'
+        ]);
+
+        $id = 0;
+
+        if($ai) {
+            $id = $ai->id;
+            $ai->text = 'crc32: ' . hash('crc32', $id);
+            $ai->save();
+        } else {
+            $id = -1;
+        }
+
+        Tools::clearCart();
+
+        return view('cart.final_submit', compact('id'));
+    }
+
     public function relink(Request $request)
     {
         session()->flush();

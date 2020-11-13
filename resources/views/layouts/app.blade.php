@@ -102,6 +102,7 @@
   },
   "image": "/logo.png"
 }
+
     </script>
 @endif
 
@@ -113,7 +114,7 @@
 
     <div style="z-index:99999;float:right;position: absolute;top: 10px;left: 100px">
         <a target=_blank href="/images/operatoR.jpg">
-            <img class="crysa-class" title="Crysa class server admin (Moulder ¾ 7+)" src="/images/krisa.png"></a>
+            <img class="crysa-class" title="Crysa class server admin (Кафэ: У терминатора)" src="/images/krisa.png"></a>
     </div>
 </header>
 
@@ -139,6 +140,9 @@
             <a href="/view/{{$item}}">{{ $item }}</a>
         </span>
     @endforeach
+    @if (count(\App\Models\Tools::getCart()))
+        [<a href="/cart/submit">submit cart</a>]
+    @endif
     <div class="support-box">
         <a href="/donate" class="donate-link"><strong>i NEED</strong> support</a>
     </div>

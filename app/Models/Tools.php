@@ -149,6 +149,27 @@ class Tools
         Redis::sadd(\request()->ip() . ':cart_items', $item);
     }
 
+    public static function arbitraryInfo($info): \App\Models\ArbitraryInfo
+    {
+        $info['ip'] = \request()->ip();
+        $info['user_id'] = self::getUserId();
+
+        \App\Logger::msg(\request()->ip() . '> creating new AI: ' . \json_encode($info, JSON_PRETTY_PRINT));
+
+        try {
+            $ai = ArbitraryInfo::create($info);
+        } catch(Exception $e) {
+            \App\Logger::msg('Exception with ai: ' . $e->getMessage());
+        }
+
+        return $ai ?? false;
+    }
+
+    public static function clearCart()
+    {
+        return Redis::del(\request()->ip() . ':cart_items');
+    }
+
     public static function getCart()
     {
         static $items;
