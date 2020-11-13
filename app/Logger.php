@@ -20,11 +20,11 @@ class Logger extends Model
             if(\is_array($msg) || \is_object($msg)) {
                 $msg = \json_encode($msg, JSON_PRETTY_PRINT);
             }
-            $fp = @fopen(env('LOG_FILE'), 'a');
+            $fp = fopen(env('LOG_FILE'), 'a');
             if($fp) {
                 $at = \Carbon::now()->format('Y-m-d H:i:s.u');
-                @fwrite($fp, '[' . sprintf("%06d", getmypid()) . '] ' . $at . ' ' . env('APP_NAME') . ': ' . $msg . PHP_EOL);
-                @fclose($fp);
+                fwrite($fp, '[' . sprintf("%06d", getmypid()) . '] ' . $at . ' ' . env('APP_NAME') . ': ' . $msg . PHP_EOL);
+                fclose($fp);
             }
         }
     }
