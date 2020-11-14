@@ -74,6 +74,8 @@
 </head>
 <!--laragen-->
 <body>
+@inject('channelStatusProvider', '\App\Providers\ChannelStatusProvider')
+<!--#{{ $channelStatusProvider->sign() }}#-->
 <header>
     @if (Route::currentRouteName()=='home')
         <div id="flagleft"></div>
