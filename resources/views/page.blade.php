@@ -4,7 +4,7 @@
 
     @include('schema.ldjson', ['page' => $page, 'comments' => $comments])
 
-    <a href="/"><-index</a> Wind: {{mt_rand(11, 22)}}<br/>
+    <a href="/"><-index</a> Wind: {{mt_rand(11, 221)}}<br/>
     <div class="container page-content">
 
         <h2 class="page-header">{{$header}}</h2>
@@ -105,7 +105,7 @@
     <div id="fb-root"></div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         @if (session('playAudio', false))
         $(function() {
@@ -141,5 +141,5 @@
 
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v9.0"
             nonce="YLGawk8W"></script>
-@endsection
+@endpush
 

@@ -14,7 +14,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@push('scripts')
     <script>
         $(function() {
             var audio = new Audio('/audio/WindowsHardwareRemove.mp3');
@@ -31,6 +31,6 @@
             }, 900);
         });
     </script>
-@endsection
+@endpush
 
 

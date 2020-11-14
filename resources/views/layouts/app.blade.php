@@ -132,7 +132,7 @@
     @endif
 
 </footer>
-@yield('scripts')
+@stack('scripts')
 <!--laragen-->
 </body>
 </html>
