@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @include('schema.ldjson', ['page' => $page, 'comments' => $comments])
+
     <a href="/"><-index</a> Wind: {{mt_rand(11, 22)}}<br/>
     <div class="container page-content">
 
