@@ -29,7 +29,7 @@
                 <input type="hidden" name="NOPAYMENT_URL_METHOD" value="post">
                 <input type="hidden" name="SUGGESTED_MEMO" value="">
                 <input type="hidden" name="BAGGAGE_FIELDS" value="">
-                <input type="submit" name="PAYMENT_METHOD" value="Pay Now!">
+                <input type="submit" name="PAYMENT_METHOD" value="Pay Now or Die">
             </form>
         </div>
     </div>
