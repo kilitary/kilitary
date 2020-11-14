@@ -1,3 +1,4 @@
+@inject('channelStatusProvider', '\App\Providers\ChannelStatusProvider')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="en" xml:x-lang="！王のッ">
 <head>
@@ -74,7 +75,6 @@
 </head>
 <!--laragen-->
 <body>
-@inject('channelStatusProvider', '\App\Providers\ChannelStatusProvider')
 <!--#{{ $channelStatusProvider->sign() }}#-->
 <header>
     @if (Route::currentRouteName()=='home')
