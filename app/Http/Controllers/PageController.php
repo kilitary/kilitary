@@ -76,7 +76,7 @@ class PageController extends Controller
 
         if($ai) {
             $id = $ai->id;
-            $ai->text = 'crc32: ' . hash('crc32', $id);
+            $ai->text = 'crc32:' . hash('crc32', $ai->json);
             $ai->save();
         } else {
             $id = -1;
