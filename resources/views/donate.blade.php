@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container page-content">
-        <a href="/"><-index</a> Wind: {{mt_rand(11, 22)}}<br/>
+        <a href="/"><-index</a> Wind: {{mt_rand(2, 212)}}<br/>
         <div class="marginbottom donate-area">
             by credit card:<br/>
             <iframe
