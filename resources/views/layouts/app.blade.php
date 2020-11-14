@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
           content="{{$description ?? $keys ?? 'v2k, military, fss, fbi, cia, nsa, nasa, intrepol, secret service, darpa, thales of the futur e'}}">
-    <meta name="generator" content="laraGen">
+    <meta name="generator" content="laragen">
+    <meta name="generator-version" content="{{config('site.version')}}">
+    <meta name="generator-author" content="Axis9 (an umbrella division)"/>
     <meta name="document-state" content="dynamic">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
@@ -102,6 +104,12 @@
   },
   "image": "/logo.png"
 }
+
+
+
+
+
+
 
 
     </script>
