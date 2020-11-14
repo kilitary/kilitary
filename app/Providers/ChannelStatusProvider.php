@@ -35,9 +35,13 @@ class ChannelStatusProvider extends ServiceProvider
     {
         $inputSalt = \request()->get('input_string');
 
+        if(empty($inputSalt)) {
+            return 'empty';
+        }
+
         $exist = Redis::sismember('channel_known_signs', $inputSalt);
         if($exist) {
-            abort(403);
+            abort(500);
         }
 
         Redis::sadd('channel_known_signs', $inputSalt);
