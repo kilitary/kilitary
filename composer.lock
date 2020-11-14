@@ -4,8 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b30e1be56731b64a500255e61e2ce37b",
+    "content-hash": "8d0f97e8a3f2e76e5143512f63bf5d45",
     "packages": [
+        {
+            "name": "amnuts/opcache-gui",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amnuts/opcache-gui.git",
+                "reference": "db965ad03e5741cb7fdfe23d9c66e95cec7a4d1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amnuts/opcache-gui/zipball/db965ad03e5741cb7fdfe23d9c66e95cec7a4d1c",
+                "reference": "db965ad03e5741cb7fdfe23d9c66e95cec7a4d1c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zend-opcache": "*",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Amnuts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Collington",
+                    "email": "andy@amnuts.com",
+                    "homepage": "http://www.amnuts.com/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/amnuts/opcache-gui/graphs/contributors"
+                }
+            ],
+            "description": "A clean, effective and responsive interface for Zend OPcache, with real(ish)-time monitoring, filtering and the ability to invalidate files",
+            "keywords": [
+                "Opcache",
+                "cache",
+                "gui",
+                "interface",
+                "opcodes"
+            ],
+            "support": {
+                "email": "andy@amnuts.com",
+                "issues": "https://github.com/amnuts/opcache-gui/issues",
+                "source": "https://github.com/amnuts/opcache-gui/tree/3.0.1"
+            },
+            "time": "2020-09-25T18:23:43+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.2",

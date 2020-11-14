@@ -28,9 +28,15 @@ use const JSON_PRETTY_PRINT;
 use const PREG_SET_ORDER;
 use \WebArticleExtractor;
 use Illuminate\Support\Facades\Cache;
+use Amnuts\Opcache\Service;
 
 class PageController extends Controller
 {
+    public function opcache(Request $request)
+    {
+        return response(require_once '../vendor/amnuts/opcache-gui/index.php');
+    }
+
     public function cartSubmit(Request $request)
     {
         $cart = collect(Tools::getCart());
