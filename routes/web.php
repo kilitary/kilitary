@@ -46,7 +46,7 @@ Route::middleware(['cache.headers'])
                 Route::get('/{file}.txt', 'TextController@identify');
                 Route::get('/{file}.htm', 'TextController@identify');
 
-                Route::any('/page/{page_code}', 'PageController@record');
+                Route::any('/page/new', 'PageController@record');
 
                 Route::get('/proxy', 'ProxyController@list');
 

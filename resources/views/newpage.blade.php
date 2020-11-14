@@ -3,7 +3,7 @@
 @section('content')
     <a href="/"><-index</a><br/>
     <div class="container">
-        <form method="post" action="/page/{{$code}}">
+        <form method="post" action="/page/new">
             @csrf
             <h3>Header</h3>
             <input class="marginleft" name="header">

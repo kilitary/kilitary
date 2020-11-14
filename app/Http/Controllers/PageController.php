@@ -544,7 +544,7 @@ class PageController extends Controller
         return back();
     }
 
-    public function record(Request $request, $code)
+    public function record(Request $request)
     {
         try {
             if($request->method() == 'GET') {

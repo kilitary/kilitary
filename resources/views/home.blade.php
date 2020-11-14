@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="marginleft smallcaps">
-                create new info here: <a href="/page/{{$code}}">+create</a>
+                create new info here: <a href="/page/new">+create</a>
             </div>
         @endif
 
