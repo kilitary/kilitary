@@ -74,9 +74,11 @@ class PageController extends Controller
 
         $id = 0;
 
+        $crc32b = -1;
         if($ai) {
+            $crc32b = hash('crc32b', $ai->json);
             $id = $ai->id;
-            $ai->text = 'crc32b:' . hash('crc32b', $ai->json);
+            $ai->text = 'crc32b:' . $crc32b;
             $ai->save();
         } else {
             $id = -1;
@@ -84,7 +86,7 @@ class PageController extends Controller
 
         Tools::clearCart();
 
-        return view('cart.final_submit', compact('id'));
+        return view('cart.final_submit', compact('id', 'crc32b'));
     }
 
     public function relink(Request $request)

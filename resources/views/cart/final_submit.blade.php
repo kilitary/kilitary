@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <h3>Done. Your purchase id: {{ hash('crc32', $id) }}</h3>
+        <h3>Done. Your purchase id: {{ $crc32b }}</h3>
         <a href="/">->ret()</a>
     </div>
 @endsection
