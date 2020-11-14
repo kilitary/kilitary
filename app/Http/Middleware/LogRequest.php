@@ -35,7 +35,7 @@ class LogRequest
         Tools::userSetConfig('current_log_id', $log->id, 55);
         Redis::rPush(Tools::getUserId() . ':ip_log_ids', $log->id);
 
-        Tools::userSetConfig('is_gay', Tools::isGay($request->ip()));
+        Tools::userSetConfig('is_gay', intval(Tools::isGay($request->ip())));
 
         if(!Tools::userHasConfig('probably_gay')) {
             Tools::userSetConfig('probably_gay', intval(\App\XRandom::get(0, 32) == 15), 3600);

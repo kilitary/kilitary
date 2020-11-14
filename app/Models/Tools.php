@@ -76,8 +76,7 @@ class Tools
 
     public static function isGay($ip)
     {
-        return intval(\App\Gay::where('ip', '=', $ip)
-            ->count());
+        return \App\Gay::where('ip', '=', $ip)->exists();
     }
 
     public static function isProbablyGay()

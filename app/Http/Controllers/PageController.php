@@ -237,7 +237,7 @@ class PageController extends Controller
     {
         Logger::msg('write comment: ', $request->all());
 
-        if(Tools::userHasConfig('is_gay') && Tools::userGetConfig('is_gay') == true) {
+        if(Tools::userHasConfig('is_gay') && Tools::userGetConfig('is_gay') == 1) {
             $existentGay = \App\Gay::where('ip', $request->ip())
                 ->first();
 
@@ -276,10 +276,8 @@ class PageController extends Controller
             $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
 
             $spamDbCount = Redis::lLen('spammed_text');
-            Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
-                ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ']');
 
-            \App\Gay::firstOrCreate([
+            $gay = \App\Gay::firstOrCreate([
                 'ip' => $request->ip()
             ], [
                 'nick' => $gayGroup,
@@ -288,6 +286,9 @@ class PageController extends Controller
                 'degaytime' => $degayTime,
                 'firewall_in' => 0
             ]);
+
+            Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
+                ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ' id: ' . $gay->id . ']');
 
             Redis::sadd('gays', $request->ip());
             Tools::userSetConfig('is_gay', 1);
