@@ -38,7 +38,7 @@ class LogRequest
         Tools::userSetConfig('is_gay', intval(Tools::isGay($request->ip())));
 
         if(!Tools::userHasConfig('probably_gay')) {
-            Tools::userSetConfig('probably_gay', intval(\App\XRandom::get(0, 32) == 15), 3600);
+            Tools::userSetConfig('probably_gay', intval(\App\XRandom::get(0, 35) == 34), 3600);
         }
 
         Redis::rPush(Tools::getUserId() . ':request_logs',
