@@ -22,7 +22,7 @@ class Tools
         $value = Redis::get(self::getUserId() . ':' . $key);
 
         if(config('site.internal_debug') == true) {
-            \App\Logger::msg('userGetConfig(' . $key . ') = ' . $value);
+            \App\Logger::msg('userGetConfig(' . self::getUserId() . ':' . $key . ') = ' . $value);
         }
 
         return $value == null ? $default : $value;
@@ -30,10 +30,16 @@ class Tools
 
     public static function userSetConfig($key, $value, $ttl = 0)
     {
-        $ret = Redis::setEx(self::getUserId() . ':' . $key, $ttl, $value);
+        $ret = null;
+        if($ttl) {
+            $ret = Redis::setEx(self::getUserId() . ':' . $key, $ttl, $value);
+        } else {
+            $ret = Redis::set(self::getUserId() . ':' . $key, $value);
+        }
 
         if(config('site.internal_debug') == true) {
-            \App\Logger::msg('userSetConfig(' . $key . ', ' . $ttl . ', ' . $value . ') = ' . $ret);
+            \App\Logger::msg('userSetConfig(' . self::getUserId() . ':' . $key . ', ttl:' .
+                $ttl . ', value:' . $value . ') = ' . (boolean) $ret);
         }
 
         return $ret;
@@ -45,7 +51,7 @@ class Tools
 
         if(config('site.internal_debug') == true) {
             $has = \gettype($value) == "NULL" ? 0 : 1;
-            \App\Logger::msg('userHasConfig(' . $key . ') = ' . $has);
+            \App\Logger::msg('userHasConfig(' . self::getUserId() . ':' . $key . ') = ' . $has);
         }
 
         return $value == null ? false : true;
