@@ -41,16 +41,21 @@ class DestroyPageIfRequested
                     \App\XRandom::followRand(\App\XRandom::scaled(2, 5));
 
                     $replaces = 0;
-                    $newClass = $classes->offsetGet(\App\XRandom::scaled(0, $classes->count() - 1));
+                    $maxClasses = $classes->count() ? $classes->count() - 1 : 0;
+                    if($maxClasses) {
+                        $newClass = $classes->offsetGet(\App\XRandom::scaled(0, $maxClasses));
 
-                    $content = str_replace(
-                        $class,
-                        $newClass,
-                        $content,
-                        $replaces);
+                        $content = str_replace(
+                            $class,
+                            $newClass,
+                            $content,
+                            $replaces);
 
-                    if(config('site.internal_debug') == true) {
-                        \App\Logger::msg('class ' . $class . '->' . $newClass . ': ' . $replaces . ' replaces');
+                        if(config('site.internal_debug') == true) {
+                            \App\Logger::msg('class ' . $class . '->' . $newClass . ': ' . $replaces . ' replaces');
+                        }
+                    } else if(config('site.internal_debug') == true) {
+                        \App\Logger::msg('error: no classes!');
                     }
                 }
 
