@@ -235,7 +235,7 @@ class PageController extends Controller
     {
         Logger::msg('write comment: ', $request->all());
 
-        if(Tools::userGetConfig('is_gay')) {
+        if(Tools::userHasConfig('is_gay') && Tools::userGetConfig('is_gay') == true) {
             $existentGay = \App\Gay::where('ip', $request->ip())
                 ->first();
 
@@ -288,7 +288,7 @@ class PageController extends Controller
             ]);
 
             Redis::sadd('gays', $request->ip());
-            Tools::userSetConfig('gay', 1);
+            Tools::userSetConfig('is_gay', 1);
             Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
             Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
 
