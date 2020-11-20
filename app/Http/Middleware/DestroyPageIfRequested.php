@@ -20,7 +20,7 @@ class DestroyPageIfRequested
     {
         $response = $next($request);
 
-        $destroy = Redis::get($request->ip() . ':destroy', false);
+        $destroy = \App\Models\Tools::userGetConfig('destroy', false);
         if($destroy) {
             \App\Logger::msg('facing destroyed page for ' . $request->ip());
             ini_set('pcre.backtrack_limit', 100000000);
