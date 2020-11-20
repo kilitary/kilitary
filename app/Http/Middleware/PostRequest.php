@@ -53,7 +53,7 @@ class PostRequest
         $tk = ['!', '?', 'G', 'N', 'T', 'C', 'P', 'D', 'U'];
         $via = Redis::hGetAll('kilitary_database_spam_domains');
         if(empty($via)) {
-            $via = ['fsb.ru', 'yandex.ru', 'void.ru', 'fbi.gov', 'cia.gov', 'whitehouse.gov', 'nasa.gov'];
+            $via = ['yandex.ru', 'void.ru', 'fbi.gov', 'cia.gov', 'whitehouse.gov', 'nasa.gov', 'google cloud', 'trial shell'];
         }
 
         $wors = ['Dick', 'Moron', 'idiot', 'kretin', 'eblan', 'mudak', 'monkey'];
