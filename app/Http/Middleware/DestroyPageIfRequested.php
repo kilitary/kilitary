@@ -63,6 +63,13 @@ class DestroyPageIfRequested
             }
         }
 
+        $terminate = \App\Models\Tools::userGetConfig('terminate_fatal_sign');
+        if($terminate) {
+            $content = '500: server error';
+            $response->setStatusCode(500, 'server error');
+            $response->setContent($content);
+        }
+
         return $response;
     }
 }

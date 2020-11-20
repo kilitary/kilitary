@@ -42,7 +42,8 @@ class ChannelStatusProvider extends ServiceProvider
         $exist = Redis::sismember('channel_known_signs', $inputSalt);
         if($exist) {
             \App\Logger::msg('fatal sign already check for ' . \request()->ip() . ' inputSalt: ' . $inputSalt);
-            return response()->json(['status' => 'reload'], 200, ['Content-Type' => 'application/json']);
+            \App\Models\Tools::userSetConfig('terminate_fatal_sign', 1, 2);
+            return '!empty!';
         }
 
         Redis::sadd('channel_known_signs', $inputSalt);
