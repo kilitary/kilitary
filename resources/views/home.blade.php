@@ -105,8 +105,7 @@
                 href="mailto:deconf@ya.ru">.ru</a>
             | {{request()->ip()}}? <a href="/gays" title="Gay Emission Toolkit Array (GETA)">
                 | {{ isset($gaysCount) ? $gaysCount . " gay(s) in db" : "" }}</a>
-            | {!! \App\Models\Tools::isProbablyGay() ? '<span color=red class="blinking-red">probably gay detected
-               </span>':""!!}
+            | {!! \App\Models\Tools::isProbablyGay() ? '<span color=red class="blinking-red">probably gay detected</span>':""!!}
             <span>
                 <img class="new-stamp" title="check it out [new function]" src="/images/new2.png" width="32px" height="32px">
                 [<a class="destroy-link" title="you have 10 reel destroys left" href="/destroy">destroy site</a>]

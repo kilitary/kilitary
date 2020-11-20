@@ -164,6 +164,11 @@ textarea:hover {
   border-top: 14px dashed #ff8c00;
   border-bottom: 14px dashed #ff8c00;
 }
+.new-stamp {
+  position: relative;
+  left: 41px;
+  top: -1px;
+}
 .iplink {
   font-size: 12px;
   padding: 3px;
