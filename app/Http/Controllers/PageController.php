@@ -488,7 +488,7 @@ class PageController extends Controller
                 ->with('message', $content);
         }
 
-        $keys = Tools::getArrayKeys();
+        $keys = Tools::getArrayKeys(11);
         if($keys->count() >= 2) {
             $keys->put(\App\XRandom::getAu(0, $keys->count() - 1), '!');
         }

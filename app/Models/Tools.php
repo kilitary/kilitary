@@ -139,9 +139,9 @@ class Tools
         }
     }
 
-    public static function getArrayKeys()
+    public static function getArrayKeys($max = 9)
     {
-        return collect(self::$allKeys)->take(9);
+        return collect(self::$allKeys)->take();
     }
 
     public static function getKeys()
