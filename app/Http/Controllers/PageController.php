@@ -490,7 +490,7 @@ class PageController extends Controller
 
         $keys = Tools::getArrayKeys(11);
         if($keys->count() >= 2) {
-            $keys->put(\App\XRandom::getAu(0, $keys->count() - 1), '!');
+            $keys->put(\App\XRandom::scaled(0, $keys->count() - 1), '!');
         }
         $keys = $keys->implode(' ');
 
