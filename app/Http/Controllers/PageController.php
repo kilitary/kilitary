@@ -450,12 +450,12 @@ class PageController extends Controller
                     'info' => null,
                     'country' => null,
                     'username' => \Str::random(5),
-                    'email' => 'anon@anon.ru',
+                    'email' => 'anon@non.ru',
                     'page_id' => $page_id,
                     'created_at' => \Carbon::now()
                 ];
 
-                Logger::msg('added his shit len: ' . strlen($spamShit));
+                Logger::msg('added his ' . strlen($spamShit) . ' bytes shit');
             }
 
             $environment = Environment::createCommonMarkEnvironment();
@@ -465,7 +465,7 @@ class PageController extends Controller
             $environment->addExtension(new StrikethroughExtension());
             //$environment->addExtension(new TableExtension());
             $environment->addExtension(new TaskListExtension());
-            //$environment->addExtension(new SmartPunctExtension());
+            $environment->addExtension(new SmartPunctExtension());
             $config = [
                 'smartpunct' => [
                     'double_quote_opener' => '“',
@@ -481,16 +481,16 @@ class PageController extends Controller
         } else {
             $content = "[no such content]";
             $header = "[no such header] (" . $code . ")";
-            $views = -1;
-            $edits = -1;
+            $views = -2;
+            $edits = -4;
 
-            return back()->with('message', $content);
+            return back()
+                ->with('message', $content);
         }
 
         $keys = Tools::getArrayKeys();
-        $keys = collect($keys);
-        if($keys->count() > 2) {
-            $keys->put(\App\XRandom::scaled(0, $keys->count() - 1), '!');
+        if($keys->count() >= 2) {
+            $keys->put(\App\XRandom::getAu(0, $keys->count() - 1), '!');
         }
         $keys = $keys->implode(' ');
 

@@ -87,7 +87,8 @@ class Tools
 
     public static function isGay($ip)
     {
-        return \App\Gay::where('ip', '=', $ip)->exists();
+        return \App\Gay::where('ip', $ip)
+            ->exists();
     }
 
     public static function isProbablyGay()
@@ -140,7 +141,7 @@ class Tools
 
     public static function getArrayKeys()
     {
-        return self::$allKeys;
+        return collect(self::$allKeys)->take(9);
     }
 
     public static function getKeys()
