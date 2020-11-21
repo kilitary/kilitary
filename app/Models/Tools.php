@@ -17,6 +17,11 @@ class Tools
 {
     public static $allKeys = [];
 
+    public static function br2nl($str)
+    {
+        return preg_replace("#<br\s*?[/ ]*?>#Usmi", "\r\n", $str);
+    }
+
     public static function userGetConfig($key, $default = null)
     {
         $value = Redis::get(self::getUserId() . ':' . $key);

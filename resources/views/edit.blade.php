@@ -18,7 +18,7 @@
             <div>
                 <label class="edit-label" for="content">content</label>
                 <textarea name="content" placeholder="water is wet"
-                          style="width:100%;height:700px">{{$page->content}}</textarea>
+                          style="width:100%;height:700px">{{\App\Models\Tools::br2nl($page->content)}}</textarea>
             </div>
             <h2 class="page-header">
                 <button>extend</button>
