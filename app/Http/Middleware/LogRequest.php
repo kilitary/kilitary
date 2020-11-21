@@ -6,6 +6,7 @@ use App\IpInfo;
 use App\Models\Tools;
 use Closure;
 use App\Logger;
+use Exception;
 use Illuminate\Support\Facades\Redis;
 use  \App\Models\LogRecord;
 
@@ -21,35 +22,39 @@ class LogRequest
      */
     public function handle($request, Closure $next)
     {
-        $log = LogRecord::create([
-            'ip' => $request->ip(),
-            'ua' => $request->userAgent(),
-            'url' => $request->fullUrl(),
-            'method' => $request->method(),
-            'referer' => $request->headers->get('referer', null),
-            'http_code' => '<unfinished>',
-            'request_start' => \DB::raw('now(6)'),
-            'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES))
-        ]);
+        try {
+            $log = LogRecord::create([
+                'ip' => $request->ip(),
+                'ua' => $request->userAgent(),
+                'url' => $request->fullUrl(),
+                'method' => $request->method(),
+                'referer' => $request->headers->get('referer', null),
+                'http_code' => '<unfinished>',
+                'request_start' => \DB::raw('now(6)'),
+                'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES), JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_TAG | JSON_NUMERIC_CHECK)
+            ]);
 
-        Tools::userSetConfig('current_log_id', $log->id, 55);
-        Redis::rPush(Tools::getUserId() . ':ip_log_ids', $log->id);
+            Tools::userSetConfig('current_log_id', $log->id, 55);
+            Redis::rPush(Tools::getUserId() . ':ip_log_ids', $log->id);
 
-        Tools::userSetConfig('is_gay', intval(Tools::isGay($request->ip())));
+            Tools::userSetConfig('is_gay', intval(Tools::isGay($request->ip())));
 
-        if(!Tools::userHasConfig('probably_gay')) {
-            Tools::userSetConfig('probably_gay', intval(\App\XRandom::get(0, 40) == 34), 3600);
+            if(!Tools::userHasConfig('probably_gay')) {
+                Tools::userSetConfig('probably_gay', intval(\App\XRandom::get(0, 40) == 34), 3600);
+            }
+
+            Redis::rPush(Tools::getUserId() . ':request_logs',
+                hash('crc32', $request->ip() . $request->header('remote_port') . $request->method() . $request->fullUrl()) . ':' .
+                $request->method() . ':' .
+                $request->session()->getId() . ':' .
+                $request->ip() . ':' .
+                $request->header('remote_port') . ':' .
+                \microtime(true));
+
+            Tools::recordIp($request->ip());
+        } catch(Exception $e) {
+            \App\Logger::msg('exception in logrequest:' . $e->getLine() . '> ' . $e->getMessage());
         }
-
-        Redis::rPush(Tools::getUserId() . ':request_logs',
-            hash('crc32', $request->ip() . $request->header('remote_port') . $request->method() . $request->fullUrl()) . ':' .
-            $request->method() . ':' .
-            $request->session()->getId() . ':' .
-            $request->ip() . ':' .
-            $request->header('remote_port') . ':' .
-            \microtime(true));
-
-        Tools::recordIp($request->ip());
 
         return $next($request);
     }
