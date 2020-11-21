@@ -141,7 +141,7 @@ class Tools
 
     public static function getArrayKeys($max = 9)
     {
-        return collect(self::$allKeys)->take();
+        return collect(self::$allKeys)->take($max);
     }
 
     public static function getKeys()

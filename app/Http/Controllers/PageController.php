@@ -465,11 +465,11 @@ class PageController extends Controller
             $environment->addExtension(new StrikethroughExtension());
             //$environment->addExtension(new TableExtension());
             $environment->addExtension(new TaskListExtension());
-            $environment->addExtension(new SmartPunctExtension());
+           // $environment->addExtension(new SmartPunctExtension());
             $config = [
                 'smartpunct' => [
-                    'double_quote_opener' => '“',
-                    'double_quote_closer' => '”',
+                    //'double_quote_opener' => '`',
+                    //'double_quote_closer' => '\'',
                     'single_quote_opener' => '‘',
                     'single_quote_closer' => '’',
                 ],
