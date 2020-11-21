@@ -3,7 +3,8 @@
 @section('content')
     <div class="container">
 
-        <h2>hello {{ $info }} (first ip-based server, {{(\App\XRandom::scaled(0,1) ? 'p' : 'o')}}wned by <a
+        <h2>hello {{ $info }} (first neuro<span style="font-size:6px">-bio-ceramic-</span>cloud-based
+            server, {{(\App\XRandom::scaled(0,1) ? 'p' : 'o')}}wned by <a
                 target=_blank href='https://www.google.com/search?q={{$pwnedBy}}'>{{$pwnedBy}})</a>
         </h2>
         <div class="marginleft">
@@ -107,7 +108,8 @@
                 | {{ isset($gaysCount) ? $gaysCount . " gay(s) in db" : "" }}</a>
             | {!! \App\Models\Tools::isProbablyGay() ? '<span color=red class="blinking-red">probably gay detected</span>':""!!}
             <span>
-                <img class="new-stamp" title="check it out [new function]" src="/images/new2.png" width="32px" height="32px">
+                <img class="new-stamp" title="check it out [new function]" src="/images/new2.png" width="32px"
+                     height="32px">
                 [<a class="destroy-link" title="you have 10 reel destroys left" href="/destroy">destroy site</a>]
             </span>
         </div>
