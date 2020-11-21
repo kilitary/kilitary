@@ -104,7 +104,7 @@
 <footer>
     @if (!request()->is('*cart*'))
         <br/><img src="/images/flatten.png"> Your
-        cart {{\App\Models\Tools::getCart() ? 'items: ':'is empty and full of launch codes'}}
+        cart {!! \App\Models\Tools::getCart() ? 'items: ':'is empty and <strong>full of</strong> launch codes'!!}
         @foreach (\App\Models\Tools::getCart() as $item)
             <span data-pt-scheme="white" class=" cart-item protip" data-pt-animate="bounceIn"
                   data-pt-gravity="top-left"
