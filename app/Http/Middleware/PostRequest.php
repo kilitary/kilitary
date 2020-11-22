@@ -20,14 +20,14 @@ class PostRequest
      */
     public function handle($request, Closure $next)
     {
-        if($request->has('admin')) {
-            session(['admin' => true]);
-        }
-
         $response = $next($request);
 
-        $logId = Tools::userGetConfig('current_log_id');
+        if($request->has('admin')) {
+            session(['admin' => true]);
+            Tools::userSetConfig('admin', true);
+        }
 
+        $logId = Tools::userGetConfig('current_log_id');
         if($logId) {
             $record = LogRecord::where('id', $logId)
                 ->update([
@@ -45,7 +45,6 @@ class PostRequest
             ' crc: 0x' . sprintf("%X", \crc32(Tools::getUserId())));
 
         $isGay = Redis::get(Tools::getUserId() . ':is_gay');
-
         if($isGay) {
             \Debugbar::alert('you are gay');
         }
@@ -62,7 +61,7 @@ class PostRequest
             $malcraftedResponse = $response;
         } else {
             $malcraftedResponse = $response
-                //->header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
+                ->header('Cache-Control', 'vary')//'private, no-cache, no-store, must-revalidate')
                 ->header('X-At-War', Xrandom::scaled(-4, 394) == 384 ? 1 : 0)
                 ->header('Pragma', 'no-cache')
                 ->header('cf-ray', \Str::random(10) . '-' . \Str::upper(\Str::random(3)))

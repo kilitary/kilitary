@@ -87,8 +87,10 @@ class Tools
 
     public static function isGay($ip)
     {
-        return \App\Gay::where('ip', $ip)
-            ->exists();
+        static $gays;
+
+        return isset($gays[$ip]) ? $gays[$ip] : $gays[$ip] = \App\Gay::where('ip', $ip)
+            ->exists();;
     }
 
     public static function isProbablyGay()
