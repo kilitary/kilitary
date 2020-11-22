@@ -1,5 +1,5 @@
 body {
-  font-family: "Lucida Console";
+  font-family: EuclidSquare;
   font-size: 12px;
   padding-left: 0px;
   height: 100%;
@@ -13,6 +13,8 @@ body {
   color: #197d44;
 }
 .content-container {
+  font-family: EuclidSquare !important;
+  line-height: 20px;
   box-shadow: 0 0px 0px #2abaff, 0 0px 32px 0 #ffefa2;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -617,6 +619,12 @@ a:hover {
 .shortener button {
   padding: 3px;
   margin-top: 4px;
+}
+font-face {
+  font-family: EuclidSquare;
+  font-style: normal;
+  font-weight: 400;
+  src: url("/css/EuclidSquare-Regular-WebS.woff") format("woff");
 }
 .blinking-orange {
   animation: blinkingOrange 1.8s infinite;
