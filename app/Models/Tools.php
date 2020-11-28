@@ -96,6 +96,11 @@ class Tools
         return Redis::llen(request()->ip() . ':ip_log_ids');
     }
 
+    public static function sqlGroupMode($mode = true)
+    {
+        return $mode ? \DB::statement("SET SQL_MODE='only_full_group_by'") : \DB::statement("SET SQL_MODE=''");
+    }
+
     public static function isGay($ip)
     {
         static $gays;
