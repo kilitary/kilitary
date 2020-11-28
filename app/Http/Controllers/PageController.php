@@ -508,7 +508,7 @@ class PageController extends Controller
                     'created_at' => \Carbon::now()
                 ];
 
-                Logger::msg(Tools::getUserId() . ' is gay, looking at page, added his ' . strlen($spamShit) . ' bytes shit');
+                Logger::msg(Tools::getUserId() . ' is gay, looking at page ' . $code . ', added his ' . strlen($spamShit) . ' bytes shit');
             }
 
             $environment = Environment::createCommonMarkEnvironment();
