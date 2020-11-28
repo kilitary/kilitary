@@ -70,7 +70,7 @@
                             <span style="display:inline-table">
                             <a href="/view/{{$c->page->code}}"
                                data-pt-animate="bounceIn"
-                               data-pt-title="<span class='protip-on-main'>{{ substr(\App\Models\Tools::trim($c->page->content), 0, 128) . '...' }}</span>"
+                               data-pt-title="<span class='protip-on-main'>{{ substr(\App\Models\Tools::trim($c->page->content, true), 0, 128) . '...' }}</span>"
                                class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
                                title="Cost: ${{$c->page->cost ?? 0.0}}">{{ substr($c->comment, 0, 32) . '...' }}</a>,
 

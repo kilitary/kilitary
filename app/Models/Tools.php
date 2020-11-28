@@ -17,8 +17,12 @@ class Tools
 {
     public static $allKeys = [];
 
-    public static function trim($str)
+    public static function trim($str, $strip = false)
     {
+        if($strip) {
+            $str = \strip_tags($str);
+        }
+
         $str = \str_ireplace("<br/>", '', $str);
         $str = \str_ireplace("\n", '', $str);
         $str = \str_ireplace("\r", '', $str);
