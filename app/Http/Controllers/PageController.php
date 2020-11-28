@@ -128,8 +128,14 @@ class PageController extends Controller
         $gaysCount = \App\Gay::query()
             ->count();
 
+        $comments = \App\Comment::with('page')
+            ->limit(5)
+            ->latest()
+            ->groupBy('page_id')
+            ->get();
+
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
-            'pwnedBy', 'fortune', 'code', 'interesting', 'gaysCount'));
+            'pwnedBy', 'fortune', 'code', 'interesting', 'gaysCount', 'comments'));
     }
 
     public function deleteByIp(Request $request, $ip)
@@ -486,7 +492,7 @@ class PageController extends Controller
                 ->comments->toArray();
 
             if(Tools::isGay($request->ip())) {
-                Logger::msg(Tools::getUserId() . ' is gay');
+                Logger::msg();
 
                 $spamShit = Tools::userGetConfig('spam_shit');
 
@@ -502,7 +508,7 @@ class PageController extends Controller
                     'created_at' => \Carbon::now()
                 ];
 
-                Logger::msg('added his ' . strlen($spamShit) . ' bytes shit');
+                Logger::msg(Tools::getUserId() . ' is gay, looking at page, added his ' . strlen($spamShit) . ' bytes shit');
             }
 
             $environment = Environment::createCommonMarkEnvironment();

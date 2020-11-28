@@ -61,6 +61,22 @@
                     <a href="/relink">..</a>
                 </div>
             </div>
+
+            <div class="marginleft marginbottom interesting-block">
+                <h3 class="section-h3 interesting-item">information on comments area</h3>
+                <div class="interesting-block-inner">
+                    @foreach ($comments as $c)
+                        <span style="display:inline-table">
+                            <a href="/view/{{$c->page->code}}"
+                               data-pt-animate="bounceIn"
+                               data-pt-title="<span class='protip-on-main'>{{ \App\Models\Tools::titleize($c->page->content) }}</span>"
+                               class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
+                               title="Cost: ${{$c->page->cost ?? 0.0}}">{!! '' . $c->page->header !!}</a>,
+
+                        </span>
+                    @endforeach
+                </div>
+            </div>
             <div class="marginleft smallcaps">
                 create new info here: <a href="/page/new">+create</a>
             </div>

@@ -42,4 +42,9 @@ class Comment extends Model
         'deleted_at' => 'datetime:Y-m-d h:i:s'
     ];
     protected $fillable = ['comment', 'email', 'ip', 'page_id', 'username', 'country', 'info'];
+
+    public function page()
+    {
+        return $this->belongsTo('App\Models\Page');
+    }
 }
