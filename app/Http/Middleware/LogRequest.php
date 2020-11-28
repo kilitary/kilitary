@@ -36,7 +36,8 @@ class LogRequest
 
             Tools::userSetConfig('current_log_id', $log->id, 55);
             Redis::rPush(Tools::getUserId() . ':ip_log_ids', $log->id);
-
+            Tools::userSetConfigIfNotExist('first_seen', \Carbon\Carbon::now()->timestamp);
+            Tools::userSetConfig('last_method', $request->method());
             Tools::userSetConfig('is_gay', intval(Tools::isGay($request->ip())));
 
             if(!Tools::userHasConfig('probably_gay')) {

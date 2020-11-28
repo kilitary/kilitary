@@ -260,6 +260,51 @@ class PageController extends Controller
             return redirect('/view/' . $randomCode);
         }
 
+        $lastVisitSeconds = Tools::userGetConfig('last_visit');
+        $diff = \Carbon\Carbon::now()->timestamp - intval($lastVisitSeconds);
+        if($diff <= config('site.min_get_post_diff_secs')) {
+            Logger::msg('this is gay, diff request ' . $diff . ' secs [m ' . Tools::userGetConfig('last_method') . ', lv ' . $lastVisitSeconds .
+                ', now ' . \Carbon\Carbon::now()->timestamp . ']');
+
+            $reason = 'too fast post <difsecs: ' . $diff . '>';
+
+            $gayGroup = \Str::upper(\Str::random(3));
+            $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
+
+            $gay = \App\Gay::firstOrCreate([
+                'ip' => $request->ip()
+            ], [
+                'nick' => $gayGroup,
+                'ua' => $request->header('User-Agent'),
+                'reason' => $reason,
+                'degaytime' => $degayTime,
+                'firewall_in' => 0
+            ]);
+
+            Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
+                ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' id: ' . $gay->id . ']');
+
+            Redis::sadd('gays', $request->ip());
+            Tools::userSetConfig('is_gay', 1);
+            Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
+            Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
+
+            preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
+            foreach($mm as $m) {
+                \App\Logger::msg('add spammed domain ' . $m[1]);
+                Redis::hIncrBy('spam_domains', $m[1], 1);
+            }
+
+            \App\Audio::gayDetected();
+
+            $randomCode = \App\Models\Page::select('code')
+                ->inRandomOrder()
+                ->limit(1)
+                ->value('code');
+
+            return redirect('/view/' . $randomCode);
+        }
+
         preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
         $domainLen = 0;
         foreach($mm as $index => $domain) {
@@ -465,7 +510,7 @@ class PageController extends Controller
             $environment->addExtension(new StrikethroughExtension());
             //$environment->addExtension(new TableExtension());
             $environment->addExtension(new TaskListExtension());
-           // $environment->addExtension(new SmartPunctExtension());
+            // $environment->addExtension(new SmartPunctExtension());
             $config = [
                 'smartpunct' => [
                     //'double_quote_opener' => '`',

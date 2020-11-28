@@ -33,6 +33,17 @@ class Tools
         return $value == null ? $default : $value;
     }
 
+    public static function userSetConfigIfNotExist($key, $value)
+    {
+        $ret = Redis::command('setnx', [self::getUserId() . ':' . $key, $value]);
+
+        if(config('site.internal_debug') == true) {
+            \App\Logger::msg('userSetConfigIfNotExist(' . self::getUserId() . ':' . $key . ', value:' . $value . ') = ' . (boolean) $ret);
+        }
+
+        return $ret;
+    }
+
     public static function userSetConfig($key, $value, $ttl = 0)
     {
         $ret = null;

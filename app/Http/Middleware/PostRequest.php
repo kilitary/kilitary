@@ -27,6 +27,8 @@ class PostRequest
             Tools::userSetConfig('admin', true);
         }
 
+        Tools::userSetConfig('last_visit', \Carbon\Carbon::now()->timestamp);
+
         $logId = Tools::userGetConfig('current_log_id');
         if($logId) {
             $record = LogRecord::where('id', $logId)
