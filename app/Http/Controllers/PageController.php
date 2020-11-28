@@ -119,7 +119,7 @@ class PageController extends Controller
         $pages = Page::select('code', 'header', 'content', 'cost')
             ->whereNotIn('code', $deleted)
             ->limit(125)
-            ->latest()
+            ->orderBy('updated_at', 'desc')
             ->get();
 
         $interesting = $pages
