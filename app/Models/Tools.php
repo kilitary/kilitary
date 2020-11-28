@@ -17,6 +17,17 @@ class Tools
 {
     public static $allKeys = [];
 
+    public static function trim($str)
+    {
+        $str = \str_ireplace("<br/>", '', $str);
+        $str = \str_ireplace("\n", '', $str);
+        $str = \str_ireplace("\r", '', $str);
+        $str = \str_ireplace("\t", '', $str);
+        $str = \str_ireplace("<br>", '', $str);
+
+        return $str;
+    }
+
     public static function br2nl($str)
     {
         return preg_replace("#<br\s*?[/ ]*?>#Usmi", "\r\n", $str);

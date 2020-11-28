@@ -132,8 +132,8 @@ class PageController extends Controller
         $comments = \App\Comment::select('comment', 'page_id', 'created_at')
             ->with('page')
             ->limit(5)
+            ->latest()
             ->groupBy('page_id')
-            ->orderBy('id')
             ->get();
         Tools::sqlGroupMode();
 
