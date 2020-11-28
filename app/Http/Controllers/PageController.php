@@ -127,13 +127,13 @@ class PageController extends Controller
 
         $gaysCount = \App\Gay::query()
             ->count();
-
+        \DB::statement("SET SQL_MODE=''");
         $comments = \App\Comment::with('page')
             ->limit(5)
             ->latest()
             ->groupBy('page_id')
             ->get();
-
+        \DB::statement("SET SQL_MODE=only_full_group_by");
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
             'pwnedBy', 'fortune', 'code', 'interesting', 'gaysCount', 'comments'));
     }
