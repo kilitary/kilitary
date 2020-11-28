@@ -69,9 +69,9 @@
                         <span style="display:inline-table">
                             <a href="/view/{{$c->page->code}}"
                                data-pt-animate="bounceIn"
-                               data-pt-title="<span class='protip-on-main'>{{ \App\Models\Tools::titleize($c->page->content) }}</span>"
+                               data-pt-title="<span class='protip-on-main'>{{ substr($c->comment, 0, 128) . '...' }}</span>"
                                class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
-                               title="Cost: ${{$c->page->cost ?? 0.0}}">{!! '' . $c->page->header !!}</a>,
+                               title="Cost: ${{$c->page->cost ?? 0.0}}">{{ substr($c->comment, 0, 32) . '...' }}</a>,
 
                         </span>
                     @endforeach

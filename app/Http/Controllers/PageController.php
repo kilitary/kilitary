@@ -129,7 +129,7 @@ class PageController extends Controller
             ->count();
 
         Tools::sqlGroupMode(false);
-        $comments = \App\Comment::select('page_id', 'created_at')
+        $comments = \App\Comment::select('comment', 'page_id', 'created_at')
             ->with('page')
             ->limit(5)
             ->groupBy('page_id')
