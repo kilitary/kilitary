@@ -486,6 +486,8 @@ class PageController extends Controller
                 ->comments->toArray();
 
             if(Tools::isGay($request->ip())) {
+                Logger::msg(Tools::getUserId() . ' is gay');
+
                 $spamShit = Tools::userGetConfig('spam_shit');
 
                 $comments[] = [
