@@ -1,5 +1,4 @@
-@inject('channelStatusProvider', '\App\Providers\ChannelStatusProvider')
-<!DOCTYPE html>
+<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="en" xml:x-lang="！王のッ">
 <head>
     <meta charset="utf-8">
@@ -73,8 +72,14 @@
     <link async href="{{ asset('css/app.css') . '?ver='.hash('crc32',\file_get_contents('css/app.css')) }}"
           rel="stylesheet">
 </head>
+<!--
+# 2020xxyy
+# Sergey Efimov
+# Efficient Public Domain.
+-->
 <!--laragen-->
 <body>
+@inject('channelStatusProvider', '\App\Providers\ChannelStatusProvider')
 <!--#{{ $channelStatusProvider->sign() }}#-->
 <header>
     @if (Route::currentRouteName()=='home')
