@@ -237,9 +237,13 @@ class PageController extends Controller
 
     public function writeComment(Request $request)
     {
-        Logger::msg('write comment: ', $request->all());
+        $matches = [];
+        $linksCount = preg_match_all("#(http(?:s|)://[^\s]*?)#Usmi", $request->post('comment'), $matches, PREG_SET_ORDER);
 
-        if(Tools::userHasConfig('is_gay') && Tools::userGetConfig('is_gay') == 1) {
+        Logger::msg('write comment ', $request->all());
+
+        if(!Tools::IsAdmin()
+            && Tools::userHasConfig('is_gay') && Tools::userGetConfig('is_gay') == 1) {
             $existentGay = \App\Gay::where('ip', $request->ip())
                 ->first();
 
@@ -256,6 +260,21 @@ class PageController extends Controller
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
             }
+
+            Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
+
+            return redirect('/view/' . $randomCode);
+        }
+
+        if(!Tools::IsAdmin() && $linksCount >= 1) {
+            $randomCode = \App\Models\Page::select('code')
+                ->inRandomOrder()
+                ->limit(1)
+                ->value('code');
+
+            Logger::msg('link gay from "' .
+                \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit with ' . $linksCount . ' links, ' .
+                ' redirect to ' . $randomCode, $matches);
 
             Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
 
@@ -487,9 +506,7 @@ class PageController extends Controller
             $comments = $page->load('comments')
                 ->comments->toArray();
 
-            if(Tools::isGay($request->ip())) {
-                Logger::msg();
-
+            if(Tools::userHasConfig('spam_shit')) {
                 $spamShit = Tools::userGetConfig('spam_shit');
 
                 $comments[] = [
@@ -504,7 +521,7 @@ class PageController extends Controller
                     'created_at' => \Carbon::now()
                 ];
 
-                Logger::msg(Tools::getUserId() . ' is gay, looking at page ' . $code . ', added his ' . strlen($spamShit) . ' bytes shit');
+                Logger::msg(Tools::getUserId() . ' is gay/linkGay, looking at page ' . $code . ', added his ' . strlen($spamShit) . ' bytes shit');
             }
 
             $environment = Environment::createCommonMarkEnvironment();
