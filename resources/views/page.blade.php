@@ -47,12 +47,9 @@
                              data-pt-title="<pre class='protip-mine'>{{\App\Models\Tools::ipInfo($comment['ip'])}}</pre>"
                              class="comment-img protip" src="/images/comp.png"
                         > {{$comment['username']}}  {{ $comment['created_at']}}
-                        @if ($comment['ip'] == request()->ip()|| \App\Models\Tools::IsAdmin())
+                        @if ($comment['ip'] == request()->ip() || \App\Models\Tools::IsAdmin())
                             <a href="/comment/{{$comment['id']}}/delete"><img
                                     style='position:relative;top:2px;width:10px;height: 10px;'
-                                    src="/images/delete.png"> </a>
-                            <a href="/comment/{{$comment['ip']}}/delete-all-by-ip"><img
-                                    style='position:relative;top:2px;width:14px;height: 14px;'
                                     src="/images/delete.png"> </a>
                         @endif
                     </div>

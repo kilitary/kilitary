@@ -50,7 +50,8 @@ Route::middleware(['cache.headers'])
 
                 Route::get('/proxy', 'ProxyController@list');
 
-                Route::get('/donate', 'PageController@donate');
+                Route::any('/donate', 'PageController@donate');
+                Route::any('/support', 'PageController@donate');
 
                 Route::get('/cart/add/{code}', 'PageController@addToCart');
                 Route::get('/cart/submit', 'PageController@cartSubmit')->name('submit');
