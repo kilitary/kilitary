@@ -128,14 +128,7 @@ class PageController extends Controller
         $gaysCount = \App\Gay::query()
             ->count();
 
-        Tools::sqlGroupMode(false);
-        $comments = \App\Comment::select('comment', 'page_id', 'created_at')
-            ->with('page')
-            ->limit(5)
-            ->latest()
-            ->groupBy('page_id')
-            ->get();
-        Tools::sqlGroupMode();
+        $comments = \App\Comment::getLatest();
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
             'pwnedBy', 'fortune', 'code', 'interesting', 'gaysCount', 'comments'));

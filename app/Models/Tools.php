@@ -17,7 +17,7 @@ class Tools
 {
     public static $allKeys = [];
 
-    public static function trim($str, $strip = false)
+    public static function strip($str, $strip = false)
     {
         if($strip) {
             $str = \strip_tags($str);

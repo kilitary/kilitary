@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Tools;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -33,6 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereCountry($value)
  * @property string|null $info
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereInfo($value)
+ * @property-read \App\Models\Page $page
  */
 class Comment extends Model
 {
@@ -46,5 +48,19 @@ class Comment extends Model
     public function page()
     {
         return $this->belongsTo('App\Models\Page');
+    }
+
+    public static function getLatest($take = 5)
+    {
+        Tools::sqlGroupMode(false);
+        $comments = \App\Comment::select('comment', 'page_id', 'created_at')
+            ->with('page')
+            ->limit($take)
+            ->latest()
+            ->groupBy('page_id')
+            ->get();
+        Tools::sqlGroupMode();
+
+        return $comments;
     }
 }
