@@ -128,7 +128,7 @@ class PageController extends Controller
         $gaysCount = \App\Gay::query()
             ->count();
 
-        $comments = \App\Comment::getLatest(20);
+        $comments = \App\Comment::getLatest(20) ?? [];
 
         return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
             'pwnedBy', 'fortune', 'code', 'interesting', 'gaysCount', 'comments'));

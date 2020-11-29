@@ -56,7 +56,7 @@ class Comment extends Model
         $comments = \App\Comment::select('id', 'comment', 'page_id', 'created_at')
             ->limit($take)
             ->latest()
-            ->toSql();
+            ->get();
        // dd($comments);
         Tools::sqlGroupMode();
 
