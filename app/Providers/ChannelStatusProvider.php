@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Redis;
 
 class ChannelStatusProvider extends ServiceProvider
 {
+    protected $key = 'zdfheufhghuh34g8u';
+
     public function __construct()
     {
         $this->app = app();
@@ -39,18 +41,25 @@ class ChannelStatusProvider extends ServiceProvider
             return '!empty!';
         }
 
+        Redis::sadd('channel_known_signs', $inputSalt);
+
         $exist = Redis::sismember('channel_known_signs', $inputSalt);
         if($exist) {
-            \App\Logger::msg('fatal sign already check for ' . \request()->ip() . ' inputSalt: ' . $inputSalt);
+            \App\Logger::msg('fatal sign: check already done for ' . \request()->ip() . ' inputSalt: ' . $inputSalt);
             \App\Models\Tools::userSetConfig('terminate_fatal_sign', 1, 2);
             return '!empty!';
         }
 
-        Redis::sadd('channel_known_signs', $inputSalt);
+        if(Str::contains($inputSalt, '4')) {
+            \App\Logger::msg('warning sign: out-of-table ip: ' . \request()->ip() . ' inputSalt: ' . $inputSalt);
+            \App\Models\Tools::userSetConfig('terminate_fatal_sign', 1, 2);
 
-        $key = 'zdfheufhghuh34g8u';
+            $sign = hash('sha512', $inputSalt . $this->$key);
 
-        $sign = hash('sha512', $inputSalt . $key);
+            return $sign;
+        }
+
+        $sign = hash('sha512', $inputSalt . $this->$key);
 
         return $sign;
     }
