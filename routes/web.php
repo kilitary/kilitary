@@ -18,7 +18,12 @@ Route::middleware(['cache.headers'])
     ->group(function() {
         Route::middleware('doNotCacheResponse')
             ->group(function() {
-                Route::get('/cparea', 'PageController@cp');
+
+                Route::middleware('\App\Http\Middleware\SecuredTime')
+                    ->group(function() {
+                        Route::get('/cparea', 'PageController@cp');
+                    });
+
                 Route::get('/command/{command}', 'CommandController@command');
                 Route::get('/admin/logs', 'LogController@index');
 
@@ -43,8 +48,12 @@ Route::middleware(['cache.headers'])
         Route::middleware('cacheResponse:34')
             ->group(function() {
                 Route::get('/view/{page_code}', 'PageController@page');
-                Route::get('/{file}.txt', 'TextController@identify');
-                Route::get('/{file}.htm', 'TextController@identify');
+
+                Route::middleware('\App\Http\Middleware\SecuredTime')
+                    ->group(function() {
+                        Route::get('/{file}.txt', 'TextController@identify');
+                        Route::get('/{file}.htm', 'TextController@identify');
+                    });
 
                 Route::any('/page/new', 'PageController@record');
 
