@@ -54,12 +54,12 @@ class ChannelStatusProvider extends ServiceProvider
             \App\Logger::msg('warning sign: out-of-table ip: ' . \request()->ip() . ' inputSalt: ' . $inputSalt);
             \App\Models\Tools::userSetConfig('terminate_fatal_sign', 1, 2);
 
-            $sign = hash('sha512', $inputSalt . $this->$key);
+            $sign = hash('sha512', $inputSalt . $this->key);
 
             return $sign;
         }
 
-        $sign = hash('sha512', $inputSalt . $this->$key);
+        $sign = hash('sha512', $inputSalt . $this->key);
 
         return $sign;
     }
