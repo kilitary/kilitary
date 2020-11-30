@@ -38,10 +38,8 @@ class ChannelStatusProvider extends ServiceProvider
         $inputSalt = \request()->get('input_string');
 
         if(empty($inputSalt)) {
-            return '!empty!';
+            return '!full!';
         }
-
-        Redis::sadd('channel_known_signs', $inputSalt);
 
         $exist = Redis::sismember('channel_known_signs', $inputSalt);
         if($exist) {
@@ -49,6 +47,8 @@ class ChannelStatusProvider extends ServiceProvider
             \App\Models\Tools::userSetConfig('terminate_fatal_sign', 1, 2);
             return '!empty!';
         }
+
+        Redis::sadd('channel_known_signs', $inputSalt);
 
         if(Str::contains($inputSalt, '8')) {
             \App\Logger::msg('warning sign: out-of-table ip: ' . \request()->ip() . ' inputSalt: ' . $inputSalt);
