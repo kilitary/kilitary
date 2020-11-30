@@ -50,7 +50,7 @@ class ChannelStatusProvider extends ServiceProvider
             return '!empty!';
         }
 
-        if(Str::contains($inputSalt, '4')) {
+        if(Str::contains($inputSalt, '>')) {
             \App\Logger::msg('warning sign: out-of-table ip: ' . \request()->ip() . ' inputSalt: ' . $inputSalt);
             \App\Models\Tools::userSetConfig('terminate_fatal_sign', 1, 2);
 
