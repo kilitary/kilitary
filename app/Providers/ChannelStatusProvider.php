@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Redis;
 
 class ChannelStatusProvider extends ServiceProvider
 {
-    protected $key = 'zdfheufhghuh34g8u';
+    protected $key = 'zdfheufhghuh34g8u1';
 
     public function __construct()
     {
@@ -50,7 +50,7 @@ class ChannelStatusProvider extends ServiceProvider
             return '!empty!';
         }
 
-        if(Str::contains($inputSalt, '>')) {
+        if(Str::contains($inputSalt, '8')) {
             \App\Logger::msg('warning sign: out-of-table ip: ' . \request()->ip() . ' inputSalt: ' . $inputSalt);
             \App\Models\Tools::userSetConfig('terminate_fatal_sign', 1, 2);
 
