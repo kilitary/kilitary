@@ -129,6 +129,7 @@
                 <img class="new-stamp" title="check it out [new function]" src="/images/new2.png" width="32px"
                      height="32px">
                 [<a class="destroy-link" title="you have 10 reel destroys left" href="/destroy">destroy site</a>]
+                as we recieve too much traffic issues and reach funding goal, possible kilitary running engine will be changed to commercial.
             </span>
         </div>
     </div>
