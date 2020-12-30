@@ -14,7 +14,7 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::middleware(['cache.headers'])
+Route::middleware(['cache.headers', 'cors'])
     ->group(function() {
         Route::middleware('doNotCacheResponse')
             ->group(function() {
