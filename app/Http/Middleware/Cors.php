@@ -16,7 +16,7 @@ class Cors
     public function handle($request, Closure $next)
     {
         return $next($request)
-            ->header('Access-Control-Allow-Origin', 'https://kilitary.int')
+            ->header('Access-Control-Allow-Origin', 'https://kilitary.int, https://kilitary.ru')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     }
 }
