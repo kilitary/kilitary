@@ -163,5 +163,9 @@ class CommandController extends Controller
             return ['error' => $mail->ErrorInfo];
         }
     }
-}
 
+    public function php(Request $request)
+    {
+        phpinfo();
+    }
+}

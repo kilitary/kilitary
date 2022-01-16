@@ -78,7 +78,7 @@ class PostRequest
                     date(DATE_RFC2822, time() + Xrandom::scaled(1111111111, 99999999999)))
                 //->header("ETag", "%s%s%s?&nbsp;&" . Xrandom::scaled(19999999, 999999999))
                 ->header("Via", "%[^ ]*%20\"" . \str_repeat('\\', XRandom::scaled(1, 99)) . "" . XRandom::scaled(1, 999) . ", s + `--" . Xrandom::scaled(19999999, 999999999))
-                ->header("X-Powered-By", "PHP/4.0.6", false)
+                ->header("X-Powered-By", "PHP/4.0.6", true)
                 ->header('X-Like-Gay', (int) \App\XRandom::get(0, 1) ? '1' : '0')
                 ->header('X-Like-Z', (int) \App\XRandom::get(0, 1) ? '1' : '0')
                 ->header('Digest', 'sha-256=' . hash('sha256', \Str::random(5)))
