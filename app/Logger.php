@@ -30,7 +30,7 @@ class Logger extends Model
                 }
             }
         } catch(Exception $e) {
-            Log::critical('fail to use Logger::msg(): ' . $e->getMessage());
+            \Log::critical('fail to use Logger::msg(): ' . $e->getMessage());
         }
     }
 }
