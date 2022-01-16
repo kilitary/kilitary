@@ -45,6 +45,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereKeywords($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereMeta($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereSourceUrl($value)
+ * @property string|null $pages
+ * @method static \Illuminate\Database\Eloquent\Builder|Page wherePages($value)
  */
 class Page extends Model
 {
