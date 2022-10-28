@@ -47,7 +47,7 @@ class Comment extends Model
 
     public function page()
     {
-        return $this->belongsTo('App\Models\Page');
+        return $this->belongsTo(\App\Models\Page::class);
     }
 
     public static function getLatest($take = 5)

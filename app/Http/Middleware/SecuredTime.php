@@ -16,7 +16,7 @@ class SecuredTime
      */
     public function handle($request, Closure $next)
     {
-        if(env('TIMESECURED') == true) {
+        if(env('TIMESECURED')) {
             return redirect('/');
         }
 

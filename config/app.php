@@ -233,7 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Carbon' => \Illuminate\Support\Carbon::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class
     ],
 
 ];

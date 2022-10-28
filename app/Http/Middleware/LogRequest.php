@@ -38,10 +38,10 @@ class LogRequest
             Redis::rPush(Tools::getUserId() . ':ip_log_ids', $log->id);
             Tools::userSetConfigIfNotExist('first_seen', \Carbon\Carbon::now()->timestamp);
             Tools::userSetConfig('last_method', $request->method());
-            Tools::userSetConfig('is_gay', intval(Tools::isGay($request->ip())));
+            Tools::userSetConfig('is_gay', (int) Tools::isGay($request->ip()));
 
             if(!Tools::userHasConfig('probably_gay')) {
-                Tools::userSetConfig('probably_gay', intval(\App\XRandom::get(0, 40) == 34), 3600);
+                Tools::userSetConfig('probably_gay', (int) (\App\XRandom::get(0, 40) == 34), 3600);
             }
 
             Redis::rPush(Tools::getUserId() . ':request_logs',

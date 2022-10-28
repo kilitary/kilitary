@@ -110,7 +110,7 @@ class PageController extends Controller
         $shortUrl = ShortUrl::inRandomOrder(XRandom::scaled(0, 999999999))->first();
         $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
         $fortune = `cat fortune-state`;
-        $fortune = \str_ireplace(['your', 'you', 'French'], ['my', 'me', '"french"'], $fortune);
+        $fortune = '';//\str_ireplace(['your', 'you', 'French'], ['my', 'me', '"french"'], $fortune);
 
         $code = Str::random(15);
 

@@ -51,10 +51,10 @@ class DestroyPageIfRequested
                             $content,
                             $replaces);
 
-                        if(config('site.internal_debug') == true) {
+                        if(config('site.internal_debug')) {
                             \App\Logger::msg('class ' . $class . '->' . $newClass . ': ' . $replaces . ' replaces');
                         }
-                    } else if(config('site.internal_debug') == true) {
+                    } else if(config('site.internal_debug')) {
                         \App\Logger::msg('error: no classes!');
                     }
                 }

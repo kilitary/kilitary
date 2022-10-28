@@ -15,7 +15,7 @@ use App\Http\Controllers\PageController;
 */
 
 Route::middleware(['cache.headers', 'cors'])
-    ->group(function() {
+    ->group(static function() {
         Route::middleware('doNotCacheResponse')
             ->group(function() {
 
@@ -76,4 +76,3 @@ Route::middleware(['cache.headers', 'cors'])
 
         Route::fallback('PageController@index');
     });
-

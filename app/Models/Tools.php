@@ -19,7 +19,7 @@ class Tools
 
     public static function strip($str, $strip = false)
     {
-        if($strip) {
+        if ($strip) {
             $str = \strip_tags($str);
         }
 
@@ -41,7 +41,7 @@ class Tools
     {
         $value = Redis::get(self::getUserId() . ':' . $key);
 
-        if(config('site.internal_debug') == true) {
+        if (config('site.internal_debug')) {
             \App\Logger::msg('userGetConfig(' . self::getUserId() . ':' . $key . ') = ' . $value);
         }
 
@@ -52,7 +52,7 @@ class Tools
     {
         $ret = Redis::command('setnx', [self::getUserId() . ':' . $key, $value]);
 
-        if(config('site.internal_debug') == true) {
+        if (config('site.internal_debug')) {
             \App\Logger::msg('userSetConfigIfNotExist(' . self::getUserId() . ':' . $key . ', value:' . $value . ') = ' . (boolean) $ret);
         }
 
@@ -62,15 +62,15 @@ class Tools
     public static function userSetConfig($key, $value, $ttl = 0)
     {
         $ret = null;
-        if($ttl) {
+        if ($ttl) {
             $ret = Redis::setEx(self::getUserId() . ':' . $key, $ttl, $value);
         } else {
             $ret = Redis::set(self::getUserId() . ':' . $key, $value);
         }
 
-        if(config('site.internal_debug') == true) {
+        if (config('site.internal_debug')) {
             \App\Logger::msg('userSetConfig(' . self::getUserId() . ':' . $key . ', ttl:' .
-                $ttl . ', value:' . $value . ') = ' . (boolean) $ret);
+                $ttl . ', value:' . $value . ') = ' . (bool) $ret);
         }
 
         return $ret;
@@ -80,7 +80,7 @@ class Tools
     {
         $value = Redis::get(self::getUserId() . ':' . $key);
 
-        if(config('site.internal_debug') == true) {
+        if (config('site.internal_debug')) {
             $has = \gettype($value) == "NULL" ? 0 : 1;
             \App\Logger::msg('userHasConfig(' . self::getUserId() . ':' . $key . ') = ' . $has);
         }
@@ -92,7 +92,7 @@ class Tools
     {
         static $costs = [];
 
-        if(isset($costs[$item])) {
+        if (isset($costs[$item])) {
             return $costs[$item];
         }
 
@@ -113,28 +113,29 @@ class Tools
 
     public static function sqlGroupMode($mode = true)
     {
-        return $mode ? \DB::statement("SET SQL_MODE='only_full_group_by'") : \DB::statement("SET SQL_MODE=''");
+        return;
+        //return $mode ? \DB::statement("SET SQL_MODE='only_full_group_by'") : \DB::statement("SET SQL_MODE=''");
     }
 
     public static function isGay($ip)
     {
         static $gays;
 
-        return isset($gays[$ip]) ? $gays[$ip] : $gays[$ip] = \App\Gay::where('ip', $ip)
-            ->exists();;
+        return $gays[$ip] ?? $gays[$ip] = \App\Gay::where('ip', $ip)
+            ->exists();
     }
 
     public static function isProbablyGay()
     {
-        return intval(self::userGetConfig('probably_gay'));
+        return (int) self::userGetConfig('probably_gay');
     }
 
     public static function ipInfo($ip)
     {
         $info = Redis::get($ip . ':info', null);
-        if(empty($info)) {
+        if (empty($info)) {
             $info = \App\IpInfo::firstWhere('ip', $ip);
-            if(!$info || empty($info->info)) {
+            if (!$info || empty($info->info)) {
                 $info = 'details: #empty/secured#';
             } else {
                 $info = \json_encode(\json_decode($info->info), JSON_PRETTY_PRINT);
@@ -167,7 +168,7 @@ class Tools
     public static function pushKey($key)
     {
         $key = trim(\strip_tags(trim($key)));
-        if(strlen($key) && $key != 'br/') {
+        if (strlen($key) && $key != 'br/') {
             self::$allKeys[] = $key;
         }
     }
@@ -202,7 +203,7 @@ class Tools
 
         try {
             $ai = ArbitraryInfo::create($info);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             \App\Logger::msg('Exception with ai: ' . $e->getMessage());
         }
 
@@ -218,13 +219,13 @@ class Tools
     {
         static $items;
 
-        if($items != null) {
+        if ($items != null) {
             return $items;
         }
 
         $items = Redis::smembers(\request()->ip() . ':cart_items');
 
-        if($items) {
+        if ($items) {
             \Debugbar::addMessage('cart items: ' . ($items ? count($items) : 0));
         }
 
@@ -233,7 +234,7 @@ class Tools
 
     public static function getCountry($ip)
     {
-        $info = Cache::remember($ip . ':info', 3600, function() use ($ip) {
+        $info = Cache::remember($ip . ':info', 3600, function () use ($ip) {
             return \DB::table('ip_info')
                 ->select('info->country_name as country_name')
                 ->where('ip', $ip)
@@ -250,7 +251,7 @@ class Tools
 
     public static function IsAdmin()
     {
-        if(session('admin', false) === true)
+        if (session('admin', false) === true)
             return true;
 
         return env('ADMIN_IP') === \request()->ip();
