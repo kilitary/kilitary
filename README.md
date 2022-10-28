@@ -1,2 +1,2 @@
 
-Running: script: Update motd
+Running: script: Update mod
