@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property string|null $created_at
  * @method static \Illuminate\Database\Eloquent\Builder|Gay whereCreatedAt($value)
+ * @property string|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Gay whereUpdatedAt($value)
  */
 class Gay extends Model
 {

@@ -34,55 +34,58 @@ class Tools
 
     public static function br2nl($str)
     {
-        return preg_replace("#<br\s*?[/ ]*?>#Usmi", "\r\n", $str);
+        return preg_replace("#<br\s*?[/ ]*?>#usmi", "\r\n", $str);
     }
 
-    public static function userGetConfig($key, $default = null)
+    public static function getUserValue($key, $default = null)
     {
-        $value = Redis::get(self::getUserId() . ':' . $key);
+        $value = Redis::get(static::getUserIp() . ':' . $key);
 
         if (config('site.internal_debug')) {
-            \App\Logger::msg('userGetConfig(' . self::getUserId() . ':' . $key . ') = ' . $value);
+            \App\Logger::msg('userGetConfig(' . static::getUserIp() . ':' . $key . ') = ' . ($value ?? '<unset>'));
         }
 
-        return $value == null ? $default : $value;
+        if ($value == null) {
+            return $default;
+        }
+        return $value;
     }
 
     public static function userSetConfigIfNotExist($key, $value)
     {
-        $ret = Redis::command('setnx', [self::getUserId() . ':' . $key, $value]);
+        $ret = Redis::command('setnx', [static::getUserIp() . ':' . $key, $value]);
 
         if (config('site.internal_debug')) {
-            \App\Logger::msg('userSetConfigIfNotExist(' . self::getUserId() . ':' . $key . ', value:' . $value . ') = ' . (boolean) $ret);
+            \App\Logger::msg('userSetConfigIfNotExist(' . static::getUserIp() . ':' . $key . ', value:' . $value . ') = ' . (boolean) $ret);
         }
 
         return $ret;
     }
 
-    public static function userSetConfig($key, $value, $ttl = 0)
+    public static function userSetValue($key, $value, $ttl = 0)
     {
         $ret = null;
         if ($ttl) {
-            $ret = Redis::setEx(self::getUserId() . ':' . $key, $ttl, $value);
+            $ret = Redis::setEx(static::getUserIp() . ':' . $key, $ttl, $value);
         } else {
-            $ret = Redis::set(self::getUserId() . ':' . $key, $value);
+            $ret = Redis::set(static::getUserIp() . ':' . $key, $value);
         }
 
         if (config('site.internal_debug')) {
-            \App\Logger::msg('userSetConfig(' . self::getUserId() . ':' . $key . ', ttl:' .
+            \App\Logger::msg('userSetConfig(' . static::getUserIp() . ':' . $key . ', ttl:' .
                 $ttl . ', value:' . $value . ') = ' . (bool) $ret);
         }
 
         return $ret;
     }
 
-    public static function userHasConfig($key)
+    public static function userHasSetting($key)
     {
-        $value = Redis::get(self::getUserId() . ':' . $key);
+        $value = Redis::get(static::getUserIp() . ':' . $key);
 
         if (config('site.internal_debug')) {
             $has = \gettype($value) == "NULL" ? 0 : 1;
-            \App\Logger::msg('userHasConfig(' . self::getUserId() . ':' . $key . ') = ' . $has);
+            \App\Logger::msg('userHasConfig(' . static::getUserIp() . ':' . $key . ') = ' . $has);
         }
 
         return $value == null ? false : true;
@@ -127,7 +130,7 @@ class Tools
 
     public static function isProbablyGay()
     {
-        return (int) self::userGetConfig('probably_gay');
+        return (int) static::getUserValue('probably_gay');
     }
 
     public static function ipInfo($ip)
@@ -169,21 +172,21 @@ class Tools
     {
         $key = trim(\strip_tags(trim($key)));
         if (strlen($key) && $key != 'br/') {
-            self::$allKeys[] = $key;
+            static::$allKeys[] = $key;
         }
     }
 
     public static function getArrayKeys($max = 9)
     {
-        return collect(self::$allKeys)->take($max);
+        return collect(static::$allKeys)->take($max);
     }
 
     public static function getKeys()
     {
-        return \implode(' ', self::$allKeys);
+        return \implode(' ', static::$allKeys);
     }
 
-    public static function getUserId()
+    public static function getUserIp()
     {
         $id = request()->ip();
         return $id;
@@ -197,7 +200,7 @@ class Tools
     public static function arbitraryInfo($info): \App\Models\ArbitraryInfo
     {
         $info['ip'] = \request()->ip();
-        $info['user_id'] = self::getUserId();
+        $info['user_id'] = static::getUserIp();
 
         \App\Logger::msg(\request()->ip() . '> creating new AI: ' . \json_encode($info, JSON_PRETTY_PRINT));
 
@@ -249,12 +252,10 @@ class Tools
         return \in_array($code, session('currentDeleted'));
     }
 
-    public static function IsAdmin()
+    public static function isAdmin()
     {
-        if (session('admin', false) === true)
-            return true;
+        return session('admin', false) === true ? true : env('ADMIN_IP') === \request()->ip();
 
-        return env('ADMIN_IP') === \request()->ip();
     }
 
     public static function savePage(\App\Models\Page $page)
@@ -298,7 +299,5 @@ class Tools
         curl_setopt($ch, CURLOPT_NOBODY, 0);
 
         $data = curl_exec($ch);
-        dd($data);
-        return;
     }
 }

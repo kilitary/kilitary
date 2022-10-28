@@ -15,64 +15,65 @@ use App\Http\Controllers\PageController;
 */
 
 Route::middleware(['cache.headers', 'cors'])
-    ->group(static function() {
+    ->group(static function () {
         Route::middleware('doNotCacheResponse')
-            ->group(function() {
+            ->group(static function () {
 
-                Route::middleware('\App\Http\Middleware\SecuredTime')
-                    ->group(function() {
+                Route::middleware(\App\Http\Middleware\SecuredTime::class)
+                    ->group(static function () {
                         Route::get('/cparea', 'PageController@cp');
                     });
 
-                Route::get('/command/{command}', 'CommandController@command');
-                Route::get('/admin/logs', 'LogController@index');
+                Route::get('/destroy-page', 'PageController@destroy');
 
-                Route::get('/relink', 'PageController@relink');
-                Route::get('/comment/{ip}/delete-all-by-ip', 'PageController@deleteByIp');
-                Route::get('/delete/{page_code}/{mode}', 'PageController@delete');
-                Route::get('/edit/{code}', 'PageController@edit');
-                Route::post('update/{code}', 'PageController@update');
-                Route::post('/comment/add', 'PageController@writeComment');
-                Route::get('/comment/{id}/delete', 'PageController@deleteComment');
-                Route::get('/reset', 'PageController@reset');
-                Route::get('/gays', 'PageController@gays');
-                Route::get('/destroy', 'PageController@destroy');
-
-                Route::get('/touch/{code}', 'PageController@touch');
-
-                Route::get('/self', 'PageController@self')->name('self');
-
-                Route::get('/opcache', 'PageController@opcache');
+//                Route::get('/command/{command}', 'CommandController@command');
+//                Route::get('/admin/logs', 'LogController@index');
+//
+//                Route::get('/relink', 'PageController@relink');
+//                Route::get('/comment/{ip}/delete-all-by-ip', 'PageController@deleteByIp');
+//                Route::get('/delete/{page_code}/{mode}', 'PageController@delete');
+//                Route::get('/edit/{code}', 'PageController@edit');
+//                Route::post('update/{code}', 'PageController@update');
+//                Route::post('/comment/add', 'PageController@writeComment');
+//                Route::get('/comment/{id}/delete', 'PageController@deleteComment');
+//                Route::get('/reset', 'PageController@reset');
+//                Route::get('/gays', 'PageController@gays');
+//
+//                Route::get('/touch/{code}', 'PageController@touch');
+//
+//                Route::get('/self', 'PageController@self')->name('self');
+//
+//                Route::get('/opcache', 'PageController@opcache');
             });
 
         Route::middleware('cacheResponse:34')
-            ->group(function() {
-                Route::get('/view/{page_code}', 'PageController@page');
+            ->group(static function () {
+                Route::get('/view/{page_code}', [PageController::class, 'page']);
 
-                Route::middleware('\App\Http\Middleware\SecuredTime')
-                    ->group(function() {
-                        Route::get('/{file}.txt', 'TextController@identify');
-                        Route::get('/{file}.htm', 'TextController@identify');
-                    });
+//                Route::middleware(\App\Http\Middleware\SecuredTime::class)
+//                    ->group(static function () {
+//                        Route::get('/{file}.txt', 'TextController@identify');
+//                        Route::get('/{file}.htm', 'TextController@identify');
+//                    });
 
-                Route::any('/page/new', 'PageController@record');
+                Route::any('/page/new', [PageController::class, 'record']);
 
-                Route::get('/proxy', 'ProxyController@list');
-
-                Route::any('/donate', 'PageController@donate');
-                Route::any('/support', 'PageController@donate');
-
-                Route::get('/cart/add/{code}', 'PageController@addToCart');
-                Route::get('/cart/submit', 'PageController@cartSubmit')->name('submit');
-                Route::get('/cart/final-submit', 'PageController@cartFinalSubmit')->name('final-submit');
+//                Route::get('/proxy', 'ProxyController@list');
+//
+//                Route::any('/donate', 'PageController@donate');
+//                Route::any('/support', 'PageController@donate');
+//
+//                Route::get('/cart/add/{code}', 'PageController@addToCart');
+//                Route::get('/cart/submit', 'PageController@cartSubmit')->name('submit');
+//                Route::get('/cart/final-submit', 'PageController@cartFinalSubmit')->name('final-submit');
             });
 
-        Route::any('/home', 'HomeController@index');
+        Route::any('/home', [HomeController::class, 'index']);
 
-        Route::get('/', 'PageController@index')->name('home');
+        Route::get('/', [PageController::class, 'index'])->name('index');
 
-        Route::post('/us/create', 'UrlController@create');
-        Route::get('/us/{url}', 'UrlController@redirect');
+//        Route::post('/us/create', 'UrlController@create');
+//        Route::get('/us/{url}', 'UrlController@redirect');
 
-        Route::fallback('PageController@index');
+        Route::fallback([PageController::class, 'index']);
     });

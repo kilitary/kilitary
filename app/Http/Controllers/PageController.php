@@ -28,10 +28,18 @@ use const JSON_PRETTY_PRINT;
 use const PREG_SET_ORDER;
 use \WebArticleExtractor;
 use Illuminate\Support\Facades\Cache;
+use App\Services\NewsService;
 use Amnuts\Opcache\Service;
 
 class PageController extends Controller
 {
+    protected $newsService;
+
+    public function __construct(NewsService $newsService)
+    {
+        $this->newsService = $newsService;
+    }
+
     public function opcache(Request $request)
     {
         return response(require_once '../vendor/amnuts/opcache-gui/index.php');
@@ -41,12 +49,12 @@ class PageController extends Controller
     {
         $cart = collect(Tools::getCart());
 
-        if(!$cart) {
+        if (!$cart) {
             return redirect('/')->with('message', 'empty cart');
         }
 
         $total = 0.0;
-        $cart->transform(function($item, $key) use ($request, &$total) {
+        $cart->transform(function ($item, $key) use ($request, &$total) {
             $record['cost'] = Tools::getItemCost($item);
             $total += $record['cost'];
             $record['name'] = $item;
@@ -62,7 +70,7 @@ class PageController extends Controller
     {
         $cart = Tools::getCart();
 
-        if(!$cart) {
+        if (!$cart) {
             return redirect('/')->with('message', 'empty cart');
         }
 
@@ -75,7 +83,7 @@ class PageController extends Controller
         $id = 0;
 
         $crc32b = -1;
-        if($ai) {
+        if ($ai) {
             $crc32b = hash('crc32b', $ai->json);
             $id = $ai->id;
             $ai->text = 'crc32b:' . $crc32b;
@@ -98,40 +106,16 @@ class PageController extends Controller
 
     public function index(Request $request)
     {
-        XRandom::followRand(7);
-
         Logger::msg('index> remote: ' . $request->ip() . ':' . $_SERVER['REMOTE_PORT'] . ' uri: ' . $request->fullUrl() . ' from: ' . $request->header('referer') .
             " session: " . session()->getId() . ' visits: ' . ((int) \App\Models\Tools::ipVisits()));
 
-        $info = $request->input('fr');
-        $gdiSelected = -3;
-        $chanceOf = -3;
-        $sign = '';
-        $shortUrl = ShortUrl::inRandomOrder(XRandom::scaled(0, 999999999))->first();
-        $pwnedBy = trim(TextSource::one()) . trim(XRandom::get(1998, 2020));
-        $fortune = `cat fortune-state`;
-        $fortune = '';//\str_ireplace(['your', 'you', 'French'], ['my', 'me', '"french"'], $fortune);
+        $interesting = Page::interesting(5) ?? [];
 
-        $code = Str::random(15);
-
-        $deleted = session('currentDeleted', []);
-
-        $pages = Page::select('code', 'header', 'content', 'cost')
-            ->whereNotIn('code', $deleted)
-            ->limit(125)
-            ->orderBy('updated_at', 'desc')
-            ->get();
-
-        $interesting = $pages
-            ->toArray();
-
-        $gaysCount = \App\Gay::query()
-            ->count();
+        $news = $this->newsService->get(5, true);
 
         $comments = \App\Comment::getLatest(20) ?? [];
 
-        return view('home', compact('info', 'gdiSelected', 'chanceOf', 'sign', 'shortUrl',
-            'pwnedBy', 'fortune', 'code', 'interesting', 'gaysCount', 'comments'));
+        return view('home', compact('interesting', 'comments', 'news'));
     }
 
     public function deleteByIp(Request $request, $ip)
@@ -153,34 +137,34 @@ class PageController extends Controller
 
             $maxI = XRandom::scaled(1, 8);
 
-            for($i = 0; $i < $maxI; $i++) {
+            for ($i = 0; $i < $maxI; $i++) {
 
                 XRandom::followRand(XRandom::get(1, 11));
 
                 $overlappedImage = $manager->make('../resources/media/darkcp.jpg')
                     ->resize(\App\XRandom::scaled(1, 200), \App\XRandom::scaled(1, 200));
 
-                if(XRandom::maybe()) {
+                if (XRandom::maybe()) {
                     $overlappedImage->rotate(XRandom::scaled(-360, 360));
                 }
 
-                if(XRandom::maybe()) {
+                if (XRandom::maybe()) {
                     $overlappedImage->contrast(XRandom::scaled(-10, 100));
                 }
 
-                if(XRandom::maybe()) {
+                if (XRandom::maybe()) {
                     $overlappedImage->pixelate(XRandom::scaled(1, $overlappedImage->width() + $overlappedImage->height()));
                 }
 
-                if(XRandom::maybe()) {
+                if (XRandom::maybe()) {
                     $gamma = 0.1 + XRandom::scaled(1.1, 2.9);
-                    if($gamma <= 0) {
+                    if ($gamma <= 0) {
                         Logger::msg('gamma ' . $gamma);
                     }
                     $overlappedImage->gamma($gamma);
                 }
 
-                if(XRandom::maybe()) {
+                if (XRandom::maybe()) {
                     $overlappedImage->blur(XRandom::scaled(1, 120));
                 }
 
@@ -191,7 +175,7 @@ class PageController extends Controller
             }
 
             $srcImage->resize($request->get('widthmax'), $request->get('heightmax'));
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Logger::msg('exception: ' . $e->getMessage());
         }
 
@@ -214,7 +198,7 @@ class PageController extends Controller
 
         $comment = \App\Comment::find($commentId);
 
-        if($comment && ($comment->ip == $request->ip() || Tools::IsAdmin())) {
+        if ($comment && ($comment->ip == $request->ip() || Tools::isAdmin())) {
             \App\Logger::msg('comment to delete: ' . \json_encode($comment, JSON_PRETTY_PRINT));
             $comment->delete();
         }
@@ -242,8 +226,8 @@ class PageController extends Controller
 
         Logger::msg('write comment ', $request->all());
 
-        if(!Tools::IsAdmin()
-            && Tools::userHasConfig('is_gay') && Tools::userGetConfig('is_gay') == 1) {
+        if (!Tools::isAdmin()
+            && Tools::userHasSetting('is_gay') && Tools::getUserValue('is_gay') == 1) {
             $existentGay = \App\Gay::where('ip', $request->ip())
                 ->first();
 
@@ -256,17 +240,17 @@ class PageController extends Controller
                 \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit: ' .
                 ($existentGay ? $existentGay->firewall_in : -1) . ' times, redirect to ' . $randomCode);
 
-            if($existentGay) {
+            if ($existentGay) {
                 $existentGay->firewall_in += 1;
                 $existentGay->save();
             }
 
-            Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
+            Tools::userSetValue('spam_shit', $request->post('comment'), 3600);
 
             return redirect('/view/' . $randomCode);
         }
 
-        if(!Tools::IsAdmin() && $linksCount >= 1) {
+        if (!Tools::isAdmin() && $linksCount >= 1) {
             $randomCode = \App\Models\Page::select('code')
                 ->inRandomOrder()
                 ->limit(1)
@@ -276,15 +260,15 @@ class PageController extends Controller
                 \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit with ' . $linksCount . ' links, ' .
                 ' redirect to ' . $randomCode, $matches);
 
-            Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
+            Tools::userSetValue('spam_shit', $request->post('comment'), 3600);
 
             return redirect('/view/' . $randomCode);
         }
 
-        $lastVisitSeconds = Tools::userGetConfig('last_visit');
+        $lastVisitSeconds = Tools::getUserValue('last_visit');
         $diff = \Carbon\Carbon::now()->timestamp - intval($lastVisitSeconds);
-        if($diff <= config('site.min_get_post_diff_secs')) {
-            Logger::msg('this is gay, diff request ' . $diff . ' secs [m ' . Tools::userGetConfig('last_method') . ', lv ' . $lastVisitSeconds .
+        if ($diff <= config('site.min_get_post_diff_secs')) {
+            Logger::msg('this is gay, diff request ' . $diff . ' secs [m ' . Tools::getUserValue('last_method') . ', lv ' . $lastVisitSeconds .
                 ', now ' . \Carbon\Carbon::now()->timestamp . ']');
 
             $reason = 'too fast post <difsecs: ' . $diff . '>';
@@ -306,12 +290,12 @@ class PageController extends Controller
                 ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' id: ' . $gay->id . ']');
 
             Redis::sadd('gays', $request->ip());
-            Tools::userSetConfig('is_gay', 1);
+            Tools::userSetValue('is_gay', 1);
             Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
-            Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
+            Tools::userSetValue('spam_shit', $request->post('comment'), 3600);
 
             preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
-            foreach($mm as $m) {
+            foreach ($mm as $m) {
                 \App\Logger::msg('add spammed domain ' . $m[1]);
                 Redis::hIncrBy('spam_domains', $m[1], 1);
             }
@@ -328,14 +312,14 @@ class PageController extends Controller
 
         preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
         $domainLen = 0;
-        foreach($mm as $index => $domain) {
+        foreach ($mm as $index => $domain) {
             $domainLen += \Str::length($domain[0]);
         }
 
         $difflLen = \Str::length($request->post('comment')) - $domainLen;
 
         Logger::msg('comment spam analyze: domainLen: ' . $domainLen . ' diffLen: ' . $difflLen);
-        if($domainLen > 64 && $difflLen >= 128) {
+        if ($domainLen > 64 && $difflLen >= 128) {
             $reason = 'links per plain text weight overflow <url: ' . $domainLen . ' > diff: ' . $difflLen . '>';
 
             $gayGroup = \Str::upper(\Str::random(3));
@@ -357,12 +341,12 @@ class PageController extends Controller
                 ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ' id: ' . $gay->id . ']');
 
             Redis::sadd('gays', $request->ip());
-            Tools::userSetConfig('is_gay', 1);
+            Tools::userSetValue('is_gay', 1);
             Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
-            Tools::userSetConfig('spam_shit', $request->post('comment'), 3600);
+            Tools::userSetValue('spam_shit', $request->post('comment'), 3600);
 
             preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
-            foreach($mm as $m) {
+            foreach ($mm as $m) {
                 \App\Logger::msg('add spammed domain ' . $m[1]);
                 Redis::hIncrBy('spam_domains', $m[1], 1);
             }
@@ -378,7 +362,7 @@ class PageController extends Controller
         }
 
         $content = $request->post('comment');
-        if(!\App\Models\Tools::IsAdmin()) {
+        if (!\App\Models\Tools::isAdmin()) {
             $content = strip_tags($content);
         }
 
@@ -404,7 +388,7 @@ class PageController extends Controller
         $page = Page::where('code', $code)
             ->first();
 
-        if(!$page) {
+        if (!$page) {
             return redirect('/');
         }
 
@@ -413,9 +397,10 @@ class PageController extends Controller
 
     public function update(Request $request, $code)
     {
-        $page = Page::firstWhere('code', $code);
+        $page = Page::where('code', $code)
+            ->first();
 
-        if($page->ip != $request->ip() && !\App\Models\Tools::IsAdmin()) {
+        if ($page->ip != $request->ip() && !\App\Models\Tools::isAdmin()) {
             return 'access denied for ' . $request->ip();
         }
 
@@ -432,12 +417,12 @@ class PageController extends Controller
     public function self(Request $request)
     {
         $headers = collect($request->headers);
-        $filtered = $headers->filter(function($value, $key) {
+        $filtered = $headers->filter(function ($value, $key) {
             return !strstr($key, "HTTP");
         });
 
         $content = '--------------------------------------------------' . "\r\n";
-        foreach($filtered->toArray() as $key => $value) {
+        foreach ($filtered->toArray() as $key => $value) {
             $content .= "$key:" . json_encode($value) . "\r\n";
         }
 
@@ -472,7 +457,7 @@ class PageController extends Controller
     public function page(Request $request, $code)
     {
         $currentDeleted = session('currentDeleted');
-        if($currentDeleted && in_array($code, $currentDeleted)) {
+        if ($currentDeleted && in_array($code, $currentDeleted)) {
             return redirect('/delete/' . $code);
         }
 
@@ -480,7 +465,7 @@ class PageController extends Controller
             ->orWhere('header', $code)
             ->first();
 
-        if($page) {
+        if ($page) {
             $content = $page->content;
             $header = $page->header;
             $views = $page->views;
@@ -488,8 +473,8 @@ class PageController extends Controller
             $page->views += 1;
             $page->save();
 
-            $content = \preg_replace_callback('#(\w{1,22}\W+?)#u', function($matches) {
-                if(XRandom::get(0, 25) != 3) {
+            $content = \preg_replace_callback('#(\w{1,22}\W+?)#u', function ($matches) {
+                if (XRandom::get(0, 25) != 3) {
                     return $matches[0];
                 }
 
@@ -506,8 +491,8 @@ class PageController extends Controller
             $comments = $page->load('comments')
                 ->comments->toArray();
 
-            if(Tools::userHasConfig('spam_shit')) {
-                $spamShit = Tools::userGetConfig('spam_shit');
+            if (Tools::userHasSetting('spam_shit')) {
+                $spamShit = Tools::getUserValue('spam_shit');
 
                 $comments[] = [
                     'id' => -1,
@@ -521,7 +506,7 @@ class PageController extends Controller
                     'created_at' => \Carbon::now()
                 ];
 
-                Logger::msg(Tools::getUserId() . ' is gay, looking at page ' . $code . ', added his ' . strlen($spamShit) . ' bytes shit');
+                Logger::msg(Tools::getUserIp() . ' is gay, looking at page ' . $code . ', added his ' . strlen($spamShit) . ' bytes shit');
             }
 
             $environment = Environment::createCommonMarkEnvironment();
@@ -555,7 +540,7 @@ class PageController extends Controller
         }
 
         $keys = Tools::getArrayKeys(11);
-        if($keys->count() >= 2) {
+        if ($keys->count() >= 2) {
             $keys->put(\App\XRandom::scaled(0, $keys->count() - 1), '!');
         }
         $keys = $keys->implode(' ');
@@ -579,25 +564,25 @@ class PageController extends Controller
             session(['delMode' => $mode]);
 
             $page = Page::firstWhere('code', $code);
-            if($page && ($page->ip == $request->ip() || \App\Models\Tools::isAdmin()) && !$page->blocked) {
+            if ($page && ($page->ip == $request->ip() || \App\Models\Tools::isAdmin()) && !$page->blocked) {
                 $page->delete();
                 $result = true;
             } else {
                 \App\Logger::msg('deleting page [access denied]');
                 $result = false;
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             \App\Logger::msg('delete()#exception: ' . $e->getMessage() . "\r\n" . $e->getTraceAsString());
             $result = false;
         }
 
-        \App\Logger::msg('user ' . \App\Models\Tools::getUserId() . ' command: delete pageCode: ' . $code . ' mode: ' . $mode . ' result: ' . intval($result));
+        \App\Logger::msg('user ' . \App\Models\Tools::getUserIp() . ' command: delete pageCode: ' . $code . ' mode: ' . $mode . ' result: ' . intval($result));
         return view('delete', compact('code'));
     }
 
     public function gays(Request $request)
     {
-        $gays = Cache::remember('gays', 60, function() {
+        $gays = Cache::remember('gays', 60, function () {
             return \App\Gay::all();
         });
 
@@ -616,49 +601,49 @@ class PageController extends Controller
     public function record(Request $request)
     {
         try {
-            if($request->method() == 'GET') {
+            if ($request->method() == 'GET') {
                 $code = Str::random(15);
                 return view('newpage', compact('code'));
             }
 
             $content = $request->post('content');
-            if(empty(trim($content))) {
+            if (empty(trim($content))) {
                 $content = "operator was lazy this time";
             }
 
             $header = $request->post('header');
 
-            if(preg_match("#^take\s?([0-9a-zA-Z:/\-\.]*)(?:\s+(\w+)|)$#Usi", $content, $matches)) {
+            if (preg_match("#^take\s?([0-9a-zA-Z:/\-\.]*)(?:\s+(\w+)|)$#Usi", $content, $matches)) {
                 \App\Logger::msg('new info: taking article from ' . $matches[1]);
                 $uri = $matches[1];
 
-                if(!\Str::contains($uri, 'http')) {
+                if (!\Str::contains($uri, 'http')) {
                     $uri = 'http://' . $uri;
                 }
                 $extractionResult = WebArticleExtractor\Extract::extractFromURL($uri);
-                if(isset($matches[2]) && $matches[2] == 'd') {
+                if (isset($matches[2]) && $matches[2] == 'd') {
                     dd($extractionResult);
                 }
                 $content = \str_replace("\r\n", "<br/><br/>", $extractionResult->text);
                 \App\Logger::msg('page len:' . strlen($content));
 
-                if(empty(trim($header))) {
+                if (empty(trim($header))) {
                     $header = Str::substr($extractionResult->title, 0, 10);
                 }
             }
 
             $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
 
-            if(strlen($content) <= 5) {
+            if (strlen($content) <= 5) {
                 \App\Logger::msg('content length too small: ' . strlen($content));
                 return back();
             }
-            if(empty(trim($header))) {
+            if (empty(trim($header))) {
                 $header = Str::slug(Str::substr($content, 0, 11), '-');
             }
 
             $code = Str::slug(Str::substr($content, 0, 20), '-');
-            while(Page::firstWhere('code', $code)) {
+            while (Page::firstWhere('code', $code)) {
                 $code = Str::slug(Str::substr($content, 0, 20), '-') . '-' . \Str::random(3);
             }
 
@@ -685,7 +670,7 @@ class PageController extends Controller
 //            if($request->post('inVault') == 'on') {
 //                //Tools::savePage($page);
 //            }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             \App\Logger::msg('record()#exception: ' . $e->getMessage(), $e->getTraceAsString());
         }
 

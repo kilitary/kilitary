@@ -56,4 +56,15 @@ class Page extends Model
     {
         return $this->hasMany('\App\Comment');
     }
+
+    public static function interesting($limit = 5)
+    {
+        $pages = Page::select('code', 'header', 'content', 'cost')
+            //->whereNotIn('code', $deleted)
+            ->limit($limit)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        return $pages;
+    }
 }

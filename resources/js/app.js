@@ -28,11 +28,11 @@ function flagsMovement() {
 }
 
 function rotateKrysaClass() {
-    let rotate = rando(-6, 6);//'.crysa-class').css('transform');
+    let rotate = rando(-2, 2);//'.crysa-class').css('transform');
     $('.crysa-class').css('transform', 'rotate(' + rotate + 'deg)');
     if(rando(true, false)) {
         prev = parseInt($('.crysa-class').css('height'));
-        $('.crysa-class').css('height', prev + rando(-25, 25) + 'px');
+        $('.crysa-class').css('height', prev + rando(-3, 3) + 'px');
     }
 }
 

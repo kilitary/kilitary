@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\IpInfo;
 use App\Models\Tools;
+use Carbon;
 use Closure;
 use App\Logger;
 use Exception;
@@ -23,6 +24,8 @@ class LogRequest
     public function handle($request, Closure $next)
     {
         try {
+            $currentTime = now('MSK');
+
             $log = LogRecord::create([
                 'ip' => $request->ip(),
                 'ua' => $request->userAgent(),
@@ -30,21 +33,22 @@ class LogRequest
                 'method' => $request->method(),
                 'referer' => $request->headers->get('referer', null),
                 'http_code' => '<unfinished>',
-                'request_start' => \DB::raw('now(6)'),
-                'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES), JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_TAG | JSON_NUMERIC_CHECK)
+                'request_start' => $currentTime,
+                'info' => \json_encode(array_merge($_GET, $_POST, $_COOKIE, $_FILES),
+                    JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_TAG | JSON_NUMERIC_CHECK)
             ]);
 
-            Tools::userSetConfig('current_log_id', $log->id, 55);
-            Redis::rPush(Tools::getUserId() . ':ip_log_ids', $log->id);
+            Tools::userSetValue('current_log_id', $log->id, 55);
+            Redis::rPush(Tools::getUserIp() . ':ip_log_ids', $log->id);
             Tools::userSetConfigIfNotExist('first_seen', \Carbon\Carbon::now()->timestamp);
-            Tools::userSetConfig('last_method', $request->method());
-            Tools::userSetConfig('is_gay', (int) Tools::isGay($request->ip()));
+            Tools::userSetValue('last_method', $request->method());
+            Tools::userSetValue('is_gay', (int) Tools::isGay($request->ip()));
 
-            if(!Tools::userHasConfig('probably_gay')) {
-                Tools::userSetConfig('probably_gay', (int) (\App\XRandom::get(0, 40) == 34), 3600);
+            if (!Tools::userHasSetting('probably_gay')) {
+                Tools::userSetValue('probably_gay', (int) (\App\XRandom::get(0, 40) == 34), 3600);
             }
 
-            Redis::rPush(Tools::getUserId() . ':request_logs',
+            Redis::rPush(Tools::getUserIp() . ':request_logs',
                 hash('crc32', $request->ip() . $request->header('remote_port') . $request->method() . $request->fullUrl()) . ':' .
                 $request->method() . ':' .
                 $request->session()->getId() . ':' .
@@ -53,7 +57,7 @@ class LogRequest
                 \microtime(true));
 
             Tools::recordIp($request->ip());
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             \App\Logger::msg('exception in logrequest:' . $e->getLine() . '> ' . $e->getMessage());
         }
 

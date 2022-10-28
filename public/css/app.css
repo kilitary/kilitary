@@ -5,13 +5,39 @@ body {
   height: 100%;
   width: 98%;
 }
+
 .cpu-item {
   font-family: "Consolas";
 }
+
+.bg-img {
+  display: block;
+  width: 100%;
+  background-image: url(/images/Untitledbg.gif);
+  margin: 0px;
+  padding-bottom: 4px;
+  height: 120px;
+}
+
+.header-text {
+  padding-left: 20px;
+  margin-left: 8px;
+  margin-top: 11px;
+  box-shadow:10px -7px red ;
+  color: white;
+  font-family: "Lucida Sans Unicode";
+  float: left;
+  font-size: 34px;
+  font-variant: small-caps;
+  background-color: darkturquoise;
+  padding-right: 33px;
+}
+
 .cpu-item:hover {
-  box-shadow: 4px 4px 4px 4px rgba(0,0,0,0.2);
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
   color: #197d44;
 }
+
 .content-container {
   font-family: EuclidSquare !important;
   line-height: 20px;
@@ -21,6 +47,7 @@ body {
   padding-left: 15px;
   background-color: #fefff5;
 }
+
 #flagleft {
   display: inline-block;
   position: absolute;
@@ -34,13 +61,16 @@ body {
   background-size: contain;
   image-rendering: pixelated;
 }
+
 .ip-info {
   font-family: "consolas" !important;
   font-size: 12px !important;
 }
+
 .destroy-link {
   border-bottom: 2px dashed #daa520;
 }
+
 #flagright {
   display: flex;
   top: -16px;
@@ -56,11 +86,13 @@ body {
   object-fit: cover;
   image-rendering: pixelated;
 }
+
 #app {
   border-left: 9px dashed #0ff;
   padding-left: 9px;
   animation: falling-red 27.3s infinite;
 }
+
 button,
 input,
 textarea {
@@ -70,6 +102,7 @@ textarea {
   cursor: pointer;
   border: 2px dashed #ff8c00;
 }
+
 button:hover,
 input:hover,
 textarea:hover {
@@ -77,6 +110,7 @@ textarea:hover {
   background-color: #fff9be !important;
   border: 2px dashed #f00 !important;
 }
+
 .message {
   color: #32d175;
   font-family: "lucida console";
@@ -88,10 +122,12 @@ textarea:hover {
   padding-bottom: 5px;
   box-shadow: 11px 1px 5px #a1ff25, 0 2px 0px 0 #fff382;
 }
+
 .interesting-block {
   width: 75%;
   line-height: 28px;
 }
+
 .content-keys {
   font-family: "lucida console";
   color: #2e8b57;
@@ -99,6 +135,7 @@ textarea:hover {
   font-variant: small-caps;
   font-size: 10px;
 }
+
 .crysa-class {
   height: 104px;
   opacity: 0.9;
@@ -107,6 +144,7 @@ textarea:hover {
   left: 1150px;
   image-rendering: pixelated;
 }
+
 .commit-button {
   background-image: url("/images/_n.jpg");
   background-repeat: no-repeat;
@@ -118,11 +156,13 @@ textarea:hover {
   width: 200px;
   height: 30px;
 }
+
 .url-input {
   width: 300px;
   margin-top: 3px;
   margin-bottom: 5px;
 }
+
 .ip-info-page {
   font-family: consolas;
   font-size: 14px;
@@ -130,15 +170,18 @@ textarea:hover {
   padding-bottom: 10px;
   padding-right: 20px;
 }
+
 .page-info-item {
   box-shadow: 0px 1px 1px #a1ff25, 0 10px 111px 10px #ffef5c;
   margin-bottom: 15px;
   padding: 10px;
   padding-right: 10px;
 }
+
 .page-info {
   padding-bottom: 4px;
 }
+
 .protip-mine {
   font-family: consolas;
   font-size: 12px;
@@ -146,6 +189,7 @@ textarea:hover {
   border: 19px dashed #f5fffa;
   background-color: #ffdab9;
 }
+
 .protip-on-main {
   font-family: "Liberation Mono";
   font-size: 11px;
@@ -155,6 +199,7 @@ textarea:hover {
   margin: 18px;
   box-shadow: 0 0px 13px 0 #00fa9a, 0 10px 20px 0 #ff0;
 }
+
 .protip-ip-info {
   font-family: "lucida console";
   font-size: 10px;
@@ -166,11 +211,13 @@ textarea:hover {
   border-top: 14px dashed #ff8c00;
   border-bottom: 14px dashed #ff8c00;
 }
+
 .new-stamp {
   position: relative;
   left: 41px;
   top: -1px;
 }
+
 .iplink {
   font-size: 12px;
   padding: 3px;
@@ -180,21 +227,26 @@ textarea:hover {
   display: flow-root;
   box-shadow: 0 2px 8px #add8e6, 0 1px 11px 0 #adff2f;
 }
+
 .iplink:hover {
   box-shadow: 1px 3px 10px #f00, 0 0px 30px 0 #34daff;
 }
+
 blockquote {
   border-left: 3px solid #8a2be2;
   margin-left: 0px;
   padding-left: 3px;
 }
+
 ul {
   list-style-type: disc;
 }
+
 .proxy-table {
   margin: 10px;
   padding: 10px;
 }
+
 .proxy-header th {
   padding: 0px;
   margin: 0px;
@@ -203,28 +255,36 @@ ul {
   text-align: left;
   border-bottom: 3px solid #0ff;
 }
+
 .proxy-item td {
   padding: 8px;
   margin: 3px;
 }
+
 .proxy-type-http {
   color: #639;
 }
+
 .proxy-type-https {
   color: #e83e8c;
 }
+
 .proxy-type-socks4 {
   color: #146838;
 }
+
 .proxy-type-socks4a {
   color: #955ae7;
 }
+
 .proxy-type-socks5 {
   color: #117a8b;
 }
+
 .proxy-type-smtp-relay {
   color: #899aa9;
 }
+
 .section-h3 {
   border-bottom: 1px solid #ebf8ff;
   padding-bottom: 11px;
@@ -234,71 +294,90 @@ ul {
   font-variant: small-caps;
   clear: both;
 }
+
 .container {
   width: 100%;
   min-height: 80%;
   display: block;
 }
+
 .list-item-container {
   border-bottom: 1px dashed #add8e6;
   padding: 4px;
   display: box;
   min-height: 10px;
 }
+
 .marginleft {
   margin: 12px;
 }
+
 .smallcaps {
   font-variant: small-caps;
   font-family: consolas;
   font-size: 17px;
 }
+
 .super-small {
   font-size: 4px;
   font-family: "Lucida Console";
   font-variant: small-caps;
 }
+
 .topheadmargin {
   margin-top: 10px;
   padding-top: 12px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }
+
 .interestlink {
   font-size: 12px;
   padding: 3px;
   font-family: lucida console;
   box-shadow: 0 2px 8px #45ff08, 0 1px 1px 0 #34daff;
 }
+
 .interestlink:hover {
   box-shadow: 1px 1px 1px #f00, 0 0px 1px 0 #34daff;
 }
+
 .cart-button-submit {
   padding: 10px;
   display: inline-block;
   padding-bottom: 5px;
 }
+
 .cart-button-submit:hover {
   color: #f00;
 }
+
 .cart-item-name {
   display: inline-block;
 }
+
 .cart-item-cost {
   width: 100%;
   text-align: right;
   display: inline-block;
 }
+
 .cart-total {
   padding-left: 7px;
   font-family: "lucida console";
   font-size: 20px;
 }
+
 .cart-item {
   width: 400px;
 }
+
 .select-doc-future {
   padding-left: 0px;
   margin-left: 15px;
 }
+
 .select-doc-future li {
   margin-top: 15px;
   font-family: "consolas";
@@ -308,23 +387,28 @@ ul {
   padding-bottom: 0px;
   margin-bottom: 0px;
 }
+
 .select-doc-future li:hover {
   color: #0ff;
 }
+
 .tib-war-header {
   font-variant: small-caps;
   font-size: 16px;
   display: inline;
 }
+
 .comment {
   display: flow-root;
   margin-bottom: 8px;
   padding-bottom: 5px;
   box-shadow: 18px 3px 0px #24b8ff, 0 0px 5px 0 #b0ffd7;
 }
+
 .new-comment {
   padding: 10px;
 }
+
 .text-comment {
   width: 25%;
   height: 100px;
@@ -333,54 +417,65 @@ ul {
   font-family: lucida console;
   opacity: 1;
 }
+
 .comment-img {
   position: relative;
   top: 4px;
   width: 12px;
   height: 12px;
 }
+
 .comment-date {
   font-size: 12px;
   font-family: consolas;
 }
+
 .comment-content {
   padding-left: 18px;
   font-size: 12px;
   font-family: consolas;
 }
+
 .page-content {
   padding-top: 0px;
   margin-top: 9px;
 }
+
 .page-header {
   border-top: 9px dotted #d3d3d3;
   padding-bottom: 0px;
   padding-top: 11px;
   margin-top: 0px;
 }
+
 .donate-link {
   color: #f00;
   box-shadow: 0 10px 1px 0 #fffee9, 0 11px 1px 0 #f00;
   font-variant: small-caps;
 }
+
 .donate-link:hover {
   color: #adadff;
   box-shadow: 0 10px 11px 0 #fffee9, 0 11px 11px 0 #0ff;
 }
+
 .construct-logo {
   padding-top: 10px;
 }
+
 .construct-logo:hover {
   box-shadow: 0 10px 12px 0 #0ff, 0 11px 111px 0 #20b2aa;
   background-color: #b0ffd7;
   padding-right: 5px;
 }
+
 .page-footer {
   border-top: 9px dotted #d3d3d3;
   padding-bottom: 0px;
   padding-top: 0px;
   margin-top: 0px;
 }
+
 .donate-area {
   padding: 20px;
   margin: 31px;
@@ -388,22 +483,26 @@ ul {
   border-bottom: 1px solid #f00;
   box-shadow: 0 10px 12px 0 #b0ffd7, 0 11px 111px 0 #2779bd;
 }
+
 .log-record {
   font-family: consolas;
   font-size: 8px;
   border-bottom: 4px dashed #ffa500;
   margin-bottom: 10px;
 }
+
 .edit-label {
   box-shadow: 0 120px 1122px 0 #00fa9a, 0 1px 111px 0 #00fa9a;
   margin-bottom: 20px;
   padding-bottom: 10px;
   display: table-cell;
 }
+
 .support-box {
   font-family: Consolas;
   padding: 15px 0px 15px 0px;
 }
+
 .car {
   position: absolute;
   top: 25%;
@@ -411,16 +510,19 @@ ul {
   opacity: 0.15;
   box-shadow: 0 10px 1122px 0 #ff5151, 0 111px 111px 0 #ff0;
 }
+
 .log-code {
   font-family: consolas;
   display: inline-flex;
   width: 22px;
 }
+
 .log-ip {
   font-family: consolas;
   display: block;
   color: #20b2aa;
 }
+
 .log-info {
   font-family: consolas;
   display: table;
@@ -428,6 +530,7 @@ ul {
   word-break: keep-all;
   white-space: pre-wrap;
 }
+
 .log-date {
   font-family: consolas;
   display: inline-flex;
@@ -435,40 +538,49 @@ ul {
   word-break: break-all;
   color: #789;
 }
+
 .log-method {
   font-family: consolas;
   display: inline-flex;
   width: 24px;
   color: #e83e8c;
 }
+
 .gay-list-table {
   padding-top: 22px;
   padding-bottom: 22px;
 }
+
 .gay-list-table td {
   border-right: 1px solid #f00;
   border-bottom: 1px solid #d3d3d3;
   padding: 10px;
 }
+
 .gay-list-table th {
   padding: 15px;
   border-bottom: 1px dashed #00bfff;
 }
+
 .social-twitter {
   margin-top: 15px;
 }
+
 .social-facebook {
   position: relative !important;
   top: -3px;
 }
+
 .fb_iframe_widget {
   position: relative;
   display: inline;
 }
+
 .social-buttons {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
 .cart-item {
   box-shadow: 8px 4px 16px #f5f5f5, 1px 1px 44px 11px #fff9be;
   border-bottom: 1px dashed #8a2be2;
@@ -476,11 +588,13 @@ ul {
   color: #125d32;
   padding: 4px;
 }
+
 .cart-item:hover {
   color: #f00;
   cursor: pointer;
   box-shadow: 3px 2px 16px #f5f5f5, 1px 1px 10px 10px #cef4de;
 }
+
 .protip-cart-item {
   margin: 0px;
   padding: 0px;
@@ -489,20 +603,24 @@ ul {
   font-family: consolas;
   font-size: 20px;
 }
+
 .log-ua {
   font-family: consolas;
   display: table-footer-group;
   width: 100px;
   color: #87cefa;
 }
+
 .log-url {
   font-family: consolas;
   display: flex;
   color: #9acd32;
 }
+
 .marginbottom {
   margin-bottom: 5px;
 }
+
 .list-key {
   font-family: "consolas";
   font-size: 11px;
@@ -515,11 +633,13 @@ ul {
   float: left;
   box-shadow: 14px 24px 6px #f5f5f5, 1px 0px 0px 0px #ff0081;
 }
+
 .list-key:hover {
   background-color: #7cfc00;
   color: #f00;
   cursor: pointer;
 }
+
 .list-item {
   font-family: "consolas";
   font-size: 11px;
@@ -529,40 +649,49 @@ ul {
   width: 90%;
   box-shadow: 0px 1px 6px #a1ff25, 0 0px 0px 0 #ff0081;
 }
+
 .list-item:hover {
   background-color: #ff1493;
   color: #fff;
   cursor: pointer;
 }
+
 .links {
   padding-top: 10px;
 }
+
 .page-country {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
 .ignited {
   color: #20c997;
   margin-bottom: 0px;
   padding-bottom: 0px;
 }
+
 .wide-button {
   padding: 2px;
   margin: 0px;
   margin-top: 4px !important;
   margin-left: 10px;
 }
+
 a,
 a:visited {
   text-decoration: none;
   color: #117a8b;
 }
+
 a:hover {
   color: #f00;
 }
+
 .blinking-red {
   animation: blinkingRed 0.1s infinite;
 }
+
 @-moz-keyframes blinkingRed {
   0% {
     color: #f00;
@@ -574,6 +703,7 @@ a:hover {
     color: #f00;
   }
 }
+
 @-webkit-keyframes blinkingRed {
   0% {
     color: #f00;
@@ -585,6 +715,7 @@ a:hover {
     color: #f00;
   }
 }
+
 @-o-keyframes blinkingRed {
   0% {
     color: #f00;
@@ -596,6 +727,7 @@ a:hover {
     color: #f00;
   }
 }
+
 @keyframes blinkingRed {
   0% {
     color: #f00;
@@ -607,28 +739,35 @@ a:hover {
     color: #f00;
   }
 }
+
 .blinking-green {
   animation: blinkingGreen 1.3s infinite;
 }
+
 .shortener {
   margin: 10px;
 }
+
 .shortener input {
   margin-left: 10px;
 }
+
 .shortener button {
   padding: 3px;
   margin-top: 4px;
 }
+
 @font-face {
   font-family: EuclidSquare;
   font-style: normal;
   font-weight: 400;
   src: local('EuclidSquare'), url("/css/EuclidSquare-Regular-WebS.woff") format('woff');
 }
+
 .blinking-orange {
   animation: blinkingOrange 1.8s infinite;
 }
+
 @-moz-keyframes blinkingGreen {
   0% {
     color: #008000;
@@ -640,6 +779,7 @@ a:hover {
     color: #adff2f;
   }
 }
+
 @-webkit-keyframes blinkingGreen {
   0% {
     color: #008000;
@@ -651,6 +791,7 @@ a:hover {
     color: #adff2f;
   }
 }
+
 @-o-keyframes blinkingGreen {
   0% {
     color: #008000;
@@ -662,6 +803,7 @@ a:hover {
     color: #adff2f;
   }
 }
+
 @keyframes blinkingGreen {
   0% {
     color: #008000;
@@ -673,6 +815,7 @@ a:hover {
     color: #adff2f;
   }
 }
+
 @-moz-keyframes blinkingOrange {
   0% {
     color: #ff0;
@@ -684,6 +827,7 @@ a:hover {
     color: #f00;
   }
 }
+
 @-webkit-keyframes blinkingOrange {
   0% {
     color: #ff0;
@@ -695,6 +839,7 @@ a:hover {
     color: #f00;
   }
 }
+
 @-o-keyframes blinkingOrange {
   0% {
     color: #ff0;
@@ -706,6 +851,7 @@ a:hover {
     color: #f00;
   }
 }
+
 @keyframes blinkingOrange {
   0% {
     color: #ff0;
@@ -717,6 +863,7 @@ a:hover {
     color: #f00;
   }
 }
+
 @-moz-keyframes falling-red {
   20% {
     border-left: 9px dashed #0ff;
@@ -728,6 +875,7 @@ a:hover {
     border-left: 9px dashed #f00;
   }
 }
+
 @-webkit-keyframes falling-red {
   20% {
     border-left: 9px dashed #0ff;
@@ -739,6 +887,7 @@ a:hover {
     border-left: 9px dashed #f00;
   }
 }
+
 @-o-keyframes falling-red {
   20% {
     border-left: 9px dashed #0ff;
@@ -750,6 +899,7 @@ a:hover {
     border-left: 9px dashed #f00;
   }
 }
+
 @keyframes falling-red {
   20% {
     border-left: 9px dashed #0ff;

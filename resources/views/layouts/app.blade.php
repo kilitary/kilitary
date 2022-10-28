@@ -9,9 +9,8 @@
   <meta name="generator-author" content="Axis9 (an umbrella division)"/>
   <meta name="document-state" content="dynamic">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta name="yandex-verification" content="0c0bf1373a8046f1"/>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta name="author" content="Sergey Efimov"/>
+  <meta name="author" content="CommandmentTwo"/>
 
   <meta property="og:title" content="{{isset($page) ? $page->header : ($description ?? 'x25 vault')}}">
   <meta property="og:url" content="{{request()->fullUrl()}}">
@@ -27,7 +26,6 @@
 
   <title>{{ env('APP_NAME') }}</title>
 
-  <!-- /Yandex.Metrika counter -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-179562632-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -52,7 +50,7 @@
 </head>
 <!--
 # 2022
-# Sergey Efimov
+# commandment1349@gmail.com
 # Efficient Public Domain Extended.
 -->
 <!--laragen-->
@@ -60,15 +58,19 @@
 @inject('channelStatusProvider', '\App\Providers\ChannelStatusProvider')
 <!--#{{ $channelStatusProvider->sign() }}#-->
 <header>
-  @if (Route::currentRouteName()=='home')
-    <div id="flagleft"></div>
-  @endif
-  <div id="flagright"></div>
+  <div class="bg-img">
 
-  <div style="z-index:99999;float:right;position: absolute;top: 10px;left: 100px">
-    <a target=_blank href="/images/operatoR.jpg">
-      <img class="crysa-class" title="Crysa class server admin " src="/images/krisa.png"></a>
+    <span class="header-text" title="последние манускрипты по защите от преступников">
+      Targeted Individuals // Terror by psy operators<br/>
+      Пситеррор в россии
+
+    </span>
   </div>
+  <!-- TODO: show on expensive position <div style="z-index:99999;float:right;position: absolute;top: 10px;left: 100px">
+      <a target=_blank href="/images/operatoR.jpg">
+        <img class="crysa-class" title="Crysa class server admin " src="/images/krisa.png"></a>
+    </div>
+   -->
 </header>
 
 <div id="app">
@@ -85,7 +87,11 @@
 </div>
 
 <footer>
-
+  <div class="topheadmargin">
+      <span>
+        [<a class="destroy-link" title="you have 10 reel destroys left" href="/destroy-page">destroy site</a>]
+      </span>
+  </div>
 </footer>
 @stack('scripts')
 <!--laragen-->

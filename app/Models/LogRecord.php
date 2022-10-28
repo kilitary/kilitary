@@ -50,6 +50,6 @@ class LogRecord extends Model
 
     public function ipInfo()
     {
-        return $this->hasOne('\App\IpInfo', 'ip', 'ip');
+        return $this->hasOne(\App\IpInfo::class, 'ip', 'ip');
     }
 }

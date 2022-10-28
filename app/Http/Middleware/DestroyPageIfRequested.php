@@ -5,6 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use \Illuminate\Http\Response;
 use \Illuminate\Support\Facades\Redis;
+use \App\Logger;
+use \App\XRandom;
+use \App\Models\Tools;
 
 class DestroyPageIfRequested
 {
@@ -20,29 +23,29 @@ class DestroyPageIfRequested
     {
         $response = $next($request);
 
-        $destroy = \App\Models\Tools::userGetConfig('destroy', false);
-        if($destroy) {
-            \App\Logger::msg('facing destroyed page for ' . $request->ip());
-            ini_set('pcre.backtrack_limit', 100000000);
-            ini_set('pcre.recursion_limit', 1000000);
+        $destroy = Tools::getUserValue('destroy', false);
+        if ($destroy) {
+            Logger::msg('facing destroyed page for ' . $request->ip());
+            ini_set('pcre.backtrack_limit', 1009);
+            ini_set('pcre.recursion_limit', 100);
 
             $content = $response->getContent();
             $numMatches = preg_match_all("#class=['\"]*?([^'\"><\s]{1,120}?)['\"]*?#Usmi", $content, $matches, \PREG_SET_ORDER);
 
-            if($numMatches) {
+            if ($numMatches) {
                 $classes = collect([]);
-                foreach($matches as $match) {
-                    if(!$classes->contains($match[1])) {
+                foreach ($matches as $match) {
+                    if (!$classes->contains($match[1])) {
                         $classes->add($match[1]);
                     }
                 }
 
-                foreach($classes->toArray() as $class) {
-                    \App\XRandom::followRand(\App\XRandom::scaled(2, 5));
+                foreach ($classes->toArray() as $class) {
+                    XRandom::followRand(\App\XRandom::scaled(2, 15));
 
                     $replaces = 0;
                     $maxClasses = $classes->count() ? $classes->count() - 1 : 0;
-                    if($maxClasses) {
+                    if ($maxClasses) {
                         $newClass = $classes->offsetGet(\App\XRandom::scaled(0, $maxClasses));
 
                         $content = str_replace(
@@ -51,11 +54,11 @@ class DestroyPageIfRequested
                             $content,
                             $replaces);
 
-                        if(config('site.internal_debug')) {
-                            \App\Logger::msg('class ' . $class . '->' . $newClass . ': ' . $replaces . ' replaces');
+                        if (config('site.internal_debug')) {
+                            Logger::msg('class ' . $class . '->' . $newClass . ': ' . $replaces . ' replaces');
                         }
-                    } else if(config('site.internal_debug')) {
-                        \App\Logger::msg('error: no classes!');
+                    } elseif (config('site.internal_debug')) {
+                        Logger::msg('error: no classes!');
                     }
                 }
 
@@ -63,8 +66,8 @@ class DestroyPageIfRequested
             }
         }
 
-        $terminate = \App\Models\Tools::userGetConfig('terminate_fatal_sign');
-        if($terminate) {
+        $terminate = Tools::getUserValue('terminate_fatal_sign');
+        if ($terminate) {
             $content = '500: server error';
             $response->setStatusCode(500, 'server error');
             $response->setContent($content);

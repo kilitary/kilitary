@@ -11,7 +11,7 @@ class idehelp extends Command
      *
      * @var string
      */
-    protected $signature = 'idehelp';
+    protected $signature = 'ide';
 
     /**
      * The console command description.
