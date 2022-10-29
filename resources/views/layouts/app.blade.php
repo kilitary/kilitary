@@ -1,5 +1,5 @@
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="en" xml:x-lang="！王のッ">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xml:lang="en" xml:x-lang="！王 ↓ッ">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,8 +30,7 @@
     gtag('js', new Date());
     gtag('config', 'UA-179562632-1');
   </script>
-  <script src="/js/jquery-3.5.1.min.js"
-          integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="/js/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="/js/2.0.0.js"></script>
   <script src="/js/protip.min.js"></script>
   <script src="{{ mix('js/app.js') . '?ver='.hash('crc32',\file_get_contents('js/app.js')) }}"></script>
@@ -39,13 +38,13 @@
   <link href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' rel='stylesheet'>
   <link async rel="stylesheet " href="/css/protip.min.css">
   <link async rel="stylesheet" href="/css/animate.min.css"/>
-  <link async href="{{ asset('css/app.css') . '?ver='.hash('crc32',\file_get_contents('css/app.css')) }}"
-        rel="stylesheet">
+  <link async href="{{ asset('css/app.css') . '?ver='.hash('crc32',\file_get_contents('css/app.css')) }}" rel="stylesheet">
 </head>
 <!--
-# 2022
-# commandment1349@gmail.com
-# Efficient Public Domain Extended.
+# 2023
+# (C) Umbrella Research Division Axis9.
+# visit https://linktr.ee/kilitary?from=u for additional instructions
+# contact commandment1349@gmail.com for contact
 -->
 <!--laragen-->
 <body>

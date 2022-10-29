@@ -75,7 +75,7 @@ class PostRequest
                 ->header('expect-dtp', 'max-age=' . Xrandom::get(0, 2) . 'd')
                 ->header('expect-d-tp', 'max-age=' . Xrandom::get(0, 2111111111) . 'd')
                 ->header('X-CurveBank', 'Dont Be A ' . $wors[Xrandom::get(0, count($wors) - 1)])
-                ->header('Client-post-version', 'arminer(0.1d-2020 0x43-b/c/AN/SPY49)')
+                ->header('Client-on-receive-version', 'arminer(0.44c-2022 0x43-b/c/AN/SPY70)')
                 ->header("Proxy-connection-class", "%s%s%s?&nbsp;&" . Xrandom::scaled(1999999, 999999999))
                 ->header("Last-chain", Xrandom::scaled(10000000, 9899909999))
                 ->header("X-MSEdge-Ref", "Ref A: " . sprintf("%-09X", Xrandom::scaled(199111111, 9999999999)) . " Ref B: " .
