@@ -52,13 +52,11 @@ class Comment extends Model
 
     public static function getLatest($take = 5)
     {
-        Tools::sqlGroupMode(false);
         $comments = \App\Comment::select('id', 'comment', 'page_id', 'created_at')
             ->limit($take)
             ->latest()
             ->get();
        // dd($comments);
-        Tools::sqlGroupMode();
 
         return $comments;
     }

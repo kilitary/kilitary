@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,10 +71,16 @@ Route::middleware(['cache.headers', 'cors'])
 
         Route::any('/home', [HomeController::class, 'index']);
 
+
+
+        Route::prefix("news")
+            ->group(static function () {
+                 Route::get('/reload', [NewsController::class, 'reloadNews']);
+            });
         Route::get('/', [PageController::class, 'index'])->name('index');
 
 //        Route::post('/us/create', 'UrlController@create');
 //        Route::get('/us/{url}', 'UrlController@redirect');
 
-        Route::fallback([PageController::class, 'index']);
+        //Route::fallback([PageController::class, 'index']);
     });

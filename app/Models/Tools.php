@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use const CURLOPT_TIMEOUT;
+use const GEOIP_STANDARD;
+use const JSON_PRETTY_PRINT;
 use ipinfo\ipinfo\IPinfo;
 use Exception;
 use GeoIp2\Exception\GeoIp2Exception;
-use const CURLOPT_TIMEOUT;
-use const GEOIP_STANDARD;
 use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
-use const JSON_PRETTY_PRINT;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Cache;
+use App\Logger;
 
 class Tools
 {
@@ -42,7 +43,7 @@ class Tools
         $value = Redis::get(static::getUserIp() . ':' . $key);
 
         if (config('site.internal_debug')) {
-            \App\Logger::msg('userGetConfig(' . static::getUserIp() . ':' . $key . ') = ' . ($value ?? '<unset>'));
+            Logger::msg('userGetConfig(' . static::getUserIp() . ':' . $key . ') = ' . ($value ?? '<unset>'));
         }
 
         if ($value == null) {
@@ -56,7 +57,7 @@ class Tools
         $ret = Redis::command('setnx', [static::getUserIp() . ':' . $key, $value]);
 
         if (config('site.internal_debug')) {
-            \App\Logger::msg('userSetConfigIfNotExist(' . static::getUserIp() .
+            Logger::msg('userSetConfigIfNotExist(' . static::getUserIp() .
                 ':' . $key . ', value:' . $value . ') = ' . (bool) $ret);
         }
 
@@ -73,7 +74,7 @@ class Tools
         }
 
         if (config('site.internal_debug')) {
-            \App\Logger::msg('userSetConfig(' . static::getUserIp() . ':' . $key . ', ttl:' .
+            Logger::msg('userSetConfig(' . static::getUserIp() . ':' . $key . ', ttl:' .
                 $ttl . ', value:' . $value . ') = ' . (bool) $ret);
         }
 
@@ -86,7 +87,7 @@ class Tools
 
         if (config('site.internal_debug')) {
             $has = \gettype($value) == "NULL" ? 0 : 1;
-            \App\Logger::msg('userHasConfig(' . static::getUserIp() . ':' . $key . ') = ' . $has);
+            Logger::msg('userHasConfig(' . static::getUserIp() . ':' . $key . ') = ' . $has);
         }
 
         return $value == null ? false : true;
@@ -110,21 +111,54 @@ class Tools
         return (float) $costs[$item];
     }
 
+    public static function slugString($string): string
+    {
+        $gost = [
+            "а" => "a", "б" => "b", "в" => "v", "г" => "g", "д" => "d",
+            "е" => "e", "ё" => "yo", "ж" => "j", "з" => "z", "и" => "ii",
+            "й" => "ji", "к" => "k", "л" => "l", "м" => "m", "н" => "n",
+            "о" => "o", "п" => "p", "р" => "r", "с" => "s", "т" => "t",
+            "у" => "y", "ф" => "f", "х" => "h", "ц" => "c", "ч" => "ch",
+            "ш" => "sh", "щ" => "sch", "ы" => "ie", "э" => "e", "ю" => "u",
+            "я" => "ya",
+            "А" => "A", "Б" => "B", "В" => "V", "Г" => "G", "Д" => "D",
+            "Е" => "E", "Ё" => "Yo", "Ж" => "J", "З" => "Z", "И" => "I",
+            "Й" => "Ji", "К" => "K", "Л" => "L", "М" => "M", "Н" => "N",
+            "О" => "O", "П" => "P", "Р" => "R", "С" => "S", "Т" => "T",
+            "У" => "Y", "Ф" => "F", "Х" => "H", "Ц" => "C", "Ч" => "Ch",
+            "Ш" => "Sh", "Щ" => "Sch", "Ы" => "Ie", "Э" => "E", "Ю" => "U",
+            "Я" => "Ya",
+            "ь" => "'", "Ь" => "_'", "ъ" => "''", "Ъ" => "_''",
+            "ї" => "yi",
+            "і" => "ii",
+            "ґ" => "ge",
+            "є" => "ye",
+            "Ї" => "Yi",
+            "І" => "II",
+            "Ґ" => "Ge",
+            "Є" => "YE",
+            " " => "_",
+            '-' => '_',
+            "'" => "_",
+            "'" => "_"
+        ];
+
+        $string = strtr($string, $gost);
+        $string = mb_ereg_replace("[^_a-zA-Z0-9А-Яа-я]", "", $string);
+
+        return $string;
+    }
+
     public static function ipVisits()
     {
         return Redis::llen(request()->ip() . ':ip_log_ids');
-    }
-
-    public static function sqlGroupMode($mode = true)
-    {
-        //return $mode ? \DB::statement("SET SQL_MODE='only_full_group_by'") : \DB::statement("SET SQL_MODE=''");
     }
 
     public static function isGay($ip)
     {
         static $gays;
 
-        if ($gays[$ip]) {
+        if (isset($gays[$ip])) {
             return $gays[$ip];
         }
 
@@ -208,12 +242,12 @@ class Tools
         $info['ip'] = \request()->ip();
         $info['user_id'] = static::getUserIp();
 
-        \App\Logger::msg(\request()->ip() . '> creating new AI: ' . \json_encode($info, JSON_PRETTY_PRINT));
+        Logger::msg(\request()->ip() . '> creating new AI: ' . \json_encode($info, JSON_PRETTY_PRINT));
 
         try {
             $ai = ArbitraryInfo::create($info);
         } catch (Exception $e) {
-            \App\Logger::msg('Exception with ai: ' . $e->getMessage());
+            Logger::msg('Exception with ai: ' . $e->getMessage());
         }
 
         return $ai ?? false;

@@ -40,6 +40,13 @@ class PageController extends Controller
         $this->newsService = $newsService;
     }
 
+    public function reloadNews(Request $request)
+    {
+        $news = $this->newsService->get(15, true, true);
+
+        return response()->redirectTo('/');
+    }
+
     public function opcache(Request $request)
     {
         return response(require_once '../vendor/amnuts/opcache-gui/index.php');
@@ -54,7 +61,7 @@ class PageController extends Controller
         }
 
         $total = 0.0;
-        $cart->transform(function ($item, $key) use ($request, &$total) {
+        $cart->transform(static function ($item, $key) use ($request, &$total) {
             $record['cost'] = Tools::getItemCost($item);
             $total += $record['cost'];
             $record['name'] = $item;

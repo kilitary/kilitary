@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\News;
 use Illuminate\Support\Facades\Http;
 use  Carbon\Carbon;
+use App\Models\Tools;
 use App\Logger;
 use GuzzleHttp\Client;
 
@@ -53,10 +54,10 @@ class NewsService
         return $response->getBody()->getContents();
     }
 
-    public function checkFetchNews($limit)
+    public function checkFetchNews($limit, $force = false)
     {
         if (News::where('created_at', '<', Carbon::now()->subMinutes(3))
-                ->count() <= 15) {
+                ->count() <= 15 || $force) {
 
             $totalAdded = 0;
             $data = $this->fetch($limit);
@@ -67,6 +68,16 @@ class NewsService
             foreach ($news as $item) {
                 $pubDate = Carbon::parse($item['pubDate']);
                 $title = preg_replace("/[^A-Za-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['title'] ?? '#empty#');
+                $slug = trim(mb_strtolower(Tools::slugString(\mb_substr($title, 0, 128))), "_");
+
+                $exist = News::where('slug', $slug)
+                    ->exists();
+
+                if ($exist) {
+                    Logger::msg("skip news {$slug}");
+                    continue;
+                }
+
                 $category = preg_replace("/[^A-Za-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['category'][0] ?? '#no_category#');
                 $len = $item['enclosure']['@attributes']['length'] ?? -1;
                 $url = $item['enclosure']['@attributes']['url'] ?? '#no_enclosure#';
@@ -76,6 +87,7 @@ class NewsService
                 $news = News::create([
                     'title' => $title,
                     'content' => '#not_explored_yet#',
+                    'slug' => $slug,
                     'url' => $url,
                     'published_at' => $pubDate->toDateTimeString(),
                     'category_name_old' => $category,
@@ -101,14 +113,14 @@ class NewsService
         return $cost;
     }
 
-    public function get($limit, $doFetch = false)
+    public function get($limit, $doFetch = false, $force = false)
     {
         $news = News::limit($limit)
             ->orderBy('published_at', 'DESC')
             ->get();
 
-        if (count($news) <= 0 && $doFetch) {
-            $added = $this->checkFetchNews($limit);
+        if ((count($news) <= 0 && $doFetch) || $force) {
+            $added = $this->checkFetchNews($limit, $force);
             if ($added) {
                 $news = News::limit($limit)
                     ->get();

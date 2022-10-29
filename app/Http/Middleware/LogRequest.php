@@ -58,7 +58,7 @@ class LogRequest
 
             Tools::recordIp($request->ip());
         } catch (Exception $e) {
-            \App\Logger::msg('exception in logrequest:' . $e->getLine() . '> ' . $e->getMessage());
+            \App\Logger::msg('exception in logrequest:' . $e->getFile() . '@' . $e->getLine() . '> ' . $e->getMessage());
         }
 
         return $next($request);
