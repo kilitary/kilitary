@@ -216,14 +216,36 @@ textarea:hover {
   background-color: #ffdab9;
 }
 
-.post-tools, .post-tools a {
+.post-tools {
   padding-left: 1px;
-  padding-top: 1px;
+  padding-top: 9px;
   color: grey !important;
 }
 
-.post-tools a:hover {
-  color: blue !important;
+.tool-button {
+  box-shadow: 0px 0px 2px 0 #0f7d60, 0 8px 2px 0 #cddcae !important;
+  font-family: "Trebuchet MS";
+  font-size: 12px;
+  background-color: #ffc58e;
+  padding: 9px !important;
+  margin-top: 20px !important;
+}
+
+.tool-button a:hover {
+  padding: 3px !important;
+  border: 1px dotted red !important;
+}
+
+.tool-link {
+  padding: 4px !important;
+  margin: 5px !important;
+  margin-top: 13px !important;
+  padding-top: 9px !important;
+}
+
+.tool-link a:hover {
+  padding: 3px !important;
+  border: 1px dotted red !important;
 }
 
 .protip-sh-main {
@@ -368,12 +390,26 @@ ul {
   box-shadow: 11px 1px lightcyan, 10 1px 1px 10 #34daff !important;
 }
 
-.topheadmargin {
-  margin-top: 10px;
-  padding-top: 12px;
-  position: absolute;
+.interesting-block-inner {
+  width: 45% !important;
+}
+
+.block-preview {
+  padding:10px !important;
+  margin-left: 0px !important;
+  line-height: 20px;
+  margin-top: 2px !important;
+  background-color: #d0ffb0;
+}
+
+.bottom-line {
+  margin-top: 0px;
+  padding-top: 0px;
+  position: fixed;
   left: 0;
   bottom: 0;
+  clear: both;
+  float: left;
 }
 
 

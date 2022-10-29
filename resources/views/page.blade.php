@@ -70,7 +70,7 @@
         <button class="commit-button">push comment</button>
       </form>
     </div>
-    <div class="topheadmargin page-info">
+    <div class="bottom-line page-info">
       <span class="page-info-item"><strong>√</strong>iews: {{$views}}</span>
       <span class="page-info-item"> Edits: {{$edits}}</span>
       <span class="page-info-item">Updated: {{$page['updated_at']}}</span>

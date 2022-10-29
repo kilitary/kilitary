@@ -67,7 +67,7 @@ class NewsService
 
             foreach ($news as $item) {
                 $pubDate = Carbon::parse($item['pubDate']);
-                $title = preg_replace("/[^A-Za-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['title'] ?? '#empty#');
+                $title = preg_replace("/[^A-Za-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['title'] ?? '');
                 $slug = trim(mb_strtolower(Tools::slugString(\mb_substr($title, 0, 128))), "_");
 
                 $exist = News::where('slug', $slug)
@@ -78,17 +78,23 @@ class NewsService
                     continue;
                 }
 
-                $category = preg_replace("/[^A-Za-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['category'][0] ?? '#no_category#');
+                $description = $item['description'] ?? '';
+                $category = preg_replace("/[^A-Za-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['category'][0] ?? '');
                 $len = $item['enclosure']['@attributes']['length'] ?? -1;
-                $url = $item['enclosure']['@attributes']['url'] ?? '#no_enclosure#';
+                $imageUrl = $item['enclosure']['@attributes']['url'] ?? '';
+                $url = implode("!", $item['link']);
                 $costHash = md5($title ?? '') . ':' . md5($category ?? '') .
                     ':' . md5($len ?? '') . ':' . md5($url ?? '');
 
+                $content = \json_encode($item, JSON_UNESCAPED_UNICODE);
+
                 $news = News::create([
                     'title' => $title,
-                    'content' => '#not_explored_yet#',
+                    'content' => "!" . $content,
                     'slug' => $slug,
                     'url' => $url,
+                    'description' => $description,
+                    'image_url' => $imageUrl,
                     'published_at' => $pubDate->toDateTimeString(),
                     'category_name_old' => $category,
                     'cost' => $this->getCost($costHash),

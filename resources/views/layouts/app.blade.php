@@ -57,7 +57,7 @@
 
     <span class="header-text" title="последние манускрипты по защите от киберпреступников">
       Targeted Individuals // Local terror by psy operators<br/>
-      <span class='header-lower-text'> Пситеррор в россии // Защита и нападение</span>
+      <span class='header-lower-text'> Пситеррор в россии // Защита, нападение и удаление</span>
 
     </span>
   </div>
@@ -79,12 +79,8 @@
     </main>
   </article>
 </div>
-<footer>
-  <div class="topheadmargin">
-      <span>
-        [<a class="destroy-link" title="you have 10 reel destroys left" href="/destroy-page">destroy site</a> <a href='/cparea'>админка</a>]
-      </span>
-  </div>
+<footer class="bottom-line">
+  [<a class="destroy-link" title="you have 10 real destroys left" href="/destroy-page">cломать сайт</a> // <a href='/cparea'>админка</a>]
 </footer>
 @stack('scripts')
 <!--laragen-->

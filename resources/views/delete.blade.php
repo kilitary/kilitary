@@ -8,7 +8,7 @@
         @endif
         was deleted.
 
-        <div class="topheadmargin page-content">
+        <div class="bottom-line page-content">
             <a href="/">return back</a>
         </div>
     </div>
@@ -32,5 +32,3 @@
         });
     </script>
 @endpush
-
-

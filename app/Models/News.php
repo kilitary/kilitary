@@ -12,6 +12,6 @@ class News extends Model
     public $table = 'news';
     protected $fillable = ['content', 'title', 'url', 'category_name_old',
         'length', 'source', 'visible', 'added_by', 'cost', 'published_at', 'slug',
-        'image_url', 'hash'
+        'image_url', 'hash', 'description'
     ];
 }

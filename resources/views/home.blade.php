@@ -10,19 +10,29 @@
           <div class='interesting-block-row'>
             <a href="/news/{{$post->slug}}" data-pt-animate="bounceIn"
                data-pt-width='800'
-               data-pt-gravity='top-left 0 65'
+               data-pt-gravity='top-left 40 115'
                data-pt-classes='protip-sh-main'
                data-pt-skin='white'
                data-pt-arrow='false'
                data-pt-title="<span class='protip-on-main'>
                {{Carbon::parse($post->published_at)->toDayDateTimeString()}} ■ {{ $post->category_name_old ?? 'Без темы'}} ■ Цена: {{$post['cost'] ?? 0.0}}$
-               </span>"
+               </span>
+                <div class='block-preview'>
+                  {{strlen($post->description) ? $post->description : '-'}}
+                </div>"
                class="protip interestlink"
-               title="Фулл: {{ sprintf("%.2fMB", $post->length / 1024.0 / 1024.0) }}">
-              {!! \App\Models\Tools::titleize($post['title'], 125) !!}
+               title="Фулл: {{ sprintf("%.2fMB", $post->length / 1024.0 / 1024.0) }}">↓
+              {!! \App\Models\Tools::titleize($post['title'], 128) !!}
             </a>
-            <div class='post-tools'><a href='#'>опровергнуть</a> ■ <a href='#'>заказать</a> ■ <a href='#'>слинковать</a>
-              ■ <a href='#'>разьебать</a>
+            <div class='post-tools'>
+              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">опровергнуть</span>'><img
+                  src='/images/child.png'> </a>
+              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">заказать</span>'><img
+                  src='/images/xctl.png'> </a>
+              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">слинковать</span>'><img
+                  src='/images/Wiring.png'> </a>
+              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">разьебать</span>'><img
+                  src='/images/vendor.png'> </a>
             </div>
           </div>
         @endforeach
