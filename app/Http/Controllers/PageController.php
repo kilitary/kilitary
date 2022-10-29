@@ -111,7 +111,7 @@ class PageController extends Controller
 
         $interesting = Page::interesting(5) ?? [];
 
-        $news = $this->newsService->get(5, true);
+        $news = $this->newsService->get(15, true);
 
         $comments = \App\Comment::getLatest(20) ?? [];
 

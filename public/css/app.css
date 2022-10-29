@@ -4,6 +4,19 @@ body {
   padding-left: 0px;
   height: 100%;
   width: 98%;
+
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  background: white;
+  opacity: .03;
+  z-index: -9999;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image: url(/images/ascii2.png);
 }
 
 .cpu-item {
@@ -19,17 +32,29 @@ body {
   height: 120px;
 }
 
+.interesting-block-row {
+  display: block;
+  padding: 1px;
+  margin: 10px;
+}
+
+.header-lower-text {
+  font-size: 18px;
+}
+
 .header-text {
   padding-left: 20px;
   margin-left: 8px;
-  margin-top: 11px;
-  box-shadow:10px -7px red ;
+  margin-top: 20px;
+  padding-bottom: 15px;
+  box-shadow: 5px -7px red;
   color: white;
   font-family: "Lucida Sans Unicode";
   float: left;
-  font-size: 34px;
+  font-size: 24px;
   font-variant: small-caps;
-  background-color: darkturquoise;
+  background-color: black;
+  width: 836.510px;
   padding-right: 33px;
 }
 
@@ -96,7 +121,7 @@ body {
 button,
 input,
 textarea {
-  box-shadow: 0 0px 23px 0 #ffd023, 0 0px 0px 0 #ff0081;
+  box-shadow: 0 0px 23px 0 #ffd023, 0 0px 0px 0 cornsilk;
   font-family: lucida console;
   background-color: #fff;
   cursor: pointer;
@@ -106,7 +131,7 @@ textarea {
 button:hover,
 input:hover,
 textarea:hover {
-  box-shadow: 0px 1px 15px #a1ff25, 0 0px 0px 0 #ff0081;
+  box-shadow: 0px 1px 15px #a1ff25, 0 0px 0px 0 cornsilk;
   background-color: #fff9be !important;
   border: 2px dashed #f00 !important;
 }
@@ -125,7 +150,8 @@ textarea:hover {
 
 .interesting-block {
   width: 75%;
-  line-height: 28px;
+  line-height: 18px;
+  padding-bottom: 4px;
 }
 
 .content-keys {
@@ -190,14 +216,28 @@ textarea:hover {
   background-color: #ffdab9;
 }
 
+.post-tools, .post-tools a {
+  padding-left: 1px;
+  padding-top: 1px;
+  color: grey !important;
+}
+
+.post-tools a:hover {
+  color: blue !important;
+}
+
+.protip-sh-main {
+  box-shadow: 10px 10px 27px 0 #adff2f, 0 28px 22px 0 #aedcc1 !important;
+}
+
 .protip-on-main {
   font-family: "Liberation Mono";
-  font-size: 11px;
-  line-height: 29px;
-  background-color: #ffef5c;
-  padding: 4px;
-  margin: 18px;
-  box-shadow: 0 0px 13px 0 #00fa9a, 0 10px 20px 0 #ff0;
+  font-size: 12px;
+  line-height: 20px;
+  background-color: #ffff8b;
+  padding: 8px;
+  margin: 0px;
+  box-shadow: 0px 0px 0px 0px #ffe4d1, 0px 0px 1px 0px #ff0000 !important;
 }
 
 .protip-ip-info {
@@ -229,7 +269,7 @@ textarea:hover {
 }
 
 .iplink:hover {
-  box-shadow: 1px 3px 10px #f00, 0 0px 30px 0 #34daff;
+  box-shadow: 1px 3px 10px cornsilk, 0 0px 30px 0 #34daff;
 }
 
 blockquote {
@@ -324,6 +364,10 @@ ul {
   font-variant: small-caps;
 }
 
+.protip-container {
+  box-shadow: 11px 1px lightcyan, 10 1px 1px 10 #34daff !important;
+}
+
 .topheadmargin {
   margin-top: 10px;
   padding-top: 12px;
@@ -332,15 +376,16 @@ ul {
   bottom: 0;
 }
 
+
 .interestlink {
   font-size: 12px;
   padding: 3px;
   font-family: lucida console;
-  box-shadow: 0 2px 8px #45ff08, 0 1px 1px 0 #34daff;
+  box-shadow: 1px 1px 0px #ffff00, 1px 1px 1px 0px #6f42c1 !important;
 }
 
 .interestlink:hover {
-  box-shadow: 1px 1px 1px #f00, 0 0px 1px 0 #34daff;
+  box-shadow: 1px 1px 1px lightcyan, 0 0px 1px 0 #34daff !important;
 }
 
 .cart-button-submit {
@@ -631,12 +676,12 @@ ul {
   padding-right: 8px;
   margin-right: 1px;
   float: left;
-  box-shadow: 14px 24px 6px #f5f5f5, 1px 0px 0px 0px #ff0081;
+  box-shadow: 14px 24px 6px #f5f5f5, 1px 0px 0px 0px cornsilk;
 }
 
 .list-key:hover {
   background-color: #7cfc00;
-  color: #f00;
+  color: coral;
   cursor: pointer;
 }
 
@@ -651,7 +696,7 @@ ul {
 }
 
 .list-item:hover {
-  background-color: #ff1493;
+  background-color: coral;
   color: #fff;
   cursor: pointer;
 }

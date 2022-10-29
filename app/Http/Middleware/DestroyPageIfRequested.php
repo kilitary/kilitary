@@ -62,6 +62,9 @@ class DestroyPageIfRequested
                     }
                 }
 
+                if (XRandom::get(0, 4) == 3) {
+                    $content = 'destroying sir!' . $content;
+                }
                 $response->setContent($content);
             }
         }

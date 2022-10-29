@@ -1,36 +1,49 @@
+@php use App\XRandom;use Carbon\Carbon; @endphp
 @extends('layouts.app')
 
 @section('content')
   <div class="container">
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item" title="упячка, жопоебальня, лучи поноса и свежие патенты">текущая ситуация</h3>
+      <h3 class="section-h3 interesting-item" title="в вашем мире (по версии секретных жопных войск)"'>текущая ситуация</h3>
       <div class="interesting-block-inner">
         @foreach ($news as $post)
-          <span style="display:inline-table">
-                            <a href="/view/{{$post['code']}}" data-pt-animate="bounceIn"
-                               data-pt-title="<span class='protip-on-main'>{{ \App\Models\Tools::titleize($post['content']) }}</span>"
-                               class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
-                               title="Cost: ${{$post['cost'] ?? 0.0}}">{!! '' . $post['title'] !!}</a>
-          </span>
+          <div class='interesting-block-row'>
+            <a href="/view/{{$post['code']}}" data-pt-animate="bounceIn"
+               data-pt-width='800'
+               data-pt-gravity='top-left 0 65'
+               data-pt-classes='protip-sh-main'
+               data-pt-skin='white'
+               data-pt-arrow='false'
+               data-pt-title="<span class='protip-on-main'>
+               {{Carbon::parse($post->published_at)->toDayDateTimeString()}} ■ {{ $post->category_name_old ?? 'Без темы'}} ■ Цена: {{$post['cost'] ?? 0.0}}$
+               </span>"
+               class="protip interestlink"
+               title="Фулл: {{ sprintf("%.2fMB", $post->length / 1024.0 / 1024.0) }}">
+              {!! \App\Models\Tools::titleize($post['title'], 125) !!}
+            </a>
+            <div class='post-tools'><a href='#'>опровергнуть</a> ■ <a href='#'>заказать</a> ■ <a href='#'>слинковать</a>
+              ■ <a href='#'>разьебать</a>
+            </div>
+          </div>
         @endforeach
       </div>
     </div>
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item" title="как дед прыгнул в коляску">интересные посты</h3>
+      <h3 class="section-h3 interesting-item" title="из сетевой карты" title='в вашем мире'>интересные посты</h3>
       <div class="interesting-block-inner">
         @foreach ($interesting as $v)
-          <span style="display:inline-table">
-                            <a href="/view/{{$v['code']}}"
-                               data-pt-animate="bounceIn"
-                               data-pt-title="<span class='protip-on-main'>{{ \App\Models\Tools::titleize($v['content']) }}</span>"
-                               class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
-                               title="Cost: ${{$v['cost'] ?? 0.0}}">{!! '' . $v['header'] !!}</a>
-            </span>
+          <div class='interesting-block-row'>
+            <a href="/view/{{$v['code']}}"
+               data-pt-animate="bounceIn"
+               data-pt-title="<span class='protip-on-main'>{{ \App\Models\Tools::titleize($v['content']) }}</span>"
+               class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
+               title="{{$v->created_at}}@{{$v->category_name_old}} || Цена: ${{$v['cost'] ?? 0.0}}">{!! '' . $v['header'] !!}</a>
+          </div>
         @endforeach
       </div>
     </div>
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item" title="заманчивые">заманчивые комментарии</h3>
+      <h3 class="section-h3 interesting-item" title='в вашем мире'>заманчивые комментарии</h3>
       <div class="interesting-block-inner">
         @foreach ($comments as $c)
           @if ($c->page)

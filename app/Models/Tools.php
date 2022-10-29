@@ -56,7 +56,8 @@ class Tools
         $ret = Redis::command('setnx', [static::getUserIp() . ':' . $key, $value]);
 
         if (config('site.internal_debug')) {
-            \App\Logger::msg('userSetConfigIfNotExist(' . static::getUserIp() . ':' . $key . ', value:' . $value . ') = ' . (boolean) $ret);
+            \App\Logger::msg('userSetConfigIfNotExist(' . static::getUserIp() .
+                ':' . $key . ', value:' . $value . ') = ' . (bool) $ret);
         }
 
         return $ret;
@@ -116,7 +117,6 @@ class Tools
 
     public static function sqlGroupMode($mode = true)
     {
-        return;
         //return $mode ? \DB::statement("SET SQL_MODE='only_full_group_by'") : \DB::statement("SET SQL_MODE=''");
     }
 
@@ -124,8 +124,14 @@ class Tools
     {
         static $gays;
 
-        return $gays[$ip] ?? $gays[$ip] = \App\Gay::where('ip', $ip)
+        if ($gays[$ip]) {
+            return $gays[$ip];
+        }
+
+        $gays[$ip] = \App\Gay::where('ip', $ip)
             ->exists();
+
+        return $gays[$ip];
     }
 
     public static function isProbablyGay()
@@ -158,14 +164,15 @@ class Tools
             ]);
     }
 
-    public static function titleize($string)
+    public static function titleize($string, $maxNum = 255)
     {
         $str = strip_tags($string);
-        $str = \preg_replace("#(\s{2,}?)#Usmi", ' ', $str);
-        $str = \substr_replace($str, ['"', ' '], ' ', 0);
-        $str = \Str::substr($str, 0, 155);
+        $str = \preg_replace("#(\s+?)#Uusmi", ' ', $str);
+        $str = \substr_replace($str, ['"', ' '], 0, 0);
+        $str = \Str::substr($str, 0, $maxNum);
 
-        return trim($str, " \t\n\r\0\x0B\"'") . '...';
+        return trim($str, " \t\n\r\0\x0B\"'") .
+            (strlen($str) > $maxNum ? '...' : '');
     }
 
     public static function pushKey($key)
@@ -188,8 +195,7 @@ class Tools
 
     public static function getUserIp()
     {
-        $id = request()->ip();
-        return $id;
+        return request()->ip();
     }
 
     public static function addToCart($item)
@@ -237,7 +243,7 @@ class Tools
 
     public static function getCountry($ip)
     {
-        $info = Cache::remember($ip . ':info', 3600, function () use ($ip) {
+        $info = Cache::remember($ip . ':info', 3600, static function () use ($ip) {
             return \DB::table('ip_info')
                 ->select('info->country_name as country_name')
                 ->where('ip', $ip)
@@ -269,7 +275,7 @@ class Tools
 
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, 'api_dev_key=' . $api_dev_key . '&api_user_name=' . $api_user_name . '&api_user_password=' .
-            $api_user_password . '');
+            $api_user_password);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_NOBODY, 0);
@@ -292,12 +298,12 @@ class Tools
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, 'api_option=paste&api_user_key=' . $api_user_key . '&api_paste_private=' . $api_paste_private .
             '&api_paste_name=' . $api_paste_name . '&api_paste_expire_date=' . $api_paste_expire_date . '&api_paste_format=' . $api_paste_format .
-            '&api_dev_key=' . $api_dev_key . '&api_paste_code=' . $api_paste_code . '');
+            '&api_dev_key=' . $api_dev_key . '&api_paste_code=' . $api_paste_code);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
         curl_setopt($ch, CURLOPT_NOBODY, 0);
 
-        $data = curl_exec($ch);
+        curl_exec($ch);
     }
 }

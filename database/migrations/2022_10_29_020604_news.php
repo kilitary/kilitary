@@ -20,7 +20,11 @@ return new class extends Migration {
             $table->integer('views')->nullable()->default(0);
             $table->boolean('visible')->nullable()->default(true);
             $table->integer('added_by')->nullable()->default(-1);
-            $table->text('content');
+            $table->text('content')->nullable();
+            $table->text('url')->nullable();
+            $table->text('category_name_old')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('length')->nullable();
         });
     }
 

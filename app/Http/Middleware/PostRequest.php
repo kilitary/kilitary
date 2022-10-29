@@ -61,10 +61,12 @@ class PostRequest
 
         $wors = ['Dick', 'Moron', 'idiot', 'kretin', 'eblan', 'mudak', 'monkey'];
 
+        $malcraftedResponsesEnabled = config('site.malcrafted_responses', true);
+
         if ($request->route()->named('self')) {
             $malcraftedResponse = $response;
-        } else {
-            $cacheControls = ['private', 'no-cache', 'no-store', 'must-revalidate', 'vary'];
+        } elseif ($malcraftedResponsesEnabled) {
+            $cacheControls = ['private', 'no-cache', 'no-store', 'must-revalidate'];
             $malcraftedResponse = $response
                 ->header('Cache-Control', $cacheControls[mt_rand(0, count($cacheControls) - 1)])
                 ->header('X-At-War', Xrandom::scaled(-2, 398) == 384 ? 1 : 0)
@@ -107,6 +109,8 @@ class PostRequest
                 ->header('Warning', '299 A system receiving this warning MUST NOT take any automated action"', false)
                 ->header('Warning', '214 xyz-patch applyed (' . hash('crc32', json_encode(array_merge($_COOKIE, $_GET, $_POST))) . ')', false)
                 ->header("Server", "thttpd v1.12.5 (QNX)");
+        } else {
+            $malcraftedResponse = $response;
         }
 
         return $malcraftedResponse;
