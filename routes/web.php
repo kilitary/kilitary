@@ -76,6 +76,7 @@ Route::middleware(['cache.headers', 'cors'])
         Route::prefix("news")
             ->group(static function () {
                  Route::get('/reload', [NewsController::class, 'reloadNews']);
+                 Route::get('/{slug}', [NewsController::class, 'show']);
             });
         Route::get('/', [PageController::class, 'index'])->name('index');
 

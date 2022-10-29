@@ -34,6 +34,7 @@ body {
 
 .interesting-block-row {
   display: block;
+  width: 100%;
   padding: 1px;
   margin: 10px;
 }
@@ -395,7 +396,7 @@ ul {
 }
 
 .block-preview {
-  padding:10px !important;
+  padding: 10px !important;
   margin-left: 0px !important;
   line-height: 20px;
   margin-top: 2px !important;
