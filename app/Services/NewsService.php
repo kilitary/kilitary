@@ -187,8 +187,45 @@ class NewsService
 
         foreach ($news as &$n) {
             $n->prog_codes = explode(" ", $n->prog_code);
+
+            foreach ($n->prog_codes as $c) {
+                $n->prog_last = $c;
+
+                $y = [1 => '!', 2 => '@', 3 => '#', 4 => '$',
+                    5 => '%', 6 => '^', 7 => '&', 8 => '*',
+                    9 => '(', 0 => '+'
+                ];
+
+                $nCode = $n->prog_last_d = '';
+
+                if (strlen($c) == 2) {
+                    for ($i = 0; $i < strlen($c); $i++) {
+                        $code = $c[$i];
+                        $n->prog_last_d .= $y[$code] . ' ';
+                    }
+                } elseif (strlen($c) == 3) {
+                    $z = [10 => '9+', 11 => '!!', 12 => '@11', 13 => '13',
+                        14 => '13+', 15 => '%', 16 => '^&', 17 => '17',
+                        18 => '18', 19 => '19'];
+
+                    for ($i = 0; $i < strlen($c); $i++) {
+                        $code = $c[$i];
+                        if ($i < strlen($c) - 1) {
+                            $code .= $c[$i + 1];
+                        }
+                        $n->prog_last_d .= ($z[$code] ?? '?') . ' ';
+                        $i++;
+                    }
+                }
+
+            }
         }
 
         return $news ?? [];
+    }
+
+    public function d2($code)
+    {
+
     }
 }

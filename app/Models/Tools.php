@@ -279,9 +279,10 @@ class Tools
     {
         $info = Cache::remember($ip . ':info', 3600, static function () use ($ip) {
             return \DB::table('ip_info')
-                ->select('info->country_name as country_name')
+                ->select('info')
                 ->where('ip', $ip)
-                ->first();
+                ->first()
+                ->country_name ?? null;
         });
 
         return $info == null ? '#unresolved#' : $info->country_name;

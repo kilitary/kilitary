@@ -3,7 +3,22 @@
 @section('content')
   <div class="container">
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item"><a href='/news/reload'><img class='img-t' src='/images/LabVIEW_object.png'></a></h3>
+      <h3 class="section-h3 interesting-item"><img class='img-t' src='/images/trigger2.png'> <a title='add'href='/comment/add'>+</a></h3>
+      <div class="interesting-block-inner">
+        @foreach ($comments as $c)
+          <div class='interesting-block-row'>
+            <a href="/comment/{{$c['id']}}/view/"
+               data-pt-animate="bounceIn"
+               data-pt-title="<span class='protip-on-main'>{{ substr(\App\Models\Tools::strip($c['comment'], true), 0, 128) . '...' }}</span>"
+               class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
+               title="bytes in: {{$c['cost'] ?? 0.0}}">{{ substr(\App\Models\Tools::strip($c['comment'], true), 0, 32) . '...' }}</a>
+          </div>
+        @endforeach
+      </div>
+    </div>
+
+    <div class="marginleft marginbottom interesting-block">
+      <h3 class="section-h3 interesting-item"><a href='/news/reload' title='update'><img class='img-t' src='/images/LabVIEW_object.png'></a></h3>
       <div class="interesting-block-inner">
         @foreach ($news as $post)
           <div class='interesting-block-row'>
@@ -31,10 +46,15 @@
               {!! \App\Models\Tools::titleize($post['title'], 2128) !!}
             </a>
             <div class='post-tools'>
-              <div class='data-row'><a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button"></span>'>
+              <div class='data-row'><a href='#'
+                                       data-pt-classes='protip-sh-main'
+                                       data-pt-gravity='bottom-right 100 15'
+                                       data-pt-skin='white'
+                                       class="protip  tool-link"
+                                       data-pt-title='<span class="tool-button">formation</span>'>
                   <img class='data-row-ico' src='/images/icon-integration.png'><span>
                     @foreach($post->prog_codes as $code)
-                      <a class='prog-code' href='/rate/{{$code}}'>{{$code}}</a>
+                      <a class='prog-code' href='/rate/{{$code}}' @if($post->prog_last == $code) title='{{$post->prog_last_d}}' @endif>{{$code}}</a>
                     @endforeach
                   </span> </a>
               </div>
@@ -43,6 +63,7 @@
         @endforeach
       </div>
     </div>
+
     <div class="marginleft marginbottom interesting-block">
       <h3 class="section-h3 interesting-item" title="из сетевой карты"><img src='/images/usergroups.png'></h3>
       <div class="interesting-block-inner">
@@ -54,22 +75,6 @@
                class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
                title="{{$v->created_at}}@{{$v->category_name_old}} || Цена: ${{$v['cost'] ?? 0.0}}">{!! '' . $v['header'] !!}</a>
           </div>
-        @endforeach
-      </div>
-    </div>
-    <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item"><img src='/images/trigger2.png'></h3>
-      <div class="interesting-block-inner">
-        @foreach ($comments as $c)
-          @if ($c->page)
-            <span style="display:inline-table">
-                <a href="/view/{{$c->page->code}}"
-                   data-pt-animate="bounceIn"
-                   data-pt-title="<span class='protip-on-main'>{{ substr(\App\Models\Tools::strip($c->page->content, true), 0, 128) . '...' }}</span>"
-                   class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
-                   title="Cost: ${{$c->page->cost ?? 0.0}}">{{ substr(\App\Models\Tools::strip($c->comment, true), 0, 32) . '...' }}</a>
-            </span>
-          @endif
         @endforeach
       </div>
     </div>

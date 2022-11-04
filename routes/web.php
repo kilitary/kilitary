@@ -36,7 +36,8 @@ Route::middleware(['cache.headers', 'cors'])
 //                Route::get('/delete/{page_code}/{mode}', 'PageController@delete');
 //                Route::get('/edit/{code}', 'PageController@edit');
 //                Route::post('update/{code}', 'PageController@update');
-//                Route::post('/comment/add', 'PageController@writeComment');
+                Route::get('/comment/add', [PageController::class, 'addComment']);
+                Route::post('/comment/add', [PageController::class, 'writeComment']);
 //                Route::get('/comment/{id}/delete', 'PageController@deleteComment');
 //                Route::get('/reset', 'PageController@reset');
 //                Route::get('/abusers', 'PageController@abusers');

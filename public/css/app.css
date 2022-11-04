@@ -54,17 +54,58 @@ body {
   font-size: 20px;
 }
 
+.textarea-comment {
+  position: relative;
+  z-index: 1;
+  width: 85%;
+  height: 200px;
+}
+
+.textarea-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 300px;
+  width: 300px;
+  display: block;
+  opacity: .4;
+  z-index: 11;
+
+}
+
+.form-input {
+  padding-bottom: 10px;
+  margin: 5px;
+}
+
+.content-img {
+  position: relative;
+  left: 0px;
+  top: -10px;
+  clear: both;
+}
+
+.title-img {
+  position: relative;
+  top: 7px;
+}
+
 .prog-code {
   font-family: "consolas";
   position: relative;
   font-size: 13px;
   top: -7px;
-  padding-right: 5px;
+  margin-right: 5px;
   color: limegreen;
 }
 
+.save-button {
+  width: 30px;
+}
+
 .prog-code:hover {
-  color: darkslateblue;
+  color: dodgerblue;
+  border-bottom: 1px solid red;
 }
 
 .header-text {
@@ -383,7 +424,7 @@ ul {
 }
 
 .section-h3 {
-  border-bottom: 1px solid #ebf8ff;
+  border-bottom: 4px solid #ebf8ff;
   padding-bottom: 11px;
   display: border-block;
   font-size: 16px;

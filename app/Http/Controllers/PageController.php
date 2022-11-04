@@ -40,6 +40,11 @@ class PageController extends Controller
         $this->newsService = $newsService;
     }
 
+    public function addComment(Request $request)
+    {
+        return view('comments.new');
+    }
+
     public function opcache(Request $request)
     {
         return response(require_once '../vendor/amnuts/opcache-gui/index.php');
@@ -266,9 +271,11 @@ class PageController extends Controller
         }
 
         $lastVisitSeconds = Tools::getUserValue('last_visit');
-        $diff = \Carbon\Carbon::now()->timestamp - intval($lastVisitSeconds);
+        $diff = \Carbon\Carbon::now()->timestamp - (int) $lastVisitSeconds;
+
         if ($diff <= config('site.min_get_post_diff_secs')) {
-            Logger::msg('this is abuser, diff request ' . $diff . ' secs [m ' . Tools::getUserValue('last_method') . ', lv ' . $lastVisitSeconds .
+            Logger::msg('this is abuser, diff request ' . $diff . ' secs [m ' .
+                Tools::getUserValue('last_method') . ', lv ' . $lastVisitSeconds .
                 ', now ' . \Carbon\Carbon::now()->timestamp . ']');
 
             $reason = 'too fast post <difsecs: ' . $diff . '>';
@@ -375,12 +382,13 @@ class PageController extends Controller
             'email' => 'unknown@unknown.ru',
             'country' => $country,
             'page_id' => $request->post('page_id'),
-            'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER))
+            'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER),
+                JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES, 5)
         ]);
 
         Logger::msg('comment ' . $comment->id . ' created OK');
 
-        return back()->with('message', 'comment added, CRC32: ' . hash('crc32', $content));
+        return redirect('/')->with('message', 'comment added, CRC32: ' . hash('crc32', $content));
     }
 
     public function edit(Request $request, $code)

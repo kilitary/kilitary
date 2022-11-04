@@ -56,8 +56,13 @@ class Comment extends Model
             ->limit($take)
             ->latest()
             ->get();
-       // dd($comments);
 
-        return $comments;
+        $comms = $comments->toArray();
+        foreach ($comms as &$item) {
+            $item['cost'] = hexdec(XRandom::getAu(1)) / 25;
+
+        };
+
+        return $comms;
     }
 }
