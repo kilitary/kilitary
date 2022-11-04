@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\News;
+use App\XRandom;
 use Illuminate\Support\Facades\Http;
 use  Carbon\Carbon;
 use App\Models\Tools;
@@ -47,17 +48,18 @@ class NewsService
         try {
             $response = $this->client->request('GET', '/rss/news', [
                 'headers' => $headers,
-                'version' => 1,
-                'debug' => true
+                'version' => 2,
+                // 'debug' => true
             ]);
         } catch (Exception $e) {
             Logger::msg($e->getMessage());
         }
 
-        Logger::msg($this->url . ' got content ' . strlen($response->getBody()->getContents()));
+        $data = $response->getBody()->getContents();
+        Logger::msg($this->url . ' got content ' . strlen($data));
 
-        $response = \file_get_contents("https://www.vedomosti.ru/rss/news");
-        return $response;
+        //$response = \file_get_contents("https://www.vedomosti.ru/rss/news");
+        return $data;
     }
 
     public function checkFetchNews($limit, $force = false)
@@ -120,9 +122,23 @@ class NewsService
 
     public function getCost($hash)
     {
-        $c = (\substr_count($hash, '2') + \substr_count($hash, '4')) ^ 9;
-        $cost = mt_rand(-1, $c * \mt_rand(2, 7));
-        Logger::msg("input {$hash} cost {$cost}");
+        if (XRandom::maybe() || XRandom::scaled(1, 9) <= 5) {
+            Logger::msg("hash input {$hash}");
+            $c = max(0, (\substr_count($hash, '2') + \substr_count($hash, '4')) ^ 9);
+            Logger::msg("c $c");
+            $b = XRandom::scaled(2, max(3, 4 + $c));
+            Logger::msg("b $b");
+            $min = (-1 + $b);
+            Logger::msg("min $min");
+            $cost = Xrandom::get(abs($min), abs($min) + mt_rand(0, 12));
+            Logger::msg("cost {$cost}");
+
+            if ($cost <= -1) {
+                dd("c $c b $b min $min cost $cost");
+            }
+        } else {
+            $cost = 0.0;
+        }
         return $cost;
     }
 

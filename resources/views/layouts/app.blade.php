@@ -55,7 +55,7 @@
   <div class="bg-img">
 
     <span class="header-text" title="последние манускрипты по защите от киберпреступников">
-      Targeted Individuals // Local terror by psy operators<br/>
+      Targeted Individuals <span style='color:{{$centerColor}}'>■</span> Local terror of psy operators<br/>
       <span class='header-lower-text'> Пситеррор в россии // Защита, нападение и удаление</span>
 
     </span>

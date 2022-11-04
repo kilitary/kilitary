@@ -4,21 +4,28 @@
 @section('content')
   <div class="container">
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item" title="в вашем мире (по версии секретных жопных войск)"'>текущая ситуация <a href='/news/reload' title='загрузить свежую ситуацию'><img src='/images/download.png'></a></h3>
+      <h3 class="section-h3 interesting-item" title="в вашем мире (по версии секретных войск)"'>текущая ситуация <a href='/news/reload' title='загрузить свежую ситуацию'><img src='/images/download.png'></a></h3>
       <div class="interesting-block-inner">
         @foreach ($news as $post)
           <div class='interesting-block-row'>
-            <a href="/news/{{$post->slug}}" data-pt-animate="bounceIn"
+            <a href="/news/{{$post->slug}}"
                data-pt-width='800'
-               data-pt-gravity='top-left 40 -40'
+               data-pt-gravity='top-left 30 -20'
                data-pt-classes='protip-sh-main'
                data-pt-skin='white'
-               data-pt-arrow='false'
+               data-pt-arrow='true'
                data-pt-title="<span class='protip-on-main'>
-               {{Carbon::parse($post->published_at)->toDayDateTimeString()}} ■ {{ $post->category_name_old ?? 'Без темы'}} ■ Цена: {{$post['cost'] ?? 0.0}}$
+               {{Carbon::parse($post->published_at)->toDayDateTimeString()}}
                </span>
                 <div class='block-preview'>
-                  {{strlen($post->description) ? $post->description : '-'}}
+                 <div>{{ $post->category_name_old ?? 'Без темы'}}</div>
+                  <div>${{$post['cost'] ?? 0.0}}</div>
+                  @if(strlen($post->description))
+                    {{ $post->description }}
+                  @endif
+                  @if(strlen($post->image_url))
+                    <img class='post-image' src='{{$post->image_url}}'>
+                  @endif
                 </div>"
                class="protip interestlink"
                title="Фулл: {{ sprintf("%.2fMB", $post->length / 1024.0 / 1024.0) }}">
@@ -31,7 +38,6 @@
                   src='/images/Wiring.png'> </a>
               <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">заказать</span>'><img
                   src='/images/xctl.png'> </a>
-
               <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">разьебать</span>'><img
                   src='/images/vendor.png'> </a>
             </div>
@@ -70,13 +76,16 @@
       </div>
     </div>
   </div>
+  <audio id="notification" src="/audio/Insert.mp3" muted></audio>
 @endsection
 
 @push('scripts')
   <script>
     $(function() {
-      var audio = new Audio('/audio/Insert.mp3');
-      audio.play();
+      $('body').trigger('click');
+      document.getElementById('notification').muted = false;
+      document.getElementById('notification').play();
+
     });
   </script>
 @endpush

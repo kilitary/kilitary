@@ -32,6 +32,10 @@ body {
   height: 120px;
 }
 
+.post-image {
+  width: 100px;
+}
+
 .interesting-block-row {
   display: block;
   width: 100%;
@@ -40,7 +44,8 @@ body {
 }
 
 .header-lower-text {
-  font-size: 18px;
+  margin-top: 5px;
+  font-size: 20px;
 }
 
 .header-text {
@@ -50,9 +55,9 @@ body {
   padding-bottom: 15px;
   box-shadow: 5px -7px red;
   color: white;
-  font-family: "Lucida Sans Unicode";
+  font-family: "Corbel";
   float: left;
-  font-size: 24px;
+  font-size: 34px;
   font-variant: small-caps;
   background-color: black;
   width: 836.510px;

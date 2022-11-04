@@ -35,7 +35,7 @@ return [
      */
     'storage' => [
         'enabled' => true,
-        'driver' => 'file', // redis, file, pdo, custom
+        'driver' => 'redis', // redis, file, pdo, custom
         'path' => storage_path('debugbar'), // For file driver
         'connection' => null,   // Leave null for default connection (Redis/PDO)
         'provider' => '', // Instance of StorageInterface for custom driver
@@ -55,7 +55,7 @@ return [
      |
      */
 
-    'include_vendors' => true,
+    'include_vendors' => false,
 
     /*
      |--------------------------------------------------------------------------
@@ -68,8 +68,8 @@ return [
      | Optionally, you can also send ServerTiming headers on ajax requests for the Chrome DevTools.
      */
 
-    'capture_ajax' => true,
-    'add_ajax_timing' => true,
+    'capture_ajax' => false,
+    'add_ajax_timing' => false,
 
     /*
      |--------------------------------------------------------------------------
@@ -103,8 +103,8 @@ return [
      */
 
     'collectors' => [
-        'phpinfo' => true,  // Php version
-        'messages' => true,  // Messages
+        'phpinfo' => false,  // Php version
+        'messages' => false,  // Messages
         'time' => true,  // Time Datalogger
         'memory' => true,  // Memory usage
         'exceptions' => true,  // Exception displayer
@@ -143,7 +143,7 @@ return [
         ],
         'db' => [
             'with_params' => true,   // Render SQL with the parameters substituted
-            'backtrace' => true,   // Use a backtrace to find the origin of the query in your files.
+            'backtrace' => false,   // Use a backtrace to find the origin of the query in your files.
             'backtrace_exclude_paths' => [],   // Paths to exclude from backtrace. (in addition to defaults)
             'timeline' => true,  // Add the queries to the timeline
             'explain' => [                 // Show EXPLAIN output on queries
