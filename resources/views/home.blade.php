@@ -1,10 +1,9 @@
-@php use App\XRandom;use Carbon\Carbon; @endphp
 @extends('layouts.app')
 
 @section('content')
   <div class="container">
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item"> <a href='/news/reload'><img class='img-t' src='/images/Deadline.png'></a></h3>
+      <h3 class="section-h3 interesting-item"><a href='/news/reload'><img class='img-t' src='/images/LabVIEW_object.png'></a></h3>
       <div class="interesting-block-inner">
         @foreach ($news as $post)
           <div class='interesting-block-row'>
@@ -18,7 +17,7 @@
                {{Carbon::parse($post->published_at)->toDayDateTimeString()}}
                </span>
                 <div class='block-preview'>
-                 <div>{{ $post->category_name_old ?? 'Без темы'}}</div>
+                 <div>{{ $post->category_name_old ?? 'y'}}</div>
                   <div>${{$post['cost'] ?? 0.0}}</div>
                   @if(strlen($post->description))
                     {{ $post->description }}
@@ -32,21 +31,20 @@
               {!! \App\Models\Tools::titleize($post['title'], 2128) !!}
             </a>
             <div class='post-tools'>
-              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">x</span>'><img
-                  src='/images/child.png'> </a>
-              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">y</span>'><img
-                  src='/images/Wiring.png'> </a>
-              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">z</span>'><img
-                  src='/images/xctl.png'> </a>
-              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">o</span>'><img
-                  src='/images/vendor.png'> </a>
+              <div class='data-row'><a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button"></span>'>
+                  <img class='data-row-ico' src='/images/icon-integration.png'><span>
+                    @foreach($post->prog_codes as $code)
+                      <a class='prog-code' href='/rate/{{$code}}'>{{$code}}</a>
+                    @endforeach
+                  </span> </a>
+              </div>
             </div>
           </div>
         @endforeach
       </div>
     </div>
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item" title="из сетевой карты"><img src='/images/usergroups.png'> </h3>
+      <h3 class="section-h3 interesting-item" title="из сетевой карты"><img src='/images/usergroups.png'></h3>
       <div class="interesting-block-inner">
         @foreach ($interesting as $v)
           <div class='interesting-block-row'>

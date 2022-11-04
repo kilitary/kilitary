@@ -4,19 +4,22 @@ body {
   padding-left: 0px;
   height: 100%;
   width: 98%;
+}
 
+.cover-y {
+  border-left: 9px dashed red;
 }
 
 .bg {
   width: 100%;
   height: 100%;
-  background: white;
-  opacity: .03;
+  background: antiquewhite;
+  opacity: .01;
   z-index: -9999;
   position: absolute;
   left: 0;
   top: 0;
-  background-image: url(/images/ascii2.png);
+  background-image: url(/images/trigger.png);
 }
 
 .cpu-item {
@@ -26,7 +29,10 @@ body {
 .bg-img {
   display: block;
   width: 100%;
-  background-image: url(/images/Untitledbg2.gif);
+  background-image: url(/images/shot0.png);
+  opacity: 10%;
+  background-repeat: repeat-x;
+  background-size: contain;
   margin: 0px;
   padding-bottom: 4px;
   height: 120px;
@@ -48,6 +54,19 @@ body {
   font-size: 20px;
 }
 
+.prog-code {
+  font-family: "consolas";
+  position: relative;
+  font-size: 13px;
+  top: -7px;
+  padding-right: 5px;
+  color: limegreen;
+}
+
+.prog-code:hover {
+  color: darkslateblue;
+}
+
 .header-text {
   padding-left: 20px;
   margin-left: 8px;
@@ -60,7 +79,7 @@ body {
   font-size: 34px;
   font-variant: small-caps;
   background-color: black;
-  width: 836.510px;
+  width: 959.51px;
   padding-right: 33px;
 }
 
@@ -140,6 +159,16 @@ textarea:hover {
   box-shadow: 0px 1px 15px #a1ff25, 0 0px 0px 0 cornsilk;
   background-color: #fff9be !important;
   border: 2px dashed #f00 !important;
+}
+
+.data-row {
+  padding: 5px;
+  margin: 3px;
+  border-bottom: 1px solid #ecfff8;
+}
+
+.data-row-ico {
+  width: 23px;
 }
 
 .message {
@@ -406,7 +435,8 @@ ul {
   margin-left: 0px !important;
   line-height: 20px;
   margin-top: 2px !important;
-  background-color: #d0ffb0;
+  background-color: #edfffd;
+  border: 1px solid black;
 }
 
 .bottom-line {
@@ -423,8 +453,9 @@ ul {
 .interestlink {
   font-size: 12px;
   padding: 3px;
+  background-color: #f3ffe1;
   font-family: lucida console;
-  box-shadow: 1px 1px 0px #ffff00, 1px 1px 1px 0px #6f42c1 !important;
+  box-shadow: 1px 1px 0px indianred, 1px 1px 1px 0px #6f42c1 !important;
 }
 
 .interestlink:hover {
@@ -634,18 +665,18 @@ ul {
   color: #e83e8c;
 }
 
-.gay-list-table {
+.abuser-list-table {
   padding-top: 22px;
   padding-bottom: 22px;
 }
 
-.gay-list-table td {
+.abuser-list-table td {
   border-right: 1px solid #f00;
   border-bottom: 1px solid #d3d3d3;
   padding: 10px;
 }
 
-.gay-list-table th {
+.abuser-list-table th {
   padding: 15px;
   border-bottom: 1px dashed #00bfff;
 }
@@ -857,7 +888,7 @@ a:hover {
 }
 
 .img-t:hover {
-  border-right:11px solid red;
+  border-right: 11px solid red;
 }
 
 img {

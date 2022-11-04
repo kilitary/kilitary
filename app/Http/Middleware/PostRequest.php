@@ -36,7 +36,8 @@ class PostRequest
             LogRecord::where('id', $logId)
                 ->update([
                     'http_code' => $response->getStatusCode(),
-                    'request_end' => $currentTime
+                    'request_end' => $currentTime,
+                    'session' => session()->getId()
                 ]);
         } else {
             \App\Logger::msg('fatal: redis current_log_id not exist (timeout?)');
@@ -48,9 +49,9 @@ class PostRequest
             Tools::getUserIp() .
             ' crc: 0x' . sprintf("%X", \crc32(Tools::getUserIp())));
 
-        $isGay = Redis::get(Tools::getUserIp() . ':is_gay');
-        if ($isGay) {
-            \Debugbar::alert('you are gay');
+        $isAbuser = Redis::get(Tools::getUserIp() . ':is_abuser');
+        if ($isAbuser) {
+            \Debugbar::alert('you are abuser');
         }
 
         $tk = ['!', '?', 'G', 'N', 'T', 'C', 'P', 'D', 'U'];
@@ -85,7 +86,7 @@ class PostRequest
                 ->header("Via", "%[^ ]*%20\"" . \str_repeat('\\', XRandom::scaled(1, 99)) . ' ' .
                     XRandom::scaled(1, 999) . ", s + `--" . Xrandom::scaled(19999999, 999999999))
                 ->header("X-Powered-By", "PHP/4.0.6", true)
-                ->header('X-Like-Gay', Xrandom::get(0, 1) ? '1' : '0')
+                ->header('X-Like-Abuser', Xrandom::get(0, 1) ? '1' : '0')
                 ->header('X-Like-Z', Xrandom::get(0, 1) ? '1' : '0')
                 ->header('Digest', 'sha-256=' . hash('sha256', \Str::random(5)))
                 ->header('Early-Data', Xrandom::get(0, 1))

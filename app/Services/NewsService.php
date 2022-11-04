@@ -13,7 +13,7 @@ use GuzzleHttp\Client;
 class NewsService
 {
     protected $client;
-    protected $url = 'https://www.vedomosti.ru';
+    protected $url = 'https://lenta.ru';
     protected $proxy = 'socks5://87.236.146.144:1080';
 
     public function __construct()
@@ -23,6 +23,11 @@ class NewsService
             'timeout' => 111.0,
             'proxy' => $this->proxy
         ]);
+    }
+
+    public function reset()
+    {
+        News::truncate();
     }
 
     public function fetch(int $limit)
@@ -86,7 +91,7 @@ class NewsService
                     continue;
                 }
 
-                $description = $item['description'] ?? '';
+                $description = $item['description'][0] ?? '';
                 $category = preg_replace("/[^A-Za-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['category'] ?? '');
                 $len = $item['enclosure']['@attributes']['length'] ?? -1;
                 $imageUrl = $item['enclosure']['@attributes']['url'] ?? '';
@@ -95,6 +100,8 @@ class NewsService
                     ':' . md5($len ?? '') . ':' . md5($url ?? '');
 
                 $content = \json_encode($item, JSON_UNESCAPED_UNICODE);
+
+                $progCode = $this->genProgCode($item);
 
                 $news = News::create([
                     'title' => $title,
@@ -106,9 +113,12 @@ class NewsService
                     'views' => 1,
                     'published_at' => $pubDate->toDateTimeString(),
                     'category_name_old' => $category,
+                    'category_id' => -1,
                     'cost' => $this->getCost($costHash),
                     'source' => 'vedomosti.ru',
-                    'length' => $len
+                    'length' => $len,
+                    'prog_at' => now('MSK'),
+                    'prog_code' => $progCode
                 ]);
 
                 Logger::msg("news id {$news->id} added ({$len} bytes) {$url} {$slug}");
@@ -120,41 +130,65 @@ class NewsService
         }
     }
 
-    public function getCost($hash)
+    public function genProgCode($item)
     {
-        if ((XRandom::maybe() && XRandom::scaled(0, 3) == 1) || XRandom::scaled(1, 9) <= 5) {
-            Logger::msg("hash input {$hash}");
-            $c = max(0, (\substr_count($hash, '2') + \substr_count($hash, '4')) ^ 9);
-            Logger::msg("c $c");
-            $b = XRandom::scaled(2, max(3, 4 + $c));
-            Logger::msg("b $b");
-            $min = (-1 + $b);
-            Logger::msg("min $min");
-            $cost = Xrandom::get(abs($min), abs($min) + mt_rand(0, 12));
-            Logger::msg("cost {$cost}");
+        $serZ = \json_encode($item);
 
+        $x = [1 => 1, 2 => 5, 3 => 4, 4 => 8, 5 => 3, 6 => 8, 7 => 0, 8 => 9, 9 => 10, 0 => 1];
+        $y = [0 => 9];
+        $c = [];
+
+        $codeAt = '';
+
+        $rndLoop = XRandom::scaled(1, 10);
+        while ($rndLoop--) {
+            $min = 0;
+            $max = XRandom::scaled($x[$rndLoop], strlen($serZ) - 1);
+
+            $codeAt .= " " . ord(
+                    $serZ[$max]
+                );
+        }
+
+        return $codeAt;
+    }
+
+    public function getCost(string $hash): float
+    {
+        if ((XRandom::maybe() && XRandom::scaled(0, 3) == 3) || XRandom::scaled(1, 9) <= 5) {
+            $c = max(0, (\substr_count($hash, '2') + \substr_count($hash, '4')) ^ 9);
+            $b = XRandom::scaled(2, max(3, 4 + $c));
+            $min = (-1 + $b);
+            $cost = Xrandom::get(abs($min), abs($min) + mt_rand(0, 12));
             if ($cost <= -1) {
-                Logger::err('alarm min cost -1 ' . "c $c b $b min $min cost $cost");
+                Logger::err('alarm min cost -1 ' . "c {$c} b {$b} min {$min} cost {$cost}");
             }
         } else {
             $cost = 0.0;
         }
-        return $cost;
+        Logger::msg("getCost({$hash}) = $cost");
+        return (float) $cost;
     }
 
-    public function get($limit, $doFetch = false, $force = false)
+    public function retrieve($limit = 5, $doFetch = false, $force = false)
     {
         $news = News::limit($limit)
             ->orderBy('published_at', 'DESC')
             ->get();
 
-        if ((count($news) <= 0 && $doFetch) || $force) {
+        if (($news && count($news) <= 0 && $doFetch) || $force) {
             $added = $this->checkFetchNews($limit, $force);
+            session()->flash('message', '+' . $added);
             if ($added) {
                 $news = News::limit($limit)
                     ->get();
             }
         }
+
+        foreach ($news as &$n) {
+            $n->prog_codes = explode(" ", $n->prog_code);
+        }
+
         return $news ?? [];
     }
 }

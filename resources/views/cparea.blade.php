@@ -17,7 +17,7 @@
       auction, send ru S services price for terrorizing/muldering me/per hour)
     </a>
     <div>
-      gays in database: {{ $gays->count() }}
+      abusers in database: {{ $abusers->count() }}
     </div>
   </div>
 

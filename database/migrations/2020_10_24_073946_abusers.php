@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Gays extends Migration
+class Abusers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class Gays extends Migration
      */
     public function up()
     {
-        Schema::create('gays', function(Blueprint $table) {
+        Schema::create('abusers', function(Blueprint $table) {
             $table->increments('id');
             $table->string('ip');
             $table->string('reason')->nullable();
             $table->integer('firewall_in')->nullable();
-            $table->dateTime('degaytime')->nullable();
+            $table->dateTime('deabusertime')->nullable();
             $table->timestamps();
         });
     }

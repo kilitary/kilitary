@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,7 @@ Route::middleware(['cache.headers', 'cors'])
 //                Route::post('/comment/add', 'PageController@writeComment');
 //                Route::get('/comment/{id}/delete', 'PageController@deleteComment');
 //                Route::get('/reset', 'PageController@reset');
-//                Route::get('/gays', 'PageController@gays');
+//                Route::get('/abusers', 'PageController@abusers');
 //
 //                Route::get('/touch/{code}', 'PageController@touch');
 //
@@ -69,7 +70,7 @@ Route::middleware(['cache.headers', 'cors'])
 //                Route::get('/cart/final-submit', 'PageController@cartFinalSubmit')->name('final-submit');
             });
 
-        Route::any('/home', [HomeController::class, 'index']);
+        Route::any('/home', [HomeController::class, 'check']);
         Route::get('/', [PageController::class, 'index'])->name('index');
 
         Route::prefix("news")

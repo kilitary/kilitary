@@ -51,14 +51,12 @@
 <div class='bg'></div>
 @inject('channelStatusProvider', '\App\Providers\ChannelStatusProvider')
 <!--#{{ $channelStatusProvider->sign() }}#-->
-<header>
-  <div class="bg-img">
-
+<header class='cover-y'>
     <span class="header-text" title="последние манускрипты по защите от киберпреступников">
-      Targeted Individuals <span style='color:{{$centerColor}}'>■</span> Local terror by psy operators<br/>
+      Targeted Individuals In Russia <span style='color:{{$centerColor}}'>■</span> Local terror by psy operators<br/>
       <span class='header-lower-text'> Пситеррор в россии // нападение, защита и удаление</span>
-
     </span>
+  <div class="bg-img">
   </div>
   <!-- TODO: show on expensive operation <div style="z-index:99999;float:right;position: absolute;top: 10px;left: 100px">
       <a target=_blank href="/images/operatoR.jpg">
@@ -68,17 +66,19 @@
 </header>
 <div id="app">
   <article role="main">
-    <main class="@yield('classes')">
-      @if(session('message'))
+    @if(session('message'))
+      <div class="alert alert-success">
         <div class="message">
           <span style="font-variant: all-petite-caps">system> {{session('message')}}</span>
         </div>
-      @endif
+      </div>
+    @endif
+    <main class="@yield('classes')">
       @yield('content')
     </main>
   </article>
 </div>
-<footer class="bottom-line">
+<footer class="bottom-line cover-y">
   <a class="destroy-link" title="you have 16 real destroys left" href="/destroy-page">cломать сайт</a> ← <a href='/cparea'>админка</a>
 </footer>
 @stack('scripts')

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Gaynick extends Migration
+class Abusernick extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Gaynick extends Migration
      */
     public function up()
     {
-        Schema::table('gays', function(Blueprint $table) {
+        Schema::table('abusers', function(Blueprint $table) {
             $table->string('nick')->nullable()->after('ip');
         });
     }

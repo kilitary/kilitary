@@ -40,13 +40,6 @@ class PageController extends Controller
         $this->newsService = $newsService;
     }
 
-    public function reloadNews(Request $request)
-    {
-        $news = $this->newsService->get(15, true, true);
-
-        return response()->redirectTo('/');
-    }
-
     public function opcache(Request $request)
     {
         return response(require_once '../vendor/amnuts/opcache-gui/index.php');
@@ -118,7 +111,7 @@ class PageController extends Controller
 
         $interesting = Page::interesting(5) ?? [];
 
-        $news = $this->newsService->get(15, true);
+        $news = $this->newsService->retrieve(15, true);
 
         $comments = \App\Comment::getLatest(20) ?? [];
 
@@ -194,9 +187,9 @@ class PageController extends Controller
 
     public function cp(Request $request)
     {
-        $gays = \App\Gay::all() ?? collect([]);
+        $abusers = \App\Abuser::all() ?? collect([]);
 
-        return view('cparea', compact('gays'));
+        return view('cparea', compact('abusers'));
     }
 
     public function deleteComment(Request $request, $commentId)
@@ -234,8 +227,8 @@ class PageController extends Controller
         Logger::msg('write comment ', $request->all());
 
         if (!Tools::isAdmin()
-            && Tools::userHasSetting('is_gay') && Tools::getUserValue('is_gay') == 1) {
-            $existentGay = \App\Gay::where('ip', $request->ip())
+            && Tools::userHasSetting('is_abuser') && Tools::getUserValue('is_abuser') == 1) {
+            $existentAbuser = \App\Abuser::where('ip', $request->ip())
                 ->first();
 
             $randomCode = \App\Models\Page::select('code')
@@ -243,13 +236,13 @@ class PageController extends Controller
                 ->limit(1)
                 ->value('code');
 
-            Logger::msg('known gay from "' .
+            Logger::msg('known abuser from "' .
                 \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit: ' .
-                ($existentGay ? $existentGay->firewall_in : -1) . ' times, redirect to ' . $randomCode);
+                ($existentAbuser ? $existentAbuser->firewall_in : -1) . ' times, redirect to ' . $randomCode);
 
-            if ($existentGay) {
-                $existentGay->firewall_in += 1;
-                $existentGay->save();
+            if ($existentAbuser) {
+                $existentAbuser->firewall_in += 1;
+                $existentAbuser->save();
             }
 
             Tools::userSetValue('spam_shit', $request->post('comment'), 3600);
@@ -263,7 +256,7 @@ class PageController extends Controller
                 ->limit(1)
                 ->value('code');
 
-            Logger::msg('link gay from "' .
+            Logger::msg('link abuser from "' .
                 \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit with ' . $linksCount . ' links, ' .
                 ' redirect to ' . $randomCode, $matches);
 
@@ -275,29 +268,29 @@ class PageController extends Controller
         $lastVisitSeconds = Tools::getUserValue('last_visit');
         $diff = \Carbon\Carbon::now()->timestamp - intval($lastVisitSeconds);
         if ($diff <= config('site.min_get_post_diff_secs')) {
-            Logger::msg('this is gay, diff request ' . $diff . ' secs [m ' . Tools::getUserValue('last_method') . ', lv ' . $lastVisitSeconds .
+            Logger::msg('this is abuser, diff request ' . $diff . ' secs [m ' . Tools::getUserValue('last_method') . ', lv ' . $lastVisitSeconds .
                 ', now ' . \Carbon\Carbon::now()->timestamp . ']');
 
             $reason = 'too fast post <difsecs: ' . $diff . '>';
 
-            $gayGroup = \Str::upper(\Str::random(3));
-            $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
+            $abuserGroup = \Str::upper(\Str::random(3));
+            $deabuserTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
 
-            $gay = \App\Gay::firstOrCreate([
+            $abuser = \App\Abuser::firstOrCreate([
                 'ip' => $request->ip()
             ], [
-                'nick' => $gayGroup,
+                'nick' => $abuserGroup,
                 'ua' => $request->header('User-Agent'),
                 'reason' => $reason,
-                'degaytime' => $degayTime,
+                'deabusertime' => $deabuserTime,
                 'firewall_in' => 0
             ]);
 
-            Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
-                ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' id: ' . $gay->id . ']');
+            Logger::msg('new abuser ' . $request->ip() . ' appeared, designated ' . $abuserGroup .
+                ', deAbuserTime: ' . $deabuserTime . " [reason: " . $reason . ' id: ' . $abuser->id . ']');
 
-            Redis::sadd('gays', $request->ip());
-            Tools::userSetValue('is_gay', 1);
+            Redis::sadd('abusers', $request->ip());
+            Tools::userSetValue('is_abuser', 1);
             Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
             Tools::userSetValue('spam_shit', $request->post('comment'), 3600);
 
@@ -307,7 +300,7 @@ class PageController extends Controller
                 Redis::hIncrBy('spam_domains', $m[1], 1);
             }
 
-            \App\Audio::gayDetected();
+            \App\Audio::abuserDetected();
 
             $randomCode = \App\Models\Page::select('code')
                 ->inRandomOrder()
@@ -329,26 +322,26 @@ class PageController extends Controller
         if ($domainLen > 64 && $difflLen >= 128) {
             $reason = 'links per plain text weight overflow <url: ' . $domainLen . ' > diff: ' . $difflLen . '>';
 
-            $gayGroup = \Str::upper(\Str::random(3));
-            $degayTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
+            $abuserGroup = \Str::upper(\Str::random(3));
+            $deabuserTime = \Carbon\Carbon::now()->addHours(4)->toDateTimeString();
 
             $spamDbCount = Redis::lLen('spammed_text');
 
-            $gay = \App\Gay::firstOrCreate([
+            $abuser = \App\Abuser::firstOrCreate([
                 'ip' => $request->ip()
             ], [
-                'nick' => $gayGroup,
+                'nick' => $abuserGroup,
                 'ua' => $request->header('User-Agent'),
                 'reason' => $reason,
-                'degaytime' => $degayTime,
+                'deabusertime' => $deabuserTime,
                 'firewall_in' => 0
             ]);
 
-            Logger::msg('new gay ' . $request->ip() . ' appeared, designated ' . $gayGroup .
-                ', deGayTime: ' . $degayTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ' id: ' . $gay->id . ']');
+            Logger::msg('new abuser ' . $request->ip() . ' appeared, designated ' . $abuserGroup .
+                ', deAbuserTime: ' . $deabuserTime . " [reason: " . $reason . ' spam_db: ' . $spamDbCount . ' id: ' . $abuser->id . ']');
 
-            Redis::sadd('gays', $request->ip());
-            Tools::userSetValue('is_gay', 1);
+            Redis::sadd('abusers', $request->ip());
+            Tools::userSetValue('is_abuser', 1);
             Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
             Tools::userSetValue('spam_shit', $request->post('comment'), 3600);
 
@@ -358,7 +351,7 @@ class PageController extends Controller
                 Redis::hIncrBy('spam_domains', $m[1], 1);
             }
 
-            \App\Audio::gayDetected();
+            \App\Audio::abuserDetected();
 
             $randomCode = \App\Models\Page::select('code')
                 ->inRandomOrder()
@@ -513,7 +506,7 @@ class PageController extends Controller
                     'created_at' => \Carbon::now()
                 ];
 
-                Logger::msg(Tools::getUserIp() . ' is gay, looking at page ' . $code . ', added his ' . strlen($spamShit) . ' bytes shit');
+                Logger::msg(Tools::getUserIp() . ' is abuser, looking at page ' . $code . ', added his ' . strlen($spamShit) . ' bytes shit');
             }
 
             $environment = Environment::createCommonMarkEnvironment();
@@ -587,13 +580,13 @@ class PageController extends Controller
         return view('delete', compact('code'));
     }
 
-    public function gays(Request $request)
+    public function abusers(Request $request)
     {
-        $gays = Cache::remember('gays', 60, function () {
-            return \App\Gay::all();
+        $abusers = Cache::remember('abusers', 60, function () {
+            return \App\Abuser::all();
         });
 
-        return view('gays', compact('gays'));
+        return view('abusers', compact('abusers'));
     }
 
     public function destroy(Request $request)

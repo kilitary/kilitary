@@ -154,23 +154,23 @@ class Tools
         return Redis::llen(request()->ip() . ':ip_log_ids');
     }
 
-    public static function isGay($ip)
+    public static function isAbuser($ip)
     {
-        static $gays;
+        static $abusers;
 
-        if (isset($gays[$ip])) {
-            return $gays[$ip];
+        if (isset($abusers[$ip])) {
+            return $abusers[$ip];
         }
 
-        $gays[$ip] = \App\Gay::where('ip', $ip)
+        $abusers[$ip] = \App\Abuser::where('ip', $ip)
             ->exists();
 
-        return $gays[$ip];
+        return $abusers[$ip];
     }
 
-    public static function isProbablyGay()
+    public static function isProbablyAbuser()
     {
-        return (int) static::getUserValue('probably_gay');
+        return (int) static::getUserValue('probably_abuser');
     }
 
     public static function ipInfo($ip)

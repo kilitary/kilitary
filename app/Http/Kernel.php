@@ -27,16 +27,16 @@ class Kernel extends HttpKernel
 
     ];
 
-    protected $middlewarePriority = [
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests::class,
-        \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        \Illuminate\Session\Middleware\AuthenticateSession::class,
-        \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        \Illuminate\Auth\Middleware\Authorize::class,
-        \App\Http\Middleware\DestroyPageIfRequested::class
-    ];
+//    protected $middlewarePriority = [
+//        \Illuminate\Session\Middleware\StartSession::class,
+//        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+//        \Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests::class,
+//        \Illuminate\Routing\Middleware\ThrottleRequests::class,
+//        \Illuminate\Session\Middleware\AuthenticateSession::class,
+//        \Illuminate\Routing\Middleware\SubstituteBindings::class,
+//        \Illuminate\Auth\Middleware\Authorize::class,
+//        \App\Http\Middleware\DestroyPageIfRequested::class
+//    ];
 
     /**
      * The application's route middleware groups.
@@ -46,7 +46,7 @@ class Kernel extends HttpKernel
     protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
-            //\Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \App\Http\Middleware\LogRequest::class,
             \Illuminate\Session\Middleware\AuthenticateSession::class,

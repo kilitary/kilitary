@@ -25,8 +25,9 @@ class NewsController extends Controller
 
     public function reloadNews(Request $request)
     {
-        $news = $this->newsService->get(15, true, true);
+        $this->newsService->reset();
+        $news = $this->newsService->retrieve(15, true, true);
 
-        return response()->redirectTo('/');
+        return redirect('/');
     }
 }

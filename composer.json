@@ -22,7 +22,7 @@
     "intervention/image": "^2.5",
     "ipinfo/ipinfo": "^2",
     "kilitary/php-web-article-extractor": "dev-master",
-    "laravel/framework": "9.37.*",
+    "laravel/framework": "9.*",
     "laravel/telescope": "^4",
     "laravel/tinker": "^2",
     "league/commonmark": "^2",

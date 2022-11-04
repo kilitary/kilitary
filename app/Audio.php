@@ -23,7 +23,7 @@ class Audio extends Model
         $ret = exec('/usr/bin/ffplay -volume 100 -autoexit -vn -nodisp /home/kilitary/kilitary/storage/mp3/explode_8.mp3 &');
     }
 
-    public static function gayDetected()
+    public static function abuserDetected()
     {
         if(env('AUDIO_ENABLED') != 'true') {
             return;
@@ -32,7 +32,7 @@ class Audio extends Model
         $ret = exec('/usr/bin/ffplay -volume 18 -autoexit -vn -nodisp /home/kilitary/kilitary/storage/mp3/wickedsick.mp3');
     }
 
-    public static function gayRedirected()
+    public static function abuserRedirected()
     {
         if(env('AUDIO_ENABLED') != 'true') {
             return;
