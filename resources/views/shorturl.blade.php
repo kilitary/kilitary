@@ -7,7 +7,7 @@
         <h2>{{$shortUrl->long}}</h2>
         <br/>
         stable: {{$success}}<br/>
-        system: url shortner v 4.06.153.34.01b<br/>
+        system: url shortner v 4.06.153.34.01c<br/>
         <div class="links"><a href='/command/sync?{{request()->path()}}'>sync</a></div>
 
         <br/>

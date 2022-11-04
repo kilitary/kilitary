@@ -26,7 +26,7 @@ body {
 .bg-img {
   display: block;
   width: 100%;
-  background-image: url(/images/Untitledbg.gif);
+  background-image: url(/images/Untitledbg2.gif);
   margin: 0px;
   padding-bottom: 4px;
   height: 120px;
@@ -386,6 +386,7 @@ ul {
   font-size: 17px;
 }
 
+
 .super-small {
   font-size: 4px;
   font-family: "Lucida Console";
@@ -397,7 +398,7 @@ ul {
 }
 
 .interesting-block-inner {
-  width: 45% !important;
+  width: 50% !important;
 }
 
 .block-preview {
@@ -853,6 +854,14 @@ a:hover {
 
 .blinking-orange {
   animation: blinkingOrange 1.8s infinite;
+}
+
+.img-t:hover {
+  border-right:11px solid red;
+}
+
+img {
+  all: revert;
 }
 
 @-moz-keyframes blinkingGreen {

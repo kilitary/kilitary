@@ -55,8 +55,8 @@
   <div class="bg-img">
 
     <span class="header-text" title="последние манускрипты по защите от киберпреступников">
-      Targeted Individuals <span style='color:{{$centerColor}}'>■</span> Local terror of psy operators<br/>
-      <span class='header-lower-text'> Пситеррор в россии // Защита, нападение и удаление</span>
+      Targeted Individuals <span style='color:{{$centerColor}}'>■</span> Local terror by psy operators<br/>
+      <span class='header-lower-text'> Пситеррор в россии // нападение, защита и удаление</span>
 
     </span>
   </div>
@@ -79,7 +79,7 @@
   </article>
 </div>
 <footer class="bottom-line">
-  [<a class="destroy-link" title="you have 10 real destroys left" href="/destroy-page">cломать сайт</a> // <a href='/cparea'>админка</a>]
+  <a class="destroy-link" title="you have 16 real destroys left" href="/destroy-page">cломать сайт</a> ← <a href='/cparea'>админка</a>
 </footer>
 @stack('scripts')
 <!--laragen-->

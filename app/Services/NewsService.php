@@ -122,7 +122,7 @@ class NewsService
 
     public function getCost($hash)
     {
-        if (XRandom::maybe() || XRandom::scaled(1, 9) <= 5) {
+        if ((XRandom::maybe() && XRandom::scaled(0, 3) == 1) || XRandom::scaled(1, 9) <= 5) {
             Logger::msg("hash input {$hash}");
             $c = max(0, (\substr_count($hash, '2') + \substr_count($hash, '4')) ^ 9);
             Logger::msg("c $c");
@@ -134,7 +134,7 @@ class NewsService
             Logger::msg("cost {$cost}");
 
             if ($cost <= -1) {
-                dd("c $c b $b min $min cost $cost");
+                Logger::err('alarm min cost -1 ' . "c $c b $b min $min cost $cost");
             }
         } else {
             $cost = 0.0;

@@ -4,7 +4,7 @@
 @section('content')
   <div class="container">
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item" title="в вашем мире (по версии секретных войск)"'>текущая ситуация <a href='/news/reload' title='загрузить свежую ситуацию'><img src='/images/download.png'></a></h3>
+      <h3 class="section-h3 interesting-item"> <a href='/news/reload'><img class='img-t' src='/images/Deadline.png'></a></h3>
       <div class="interesting-block-inner">
         @foreach ($news as $post)
           <div class='interesting-block-row'>
@@ -32,13 +32,13 @@
               {!! \App\Models\Tools::titleize($post['title'], 2128) !!}
             </a>
             <div class='post-tools'>
-              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">опровергнуть</span>'><img
+              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">x</span>'><img
                   src='/images/child.png'> </a>
-              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">слинковать</span>'><img
+              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">y</span>'><img
                   src='/images/Wiring.png'> </a>
-              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">заказать</span>'><img
+              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">z</span>'><img
                   src='/images/xctl.png'> </a>
-              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">разьебать</span>'><img
+              <a href='#' data-pt-classes='protip-sh-main' data-pt-gravity='bottom-right 100 15' data-pt-skin='white' class="protip  tool-link" data-pt-title='<span class="tool-button">o</span>'><img
                   src='/images/vendor.png'> </a>
             </div>
           </div>
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item" title="из сетевой карты" title='в вашем мире'>интересные посты</h3>
+      <h3 class="section-h3 interesting-item" title="из сетевой карты"><img src='/images/usergroups.png'> </h3>
       <div class="interesting-block-inner">
         @foreach ($interesting as $v)
           <div class='interesting-block-row'>
@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item" title='в вашем мире'>заманчивые комментарии</h3>
+      <h3 class="section-h3 interesting-item"><img src='/images/trigger2.png'></h3>
       <div class="interesting-block-inner">
         @foreach ($comments as $c)
           @if ($c->page)

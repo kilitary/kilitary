@@ -22,7 +22,7 @@ class Logger extends Model
                 if(\is_array($msg) || \is_object($msg)) {
                     $msg = \json_encode($msg, JSON_PRETTY_PRINT);
                 }
-                $fp = fopen(env('LOG_FILE'), 'a');
+                $fp = fopen(env('LOG_FILE_DEBUG'), 'a');
                 if($fp) {
                     $at = \Carbon::now()->format('Y-m-d H:i:s.u');
                     fwrite($fp, '[' . sprintf("%06d", getmypid()) . '] ' . $at . ' ' . env('APP_NAME') . ': ' . $msg . PHP_EOL);
@@ -31,6 +31,25 @@ class Logger extends Model
             }
         } catch(Exception $e) {
             \Log::critical('fail to use Logger::msg(): ' . $e->getMessage());
+        }
+    }
+
+      public static function err(...$msgs)
+    {
+        try {
+            foreach($msgs as $msg) {
+                if(\is_array($msg) || \is_object($msg)) {
+                    $msg = \json_encode($msg, JSON_PRETTY_PRINT);
+                }
+                $fp = fopen(env('LOG_FILE_ERROR'), 'a');
+                if($fp) {
+                    $at = \Carbon::now()->format('Y-m-d H:i:s.u');
+                    fwrite($fp, '[' . sprintf("%06d", getmypid()) . '] ' . $at . ' ' . env('APP_NAME') . ': ' . $msg . PHP_EOL);
+                    fclose($fp);
+                }
+            }
+        } catch(Exception $e) {
+            \Log::critical('fail to use Logger::err(): ' . $e->getMessage());
         }
     }
 }
