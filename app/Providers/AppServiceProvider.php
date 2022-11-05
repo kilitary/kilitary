@@ -28,17 +28,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \Blade::directive('datetime', static function ($expression) {
-            return "<?php
-declare(strict_types=1);
-
- echo ({$expression})->format('d.m.Y HH:ii:ss'); ?>";
+            return "<?php echo ({$expression})->format('d.m.Y HH:ii:ss'); ?>";
         });
 
         \Blade::directive('reltime', static function () {
-            return "<?php
-declare(strict_types=1);
-
- echo now()->to(session('time_prev_request'), \Carbon\CarbonInterface::DIFF_RELATIVE_TO_NOW); ?>";
+            return "<?php echo now()->to(session('time_prev_request'), \Carbon\CarbonInterface::DIFF_RELATIVE_TO_NOW); ?>";
         });
     }
 }
