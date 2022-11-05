@@ -250,7 +250,7 @@ class PageController extends Controller
         Logger::msg('write comment ', $request->all());
 
         if (!Tools::isAdmin()
-            && !\in_array($request->ip(), config('site.admin_whitelist'))
+            && !\in_array($request->ip(), config('site.adminips'))
             && Tools::userHasSetting('is_abuser') && Tools::getUserValue('is_abuser') == 1) {
             $existentAbuser = \App\Abuser::where('ip', $request->ip())
                 ->first();
@@ -292,7 +292,7 @@ class PageController extends Controller
         $lastVisitSeconds = Tools::getUserValue('last_visit');
         $diff = \Carbon\Carbon::now()->timestamp - (int) $lastVisitSeconds;
 
-        if (!\in_array($request->ip(), config('site.admin_whitelist'))
+        if (!\in_array($request->ip(), config('site.adminips'))
             && $diff <= config('site.min_get_post_diff_secs')) {
             Logger::msg('this is abuser, diff request ' . $diff . ' secs [m ' .
                 Tools::getUserValue('last_method') . ', lv ' . $lastVisitSeconds .
@@ -347,7 +347,7 @@ class PageController extends Controller
 
         Logger::msg('comment spam analyze: domainLen: ' . $domainLen . ' diffLen: ' . $difflLen);
         if ($domainLen > 64 && $difflLen >= 128
-            && !\in_array($request->ip(), config('site.admin_whitelist'))) {
+            && !\in_array($request->ip(), config('site.adminips'))) {
             $reason = 'links per plain text weight overflow <url: ' . $domainLen . ' > diff: ' . $difflLen . '>';
 
             $abuserGroup = \Str::upper(\Str::random(3));

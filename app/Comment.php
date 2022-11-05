@@ -35,6 +35,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $info
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereInfo($value)
  * @property-read \App\Models\Page $page
+ * @property string|null $prefix
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment wherePrefix($value)
  */
 class Comment extends Model
 {

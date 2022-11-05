@@ -9,5 +9,8 @@ return [
     'internal_debug' => false,
     'version' => 'v0.3-alpha',
     'min_get_post_diff_secs' => 2,
-    'admin_whitelist' => ['192.168.10.1']
+    'adminips' => [
+        '188.242.187.4',
+        '192.168.10.1'
+    ]
 ];

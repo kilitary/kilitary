@@ -48,6 +48,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Page whereSourceUrl($value)
  * @property string|null $pages
  * @method static \Illuminate\Database\Eloquent\Builder|Page wherePages($value)
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Page whereDeletedAt($value)
  */
 class Page extends Model
 {

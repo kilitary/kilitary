@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
             \DB::table('logs')
-                ->whereIn('ip', config('app.adminips'))
+                ->whereIn('ip', config('site.adminips'))
                 ->delete();
         })->everyMinute();
 

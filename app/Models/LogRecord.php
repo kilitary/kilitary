@@ -37,6 +37,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $referer
  * @method static \Illuminate\Database\Eloquent\Builder|LogRecord whereReferer($value)
  * @property-read \App\IpInfo|null $ipInfo
+ * @property string|null $session
+ * @method static \Illuminate\Database\Eloquent\Builder|LogRecord whereSession($value)
  */
 class LogRecord extends Model
 {

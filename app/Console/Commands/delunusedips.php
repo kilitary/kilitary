@@ -39,13 +39,13 @@ class delunusedips extends Command
     public function handle()
     {
         $num = \DB::table('logs')
-            ->whereIn('ip', config('app.adminips'))
+            ->whereIn('ip', config('site.adminips'))
             ->count();
 
         $this->output->text('deleting ' . $num . ' records...');
 
         \DB::table('logs')
-            ->whereIn('ip', config('app.adminips'))
+            ->whereIn('ip', config('site.adminips'))
             ->delete();
 
         return 0;
