@@ -19,6 +19,7 @@ body {
 }
 
 .comment-href {
+  border-left: 8px solid red;
   /* padding: 5 px;*/
 }
 
@@ -544,6 +545,10 @@ ul {
   background-color: #f3ffe1;
   font-family: lucida console;
   box-shadow: 1px 1px 0px indianred, 1px 1px 1px 0px #6f42c1 !important;
+}
+
+.news-href {
+  border-left: 8px solid cadetblue;
 }
 
 .interestlink:hover {

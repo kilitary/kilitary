@@ -185,6 +185,13 @@ class NewsService
             }
         }
 
+        $y = [1 => '!', 2 => '@', 3 => '#', 4 => '$', 5 => '%',
+            6 => '^', 7 => '&', 8 => '*', 9 => '(', 0 => '+'
+        ];
+
+        $z = [10 => '9+', 11 => '!!', 12 => '@11', 13 => '13', 14 => '13+',
+            15 => '%', 16 => '^&', 17 => '17', 18 => '18', 19 => '19'];
+
         foreach ($news as &$n) {
             $ok = $n->prog_ok > 99 ? dechex($n->prog_ok) : $n->prog_ok;
             $ok = $n->prog_bad > 99 ? dechex($n->prog_bad) : $n->prog_bad;
@@ -197,32 +204,33 @@ class NewsService
                     continue;
                 }
 
-                $n->prog_last = $c;
-
-                $y = [1 => '!', 2 => '@', 3 => '#', 4 => '$',
-                    5 => '%', 6 => '^', 7 => '&', 8 => '*',
-                    9 => '(', 0 => '+'
-                ];
-
                 $nCode = $n->prog_last_d = '';
 
-                if (strlen($c) == 2) {
-                    for ($i = 0; $i < strlen($c); $i++) {
-                        $code = $c[$i];
-                        $n->prog_last_d .= $y[$code] . ' ';
-                    }
-                } elseif (strlen($c) == 3) {
-                    $z = [10 => '9+', 11 => '!!', 12 => '@11', 13 => '13',
-                        14 => '13+', 15 => '%', 16 => '^&', 17 => '17',
-                        18 => '18', 19 => '19'];
+                $cLen = strlen($c);
 
-                    for ($i = 0; $i < strlen($c); $i++) {
+                if ($cLen == 2) {
+                    $code = $c[0];
+                    $d = $y[$code];
+                    $code = $c[1];
+                    $d .= $y[$code];
+                    if ((int) $d !== (int) $n->prog_last) {
+                        $n->prog_last_d .= $d . ' ';
+                        $n->prog_last = $d;
+                    }
+                } else {
+                    $d = '';
+                    for ($i = 0; $i < $cLen; $i++) {
                         $code = $c[$i];
-                        if ($i < strlen($c) - 1) {
+                        if ($i < $cLen - 1) {
                             $code .= $c[$i + 1];
                         }
-                        $n->prog_last_d .= ($z[$code] ?? '?') . ' ';
+                        $d .= ($z[$code] ?? '?');
+
                         $i++;
+                    }
+                    if ((int) $d !== (int) $n->prog_last) {
+                        $n->prog_last_d .= $d . ' ';
+                        $n->prog_last = $d;
                     }
                 }
             }

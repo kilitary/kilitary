@@ -44,12 +44,12 @@ class PageController extends Controller
     public function rate(Request $request, $id)
     {
 
-        if (XRandom::maybe()) {
+        if (XRandom::scaled(1, 3) >= 2 && XRandom::maybe()) {
             return redirect()->back()->with('message', 'your rate was rejected by remote system');
         }
 
         $keys = ['prog_ok', 'prog_bad'];
-        $key = $keys[XRandom::get(0, 1)];
+        $key = $keys[XRandom::scaled(0, 1)];
 
 //        $op = ["+", "-"];
 //        $op = $op[XRandom::scaled(0, 1)];

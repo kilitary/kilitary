@@ -48,7 +48,7 @@
                     <img class='post-image' src='{{$post->image_url}}'>
                   @endif
                 </div>"
-               class="protip interestlink"
+               class="protip interestlink news-href"
                title="Фулл: {{ sprintf("%.2fMB", $post->length / 1024.0 / 1024.0) }}">
               {!! \Tools::titleize($post['title'], 2128) !!}
             </a>
@@ -59,7 +59,7 @@
                    data-pt-gravity='bottom-right 100 15'
                    data-pt-skin='white'
                    class="protip  tool-link"
-                   data-pt-title='<span class="tool-button">rate formation (<span class=green>{{$post->prog_ok}}</span> vs <span class=red>{{$post->prog_bad}}</span>)</span>'>
+                   data-pt-title='<span class="tool-button">rate convergence (<span class=green>{{$post->prog_ok}}</span> vs <span class=red>{{$post->prog_bad}}</span>)</span>'>
                   <img class='data-row-ico' src='/images/icon-integration.png'></a>
                 @foreach($post->prog_codes as $code)
                   <a class='prog-code' style='color: {{$post->prog_color}};' @if($post->prog_last == $code) title='{{$post->prog_last_d}}' @endif>{{$code}}</a>
