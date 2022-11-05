@@ -7,7 +7,6 @@ use \Illuminate\Http\Response;
 use \Illuminate\Support\Facades\Redis;
 use \App\Logger;
 use \App\XRandom;
-use \App\Models\Tools;
 
 class DestroyPageIfRequested
 {
@@ -23,7 +22,7 @@ class DestroyPageIfRequested
     {
         $response = $next($request);
 
-        $destroy = Tools::getUserValue('destroy', false);
+        $destroy = \Tools::getUserValue('destroy', false);
         if ($destroy) {
             Logger::msg('facing destroyed page for ' . $request->ip());
             ini_set('pcre.backtrack_limit', 1009);
@@ -69,7 +68,7 @@ class DestroyPageIfRequested
             }
         }
 
-        $terminate = Tools::getUserValue('terminate_fatal_sign');
+        $terminate = \Tools::getUserValue('terminate_fatal_sign');
         if ($terminate) {
             $content = '500: server error';
             $response->setStatusCode(500, 'server error');

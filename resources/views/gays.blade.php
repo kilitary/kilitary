@@ -14,7 +14,7 @@
                 <tr>
                     <td>
                         <span data-pt-placement="corner-right-top" data-pt-width='800'
-                              data-pt-title="<pre class='protip-mine'>{{ \App\Models\Tools::ipInfo($abuser->ip) }}</pre>"
+                              data-pt-title="<pre class='protip-mine'>{{ \Tools::ipInfo($abuser->ip) }}</pre>"
                               class="protip interestlink" data-pt-scheme="white">{{$abuser->ip}}</span>
                     </td>
                     <td>

@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if($this->app->isLocal()) {
+        if ($this->app->isLocal()) {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
         }
@@ -26,8 +26,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Blade::directive('datetime', static function($expression) {
-            return "<?php echo ({$expression})->format('d-m-y H:i:s'); ?>";
+        \Blade::directive('datetime', static function ($expression) {
+            return "<?php echo ({$expression})->format('d.m.Y HH:ii:ss'); ?>";
+        });
+
+        \Blade::directive('reltime', static function () {
+            return "<?php echo now()->to(session('time_prev_request'), \Carbon\CarbonInterface::DIFF_RELATIVE_TO_NOW); ?>";
         });
     }
 }

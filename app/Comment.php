@@ -59,20 +59,17 @@ class Comment extends Model
             ->orderBy('id', 'DESC')
             ->get();
 
-        $comms = $comments;
-        foreach ($comms as &$item) {
-            $item->cost = hexdec(XRandom::getAu(1)) / 25;
-        }
+        foreach ($comments as &$item) {
             $item->cost = hexdec(XRandom::getAu(1)) / 25;
             $item->created_at_diff = $item->created_at->to(null, \Carbon\CarbonInterface::DIFF_RELATIVE_TO_NOW);
             $item->created_at_diff = \str_replace(
-                ["minutes from now", "hours from now", "hours ago", "seconds from now", "hour from now",
+                ["minutes from now", "hour ago", "hours from now", "hours ago", "seconds from now", "hour from now",
                     "minute from now"],
-                ["минут назад", "часов назад", "часа назад", "секунд назад", "час назад",
+                ["минут назад", "час назад", "часов назад", "часа назад", "секунд назад", "час назад",
                     "минуты назад"],
                 $item->created_at_diff);
         }
 
-        return $comms;
+        return $comments;
     }
 }

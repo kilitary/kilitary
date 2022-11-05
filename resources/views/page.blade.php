@@ -17,7 +17,7 @@
     </div>
     <div class="page-country">
                 <span data-pt-placement="corner-right-top" data-pt-width='1200' data-pt-scheme="white"
-                      data-pt-title="<pre class='protip-mine'>{{\App\Models\Tools::ipInfo($ip)}}</pre>"
+                      data-pt-title="<pre class='protip-mine'>{{\Tools::ipInfo($ip)}}</pre>"
                       class="ip-info-page protip"
                 >Connection<-</span>
       <span>Cost: ${{$page->cost}}</span>
@@ -43,10 +43,10 @@
         <div class="comment">
           <div class="comment-date">
             <img data-pt-placement="corner-right-top" data-pt-width='1200' data-pt-scheme="white"
-                 data-pt-title="<pre class='protip-mine'>{{\App\Models\Tools::ipInfo($comment['ip'])}}</pre>"
+                 data-pt-title="<pre class='protip-mine'>{{\Tools::ipInfo($comment['ip'])}}</pre>"
                  class="comment-img protip" src="/images/comp.png"
             > {{$comment['username']}}  {{ $comment['created_at']}}
-            @if ($comment['ip'] == request()->ip() || \App\Models\Tools::isAdmin())
+            @if ($comment['ip'] == request()->ip() || \Tools::isAdmin())
               <a href="/comment/{{$comment['id']}}/delete"><img
                   style='position:relative;top:2px;width:10px;height: 10px;'
                   src="/images/delete.png"> </a>

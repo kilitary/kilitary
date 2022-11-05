@@ -22,7 +22,7 @@
 
                         <a href="/proxy"
                            data-pt-animate="bounceIn" data-pt-width="900px"
-                           data-pt-title="<pre class='protip-ip-info'>{{\App\Models\Tools::ipInfo($proxy['host'])}}</pre>"
+                           data-pt-title="<pre class='protip-ip-info'>{{\Tools::ipInfo($proxy['host'])}}</pre>"
                            class="protip iplink" data-pt-scheme="white"
                            title="{{\App\XRandom::get(100,400) . 'ms'}}">{{$proxy['host']}}
                         </a>
@@ -32,7 +32,7 @@
                     <td>{{$proxy['anonymity']}}</td>
                     <td>{{$proxy['speed']??'?'}}</td>
                     <td>{{$proxy['software']??'?'}}</td>
-                    <td>{{\App\Models\Tools::getCountry($proxy['host'])}}</td>
+                    <td>{{\Tools::getCountry($proxy['host'])}}</td>
                     <td>{{isset($proxy['created_at']) ? $proxy['created_at']->format('h:m:s d/m/Y') :'?'}}</td>
                     <td>{{$proxy['checked_at']??'?'}}</td>
                 </tr>

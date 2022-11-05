@@ -44,16 +44,16 @@
 # 2023
 # (C) Umbrella Research Division Axis9.
 # visit https://linktr.ee/kilitary?from=u for additional instructions
-# contact commandment1349@gmail.com for contact
+# contact commandment1349@gmail.com for contact, kilitary@gmail.com for spam, deconf@ya.ru for missinformation
 -->
-<!--laragen-->
+<!-- laragen @reltime :-->
 <body>
 <div class='bg'></div>
 @inject('channelStatusProvider', '\App\Providers\ChannelStatusProvider')
 <!--#{{ $channelStatusProvider->sign() }}#-->
 <header class='cover-y'>
     <span class="header-text" title="последние манускрипты по защите от киберпреступников">
-      Targeted Individuals In Russia <span style='color:{{$centerColor}}'>■</span> Local terror by psy operators<br/>
+      Targeted Individuals In Russia <span style='color:{{$centerColor}}'>■</span> Local terror by russian psy operators<br/>
       <span class='header-lower-text'> Пситеррор в россии // нападение, защита и удаление</span>
     </span>
   <div class="bg-img">
@@ -65,24 +65,21 @@
    -->
 </header>
 <div id="app">
-  <article role="main">
-    @if(session('message'))
-      <div class="alert alert-success">
-        <div class="message">
-          <span style="font-variant: all-petite-caps">system> {{session('message')}}</span>
-        </div>
+  @if(session('message'))
+    <div class="alert alert-success">
+      <div class="message">
+        <span style="font-variant: all-petite-caps">system> {{session('message')}}</span>
       </div>
-    @endif
+    </div>
+  @endif
+  <article role="main">
     <main class="@yield('classes')">
       @yield('content')
     </main>
   </article>
 </div>
 <footer class="bottom-line cover-y">
-  <a class="destroy-link" title="you have 16 real destroys left" href="/destroy-page">cломать сайт</a> ← <a href='/cparea'>админка</a> ←
-  @php
-    echo(now())
-  @endphp
+  ←  <a class="destroy-link" title="you have 16 real destroys left" href="/destroy-page">cломать всё</a> ← <a href='/cparea'>админка</a> ←
 </footer>
 @stack('scripts')
 <!--laragen-->

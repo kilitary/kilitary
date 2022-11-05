@@ -7,6 +7,6 @@ return [
     'session_lifetime_hours' => 12,
     'internal_debug' => false,
     'version' => 'v0.3-alpha',
-    'min_get_post_diff_secs' => 4,
+    'min_get_post_diff_secs' => 2,
     'admin_whitelist' => ['192.168.10.1']
 ];

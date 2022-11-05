@@ -43,10 +43,19 @@ class PageController extends Controller
 
     public function rate(Request $request, $id)
     {
+
+        if (XRandom::maybe()) {
+            return redirect()->back()->with('message', 'your rate was rejected by remote system');
+        }
+
         $keys = ['prog_ok', 'prog_bad'];
         $key = $keys[XRandom::get(0, 1)];
 
-        \DB::update("update news set {$key} = {$key} + 1 where id = ?", [$id]);
+//        $op = ["+", "-"];
+//        $op = $op[XRandom::scaled(0, 1)];
+        $op = "+";
+
+        \DB::update("update news set {$key} = {$key} {$op} 1 where id = ?", [$id]);
 
         Logger::msg('rate ' . $id . ' key ' . $key);
 
@@ -125,15 +134,17 @@ class PageController extends Controller
     public function index(Request $request)
     {
         Logger::msg('index> remote: ' . $request->ip() . ':' . $_SERVER['REMOTE_PORT'] . ' uri: ' . $request->fullUrl() . ' from: ' . $request->header('referer') .
-            " session: " . session()->getId() . ' visits: ' . ((int) \App\Models\Tools::ipVisits()));
+            " session: " . session()->getId() . ' visits: ' . ((int) \Tools::ipVisits()));
 
         $interesting = Page::interesting(5) ?? [];
 
-        $news = $this->newsService->retrieve(15, true);
+        $news = $this->newsService->retrieve(5, true);
 
-        $comments = \App\Comment::getLatest(20) ?? [];
+        $comments = \App\Comment::getLatest(5) ?? [];
 
-        return view('home', compact('interesting', 'comments', 'news'));
+        $videos = \App\Models\Video::getLatest(5) ?? [];
+
+        return view('home', compact('videos', 'comments', 'news'));
     }
 
     public function deleteByIp(Request $request, $ip)
@@ -227,7 +238,7 @@ class PageController extends Controller
     public function addToCart(Request $request, $code)
     {
         \App\Logger::msg('adding to cart: ' . $code);
-        \App\Models\Tools::addToCart($code);
+        \Tools::addToCart($code);
 
         return back()->with('message', 'item ' . $code . ' added to cart');
     }
@@ -256,7 +267,7 @@ class PageController extends Controller
                 ->value('code');
 
             Logger::msg('known abuser from "' .
-                \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit: ' .
+                \Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit: ' .
                 ($existentAbuser ? $existentAbuser->firewall_in : -1) . ' times, redirect to ' . $randomCode);
 
             if ($existentAbuser) {
@@ -276,7 +287,7 @@ class PageController extends Controller
                 ->value('code');
 
             Logger::msg('link abuser from "' .
-                \App\Models\Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit with ' . $linksCount . ' links, ' .
+                \Tools::getCountry($request->ip()) . '" [' . $request->ip() . '], tryed to inject his shit with ' . $linksCount . ' links, ' .
                 ' redirect to ' . $randomCode, $matches);
 
             Tools::userSetValue('spam_shit', $request->post('comment'), 3600);
@@ -385,7 +396,7 @@ class PageController extends Controller
         }
 
         $content = $request->post('comment');
-        if (!\App\Models\Tools::isAdmin()) {
+        if (!\Tools::isAdmin()) {
             $content = strip_tags($content);
         }
 
@@ -427,7 +438,7 @@ class PageController extends Controller
         $page = Page::where('code', $code)
             ->first();
 
-        if ($page->ip != $request->ip() && !\App\Models\Tools::isAdmin()) {
+        if ($page->ip != $request->ip() && !\Tools::isAdmin()) {
             return 'access denied for ' . $request->ip();
         }
 
@@ -555,7 +566,7 @@ class PageController extends Controller
 
             $converter = new CommonMarkConverter($config, $environment);
             $content = $converter->convertToHtml($content);
-            $country = \App\Models\Tools::getCountry($page->ip);
+            $country = \Tools::getCountry($page->ip);
         } else {
             $content = "[no such content]";
             $header = "[no such header] (" . $code . ")";
@@ -591,7 +602,7 @@ class PageController extends Controller
             session(['delMode' => $mode]);
 
             $page = Page::firstWhere('code', $code);
-            if ($page && ($page->ip == $request->ip() || \App\Models\Tools::isAdmin()) && !$page->blocked) {
+            if ($page && ($page->ip == $request->ip() || \Tools::isAdmin()) && !$page->blocked) {
                 $page->delete();
                 $result = true;
             } else {
@@ -603,7 +614,7 @@ class PageController extends Controller
             $result = false;
         }
 
-        \App\Logger::msg('user ' . \App\Models\Tools::getUserIp() . ' command: delete pageCode: ' . $code . ' mode: ' . $mode . ' result: ' . intval($result));
+        \App\Logger::msg('user ' . \Tools::getUserIp() . ' command: delete pageCode: ' . $code . ' mode: ' . $mode . ' result: ' . intval($result));
         return view('delete', compact('code'));
     }
 
@@ -659,7 +670,7 @@ class PageController extends Controller
                 }
             }
 
-            $content = \App\Models\Tools::isAdmin() ? $content : \strip_tags($content);
+            $content = \Tools::isAdmin() ? $content : \strip_tags($content);
 
             if (strlen($content) <= 5) {
                 \App\Logger::msg('content length too small: ' . strlen($content));
