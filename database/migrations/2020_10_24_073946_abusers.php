@@ -13,9 +13,11 @@ class Abusers extends Migration
      */
     public function up()
     {
-        Schema::create('abusers', function(Blueprint $table) {
+        Schema::create('abusers', static function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ip');
+            $table->string('ip')->nullable();
+            $table->string('nick')->nullable();
+            $table->string('ua')->nullable();
             $table->string('reason')->nullable();
             $table->integer('firewall_in')->nullable();
             $table->dateTime('deabusertime')->nullable();

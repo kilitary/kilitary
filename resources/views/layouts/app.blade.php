@@ -79,7 +79,10 @@
   </article>
 </div>
 <footer class="bottom-line cover-y">
-  <a class="destroy-link" title="you have 16 real destroys left" href="/destroy-page">cломать сайт</a> ← <a href='/cparea'>админка</a>
+  <a class="destroy-link" title="you have 16 real destroys left" href="/destroy-page">cломать сайт</a> ← <a href='/cparea'>админка</a> ←
+  @php
+    echo(now())
+  @endphp
 </footer>
 @stack('scripts')
 <!--laragen-->

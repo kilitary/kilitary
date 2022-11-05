@@ -30,6 +30,7 @@ use \WebArticleExtractor;
 use Illuminate\Support\Facades\Cache;
 use App\Services\NewsService;
 use Amnuts\Opcache\Service;
+use App\Models\News;
 
 class PageController extends Controller
 {
@@ -38,6 +39,18 @@ class PageController extends Controller
     public function __construct(NewsService $newsService)
     {
         $this->newsService = $newsService;
+    }
+
+    public function rate(Request $request, $id)
+    {
+        $keys = ['prog_ok', 'prog_bad'];
+        $key = $keys[XRandom::get(0, 1)];
+
+        \DB::update("update news set {$key} = {$key} + 1 where id = ?", [$id]);
+
+        Logger::msg('rate ' . $id . ' key ' . $key);
+
+        return redirect()->back()->with('message', 'rate applyed');
     }
 
     public function addComment(Request $request)
@@ -232,6 +245,7 @@ class PageController extends Controller
         Logger::msg('write comment ', $request->all());
 
         if (!Tools::isAdmin()
+            && !\in_array($request->ip(), config('site.admin_whitelist'))
             && Tools::userHasSetting('is_abuser') && Tools::getUserValue('is_abuser') == 1) {
             $existentAbuser = \App\Abuser::where('ip', $request->ip())
                 ->first();
@@ -273,7 +287,8 @@ class PageController extends Controller
         $lastVisitSeconds = Tools::getUserValue('last_visit');
         $diff = \Carbon\Carbon::now()->timestamp - (int) $lastVisitSeconds;
 
-        if ($diff <= config('site.min_get_post_diff_secs')) {
+        if (!\in_array($request->ip(), config('site.admin_whitelist'))
+            && $diff <= config('site.min_get_post_diff_secs')) {
             Logger::msg('this is abuser, diff request ' . $diff . ' secs [m ' .
                 Tools::getUserValue('last_method') . ', lv ' . $lastVisitSeconds .
                 ', now ' . \Carbon\Carbon::now()->timestamp . ']');
@@ -326,7 +341,8 @@ class PageController extends Controller
         $difflLen = \Str::length($request->post('comment')) - $domainLen;
 
         Logger::msg('comment spam analyze: domainLen: ' . $domainLen . ' diffLen: ' . $difflLen);
-        if ($domainLen > 64 && $difflLen >= 128) {
+        if ($domainLen > 64 && $difflLen >= 128
+            && !\in_array($request->ip(), config('site.admin_whitelist'))) {
             $reason = 'links per plain text weight overflow <url: ' . $domainLen . ' > diff: ' . $difflLen . '>';
 
             $abuserGroup = \Str::upper(\Str::random(3));
@@ -373,13 +389,16 @@ class PageController extends Controller
             $content = strip_tags($content);
         }
 
-        $userName = \Str::upper(\Str::random(5));
+        $userName = \Str::upper(\Str::limit(hash('sha256', $content . $request->ip() . $request->userAgent()), 6));
         $country = Tools::getCountry($request->ip());
+        $prefix = $request->post('type');
+
         $comment = \App\Comment::create([
             'comment' => $content,
             'ip' => $request->ip(),
             'username' => $userName,
-            'email' => 'unknown@unknown.ru',
+            'prefix' => $prefix,
+            'email' => 'unknown@unknown.unknown',
             'country' => $country,
             'page_id' => $request->post('page_id'),
             'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER),

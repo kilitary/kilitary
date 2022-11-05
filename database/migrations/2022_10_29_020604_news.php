@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->text('category_name_old')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('length')->nullable();
+            $table->softDeletes();
         });
     }
 

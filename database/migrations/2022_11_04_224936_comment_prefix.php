@@ -12,8 +12,8 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table('pages', function (Blueprint $table) {
-            $table->timestamp('deleted_at');
+        Schema::table('comments', function (Blueprint $table) {
+            $table->string('prefix')->nullable();
         });
     }
 

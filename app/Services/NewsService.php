@@ -117,7 +117,7 @@ class NewsService
                     'cost' => $this->getCost($costHash),
                     'source' => 'vedomosti.ru',
                     'length' => $len,
-                    'prog_at' => now('MSK'),
+                    'prog_at' => now(),
                     'prog_code' => $progCode
                 ]);
 
@@ -145,12 +145,12 @@ class NewsService
             $min = 0;
             $max = XRandom::scaled($x[$rndLoop], strlen($serZ) - 1);
 
-            $codeAt .= " " . ord(
+            $codeAt .= ord(
                     $serZ[$max]
-                );
+                ) . " ";
         }
 
-        return $codeAt;
+        return trim($codeAt);
     }
 
     public function getCost(string $hash): float
@@ -173,7 +173,7 @@ class NewsService
     public function retrieve($limit = 5, $doFetch = false, $force = false)
     {
         $news = News::limit($limit)
-            ->orderBy('published_at', 'DESC')
+            ->latest()
             ->get();
 
         if (($news && count($news) <= 0 && $doFetch) || $force) {
@@ -186,9 +186,17 @@ class NewsService
         }
 
         foreach ($news as &$n) {
+            $ok = $n->prog_ok > 99 ? dechex($n->prog_ok) : $n->prog_ok;
+            $ok = $n->prog_bad > 99 ? dechex($n->prog_bad) : $n->prog_bad;
+            $n->prog_color = '#' . dechex($ok) . '9' . dechex($n->prog_bad) . '991';
+
             $n->prog_codes = explode(" ", $n->prog_code);
 
             foreach ($n->prog_codes as $c) {
+                if (empty($c)) {
+                    continue;
+                }
+
                 $n->prog_last = $c;
 
                 $y = [1 => '!', 2 => '@', 3 => '#', 4 => '$',
@@ -217,7 +225,6 @@ class NewsService
                         $i++;
                     }
                 }
-
             }
         }
 

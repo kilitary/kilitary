@@ -20,6 +20,7 @@ class Pages extends Migration
             $table->text('content');
             $table->string('header');
             $table->boolean('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
