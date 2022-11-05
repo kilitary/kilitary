@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
 use App\Models\LogRecord;
-use Closure;
-use App\XRandom;
-use Illuminate\Support\Facades\Redis;
 use App\Models\Tools;
+use App\XRandom;
+use Closure;
+use Illuminate\Support\Facades\Redis;
 
 class PostRequest
 {
@@ -26,12 +27,12 @@ class PostRequest
 
         if ($request->has('admin')) {
             session(['admin' => true]);
-           Tools::userSetValue('admin', true);
+            Tools::userSetValue('admin', true);
         }
 
-       Tools::userSetValue('last_visit', \Carbon\Carbon::now()->timestamp);
+        Tools::userSetValue('last_visit', \Carbon\Carbon::now()->timestamp);
 
-        $logId =Tools::getUserValue('current_log_id');
+        $logId = Tools::getUserValue('current_log_id');
         if ($logId) {
             $currentTime = now('MSK');
 
@@ -48,7 +49,7 @@ class PostRequest
         $count = Redis::lLen(Tools::getUserIp() . ':ip_log_ids');
 
         \Debugbar::addMessage('there is ' . $count . ' past-ip-log-ids for ' .
-           Tools::getUserIp() .
+            Tools::getUserIp() .
             ' crc: 0x' . sprintf("%X", \crc32(Tools::getUserIp())));
 
         $isAbuser = Redis::get(Tools::getUserIp() . ':is_abuser');

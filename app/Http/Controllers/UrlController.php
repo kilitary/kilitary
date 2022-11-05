@@ -1,32 +1,33 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Logger;
 use App\Models\Page;
 use App\XRandom;
 use Illuminate\Http\Request;
-use App\Logger;
 
 class UrlController extends Controller
 {
     public function create(Request $request)
     {
-        if(empty($request->input('short'))) {
+        if (empty($request->input('short'))) {
             $request['short'] = \Str::random(8);
         }
 
-        if(empty($request->input('long'))) {
+        if (empty($request->input('long'))) {
             $request['long'] = \Str::random(8);
         }
 
         $shortRecord = \App\ShortUrl::where('short', $request->input('short'))
             ->first();
 
-        if(!$shortRecord) {
+        if (!$shortRecord) {
             Logger::msg('creating static ' . $request->input('short') . ' => ' . $request->input('long') . ' link' . ' by ' . $request->ip());
 
             $long = $request->input('long');
-            if(!strstr($long, "://")) {
+            if (!strstr($long, "://")) {
                 $long = 'http://' . $long;
             }
 
@@ -51,7 +52,7 @@ class UrlController extends Controller
         $shortRecord = \App\ShortUrl::where('short', $shortUrl)
             ->first();
 
-        if($shortRecord) {
+        if ($shortRecord) {
             Logger::msg('static redirect ' . $shortRecord->short . '=>' . $shortRecord->long . ' by ' . $request->ip());
 
             $shortRecord->visits += 1;

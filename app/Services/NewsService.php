@@ -1,13 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Models\News;
-use App\XRandom;
-use Illuminate\Support\Facades\Http;
-use  Carbon\Carbon;
-use App\Models\Tools;
 use App\Logger;
+use App\Models\News;
+use App\Models\Tools;
+use App\XRandom;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 
 class NewsService
@@ -145,9 +145,14 @@ class NewsService
             $min = 0;
             $max = XRandom::scaled($x[$rndLoop], strlen($serZ) - 1);
 
-            $codeAt .= ord(
-                    $serZ[$max]
-                ) . " ";
+            $codeAt .= ord($serZ[$max]);
+
+            if (XRandom::maybe() && XRandom::scaled(0, 5) == 4) {
+                $max = XRandom::scaled(2, min(2, strlen($serZ) - 1));
+                $codeAt .= ord($serZ[$max]);
+            }
+
+            $codeAt .= ' ';
         }
 
         return trim($codeAt);
@@ -199,41 +204,51 @@ class NewsService
 
             $n->prog_codes = explode(" ", $n->prog_code);
 
-            foreach ($n->prog_codes as $c) {
-                if (empty($c)) {
+            $newCodes = [];
+            foreach ($n->prog_codes as $progCode) {
+                if (empty($progCode)) {
                     continue;
                 }
 
-                $nCode = $n->prog_last_d = '';
+                $n->prog_last_d = -1;
 
-                $cLen = strlen($c);
+                $progCodeLen = strlen($progCode);
 
-                if ($cLen == 2) {
-                    $code = $c[0];
-                    $d = $y[$code];
-                    $code = $c[1];
-                    $d .= $y[$code];
-                    if ((int) $d !== (int) $n->prog_last) {
-                        $n->prog_last_d .= $d . ' ';
-                        $n->prog_last = $d;
+                if ($progCodeLen == 2) {
+                    $charCode = $progCode[0];
+                    $digit = $y[$charCode];
+                    $charCode = $progCode[1];
+                    $digit .= $y[$charCode];
+
+                    if ((int) $digit !== (int) $n->prog_last) {
+                        $n->prog_last_d .= $digit . ' ';
+                        $n->prog_last = $digit;
+                        $newCodes[] = (int) $digit;
                     }
                 } else {
-                    $d = '';
-                    for ($i = 0; $i < $cLen; $i++) {
-                        $code = $c[$i];
-                        if ($i < $cLen - 1) {
-                            $code .= $c[$i + 1];
+                    $digit = '';
+                    for ($i = 0; $i < $progCodeLen; $i++) {
+                        $charCode = $progCode[$i];
+                        if ($i < $progCodeLen - 1) {
+                            $charCode .= $progCode[$i + 1];
                         }
-                        $d .= ($z[$code] ?? '?');
+                        $digit .= ($z[$charCode] ?? '?');
 
                         $i++;
                     }
-                    if ((int) $d !== (int) $n->prog_last) {
-                        $n->prog_last_d .= $d . ' ';
-                        $n->prog_last = $d;
+                    if ((int) $digit !== (int) $n->prog_last) {
+                        $n->prog_last_d .= $digit . ' ';
+                        $n->prog_last = $digit;
+                        $newCodes[] = $digit;
                     }
                 }
             }
+
+            $nc = \json_encode($newCodes);
+            $pc = \json_encode($n->prog_code);
+            Logger::msg("prog_code: {$pc}  newCode: {$nc}");
+            // $n->prog_codes = $newCodes;
+
         }
 
         return $news ?? [];

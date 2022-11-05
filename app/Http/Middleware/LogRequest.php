@@ -1,15 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\IpInfo;
+use App\Models\LogRecord;
 use App\Models\Tools;
-use Carbon;
 use Closure;
-use App\Logger;
 use Exception;
 use Illuminate\Support\Facades\Redis;
-use  \App\Models\LogRecord;
 
 class LogRequest
 {
@@ -39,14 +37,14 @@ class LogRequest
                     JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_TAG | JSON_NUMERIC_CHECK)
             ]);
 
-           Tools::userSetValue('current_log_id', $log->id, 55);
+            Tools::userSetValue('current_log_id', $log->id, 55);
             Redis::rPush(Tools::getUserIp() . ':ip_log_ids', $log->id);
-           Tools::userSetConfigIfNotExist('first_seen', \Carbon\Carbon::now()->timestamp);
-           Tools::userSetValue('last_method', $request->method());
-           Tools::userSetValue('is_abuser', (int)Tools::isAbuser($request->ip()));
+            Tools::userSetConfigIfNotExist('first_seen', \Carbon\Carbon::now()->timestamp);
+            Tools::userSetValue('last_method', $request->method());
+            Tools::userSetValue('is_abuser', (int) Tools::isAbuser($request->ip()));
 
             if (!Tools::userHasSetting('probably_abuser')) {
-               Tools::userSetValue('probably_abuser', (int) (\App\XRandom::get(0, 40) == 34), 3600);
+                Tools::userSetValue('probably_abuser', (int) (\App\XRandom::get(0, 40) == 34), 3600);
             }
 
             Redis::rPush(Tools::getUserIp() . ':request_logs',
@@ -57,7 +55,7 @@ class LogRequest
                 $request->header('remote_port') . ':' .
                 \microtime(true));
 
-           Tools::recordIp($request->ip());
+            Tools::recordIp($request->ip());
         } catch (Exception $e) {
             \App\Logger::msg('exception in logrequest:' . $e->getFile() . '@' . $e->getLine() . '> ' . $e->getMessage());
         }

@@ -1,19 +1,15 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Console;
 
+use App\Jobs\ClearOldShit;
 use App\Jobs\FetchProxy;
-use App\Jobs\ProxyCheck;
+use App\Jobs\IpInfoResolver;
 use App\Jobs\RedisSaver;
 use App\Jobs\TelescopPrune;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Logger;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
-use App\Jobs\IpInfoResolver;
-use App\Jobs\ClearOldShit;
-use App\Jobs\ProxySoftwareNamer;
 
 class Kernel extends ConsoleKernel
 {

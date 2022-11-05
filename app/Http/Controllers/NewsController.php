@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Services\NewsService;
 use Illuminate\Http\Request;
-use App\Models\News;
 
 class NewsController extends Controller
 {
@@ -25,10 +26,6 @@ class NewsController extends Controller
 
     public function reloadNews(Request $request)
     {
-        if ($request->has('rezet')) {
-            $this->newsService->reset();
-        }
-
         $news = $this->newsService->retrieve(15, true, true);
 
         return redirect('/');

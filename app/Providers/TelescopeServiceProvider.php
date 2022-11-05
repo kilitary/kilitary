@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Providers;
 
@@ -20,8 +21,8 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
         $this->hideSensitiveRequestDetails();
 
-        Telescope::filter(function(IncomingEntry $entry) {
-            if($this->app->environment('local')) {
+        Telescope::filter(function (IncomingEntry $entry) {
+            if ($this->app->environment('local')) {
                 return true;
             }
 
@@ -40,7 +41,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     protected function hideSensitiveRequestDetails()
     {
-        if($this->app->environment('local')) {
+        if ($this->app->environment('local')) {
             return;
         }
 
@@ -62,8 +63,8 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     protected function gate()
     {
-        Gate::define('viewTelescope', function($user) {
-            if(request()->ip() == '188.242.121.209') {
+        Gate::define('viewTelescope', function ($user) {
+            if (request()->ip() == '188.242.121.209') {
                 return true;
             }
             return false;

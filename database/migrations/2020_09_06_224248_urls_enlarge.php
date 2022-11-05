@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,7 +14,7 @@ class UrlsEnlarge extends Migration
      */
     public function up()
     {
-        Schema::table('short_urls', function(Blueprint $table) {
+        Schema::table('short_urls', function (Blueprint $table) {
             $table->text('short')->change();
             $table->text('long')->change();
         });

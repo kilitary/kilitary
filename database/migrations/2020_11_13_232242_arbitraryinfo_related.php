@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,7 +14,7 @@ class ArbitraryinfoRelated extends Migration
      */
     public function up()
     {
-        Schema::table('arbitrary_info', function(Blueprint $table) {
+        Schema::table('arbitrary_info', function (Blueprint $table) {
             $table->text('related')->nullable()->after('ip');
         });
     }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Jobs;
 
@@ -48,7 +49,7 @@ class FetchProxy implements ShouldQueue
 
             \App\Logger::msg('index ' . ($start - 64) . ' - ' . $start);
 
-            if($response->status() != 200) {
+            if ($response->status() != 200) {
                 \App\Logger::msg($source . ': fetch status => ' . $response->status());
                 \App\Logger::msg($response->serverError());
                 \App\Logger::msg($response->clientError());
@@ -57,10 +58,10 @@ class FetchProxy implements ShouldQueue
 
             $foundProxys = preg_match_all("#<td>(\d{1,3}?\.\d{1,3}?\.\d{1,3}?\.\d{1,3}?)<.*?<td>(\d{1,5}).*?(so\w+|htt\w+).*?<#mi", $response->body(), $mm, \PREG_SET_ORDER);
 
-            foreach($mm as $match) {
+            foreach ($mm as $match) {
                 \App\Logger::msg($source . ': found proxy type ' . $match[3] . ' ' . $match[1] . ':' . $match[2]);
 
-                if(preg_match("#^172\.#mi", $match[1])) {
+                if (preg_match("#^172\.#mi", $match[1])) {
                     \App\Logger::msg('skip cloudflare ' . $match[1] . ':' . $match[2]);
                     continue;
                 }
@@ -80,7 +81,7 @@ class FetchProxy implements ShouldQueue
                         'ip' => $match[1]
                     ]);
             }
-        } while($foundProxys > 0 && $start <= 65);
+        } while ($foundProxys > 0 && $start <= 65);
 
         \App\Logger::msg('done job [fetch proxy: hidemy.name] ' . 'got ' . $foundProxys . ' proxys');
     }

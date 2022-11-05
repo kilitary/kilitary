@@ -1,36 +1,30 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Amnuts\Opcache\Service;
 use App\Comment;
+use App\Logger;
+use App\Models\Page;
 use App\Models\Tools;
+use App\Services\NewsService;
+use App\XRandom;
 use Exception;
 use Illuminate\Http\Request;
-use \App\Logger;
-use \App\XRandom;
-use \App\ShortUrl;
-use \App\TextSource;
-use \App\Models\Page;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use Intervention\Image\ImageManager;
 use League\CommonMark\CommonMarkConverter;
-use League\CommonMark\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
-use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\TaskList\TaskListExtension;
-use GeoIp2\Database\Reader;
-use Predis\Command\ConnectionQuit;
 use Str;
-use Intervention\Image\ImageManager;
+use WebArticleExtractor;
 use const JSON_PRETTY_PRINT;
 use const PREG_SET_ORDER;
-use \WebArticleExtractor;
-use Illuminate\Support\Facades\Cache;
-use App\Services\NewsService;
-use Amnuts\Opcache\Service;
-use App\Models\News;
 
 class PageController extends Controller
 {

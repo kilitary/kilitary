@@ -1,18 +1,19 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Jobs;
 
+use Clue\React\Socks;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Clue\React\Socks;
 use React\EventLoop\Factory;
 use React\Http\Response;
 use React\Http\Server;
-use React\Socket\Connector;
 use React\Socket\ConnectionInterface;
+use React\Socket\Connector;
 
 class ProxyCheck implements ShouldQueue
 {
@@ -43,7 +44,7 @@ class ProxyCheck implements ShouldQueue
 
         ini_set("default_socket_timeout", 31);
 
-        foreach($proxys as $proxy) {
+        foreach ($proxys as $proxy) {
             \App\Logger::msg('[proxy check] testing ' . $proxy->host . ':' . $proxy->port);
             $loop = \React\EventLoop\Factory::create();
             $connector = new \React\Socket\Connector($loop, [
@@ -53,26 +54,26 @@ class ProxyCheck implements ShouldQueue
 //                'timeout' => true
             ]);
 
-            $loop->addPeriodicTimer(60.0, function() use ($loop) {
+            $loop->addPeriodicTimer(60.0, function () use ($loop) {
                 \App\Logger::msg('stopping scan');
                 $loop->stop();
             });
 
-            $loop->addSignal(SIGINT, function() {
+            $loop->addSignal(SIGINT, function () {
                 \App\Logger::msg('signal received');
             });
 
             //$client = new \Clue\React\Socks\Client('socks://' . $proxy->host . ':' . $proxy->port, $connector);
             $client = new \Clue\React\Socks\Client('socks5://98.190.102.62:4145', $connector);
 
-            $client->connect('tcp://kilitary.ru:80')->then(function(ConnectionInterface $stream) {
+            $client->connect('tcp://kilitary.ru:80')->then(function (ConnectionInterface $stream) {
                 \App\Logger::msg('writing to stream ...');
                 $stream->write("GET / HTTP/1.0\r\nHost: kilitary.ru\r\n\r\n");
                 \App\Logger::msg('reading stream ...');
-                $stream->on('read', function($data) {
+                $stream->on('read', function ($data) {
                     \App\Logger::msg('>' . $data);
                 });
-                $data = $stream->readBufferCallback(function($buffer) {
+                $data = $stream->readBufferCallback(function ($buffer) {
                     \App\Logger::msg('>' . $buffer);
                 });
 

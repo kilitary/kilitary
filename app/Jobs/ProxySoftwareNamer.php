@@ -1,15 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Jobs;
 
-use Carbon;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Http;
 
 class ProxySoftwareNamer implements ShouldQueue
 {
@@ -41,7 +40,7 @@ class ProxySoftwareNamer implements ShouldQueue
 
         \App\Logger::msg('job: proxy software checker started with ' . $proxys->count() . ' records');
 
-        foreach($proxys as $proxy) {
+        foreach ($proxys as $proxy) {
             try {
                 $proxy->checked_at = \Carbon::now();
                 \App\Logger::msg('going with ' . $proxy->host . ':' . $proxy->port);
@@ -58,7 +57,7 @@ class ProxySoftwareNamer implements ShouldQueue
                 //do {
                 $start = time();
                 $ret = socket_connect($socket, $proxy->host, $proxy->port);
-                if($ret == true) {
+                if ($ret == true) {
                     \App\Logger::msg('connected in ' . (time() - $start) . ' secs');
                 } else {
                     \App\Logger::msg('error: ' . socket_strerror(socket_last_error()) . ' (#' . socket_last_error() . ')');
@@ -88,7 +87,7 @@ class ProxySoftwareNamer implements ShouldQueue
 
                 do {
                     $recv = socket_recv($socket, $buf, 32768, 0);
-                    if($recv) {
+                    if ($recv) {
                         \App\Logger::msg('recv ' . strlen($buf), $buf);
                     } else {
                         $proxy->last_error = socket_last_error();
@@ -97,49 +96,49 @@ class ProxySoftwareNamer implements ShouldQueue
                     }
 
                     $n = preg_match("#^Server:\s+(.*?)$#smi", $buf, $matches);
-                    if($n) {
+                    if ($n) {
                         $proxy->software = \Str::substr($matches[1], 0, 255);
                         $proxy->save();
                     }
 
                     $n = preg_match("#http/#smi", $buf, $matches);
-                    if($n) {
+                    if ($n) {
                         $proxy->software = 'unknown';
                         $proxy->save();
                     }
 
                     $n = preg_match("#http/\d\.\d\s+(\d+)\s+#smi", $buf, $matches);
-                    if($n) {
+                    if ($n) {
                         $proxy->last_code = $matches[1];
                         $proxy->save();
                     }
 
                     $id = hash('sha256', $proxy->host . "--");
                     $n = preg_match("#$id#smi", $buf, $matches);
-                    if($n) {
+                    if ($n) {
                         \App\Logger::msg('id ' . $id . ' found');
                         $proxy->self = $buf;
                         $proxy->save();
                     }
 
                     $n = preg_match("#(?:forwarded\-for|via)#smi", $buf, $matches);
-                    if($n) {
+                    if ($n) {
                         \App\Logger::msg('proxy is fully transparent');
                         $proxy->self = $buf;
                         $proxy->save();
                     }
 
-                } while($recv != false);
+                } while ($recv != false);
 
-                if($recv === false) {
+                if ($recv === false) {
                     $proxy->last_error = socket_last_error();
                     $proxy->save();
                     \App\Logger::msg('connection dropped');
-                } else if($recv == 0) {
+                } elseif ($recv == 0) {
                     \App\Logger::msg('connection closed gracefully');
                 }
 
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 \App\Logger::msg('exception: ' . $e->getMessage());
             }
         }

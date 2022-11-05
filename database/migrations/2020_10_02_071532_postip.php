@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,7 +14,7 @@ class Postip extends Migration
      */
     public function up()
     {
-        Schema::table('pages', function(Blueprint $table) {
+        Schema::table('pages', function (Blueprint $table) {
             $table->string('ip');
             $table->integer('edits');
         });

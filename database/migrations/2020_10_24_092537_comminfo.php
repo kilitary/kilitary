@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,7 +14,7 @@ class Comminfo extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function(Blueprint $table) {
+        Schema::table('comments', function (Blueprint $table) {
             $table->text('info')->nullable()->after('ip');
         });
     }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,10 +14,10 @@ class PageAdditionalInfo extends Migration
      */
     public function up()
     {
-        Schema::table('pages', function(Blueprint $table){
-           $table->string('keywords')->nullable();
-           $table->string('source_url')->nullable();
-           $table->text('meta')->nullable();
+        Schema::table('pages', function (Blueprint $table) {
+            $table->string('keywords')->nullable();
+            $table->string('source_url')->nullable();
+            $table->text('meta')->nullable();
         });
     }
 

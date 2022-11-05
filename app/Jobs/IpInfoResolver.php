@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Jobs;
 
@@ -37,7 +38,7 @@ class IpInfoResolver implements ShouldQueue
             ->whereNull('info')
             ->get();
 
-        foreach($ips as $ip) {
+        foreach ($ips as $ip) {
             \App\Logger::msg('fetching info for ' . $ip->ip);
 
             $response = Http::get('https://api.ipgeolocation.io/ipgeo', [
@@ -45,7 +46,7 @@ class IpInfoResolver implements ShouldQueue
                 'ip' => $ip->ip
             ]);
 
-            if($response->successful()) {
+            if ($response->successful()) {
                 $data = $response->body();
                 \App\Logger::msg('response: ' . $response->status() . ' data: ' . $data);
                 \DB::table('ip_info')
@@ -58,7 +59,7 @@ class IpInfoResolver implements ShouldQueue
                 \App\Logger::msg('error fetching ip info (' . $response->status() . '): ' . $response->serverError() . ':' . $response->clientError());
             }
 
-            if($response->status() == 401) {
+            if ($response->status() == 401) {
                 \App\Logger::msg('limit reached, sleeping ...');
                 break;
             }

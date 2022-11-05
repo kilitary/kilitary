@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App;
 
@@ -16,7 +17,7 @@ class Audio extends Model
 {
     public static function exception()
     {
-        if(env('AUDIO_ENABLED') != 'true') {
+        if (env('AUDIO_ENABLED') != 'true') {
             return;
         }
 
@@ -25,7 +26,7 @@ class Audio extends Model
 
     public static function abuserDetected()
     {
-        if(env('AUDIO_ENABLED') != 'true') {
+        if (env('AUDIO_ENABLED') != 'true') {
             return;
         }
 
@@ -34,7 +35,7 @@ class Audio extends Model
 
     public static function abuserRedirected()
     {
-        if(env('AUDIO_ENABLED') != 'true') {
+        if (env('AUDIO_ENABLED') != 'true') {
             return;
         }
 

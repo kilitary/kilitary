@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\ServiceProvider;
 
 class ChannelStatusProvider extends ServiceProvider
 {
@@ -37,12 +38,12 @@ class ChannelStatusProvider extends ServiceProvider
     {
         $inputSalt = \request()->get('input_string');
 
-        if(empty($inputSalt)) {
+        if (empty($inputSalt)) {
             return '!full!';
         }
 
         $exist = Redis::sismember('channel_known_signs', $inputSalt);
-        if($exist) {
+        if ($exist) {
             \App\Logger::msg('fatal sign: check already done for ' . \request()->ip() . ' inputSalt: ' . $inputSalt);
             \Tools::userSetValue('terminate_fatal_sign', 1, 2);
             return '!empty!';
@@ -50,7 +51,7 @@ class ChannelStatusProvider extends ServiceProvider
 
         Redis::sadd('channel_known_signs', $inputSalt);
 
-        if(\Illuminate\Support\Str::contains($inputSalt, '8')) {
+        if (\Illuminate\Support\Str::contains($inputSalt, '8')) {
             \App\Logger::msg('warning sign: out-of-table ip: ' . \request()->ip() . ' inputSalt: ' . $inputSalt);
             \Tools::userSetValue('terminate_fatal_sign', 1, 2);
 

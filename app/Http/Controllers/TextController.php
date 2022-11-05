@@ -1,12 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\XRandom;
-use Filicious\Local\LocalAdapter;
-use Filicious\Filesystem;
-use Illuminate\Http\Request;
 use App\TextSource;
+use App\XRandom;
+use Illuminate\Http\Request;
 
 class TextController extends Controller
 {
@@ -16,7 +15,7 @@ class TextController extends Controller
 
         $num = mt_rand(1, 11) * 3;
 
-        for($i = 0; $i < $num; $i++) {
+        for ($i = 0; $i < $num; $i++) {
             $signs = [' ', '+', '-'];
             $sign = $signs[XRandom::get(0, 2)];
 

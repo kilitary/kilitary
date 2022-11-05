@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,7 +14,7 @@ class Proxys extends Migration
      */
     public function up()
     {
-        Schema::create('proxys', function(Blueprint $table) {
+        Schema::create('proxys', function (Blueprint $table) {
             $table->id();
             $table->string('host')->unique();
             $table->integer('port')->index();

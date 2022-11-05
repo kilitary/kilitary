@@ -1,18 +1,15 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Logger;
+use Exception;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use const CURLOPT_TIMEOUT;
 use const GEOIP_STANDARD;
 use const JSON_PRETTY_PRINT;
-use ipinfo\ipinfo\IPinfo;
-use Exception;
-use GeoIp2\Exception\GeoIp2Exception;
-use GeoIp2\Database\Reader;
-use GeoIp2\Exception\AddressNotFoundException;
-use Illuminate\Support\Facades\Redis;
-use Illuminate\Support\Facades\Cache;
-use App\Logger;
 
 class Tools
 {

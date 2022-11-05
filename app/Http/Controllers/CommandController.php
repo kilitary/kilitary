@@ -1,14 +1,15 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Logger;
 use App\XRandom;
 use Illuminate\Http\Request;
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-use App\Logger;
-use \WebArticleExtractor;
+use WebArticleExtractor;
 
 class CommandController extends Controller
 {
@@ -17,7 +18,7 @@ class CommandController extends Controller
         $comms = \App\Comment::whereRaw(\DB::raw('length(username) <= 3'))
             ->get();
 
-        foreach($comms as $com) {
+        foreach ($comms as $com) {
             $com->username = \Str::upper(\Str::random(5));
             $com->save();
         }
@@ -50,7 +51,7 @@ class CommandController extends Controller
 
         $list['balance'] = XRandom::get(0, 100) . '%';
 
-        if(XRandom::emergencyOverridePresent()) {
+        if (XRandom::emergencyOverridePresent()) {
             Logger::msg('emergency override()');
             XRandom::emergencyOverride();
         }
@@ -61,7 +62,7 @@ class CommandController extends Controller
         $list['cia_score'] = XRandom::get(0, 99) . '%';
         $list['fss_score'] = XRandom::get(0, 97) . '%';
 
-        for($i = 0; $i < 1 + XRandom::get(0, 5); $i++) {
+        for ($i = 0; $i < 1 + XRandom::get(0, 5); $i++) {
             $patent = trim(sprintf("%10d", XRandom::get(1000000, 5000000)), '+ \r\n');
 
             $list['patent_' . sprintf("%04d", $i)] =
@@ -70,7 +71,7 @@ class CommandController extends Controller
                 "</a> (buy <a href='mailto:kilitary@gmail.com'>account</a> for more info)";
         }
 
-        foreach(hash_algos() as $algo) {
+        foreach (hash_algos() as $algo) {
             $hash = hash($algo, $list['rand']);
             $list[$algo] = $hash . " <a target=_blank href='https://google.com/search?sq=%2B" . substr($hash, 0, 7) . "'>[?]</a>" .
                 " <a target=_blank href='https://google.com/search?q=related:" . substr($hash, 0, 6) . "'>[I]</a>" .
@@ -101,7 +102,7 @@ class CommandController extends Controller
         $list['tampered'] = $tamper[XRandom::scaled(0, 1)];
 
         $clears = [];
-        foreach($list as $k => $v) {
+        foreach ($list as $k => $v) {
             $clears[\strip_tags($k)] = \strip_tags($v);
         }
 
@@ -159,7 +160,7 @@ class CommandController extends Controller
 
             $ret = $mail->send();
             return ['ok' => $ret];
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return ['error' => $mail->ErrorInfo];
         }
     }

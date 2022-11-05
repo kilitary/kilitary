@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
@@ -16,7 +17,7 @@ class SecuredTime
      */
     public function handle($request, Closure $next)
     {
-        if(env('TIMESECURED')) {
+        if (env('TIMESECURED')) {
             return redirect('/');
         }
 

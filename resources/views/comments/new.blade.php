@@ -11,7 +11,7 @@
       <input required class="form-input" name="type" placeholder='суки...  [текст]'>
       <div class='form-input'>
         <textarea required class="textarea-comment" name="comment" placeholder='только захотел взять свою булочку а она... [текст]'></textarea>
-        <div class="textarea-bg"><img src='/images/download.png'> </div>
+        <div class="textarea-bg"><img src='/images/download.png'></div>
         <div class="smallcaps">
           (<a target=_blank href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">поддержка</a>)
         </div>

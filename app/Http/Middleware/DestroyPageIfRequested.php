@@ -1,12 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
+use App\Logger;
+use App\XRandom;
 use Closure;
-use \Illuminate\Http\Response;
-use \Illuminate\Support\Facades\Redis;
-use \App\Logger;
-use \App\XRandom;
 
 class DestroyPageIfRequested
 {
