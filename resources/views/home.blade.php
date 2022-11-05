@@ -59,7 +59,7 @@
                    data-pt-gravity='bottom-right 100 15'
                    data-pt-skin='white'
                    class="protip  tool-link"
-                   data-pt-title='<span class="tool-button">rate convergence (<span class=green>{{$post->prog_ok}}</span> vs <span class=red>{{$post->prog_bad}}</span>)</span>'>
+                   data-pt-title='<span class="tool-button">code convergence (<span class=green>{{$post->prog_ok}}</span> vs <span class="red">{{$post->prog_bad}}</span>)</span>'>
                   <img class='data-row-ico' src='/images/icon-integration.png'></a>
                 @foreach($post->prog_codes as $code)
                   <a class='prog-code' style='color: {{$post->prog_color}};' @if($post->prog_last == $code) title='{{$post->prog_last_d}}' @endif>{{$code}}</a>

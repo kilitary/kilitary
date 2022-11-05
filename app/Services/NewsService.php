@@ -140,19 +140,23 @@ class NewsService
 
         $codeAt = '';
 
+        $prevCode = -1;
         $rndLoop = XRandom::scaled(1, 10);
         while ($rndLoop--) {
             $min = 0;
             $max = XRandom::scaled($x[$rndLoop], strlen($serZ) - 1);
 
-            $codeAt .= ord($serZ[$max]);
+            $code = ord($serZ[$max]);
 
             if (XRandom::maybe() && XRandom::scaled(0, 5) == 4) {
                 $max = XRandom::scaled(2, min(2, strlen($serZ) - 1));
-                $codeAt .= ord($serZ[$max]);
+                $code .= ord($serZ[$max]);
             }
 
-            $codeAt .= ' ';
+            if ((int) $code !== (int) $prevCode) {
+                $codeAt .= $code . ' ';
+                $prevCode = $code;
+            }
         }
 
         return trim($codeAt);
@@ -210,8 +214,6 @@ class NewsService
                     continue;
                 }
 
-                $n->prog_last_d = -1;
-
                 $progCodeLen = strlen($progCode);
 
                 if ($progCodeLen == 2) {
@@ -219,12 +221,6 @@ class NewsService
                     $digit = $y[$charCode];
                     $charCode = $progCode[1];
                     $digit .= $y[$charCode];
-
-                    if ((int) $digit !== (int) $n->prog_last) {
-                        $n->prog_last_d .= $digit . ' ';
-                        $n->prog_last = $digit;
-                        $newCodes[] = (int) $digit;
-                    }
                 } else {
                     $digit = '';
                     for ($i = 0; $i < $progCodeLen; $i++) {
@@ -236,19 +232,12 @@ class NewsService
 
                         $i++;
                     }
-                    if ((int) $digit !== (int) $n->prog_last) {
-                        $n->prog_last_d .= $digit . ' ';
-                        $n->prog_last = $digit;
-                        $newCodes[] = $digit;
-                    }
+                    $n->prog_lat = $progCode;
                 }
+
+                $n->prog_last = $progCode;
+                $n->prog_last_d = $digit;
             }
-
-            $nc = \json_encode($newCodes);
-            $pc = \json_encode($n->prog_code);
-            Logger::msg("prog_code: {$pc}  newCode: {$nc}");
-            // $n->prog_codes = $newCodes;
-
         }
 
         return $news ?? [];
