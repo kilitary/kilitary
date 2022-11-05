@@ -62,6 +62,8 @@ class Comment extends Model
         $comms = $comments;
         foreach ($comms as &$item) {
             $item->cost = hexdec(XRandom::getAu(1)) / 25;
+        }
+            $item->cost = hexdec(XRandom::getAu(1)) / 25;
             $item->created_at_diff = $item->created_at->to(null, \Carbon\CarbonInterface::DIFF_RELATIVE_TO_NOW);
             $item->created_at_diff = \str_replace(
                 ["minutes from now", "hours from now", "hours ago", "seconds from now", "hour from now",
