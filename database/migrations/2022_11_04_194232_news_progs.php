@@ -15,8 +15,8 @@ return new class extends Migration {
         Schema::table('news', function (Blueprint $table) {
             $table->timestamp('prog_at')->nullable();
             $table->text('prog_code')->nullable();
-            $table->integer('prog_ok')->nullable();
-            $table->integer('prog_bad')->nullable();
+            $table->integer('prog_ok')->nullable()->default(0);
+            $table->integer('prog_bad')->nullable()->default(0);
         });
     }
 

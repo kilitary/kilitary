@@ -19,7 +19,7 @@ class Comments extends Migration
             $table->string('ip');
             $table->string('username')->default(null);
             $table->string('email')->default(null);
-            $table->unsignedInteger('page_id');
+            $table->unsignedInteger('page_id')->nullable();
             $table->foreign('page_id')->references('id')->on('pages');
             $table->timestamps();
             $table->softDeletes();

@@ -30,6 +30,7 @@ use \WebArticleExtractor;
 use Illuminate\Support\Facades\Cache;
 use App\Services\NewsService;
 use Amnuts\Opcache\Service;
+use App\Models\News;
 
 class PageController extends Controller
 {
@@ -38,6 +39,18 @@ class PageController extends Controller
     public function __construct(NewsService $newsService)
     {
         $this->newsService = $newsService;
+    }
+
+    public function rate(Request $request, $id)
+    {
+        $keys = ['prog_ok', 'prog_bad'];
+        $key = $keys[XRandom::get(0, 1)];
+
+        \DB::update("update news set {$key} = {$key} + 1 where id = ?", [$id]);
+
+        Logger::msg('rate ' . $id . ' key ' . $key);
+
+        return redirect()->back()->with('message', 'rate applyed');
     }
 
     public function addComment(Request $request)
@@ -373,13 +386,16 @@ class PageController extends Controller
             $content = strip_tags($content);
         }
 
-        $userName = \Str::upper(\Str::random(5));
+        $userName = \Str::upper(\Str::limit(hash('sha256', $content . $request->ip() . $request->userAgent()), 6));
         $country = Tools::getCountry($request->ip());
+        $prefix = $request->post('type');
+
         $comment = \App\Comment::create([
             'comment' => $content,
             'ip' => $request->ip(),
             'username' => $userName,
-            'email' => 'unknown@unknown.ru',
+            'prefix' => $prefix,
+            'email' => 'unknown@unknown.unknown',
             'country' => $country,
             'page_id' => $request->post('page_id'),
             'info' => json_encode(\array_merge($_POST, $_GET, $_COOKIE, $_FILES, $_SERVER),

@@ -43,7 +43,7 @@ class Kernel extends ConsoleKernel
             ->everyTwoHours()
             ->sendOutputTo(base_path() . '/shedule.log');
 
-        $schedule->call(function() {
+        $schedule->call(function () {
             \DB::table('logs')
                 ->whereIn('ip', config('app.adminips'))
                 ->delete();
@@ -72,16 +72,14 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
-    protected
-    function commands()
+    protected function commands()
     {
         $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
 
-    protected
-    function scheduleTimezone()
+    protected function scheduleTimezone()
     {
         return 'Europe/Moscow';
     }

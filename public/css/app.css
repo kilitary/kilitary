@@ -96,7 +96,6 @@ body {
   font-size: 13px;
   top: -7px;
   margin-right: 5px;
-  color: limegreen;
 }
 
 .save-button {
@@ -490,6 +489,13 @@ ul {
   float: left;
 }
 
+.red {
+  color: red;
+}
+
+.green {
+  color: yellowgreen;
+}
 
 .interestlink {
   font-size: 12px;

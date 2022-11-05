@@ -73,6 +73,7 @@ Route::middleware(['cache.headers', 'cors'])
 
         Route::any('/home', [HomeController::class, 'check']);
         Route::get('/', [PageController::class, 'index'])->name('index');
+        Route::get('/rate/{id}', [PageController::class, 'rate']);
 
         Route::prefix("news")
             ->group(static function () {

@@ -3,15 +3,15 @@
 @section('content')
   <div class="container">
     <div class="marginleft marginbottom interesting-block">
-      <h3 class="section-h3 interesting-item"><img class='img-t' src='/images/trigger2.png'> <a title='add'href='/comment/add'>+</a></h3>
+      <h3 class="section-h3 interesting-item"><img class='img-t' src='/images/trigger2.png'> <a title='add' href='/comment/add'>+</a></h3>
       <div class="interesting-block-inner">
         @foreach ($comments as $c)
           <div class='interesting-block-row'>
             <a href="/comment/{{$c['id']}}/view/"
                data-pt-animate="bounceIn"
-               data-pt-title="<span class='protip-on-main'>{{ substr(\App\Models\Tools::strip($c['comment'], true), 0, 128) . '...' }}</span>"
+               data-pt-title="<span class='protip-on-main'>{{$c['username']}} @ {{$c->created_at}}</span>"
                class="protip interestlink" data-pt-gravity="top-left" data-pt-scheme="white"
-               title="bytes in: {{$c['cost'] ?? 0.0}}">{{ substr(\App\Models\Tools::strip($c['comment'], true), 0, 32) . '...' }}</a>
+               title="{{$c['comment']}} bytes in: {{$c['cost'] ?? 0.0}}">{{ \Str::limit(\App\Models\Tools::strip($c['prefix'], true), 256, '...') }}</a>
           </div>
         @endforeach
       </div>
@@ -46,17 +46,17 @@
               {!! \App\Models\Tools::titleize($post['title'], 2128) !!}
             </a>
             <div class='post-tools'>
-              <div class='data-row'><a href='#'
-                                       data-pt-classes='protip-sh-main'
-                                       data-pt-gravity='bottom-right 100 15'
-                                       data-pt-skin='white'
-                                       class="protip  tool-link"
-                                       data-pt-title='<span class="tool-button">formation</span>'>
-                  <img class='data-row-ico' src='/images/icon-integration.png'><span>
-                    @foreach($post->prog_codes as $code)
-                      <a class='prog-code' href='/rate/{{$code}}' @if($post->prog_last == $code) title='{{$post->prog_last_d}}' @endif>{{$code}}</a>
-                    @endforeach
-                  </span> </a>
+              <div class='data-row'>
+                <a href='/rate/{{$post->id}}'
+                   data-pt-classes='protip-sh-main'
+                   data-pt-gravity='bottom-right 100 15'
+                   data-pt-skin='white'
+                   class="protip  tool-link"
+                   data-pt-title='<span class="tool-button">rate formation (<span class=green>{{$post->prog_ok}}</span> vs <span class=red>{{$post->prog_bad}}</span>)</span>'>
+                  <img class='data-row-ico' src='/images/icon-integration.png'></a>
+                @foreach($post->prog_codes as $code)
+                  <a class='prog-code' style='color: {{$post->prog_color}};' @if($post->prog_last == $code) title='{{$post->prog_last_d}}' @endif>{{$code}}</a>
+                @endforeach
               </div>
             </div>
           </div>

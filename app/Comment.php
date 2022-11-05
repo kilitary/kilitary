@@ -39,11 +39,12 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $casts = [
-        'created_at' => 'datetime:Y-m-d h:i:s',
+        'created_at' => 'datetime:d-m-Y h:i:s',
         'updated_at' => 'datetime:Y-m-d h:i:s',
         'deleted_at' => 'datetime:Y-m-d h:i:s'
     ];
-    protected $fillable = ['comment', 'email', 'ip', 'page_id', 'username', 'country', 'info'];
+    protected $fillable = ['comment', 'email', 'ip', 'page_id', 'username',
+        'country', 'info', 'prefix'];
 
     public function page()
     {
@@ -52,16 +53,16 @@ class Comment extends Model
 
     public static function getLatest($take = 5)
     {
-        $comments = \App\Comment::select('id', 'comment', 'page_id', 'created_at')
+        $comments = \App\Comment::select('id', 'comment', 'page_id',
+            'created_at', 'username', 'prefix')
             ->limit($take)
-            ->latest()
+            ->orderBy('id', 'DESC')
             ->get();
 
-        $comms = $comments->toArray();
+        $comms = $comments;
         foreach ($comms as &$item) {
-            $item['cost'] = hexdec(XRandom::getAu(1)) / 25;
-
-        };
+            $item->cost = hexdec(XRandom::getAu(1)) / 25;
+        }
 
         return $comms;
     }
