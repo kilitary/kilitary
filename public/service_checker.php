@@ -18,7 +18,7 @@ do {
         preg_match("|\-#([a-zA-Z0-9]{128})#\-|smi", $data, $matches);
         if ($matches[1] != $sign) {
             echo " sign failed: $matches[1] != $sign\r\n key: $key input: $input_string\r\n";
-            echo `date >> /home/kilitary/nonworking.log`;
+            echo shell_exec('date >> /home/kilitary/nonworking.log');
             sleep(50);
             continue;
         } else {

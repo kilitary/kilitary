@@ -36,10 +36,10 @@ class Handler extends ExceptionHandler
      *
      * @throws \Exception
      */
-    public function report(Throwable $exception)
+    public function report(Throwable $e)
     {
         \App\Audio::exception();
-        parent::report($exception);
+        parent::report($e);
     }
 
     /**
@@ -52,9 +52,9 @@ class Handler extends ExceptionHandler
      *
      * @throws \Throwable
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e)
     {
         \App\Audio::exception();
-        return parent::render($request, $exception);
+        return parent::render($request, $e);
     }
 }

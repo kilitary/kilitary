@@ -23,13 +23,9 @@
       <h2 class="page-header">
         <button>extend</button>
       </h2>
-      <li>
-        <a class="bottom-line alignnmiddle" href="/">ret()
-      </li>
+      <div>
+        <a class="bottom-line alignnmiddle" href="/">ret</a>()
+      </div>
     </form>
   </div>
-
-
-  </div>
-
 @endsection

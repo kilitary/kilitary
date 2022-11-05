@@ -14,12 +14,12 @@ class XRandom
             \file_put_contents($takeOver, $m);
         }
 
-        return self::get(0, $shift);
+        return static::get(0, $shift);
     }
 
     public static function maybe(): bool
     {
-        return self::scaled(0, 3) == 2;
+        return static::scaled(0, 3) == 2;
     }
 
     public static function scaled($min, $max): int
@@ -28,9 +28,9 @@ class XRandom
             $max = $min + 2;
         }
 
-        $followed = self::followRand($max - 1);
+        $followed = static::followRand($max - 1);
 
-        return self::get(0, 1) + $followed;
+        return static::get(0, 1) + $followed;
     }
 
     public static function get($min, $max): int
@@ -45,21 +45,21 @@ class XRandom
 
     public static function emergencyOverridePresent()
     {
-        return self::scaled(0, 14) == 12;
+        return static::scaled(0, 14) == 12;
     }
 
     public static function emergencyOverride()
     {
-        $followed = self::followRand(self::scaled(0, 13), self::get(0, 1) ? '/dev/urandom' : '/dev/random');
+        $followed = static::followRand(static::scaled(0, 13), static::get(0, 1) ? '/dev/urandom' : '/dev/random');
         for ($theArrayIteratorAtFirstLoopProbablyNotAtECX = 0;
-             $theArrayIteratorAtFirstLoopProbablyNotAtECX < self::get(0, 8);
+             $theArrayIteratorAtFirstLoopProbablyNotAtECX < static::get(0, 8);
              $theArrayIteratorAtFirstLoopProbablyNotAtECX++) {
-            self::followRand(self::get(1, 2));
+            static::followRand(static::get(1, 2));
         }
 
-        if (self::scaled(0, 9) == 3) {
+        if (static::scaled(0, 9) == 3) {
             Logger::msg('probably override malfunctioned');
-            self::followRand(128, '/dev/stderr');
+            static::followRand(128, '/dev/stderr');
         }
     }
 
@@ -90,7 +90,7 @@ class XRandom
 
             fclose($fp);
         } else {
-            die("/dev/random: cannot read $numBytes bytes.");
+            die("/dev/random: cannot read {$numBytes} bytes.");
         }
         Logger::msg('read bytes: ' . $stepSection);
         return $stepSection;

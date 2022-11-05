@@ -75,7 +75,7 @@ class PageController extends Controller
         }
 
         $total = 0.0;
-        $cart->transform(static function ($item, $key) use ($request, &$total) {
+        $cart->transform(static function ($item, $key) use (&$total) {
             $record['cost'] = Tools::getItemCost($item);
             $total += $record['cost'];
             $record['name'] = $item;
@@ -245,7 +245,8 @@ class PageController extends Controller
     public function writeComment(Request $request)
     {
         $matches = [];
-        $linksCount = preg_match_all("#(http(?:s|)://[^\s]*?)#Usmi", $request->post('comment'), $matches, PREG_SET_ORDER);
+        $linksCount = preg_match_all("#(http(?:s|)://[^\s]*?)#Uusmi", $request->post('comment'), $matches,
+            PREG_SET_ORDER);
 
         Logger::msg('write comment ', $request->all());
 
@@ -321,7 +322,8 @@ class PageController extends Controller
             Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
             Tools::userSetValue('spam_shit', $request->post('comment'), 3600);
 
-            preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
+            preg_match_all("#([a-z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#uUsmi", $request->post('comment'), $mm,
+                PREG_SET_ORDER);
             foreach ($mm as $m) {
                 \App\Logger::msg('add spammed domain ' . $m[1]);
                 Redis::hIncrBy('spam_domains', $m[1], 1);
@@ -337,7 +339,7 @@ class PageController extends Controller
             return redirect('/view/' . $randomCode);
         }
 
-        preg_match_all('#(\w{1,20}\.\w{1,5})#smi', $request->post('comment'), $mm, PREG_SET_ORDER);
+        preg_match_all('#(\w{1,20}\.\w{1,5})#sUumi', $request->post('comment'), $mm, PREG_SET_ORDER);
         $domainLen = 0;
         foreach ($mm as $index => $domain) {
             $domainLen += \Str::length($domain[0]);
@@ -373,7 +375,8 @@ class PageController extends Controller
             Redis::rPush('spammed_text', \stripslashes($request->post('comment')));
             Tools::userSetValue('spam_shit', $request->post('comment'), 3600);
 
-            preg_match_all("#([a-zA-Z0-9\-]{2,}?\.[a-zA-Z0-9]{2,}?)#Usmi", $request->post('comment'), $mm, PREG_SET_ORDER);
+            preg_match_all("#([a-z0-9\-]{2,}?\.[a-z0-9]{2,}?)#Usumi", $request->post('comment'), $mm,
+                PREG_SET_ORDER);
             foreach ($mm as $m) {
                 \App\Logger::msg('add spammed domain ' . $m[1]);
                 Redis::hIncrBy('spam_domains', $m[1], 1);
@@ -453,13 +456,13 @@ class PageController extends Controller
             return !strstr($key, "HTTP");
         });
 
-        $content = '--------------------------------------------------' . "\r\n";
+        $content = "--------------------------------------------------\r\n";
         foreach ($filtered->toArray() as $key => $value) {
-            $content .= "$key:" . json_encode($value) . "\r\n";
+            $content .= "{$key}:" . json_encode($value) . "\r\n";
         }
 
         $content .= "key:" . hash('sha256', $request->ip() . "--") . "\r\n";
-        $content .= '-------------------------------------------------' . "\r\n";
+        $content .= "-------------------------------------------------\r\n";
         $content .= 'crc[' . hash('crc32', $content) . ']';
 
         return \response($content, \App\XRandom::get(0, 2) == 1 ? 200 : 299);
@@ -608,7 +611,8 @@ class PageController extends Controller
             $result = false;
         }
 
-        \App\Logger::msg('user ' . \Tools::getUserIp() . ' command: delete pageCode: ' . $code . ' mode: ' . $mode . ' result: ' . intval($result));
+        \App\Logger::msg('user ' . \Tools::getUserIp() . ' command: delete pageCode: ' .
+            $code . ' mode: ' . $mode . ' result: ' . (int) $result);
         return view('delete', compact('code'));
     }
 
@@ -645,7 +649,7 @@ class PageController extends Controller
 
             $header = $request->post('header');
 
-            if (preg_match("#^take\s?([0-9a-zA-Z:/\-\.]*)(?:\s+(\w+)|)$#Usi", $content, $matches)) {
+            if (preg_match("#^take\s?([0-9a-z:/\-\.]*)(?:\s+(\w+)|)$#umUsi", $content, $matches)) {
                 \App\Logger::msg('new info: taking article from ' . $matches[1]);
                 $uri = $matches[1];
 

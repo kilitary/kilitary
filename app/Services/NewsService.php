@@ -9,6 +9,7 @@ use App\Models\Tools;
 use App\XRandom;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use Nette\NotImplementedException;
 
 class NewsService
 {
@@ -80,7 +81,7 @@ class NewsService
 
             foreach ($news as $item) {
                 $pubDate = Carbon::parse($item['pubDate']);
-                $title = preg_replace("/[^A-Za-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['title'] ?? '');
+                $title = preg_replace("/[^a-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['title'] ?? '');
                 $slug = trim(mb_strtolower(Tools::slugString(\mb_substr($title, 0, 128))), "_");
 
                 $id = News::where('slug', $slug)
@@ -92,12 +93,12 @@ class NewsService
                 }
 
                 $description = $item['description'][0] ?? '';
-                $category = preg_replace("/[^A-Za-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['category'] ?? '');
+                $category = preg_replace("/[^a-zа-яА-Я0-9\s*\!\.\-]/umsiU", "", $item['category'] ?? '');
                 $len = $item['enclosure']['@attributes']['length'] ?? -1;
                 $imageUrl = $item['enclosure']['@attributes']['url'] ?? '';
                 $url = $item['link'];
-                $costHash = md5($title ?? '') . ':' . md5($category ?? '') .
-                    ':' . md5($len ?? '') . ':' . md5($url ?? '');
+                $costHash = hash('sha256', $title ?? '') . ':' . hash('sha256', $category ?? '') .
+                    ':' . hash('sha256', $len ?? '') . ':' . hash('sha256', $url ?? '');
 
                 $content = \json_encode($item, JSON_UNESCAPED_UNICODE);
 
@@ -134,7 +135,7 @@ class NewsService
     {
         $serZ = \json_encode($item);
 
-        $x = [1 => 1, 2 => 5, 3 => 4, 4 => 8, 5 => 3, 6 => 8, 7 => 0, 8 => 9, 9 => 10, 0 => 1];
+        $x = [1 => 1, 2 => 5, 3 => 4, 4 => 8, 5 => 3, 6 => 8, 7 => 0, 8 => 9, 9 => 10, 0 => 1, 10 => 9];
         $y = [0 => 9];
         $c = [];
 
@@ -142,7 +143,7 @@ class NewsService
 
         $prevCode = -1;
         $rndLoop = XRandom::scaled(1, 10);
-        while ($rndLoop--) {
+        while ($rndLoop) {
             $min = 0;
             $max = XRandom::scaled($x[$rndLoop], strlen($serZ) - 1);
 
@@ -157,6 +158,7 @@ class NewsService
                 $codeAt .= $code . ' ';
                 $prevCode = $code;
             }
+            $rndLoop--;
         }
 
         return trim($codeAt);
@@ -170,12 +172,12 @@ class NewsService
             $min = (-1 + $b);
             $cost = Xrandom::get(abs($min), abs($min) + mt_rand(0, 12));
             if ($cost <= -1) {
-                Logger::err('alarm min cost -1 ' . "c {$c} b {$b} min {$min} cost {$cost}");
+                Logger::err("alarm min cost -1 c {$c} b {$b} min {$min} cost {$cost}");
             }
         } else {
             $cost = 0.0;
         }
-        Logger::msg("getCost({$hash}) = $cost");
+        Logger::msg("getCost({$hash}) = {$cost}");
         return (float) $cost;
     }
 
@@ -245,6 +247,6 @@ class NewsService
 
     public function d2($code)
     {
-
+        throw NotImplementedException::new("d2");
     }
 }

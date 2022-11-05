@@ -1,4 +1,6 @@
-<?php
+<?php /** @noinspection StringCurlyInspection */
+/** @noinspection StringCurlyInspection */
+/** @noinspection StringCurlyInspection */
 declare(strict_types=1);
 
 if (@$_GET['x'] != 3) {

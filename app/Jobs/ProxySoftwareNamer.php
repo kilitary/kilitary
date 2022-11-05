@@ -57,7 +57,7 @@ class ProxySoftwareNamer implements ShouldQueue
                 //do {
                 $start = time();
                 $ret = socket_connect($socket, $proxy->host, $proxy->port);
-                if ($ret == true) {
+                if ($ret) {
                     \App\Logger::msg('connected in ' . (time() - $start) . ' secs');
                 } else {
                     \App\Logger::msg('error: ' . socket_strerror(socket_last_error()) . ' (#' . socket_last_error() . ')');
@@ -95,7 +95,7 @@ class ProxySoftwareNamer implements ShouldQueue
                         break;
                     }
 
-                    $n = preg_match("#^Server:\s+(.*?)$#smi", $buf, $matches);
+                    $n = preg_match("#^Server:\s+(.*?)$#sUumi", $buf, $matches);
                     if ($n) {
                         $proxy->software = \Str::substr($matches[1], 0, 255);
                         $proxy->save();
@@ -107,28 +107,28 @@ class ProxySoftwareNamer implements ShouldQueue
                         $proxy->save();
                     }
 
-                    $n = preg_match("#http/\d\.\d\s+(\d+)\s+#smi", $buf, $matches);
+                    $n = preg_match("#http/\d\.\d\s+(\d+)\s+#sUumi", $buf, $matches);
                     if ($n) {
                         $proxy->last_code = $matches[1];
                         $proxy->save();
                     }
 
                     $id = hash('sha256', $proxy->host . "--");
-                    $n = preg_match("#$id#smi", $buf, $matches);
+                    $n = preg_match("#{$id}#sUumi", $buf, $matches);
                     if ($n) {
                         \App\Logger::msg('id ' . $id . ' found');
                         $proxy->self = $buf;
                         $proxy->save();
                     }
 
-                    $n = preg_match("#(?:forwarded\-for|via)#smi", $buf, $matches);
+                    $n = preg_match("#(?:forwarded\-for|via)#Uusmi", $buf, $matches);
                     if ($n) {
                         \App\Logger::msg('proxy is fully transparent');
                         $proxy->self = $buf;
                         $proxy->save();
                     }
 
-                } while ($recv != false);
+                } while ($recv);
 
                 if ($recv === false) {
                     $proxy->last_error = socket_last_error();
@@ -136,6 +136,8 @@ class ProxySoftwareNamer implements ShouldQueue
                     \App\Logger::msg('connection dropped');
                 } elseif ($recv == 0) {
                     \App\Logger::msg('connection closed gracefully');
+                } else {
+                    \App\Logger::msg('connection closed unexpetdly');
                 }
 
             } catch (Exception $e) {
