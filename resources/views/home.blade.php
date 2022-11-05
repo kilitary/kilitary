@@ -7,7 +7,9 @@
     <div class="marginleft marginbottom interesting-block">
       <h3 class="section-h3 interesting-item"><img class='img-t' src='/images/trigger2.png'> <a title='add' href='/comment/add'>+</a></h3>
       <div class="interesting-block-inner">
+
         @foreach ($comments as $c)
+
           <div class='interesting-block-row'>
             <a class="comment-href protip interestlink" href="/comment/{{$c['id']}}/view/"
                data-pt-animate="bounceIn"
@@ -20,14 +22,18 @@
               {{ \Str::limit(\Tools::strip($c['prefix'], true), 256, '...') }}
             </a>
           </div>
+
         @endforeach
+
       </div>
     </div>
 
     <div class="marginleft marginbottom interesting-block">
       <h3 class="section-h3 interesting-item"><a href='/news/reload' title='update'><img class='img-t' src='/images/LabVIEW_object.png'></a></h3>
       <div class="interesting-block-inner">
+
         @foreach ($news as $post)
+
           <div class='interesting-block-row'>
             <a href="/news/{{$post->slug}}"
                data-pt-width='800'
@@ -52,6 +58,7 @@
                title="Фулл: {{ sprintf("%.2fMB", $post->length / 1024.0 / 1024.0) }}">
               {!! \Tools::titleize($post['title'], 2128) !!}
             </a>
+
             <div class='post-tools'>
               <div class='data-row'>
                 <a href='/rate/{{$post->id}}'
@@ -67,14 +74,18 @@
               </div>
             </div>
           </div>
+
         @endforeach
+
       </div>
     </div>
 
     <div class="marginleft marginbottom interesting-block">
       <h3 class="section-h3 interesting-item" title="из сетевой карты"><img class='img-t' src='/images/group_small.png'></h3>
       <div class="interesting-block-inner">
+
         @foreach ($videos as $v)
+
           <div class='interesting-block-row'>
             <a class='video-header-link' data-pt-width='800'
                data-pt-gravity='top-left 30 -20'
@@ -90,7 +101,9 @@
               {!! $v->html !!}
             </div>
           </div>
+
         @endforeach
+
       </div>
     </div>
   </div>
