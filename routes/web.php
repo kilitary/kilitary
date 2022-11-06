@@ -47,7 +47,7 @@ Route::middleware(['cache.headers', 'cors'])
 //
 //                Route::get('/self', 'PageController@self')->name('self');
 //
-//                Route::get('/opcache', 'PageController@opcache');
+                Route::get('/opcache', [PageController::class, 'opcache']);
             });
 
         Route::middleware('cacheResponse:34')

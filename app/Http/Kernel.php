@@ -55,7 +55,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\PostRequest::class,
-            //\Spatie\ResponseCache\Middlewares\CacheResponse::class,
+            \Spatie\ResponseCache\Middlewares\CacheResponse::class,
         ],
 
         'api' => [
