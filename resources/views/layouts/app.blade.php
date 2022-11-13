@@ -11,12 +11,20 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="author" content="CommandmentTwo"/>
+
   <meta property="og:title" content="{{isset($page) ? $page->header : ($description ?? 'x25 vault')}}">
   <meta property="og:url" content="{{request()->fullUrl()}}">
   <meta property="og:site_name" content="kilitary thales of the future">
   <meta property="og:description" content="kilitary thales of the x25 future">
   <meta property="og:type" content="website">
   <meta property="og:image" content="/media/sh.png">
+  <meta property="og:description" content="Certification: ISO9001-> CE Height: Low Attitude Operating. Radius: 20km. Size: Small. Usage: Industrial Structure: Variable-Wing UAV.">
+
+  <!--<meta property="fb:admins" content="292039974180201">
+  <meta property="fb:page_id" content="10150525576765348">
+  <meta property="fb:app_id" content="205885989426763">
+  -->
+
   <link rel="canonical" href="{{request()->fullUrl()}}"/>
   <link rel="icon" href="/images/lock.png" type="image/png">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">

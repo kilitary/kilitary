@@ -136,8 +136,10 @@ class NewsService
         $serializedSign = \json_encode($item);
 
         $x = [1 => 1, 2 => 5, 3 => 4, 4 => 8, 5 => 3, 6 => 8, 7 => 0, 8 => 9, 9 => 10, 0 => 1, 10 => 9];
-        $y = [0 => 0.1, 1 => 0.02, 2 => 0.4, 3 => 0.23, 4 => 0.8,
-            5 => 0.7, 6 => 0.29, 7 => 0.09, 8 => 0.26, 9 => 0.06, 10 => 0.03];
+        $y = [
+            0 => 0.1, 1 => 0.02, 2 => 0.4, 3 => 0.23, 4 => 0.8, 5 => 0.7, 6 => 0.29, 7 => 0.09,
+            8 => 0.26, 9 => 0.06, 10 => 0.03
+        ];
         //$c = [];
 
         $codeAt = '';
@@ -159,8 +161,10 @@ class NewsService
 
             $code = (string) ord($serializedSign[min($codeLen, $idx)]);
 
-            if (XRandom::scaled(0, 3) == 2) {
+            if (XRandom::scaled(0, 2) == 1) {
                 $code = XRandom::maybe() ?
+                    $serializedSign[XRandom::get(0, $idx)]
+                    .
                     $serializedSign[XRandom::get(0, $idx)]
                     :
                     ord($serializedSign[$code]);
@@ -180,7 +184,12 @@ class NewsService
             $rndDims--;
         }
 
-        return trim($codeAt);
+        $sign = trim($codeAt);
+        if (empty($sign)) {
+            $sign = "-1";
+        }
+
+        return $sign;
     }
 
     public function getCost(string $hash): float
@@ -239,9 +248,9 @@ class NewsService
 
                 if ($progCodeLen == 2) {
                     $charCode = $progCode[0];
-                    $digit = $y[$charCode];
+                    $digit = $y[(int) $charCode];
                     $charCode = $progCode[1];
-                    $digit .= $y[$charCode];
+                    $digit .= $y[(int) $charCode];
                 } else {
                     $digit = '';
                     for ($i = 0; $i < $progCodeLen; $i++) {
