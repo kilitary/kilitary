@@ -16,7 +16,7 @@ return new class extends Migration {
         Schema::create('news', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->nullable()->default('#empty#');
-            $table->timestamps();
+            $table->timestamps(6);
             $table->string('source')->nullable()->default('#unkown#');
             $table->integer('views')->nullable()->default(0);
             $table->boolean('visible')->nullable()->default(true);

@@ -14,7 +14,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->timestamp('prog_at')->nullable();
+            $table->timestamp('prog_at', 6)->nullable();
             $table->text('prog_code')->nullable();
             $table->integer('prog_ok')->nullable()->default(0);
             $table->integer('prog_bad')->nullable()->default(0);

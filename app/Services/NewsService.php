@@ -136,25 +136,39 @@ class NewsService
         $serializedSign = \json_encode($item);
 
         $x = [1 => 1, 2 => 5, 3 => 4, 4 => 8, 5 => 3, 6 => 8, 7 => 0, 8 => 9, 9 => 10, 0 => 1, 10 => 9];
-        $y = [0 => 9];
-        $c = [];
+        $y = [0 => 0.1, 1 => 0.02, 2 => 0.4, 3 => 0.23, 4 => 0.8,
+            5 => 0.7, 6 => 0.29, 7 => 0.09, 8 => 0.26, 9 => 0.06, 10 => 0.03];
+        //$c = [];
 
         $codeAt = '';
 
         $previousCode = -1;
         $rndDims = XRandom::scaled(1, 4);
+        $codeLen = strlen($serializedSign);
+        $YLen = count($y);
+
+        $y = collect($y)->transform(function ($cell) {
+            return (int) max(1.0 - $cell, $cell * ($cell >= 0.5 ? 10 : 99));
+        })->toArray();
 
         while ($rndDims) {
             $min = 0;
-            $idx = XRandom::scaled($x[$rndDims], strlen($serializedSign) - 1);
+            $Y = XRandom::get(0, $YLen - 1);
 
-            $code = (string) ord($serializedSign[$idx]);
+            $idx = XRandom::scaled($codeLen - XRandom::get(0, $y[$Y] * $rndDims), $x[$rndDims]);
 
-            if (XRandom::maybe() && XRandom::scaled(0, 3) == 2) {
-                $code = XRandom::maybe() ? $code[XRandom::get(0, 1)] : ord($serializedSign[$code]);
+            $code = (string) ord($serializedSign[min($codeLen, $idx)]);
+
+            if (XRandom::scaled(0, 3) == 2) {
+                $code = XRandom::maybe() ?
+                    $serializedSign[XRandom::get(0, $idx)]
+                    :
+                    ord($serializedSign[$code]);
             } else {
                 $code = (string) ord($serializedSign[$code]);
-                $code = $code[0];
+                if (XRandom::maybe()) {
+                    $code = $code[0];
+                }
             }
 
             if ((int) $code !== (int) $previousCode) {
