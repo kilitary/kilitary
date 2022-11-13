@@ -25,12 +25,7 @@ class PostRequest
 
         session(['time_prev_request' => now('MSK')]);
 
-        if ($request->has('admin')) {
-            session(['admin' => true]);
-            Tools::userSetValue('admin', true);
-        }
-
-        Tools::userSetValue('last_visit', \Carbon\Carbon::now()->timestamp);
+        Tools::userSetValue('last_visit', now()->timestamp);
 
         $logId = Tools::getUserValue('current_log_id');
         if ($logId) {
@@ -76,7 +71,6 @@ class PostRequest
                 ->header('X-At-War', Xrandom::scaled(-2, 398) == 384 ? 1 : 0)
                 ->header('Pragma', 'no-cache')
                 ->header('cf-ray', \Str::random(10) . '-' . \Str::upper(\Str::random(3)))
-                ->header('expect-dtp', 'max-age=' . Xrandom::get(0, 2) . 'd')
                 ->header('expect-d-tp', 'max-age=' . Xrandom::get(0, 2111111111) . 'd')
                 ->header('X-CurveBank', 'Dont Be A ' . $wors[Xrandom::get(0, count($wors) - 1)])
                 ->header('Client-on-receive-version', 'arminer(0.44c-2022 0x43-b/c/AN/SPY70)')
@@ -92,27 +86,33 @@ class PostRequest
                 ->header('X-Like-Abuser', Xrandom::get(0, 1) ? '1' : '0')
                 ->header('X-Like-Z', Xrandom::get(0, 1) ? '1' : '0')
                 ->header('Digest', 'sha-256=' . hash('sha256', \Str::random(5)))
-                ->header('Early-Data', Xrandom::get(0, 1))
+                ->header('Early-Data', Xrandom::get(0, 2))
                 ->header('From', 'kilitary@x25.cc')
                 ->header('To', 'self')
                 ->header('Link', 'https://platform.twitter.com; rel="preconnect"', false)
                 ->header('Link', 'https://www.facebook.com; rel="preconnect"', false)
                 ->header('Link', 'https://mc.yandex.ru; rel="preconnect"', false)
+                ->header('Link', 'https://www.microsoft.com; rel="preconnect"', false)
+                ->header('Link', 'https://abs.twimg.com', false)
                 ->header('Link', 'https://www.googletagmanager.com; rel="preconnect"', false)
                 ->header('Server-Timing', Xrandom::get(0, 1) ? 'missedCache' : 'hitCache', false)
                 ->header('Server-Timing', 'cpu;dur=' . Xrandom::get(1, 4), false)
                 ->header('Server-Timing', 'cache;desc="Cache Read";dur=' . Xrandom::get(1, 41), false)
-                ->header('Server-Timing', 'db;dur=53, app;dur=' . Xrandom::get(1, 411), false)
+                ->header('Server-Timing', 'db;dur=53, mur=' . Xrandom::get(0, 1) . ';app;dur=' . Xrandom::get(1, 411), false)
                 ->header('Server-Timing', 'total;dur=' . Xrandom::get(1110, 1411), false)
                 ->header('Trailer', 'https://twitter.com/CommandmentTwo/status/1322420315268534272')
                 ->header('Tk', $tk[Xrandom::get(0, count($tk) - 1)])
                 ->header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36 OPR/72.0.3815.' .
                     Xrandom::get(100, 999))
                 ->header('Via', $via[Xrandom::get(0, count($via) - 1)], false)
-                ->header('Warning', '113 jettison/2.6.6.4 Response is', false)
-                ->header('Warning', '299 A system receiving this warning MUST NOT take any automated action"', false)
-                ->header('Warning', '214 xyz-patch applyed (' . hash('crc32', json_encode(array_merge($_COOKIE, $_GET, $_POST))) . ')', false)
-                ->header("Server", "thttpd v1.12.5 (QNX)");
+                ->header('Warning', '113 jettison/2.6.6.4 response (!interized!) is: ' . Xrandom::scaled(0, 7), false)
+                ->header('Warning', '303 See Other: Will Be Implemented Soon')
+                ->header('Warning', '299 A system: receiving this warning MUST NOT take any automated action"', false)
+                ->header('Warning', '214 xYz-pATch: applyed (' . hash('crc32', json_encode(array_merge($_COOKIE,
+                        $_GET, $_POST))) . ')', false)
+                ->header('Info', '103 A system: URL will accept Webmentions')
+                ->header("Server", "thttpd v" . Xrandom::get(1, 9) . "." . Xrandom::get(4, 29) . "." . Xrandom::get(1, 9) .
+                    (Xrandom::maybe() ? 'a' : 'c') . " (QNX)");
         } else {
             $malcraftedResponse = $response;
         }

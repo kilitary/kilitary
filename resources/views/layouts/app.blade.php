@@ -37,8 +37,11 @@
   <link async href="/css/liberation-mono.css" rel="stylesheet">
   <link href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' rel='stylesheet'>
   <link async rel="stylesheet " href="/css/protip.min.css">
+  <link rel="preconnect" href=""/>
   <link async rel="stylesheet" href="/css/animate.min.css"/>
   <link async href="{{ asset('css/app.css') . '?ver='.hash('crc32',\file_get_contents('css/app.css')) }}" rel="stylesheet">
+
+  <link href='/css/fonts.css' rel='stylesheet'/>
 </head>
 <!--
 # 2023
@@ -58,11 +61,10 @@
     </span>
   <div class="bg-img">
   </div>
-  <!-- TODO: show on expensive operation <div style="z-index:99999;float:right;position: absolute;top: 10px;left: 100px">
-      <a target=_blank href="/images/operatoR.jpg">
-        <img class="crysa-class" title="Crysa class server admin " src="/images/krisa.png"></a>
-    </div>
-   -->
+  <div style="z-index:99999;float:right;position: absolute;top: 10px;left: 100px">
+    <a target=_blank href="/images/operatoR.jpg">
+      <img class="crysa-class" title="Crysa class server admin " src="/images/krysa-class-server-admin.png"></a>
+  </div>
 </header>
 <div id="app">
   @if(session('message'))

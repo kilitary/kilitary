@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Amnuts\Opcache\Service;
 use App\Comment;
 use App\Logger;
 use App\Models\Page;
 use App\Models\Tools;
+use App\Models\Video;
 use App\Services\NewsService;
 use App\XRandom;
 use Exception;
@@ -131,12 +131,9 @@ class PageController extends Controller
             " session: " . session()->getId() . ' visits: ' . ((int) \Tools::ipVisits()));
 
         $interesting = Page::interesting(5) ?? [];
-
         $news = $this->newsService->retrieve(5, true);
-
-        $comments = \App\Comment::getLatest(5) ?? [];
-
-        $videos = \App\Models\Video::getLatest(5) ?? [];
+        $comments = Comment::getLatest(5) ?? [];
+        $videos = Video::getLatest(5) ?? [];
 
         return view('home', compact('videos', 'comments', 'news'));
     }
@@ -164,8 +161,10 @@ class PageController extends Controller
 
                 XRandom::followRand(XRandom::get(1, 11));
 
+                $h = \App\XRandom::scaled(1, 200);
+                $w = \App\XRandom::scaled(1, 200);
                 $overlappedImage = $manager->make('../resources/media/darkcp.jpg')
-                    ->resize(\App\XRandom::scaled(1, 200), \App\XRandom::scaled(1, 200));
+                    ->resize($h, $w);
 
                 if (XRandom::maybe()) {
                     $overlappedImage->rotate(XRandom::scaled(-360, 360));
@@ -202,10 +201,10 @@ class PageController extends Controller
             Logger::msg('exception: ' . $e->getMessage());
         }
 
-        return XRandom::maybe() ?
-            \response()->file('media/sh.png', ['Content-Type' => 'image/png'])
-            :
+        $ret = XRandom::maybe() ?
+            \response()->file('media/sh.png', ['Content-Type' => 'image/png']) :
             (XRandom::maybe() ? \response('', 410) : $srcImage->response('image/png'));
+        return $ret;
     }
 
     public function cp(Request $request)

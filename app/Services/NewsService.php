@@ -133,7 +133,7 @@ class NewsService
 
     public function genProgCode($item)
     {
-        $serZ = \json_encode($item);
+        $serializedSign = \json_encode($item);
 
         $x = [1 => 1, 2 => 5, 3 => 4, 4 => 8, 5 => 3, 6 => 8, 7 => 0, 8 => 9, 9 => 10, 0 => 1, 10 => 9];
         $y = [0 => 9];
@@ -141,24 +141,29 @@ class NewsService
 
         $codeAt = '';
 
-        $prevCode = -1;
-        $rndLoop = XRandom::scaled(1, 10);
-        while ($rndLoop) {
+        $previousCode = -1;
+        $rndDims = XRandom::scaled(1, 4);
+
+        while ($rndDims) {
             $min = 0;
-            $max = XRandom::scaled($x[$rndLoop], strlen($serZ) - 1);
+            $idx = XRandom::scaled($x[$rndDims], strlen($serializedSign) - 1);
 
-            $code = ord($serZ[$max]);
+            $code = (string) ord($serializedSign[$idx]);
 
-            if (XRandom::maybe() && XRandom::scaled(0, 5) == 4) {
-                $max = XRandom::scaled(2, min(2, strlen($serZ) - 1));
-                $code .= ord($serZ[$max]);
+            if (XRandom::maybe() && XRandom::scaled(0, 3) == 2) {
+                $code = XRandom::maybe() ? $code[XRandom::get(0, 1)] : ord($serializedSign[$code]);
+            } else {
+                $code = (string) ord($serializedSign[$code]);
+                $code = $code[0];
             }
 
-            if ((int) $code !== (int) $prevCode) {
+            if ((int) $code !== (int) $previousCode) {
                 $codeAt .= $code . ' ';
-                $prevCode = $code;
             }
-            $rndLoop--;
+
+            Logger::msg("ord $code");
+            $previousCode = $code;
+            $rndDims--;
         }
 
         return trim($codeAt);
