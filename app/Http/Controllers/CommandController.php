@@ -99,7 +99,7 @@ class CommandController extends Controller
             'no',
             'maybe'
         ];
-        $list['tampered'] = $tamper[XRandom::scaled(0, 1)];
+        $list['tampered'] = $tamper[XRandom::scaled(0, 2)];
 
         $clears = [];
         foreach ($list as $k => $v) {
