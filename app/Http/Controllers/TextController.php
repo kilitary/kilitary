@@ -24,7 +24,7 @@ class TextController extends Controller
         }
 
         return \response()
-            ->view('list-text', compact('list'), \App\XRandom::maybe() ? 417 : 200)
+            ->view('list-text', compact('list'))//, \App\XRandom::maybe() ? 417 : 200 ??
             ->header('Content-Type', 'text/plain');
     }
 }
