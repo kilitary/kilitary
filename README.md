@@ -1,1 +1,1 @@
-running: script: Update ... complete ... update ... you are almost in ... reBoOT .. You are 67% here.
+running: script: Update ... complete ... update ... you are almost in ... reB00T .. You are 67% here.
