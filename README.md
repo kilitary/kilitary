@@ -26,5 +26,5 @@ loli-connector-x96, aka mastah, aka deconf aka kilitary@gmail.com aka printf (ak
 write a program [or fast read this text and fastly (<500ms) think about something matchch) which will converge this "test" into north bridge via p-n-p.
 better u have Ryzen processor. and shut down acceleration. 
 
-79046492454,  i am no anonymous, i am Counter-Terrorist++
+79046492454,  i am not an anonymous/anonymouz/mouser, i am Counter-Terrorist++
 if you th en, co o l and quie t -> OffIce 
