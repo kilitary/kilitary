@@ -1,4 +1,6 @@
-runnINg: Update ... You are 0 time[S] anyWHere or read https://github.com/kilitary/full-bread-swith-k-no-t-be-e-r during se tup.
+runnINg: Update ... You are 0 time(|S) anYwhERe or read https://github.com/kilitary/full-bread-swith-k-no-t-be-e-r during se tup.
+мне нужны ок на и мешки и эту суку из блейда с рисовой пиздой. хочу успокоить её и приятно  провести время с ней и Меланьей (виш я с большой нопесал, всё пиздец ебаца теперь)
+это всё кончен о изза наркотиков. которые создались вдруг и перевезлись
 
 good. but better i have rest simulation engine. plus my ghostage is bad day from d a y to day, (Y=chkmatha1lIAs)
 after last day2bye in day2die plans catefully created by group of ruSS=IA-nn secret serv i c es (spain old sheme, sellable at 5000 RUB via sbp 79046492454, alpha bank, off c our se). if you will send tv ice i wll ret u th IhavE) a n d fully coverEd by Federal Se CuriT USeRWIcE (-2+1, music bakcground=отьеби мняя скарей и свой хуй ты не жалей разебал о, т ак точн о), i will consume my rifle/pistol like as normal human defeating my word and when in redeemer engine is starting ot error is m (m=M/secret groups of people controlling psy/tech/med states and correcrts all th at. cover s in spb, FSS. when i will start i think i will have abot 15 minutes to kill more and more.
