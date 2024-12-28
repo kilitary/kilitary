@@ -1,4 +1,4 @@
-runnINg: Update ... You are 0 time(|S) anYwhERe or read https://github.com/kilitary/full-bread-swith-k-no-t-be-e-r during se tup.
+runnINg: Update ... You are 0 time(|S) hERe durinr read make a pot on thISS: https://github.com/kilitary/full-bread-swith-k-no-t-be-e-r i am d ur in g se t up.
 мне нужны ок на и мешки и эту суку из блейда с рисовой пиздой. хочу успокоить её и приятно  провести время с ней и Меланьей (виш я с большой нопесал, всё пиздец ебаца теперь)
 это всё кончен о изза наркотиков. которые создались вдруг и перевезлись
 
