@@ -1,4 +1,4 @@
-runnINg: Update ... You are 0 time(|S) hERe                   ебать, точно!
+runnINg: Update ... You are 0 time(|S) hERe                   ебанутса, но точно!
 
 
 
