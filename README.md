@@ -1,4 +1,4 @@
-runnINg: Update ... You are 0 time(|S) hERe                   ебанутса, но точно!
+runnINg: Update ... You are 0 time(|S) hERe                   ебанутса,  точно!
 
 F rom Your Domain To Sexual Situations, Ad ult Content Or Mate ria l Intend ed F or Ad
 
