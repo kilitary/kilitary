@@ -5,7 +5,7 @@ i am coding now (all cameras ON and i am waiting some mystical events (ON) that 
 
 
 deployer:
-loli-connector-x96, aka mastah, aka deconf aka kilitary@gmail.com aka printf (aka IP_HDRNCL joined the channels ms is (´▽`ʃ♡ƪ)
+loli-connector-x96, aka mastah, aka deconf aka kilitary@gmail.com aka printf (aka IP_HDRNCL joined the channels ms delay is (´▽`ʃ♡ƪ)
 
 
 requester:
