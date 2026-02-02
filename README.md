@@ -12,7 +12,7 @@ requester:
 write a program [or fast read this text and fastly (<500ms) think about something matchch) which will converge this "test" into north bridge via p-n-p.
 
 receiver:
-79046492454,  i am not an anonymous/anonymouz/mouser, i am Counter-Terrorist++
+79046492454,  i am not an anonymous/anonymouz/mouser, i am Counter-Terrorist++ (EX Krysa-class wep site admin aka "NoRgon r*at*S)
 
 m id dl e:
 if you then, co ol an d quiet -> OffIce and FORGOT ABOUT KME ("PLEASE " + "!" ) * 100000000000000000099999999977777777733333333333333331111
