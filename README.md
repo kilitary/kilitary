@@ -24,4 +24,4 @@ line 22, opening mounts number 5 aaaand 7 ... line x,-x,your time is not the bes
 #((((nano pniblamma delay ddepplllooy ccompleted [state: INSTALLED MANUAL Ghal SCRIPT] /// bet t er u have Ryzen processor. and shut down acceleration. ))))#($1)#SMI
 
 
-[стойте здесь и только никуда не уходите]
+[стойте только здесь и никак никуда не уходите]
