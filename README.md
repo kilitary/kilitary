@@ -17,7 +17,7 @@ receiver:
 m id dl e:
 if you then, co ol an d quiet -> OffIce and FORGOT ABOUT KME ("PLEASE " + "!" ) * 100000000000000000099999999977777777733333333333333331111
 
-[DISConNECt]
+
 line 22, opening mounts number 5 aaaand 7 ... line x,-x,your time is not the best way to get the tab key moving focus. Alternatively, use esc then tab to move to the next interactive element on the page.
 
 
@@ -30,3 +30,5 @@ line 22, opening mounts number 5 aaaand 7 ... line x,-x,your time is not the bes
 
 п.с.
 ру EV для ихнего гхоста, кто не понял тод хиер либо 
+
+[DISConNECt (disconnect joined the quit]
