@@ -20,3 +20,6 @@ if you then, co ol an d quiet -> OffIce and FORGOT ABOUT KME ("PLEASE " + "!" ) 
 
 [DISConNECt]
 line 22, opening mounts number 5 aaaand 7 ... line x,-x,your time is not the best way to get the tab key moving focus. Alternatively, use esc then tab to move to the next interactive element on the page.
+
+
+nano pniblamma delay ddepplllooy ccompleted [state: INSTALLED MANUAL Ghal SCRIPT]
