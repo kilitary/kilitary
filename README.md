@@ -10,7 +10,6 @@ loli-connector-x96, aka mastah, aka deconf aka kilitary@gmail.com aka printf (ak
 
 requester:
 write a program [or fast read this text and fastly (<500ms) think about something matchch) which will converge this "test" into north bridge via p-n-p.
-better u have Ryzen processor. and shut down acceleration. 
 
 receiver:
 79046492454,  i am not an anonymous/anonymouz/mouser, i am Counter-Terrorist++
@@ -22,4 +21,5 @@ if you then, co ol an d quiet -> OffIce and FORGOT ABOUT KME ("PLEASE " + "!" ) 
 line 22, opening mounts number 5 aaaand 7 ... line x,-x,your time is not the best way to get the tab key moving focus. Alternatively, use esc then tab to move to the next interactive element on the page.
 
 
-nano pniblamma delay ddepplllooy ccompleted [state: INSTALLED MANUAL Ghal SCRIPT]
+#((((nano pniblamma delay ddepplllooy ccompleted [state: INSTALLED MANUAL Ghal SCRIPT] /// bet t er u have Ryzen processor. and shut down acceleration. ))))#($1)#SMI
+
