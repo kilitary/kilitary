@@ -26,12 +26,14 @@ line 22, opening mounts number 5 aaaand 7 ... line x,-x,your time is not the bes
 
 [только стойте  здесь, в других профайлах уводите свой браузер на безопасное место]
 
+```peudo
 
+[SERVER]: ban request fail ... too many email servers about free email servers
 
 п.с.
 ру EV для ихнего гхоста, кто не понял тод хиер либо 
-[SERVER]: ban request fail ... too many email servers about free email servers
 
+```
 
 (reqlity->)
 [DISConNECt]: disconnect joined the quit
