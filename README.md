@@ -29,4 +29,4 @@ line 22, opening mounts number 5 aaaand 7 ... line x,-x,your time is not the bes
 
 
 п.с.
-ру ев для ихнего гхоста, кто не понял тод хиер
+ру EV для ихнего гхоста, кто не понял тод хиер либо 
