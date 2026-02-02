@@ -1,5 +1,5 @@
 
-kilitary/kilitary is a special repository: its README.md will app
+kilitary/kilitary is a spe*Сia*l repository: its README.md will app
 
 i am coding now (all cameras ON and i am waiting some mystical events (ON) that will happen not for talk but to do their faggot [ECIM ON] job. Even g hosts knew about th e m.g+ptr_OfKnow is kphysocal part us in g var io us hardware, soft war e, env ir o nm en t and other thing s you n, eve r not seed. This  can lea d my m in d, your or your i3n vm, use several houndrets ct ab l e associative neuro ns co ns tr u ct remote text -->write r (N/A) while en emy do, i ng the ir nazi s rem o t e exper i enc e. I have detailed informat [SCRAMBL:E SCRAMBLE S I HAVE SCRAMBLERZARD.jpuk of your su shit. fckn /lusers.] ... >INSERT COIN S<
 
