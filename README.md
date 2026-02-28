@@ -39,3 +39,5 @@ line 22, opening mounts number 5 aaaand 7 ... line x,-x,your time is not the bes
 
 (reqlity->)
 [DISConNECt]: disconnect joined the quit
+
+「🚡」
