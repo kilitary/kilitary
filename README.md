@@ -1,3 +1,5 @@
+間に print "A" 0 times anytime ⨞間   ≁`¸¸`⌜
+
 
 kilitary/kilitary is a *s*pe*Сia*l repository: its README.md will upp
 
