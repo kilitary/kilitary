@@ -28,6 +28,10 @@ line 22, opening mounts number 5 aaaand 7 ... line x,-x,your time is not the bes
 
 [только стойте  здесь, в других профайлах уводите свой браузер на безопасное место]
 
+Vítejte na mém x.com wep p4g3, kde si vytisknu pár paměťových incidentů, které se staly na mé straně, a nový počítačový ruský FSS oss 11 před mým... ne, teď to samozřejmě není moje. evakuace stále probíhá. malý s neomezenými schopnostmi. (pravděpodobnost úniku v tomto volání: 32 %), zbývá 19 znaků.
+
+https://bsky.app/profile/socilass.bsky.social
+
 ```peudo
 
 [SERVER]: ban request fail ... too many email servers about free email servers
