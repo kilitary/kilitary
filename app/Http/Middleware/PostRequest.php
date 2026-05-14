@@ -22,49 +22,49 @@ class PostRequest
     public function handle($request, Closure $next)
     {
         $response = $next($request);
-
+        
         session(['time_prev_request' => now('MSK')]);
-
+        
         Tools::userSetValue('last_visit', now()->timestamp);
-
+        
         $logId = Tools::getUserValue('current_log_id');
-        if ($logId) {
+        if($logId) {
             $currentTime = now('MSK');
-
+            
             LogRecord::where('id', $logId)
                 ->update([
-                    'http_code' => $response->getStatusCode(),
+                    'http_code'   => $response->getStatusCode(),
                     'request_end' => $currentTime,
-                    'session' => session()->getId()
+                    'session'     => session()->getId()
                 ]);
         } else {
             \App\Logger::msg('fatal: redis current_log_id not exist (timeout?)');
         }
-
+        
         $count = Redis::lLen(Tools::getUserIp() . ':ip_log_ids');
-
+        
         \Debugbar::addMessage('there is ' . $count . ' past-ip-log-ids for ' .
             Tools::getUserIp() .
             ' crc: 0x' . sprintf("%X", \crc32(Tools::getUserIp())));
-
+        
         $isAbuser = Redis::get(Tools::getUserIp() . ':is_abuser');
-        if ($isAbuser) {
+        if($isAbuser) {
             \Debugbar::alert('you are abuser');
         }
-
+        
         $tk = ['!', '?', 'G', 'N', 'T', 'C', 'P', 'D', 'U'];
         $via = Redis::hGetAll('kilitary_database_spam_domains');
-        if (empty($via)) {
+        if(empty($via)) {
             $via = ['yandex.ru', 'void.ru', 'fbi.gov', 'cia.gov', 'whitehouse.gov', 'nasa.gov', 'google cloud', 'trial shell'];
         }
-
+        
         $wors = ['Dick', 'Moron', 'idiot', 'kretin', 'eblan', 'mudak', 'monkey'];
-
+        
         $malcraftedResponsesEnabled = config('site.malcrafted_responses', true);
-
-        if ($request->route()->named('self')) {
+        
+        if($request->route()->named('self')) {
             $malcraftedResponse = $response;
-        } elseif ($malcraftedResponsesEnabled) {
+        } elseif($malcraftedResponsesEnabled) {
             $cacheControls = ['private', 'no-cache', 'no-store', 'must-revalidate'];
             $malcraftedResponse = $response
                 ->header('Cache-Control', $cacheControls[mt_rand(0, count($cacheControls) - 1)])
@@ -116,7 +116,7 @@ class PostRequest
         } else {
             $malcraftedResponse = $response;
         }
-
+        
         return $malcraftedResponse;
     }
 }

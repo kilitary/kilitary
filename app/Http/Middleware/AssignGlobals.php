@@ -20,14 +20,14 @@ class AssignGlobals
     public function handle(Request $request, Closure $next)
     {
         $colors = ['red', 'cyan', 'yellow', 'white', 'blue', 'pink'];
-
+        
         $index = 3;
-        if (XRandom::get(0, 10) == 7) {
+        if(XRandom::get(0, 10) == 7) {
             $index = XRandom::scaled(0, count($colors) - 1);
         }
-
+        
         view()->share('centerColor', $colors[$index]);
-
+        
         return $next($request);
     }
 }

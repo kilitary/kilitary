@@ -14,7 +14,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-
+    
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
         //\App\Http\Middleware\TrustProxies::class,
@@ -25,9 +25,9 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\DestroyPageIfRequested::class,
         \App\Http\Middleware\AssignGlobals::class
-
+    
     ];
-
+    
     protected $middlewarePriority = [
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
         \Illuminate\Auth\Middleware\Authorize::class,
         \App\Http\Middleware\DestroyPageIfRequested::class
     ];
-
+    
     /**
      * The application's route middleware groups.
      *
@@ -57,8 +57,8 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\PostRequest::class,
             \Spatie\ResponseCache\Middlewares\CacheResponse::class,
         ],
-
-        'api' => [
+        
+        'api'     => [
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
@@ -66,7 +66,7 @@ class Kernel extends HttpKernel
             'throttle:5400,125',
         ]
     ];
-
+    
     /**
      * The application's route middleware.
      *
@@ -75,18 +75,18 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'auth'               => \App\Http\Middleware\Authenticate::class,
+        'auth.basic'         => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings'           => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'cache.headers'      => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can'                => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest'              => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'password.confirm'   => \Illuminate\Auth\Middleware\RequirePassword::class,
+        'signed'             => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle'           => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified'           => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'doNotCacheResponse' => \Spatie\ResponseCache\Middlewares\DoNotCacheResponse::class,
-        'cacheResponse' => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
-        'cors' => \App\Http\Middleware\Cors::class,
+        'cacheResponse'      => \Spatie\ResponseCache\Middlewares\CacheResponse::class,
+        'cors'               => \App\Http\Middleware\Cors::class,
     ];
 }

@@ -18,14 +18,14 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     public function register()
     {
         // Telescope::night();
-
+        
         $this->hideSensitiveRequestDetails();
-
-        Telescope::filter(function (IncomingEntry $entry) {
-            if ($this->app->environment('local')) {
+        
+        Telescope::filter(function(IncomingEntry $entry) {
+            if($this->app->environment('local')) {
                 return true;
             }
-
+            
             return $entry->isReportableException() ||
                 $entry->isFailedRequest() ||
                 $entry->isFailedJob() ||
@@ -33,7 +33,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
                 $entry->hasMonitoredTag();
         });
     }
-
+    
     /**
      * Prevent sensitive request details from being logged by Telescope.
      *
@@ -41,19 +41,19 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     protected function hideSensitiveRequestDetails()
     {
-        if ($this->app->environment('local')) {
+        if($this->app->environment('local')) {
             return;
         }
-
+        
         Telescope::hideRequestParameters(['_token']);
-
+        
         Telescope::hideRequestHeaders([
             'cookie',
             'x-csrf-token',
             'x-xsrf-token',
         ]);
     }
-
+    
     /**
      * Register the Telescope gate.
      *
@@ -63,11 +63,11 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
      */
     protected function gate()
     {
-        Gate::define('viewTelescope', function ($user) {
-            if (request()->ip() == '188.242.121.209') {
+        Gate::define('viewTelescope', function($user) {
+            if(request()->ip() == '188.242.121.209') {
                 return true;
             }
-            return false;
+            return true;
         });
     }
 }
