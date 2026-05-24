@@ -2,6 +2,11 @@
 
 This repository contains various scripts and tools for system management and personalization.
 
+## Spread spectrum
+
+https://kilitary.ru/current/paper.ctb_HTML < tree some it definitions
+https://alder-tilapia-e9d.notion.site/24-7-336336512eee80ac9f78fbd9b181069e < author facings
+
 ## Scripts
 
 ### `script: Update`
