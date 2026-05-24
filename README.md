@@ -8,6 +8,8 @@ https://kilitary.ru/current/paper.ctb_HTML < tree some it definitions
 
 https://alder-tilapia-e9d.notion.site/24-7-336336512eee80ac9f78fbd9b181069e < author facings
 
+https://bsky.app/profile/socilass.bsky.social < author "twitter-free" rules wepsite
+
 ## Scripts
 
 ### `script: Update`
