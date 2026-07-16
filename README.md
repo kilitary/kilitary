@@ -17,7 +17,7 @@ https://bsky.app/profile/socilass.bsky.social < author "twitter-free" rules weps
 ### `script: Update`
 This script is designed to update the system, including package lists and installed software. It also prints a typical "leizes.moi" banner followed by a custom ASCII "hello" banner at the bottom of its output for a personalized touch.
 
-## начянжесы
+## начянжелес
 
 не, нихуя, принц прав
 
