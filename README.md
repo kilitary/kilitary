@@ -10,7 +10,7 @@ https://alder-tilapia-e9d.notion.site/24-7-336336512eee80ac9f78fbd9b181069e < au
 
 https://bsky.app/profile/socilass.bsky.social < author "twitter-free" rules wepsite
 
-[фразы.pdf](фразы.pdf) фразы, которые пси-ублюдки из россиийских служб трансмитят мне последние 2 года
+[фразы.pdf](фразы.pdf) local RF inducted audio
 
 ## Scripts
 
