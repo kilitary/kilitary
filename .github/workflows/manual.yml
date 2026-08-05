@@ -1,35 +1,35 @@
-name: deploy kilitary.ru
-on: [push]
-#on:
- # workflow_dispatch:
-jobs:
-  deploy:
-    name: deploy kilitary
-    runs-on: ubuntu-latest
-    steps:
-      - name: ssh-pipeline
-        uses: cross-the-world/ssh-pipeline@v1.2.0
-        with:
-    # ssh remote host
-          host: kilitary.ru
-    # ssh remote port
-          port: 22222
-    # ssh remote user
-          user: deployer
-    # content of ssh private key. ex raw content of ~/.ssh/id_rsa
-          key: ${{ secrets.PKEY }}
-    # ssh remote password
-          pass: d3pl0y3r
-    # connection timeout to remote host
-          connect_timeout: 4s
-    # execute commands on ssh
-          script: |
-            cd /home/kilitary/kilitary
-            git reset --hard
-            git pull
-            chmod -R a+rw public/
-            /usr/bin/php7.4 /usr/bin/composer update
-            /usr/bin/php7.4 install.php
-            /usr/bin/php7.4 artisan optimize:clear
-            /usr/bin/php7.4 artisan optimize
+# name: deploy kilitary.ru
+# on: [push]
+# #on:
+#  # workflow_dispatch:
+# jobs:
+#   deploy:
+#     name: deploy kilitary
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: ssh-pipeline
+#         uses: cross-the-world/ssh-pipeline@v1.2.0
+#         with:
+#     # ssh remote host
+#           host: kilitary.ru
+#     # ssh remote port
+#           port: 22222
+#     # ssh remote user
+#           user: deployer
+#     # content of ssh private key. ex raw content of ~/.ssh/id_rsa
+#           key: ${{ secrets.PKEY }}
+#     # ssh remote password
+#           pass: d3pl0y3r
+#     # connection timeout to remote host
+#           connect_timeout: 4s
+#     # execute commands on ssh
+#           script: |
+#             cd /home/kilitary/kilitary
+#             git reset --hard
+#             git pull
+#             chmod -R a+rw public/
+#             /usr/bin/php7.4 /usr/bin/composer update
+#             /usr/bin/php7.4 install.php
+#             /usr/bin/php7.4 artisan optimize:clear
+#             /usr/bin/php7.4 artisan optimize
            
