@@ -28,7 +28,7 @@ my uncover  of this shit is going according to my dropb plan counter-c-c and wil
 ### `script: Update`
 This script is designed to update the system, including package lists and installed software. It also prints a typical "leizes.moi" banner followed by a custom ASCII "hello" banner at the bottom of its output for a personalized touch.
 
-## начянжелес
+## мучянжелес
 
 не, нихуя, принц прав
 
