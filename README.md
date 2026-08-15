@@ -28,6 +28,102 @@ my uncover  of this shit is going according to my dropb plan counter-c-c and wil
 ### `script: Update`
 This script is designed to update the system, including package lists and installed software. It also prints a typical "leizes.moi" banner followed by a custom ASCII "hello" banner at the bottom of its output for a personalized touch.
 
+Stage 1: Select modules
+
++ execute user file
+   + download then execute
++ smtp server
++ ddos [winpcap required]
++ udp
+   + spoof
+ 	+ tcp
++ icmp
+ 	   + spoof
++ smart ddos
++ ssl certificate exchange ddos (otsuda i dalee 'ddos' => penetration test)
++ smart ftp upload/download ddos (not so smart just download upload random shit)
++ smart http ddos (like find slowest url's / forms; ddos it)
++ specially malcrafted packets and very sexually requests
++ web server
++ ftp server
++ voice transmittion
++ inbound recieving
++ screen transmition
++ control
++ enumerate windows/ie secrets
++ keylogger
++ banner replacer
+ 	+ google
++ network control application
++ none (logs only)
+ 	+ console (shell prompt)
++ gui
++ socks server
+   + udp support
+   + open access
+      + harvest http credentials
+      + harvest mails (in case of smtp connection)
+      + simulate slow bad connection; drop packets at last stage
++ proxy
+   + add signature/code blocks to each reply
++ netbios browser
++ "anti-antivirus module" hide from antiviruses
+   + detect; replace code instructions to exit immediatly;install fake tray icons
++ DNS control
++ autoupdate / update on demand
++ user interaction module (like ask the user some question like 'do u like i owned u?', reply in edit box)
++ raw cmd.exe command launcher
++ network command channel transport   
+   + none (no control)
+   + icq
+   + udp
+      + p2p
+   + tcp
+   + web
+   + irc connect
+      + ssl connect
++ network functions wrapper
+    + none (plain, lowest sec level, specific packets will not pass hard fw rules)
+    + random XOR’ed and structure shifted (professional)
+    + SSL (less secure, slow, very detectable, not professional)
++ network channel control modules
+    + port randomer
++ network additional modules
+    + fake services
+    + fake other various botnet presence
++ port scanner
++ traffic sniffer
+   + mail
+   + http credentials
+   + cookie 
+   + icq
+          + conversation retranslation to another icq
++ identd server
++ various/other
+   + set/clear global user proxy
+   + winxp tcp ip limit remover
+   + touchpad fingerprint 
+   + HASP enumerate & dump (hz)
+   + destruct presence at conditions
+   + lock computer for remote control only
+   + find file
+   + batch commands timed executor
+   + drop random packets; simulate bad network link
+   + reboot/logoff/poweroff/sleep control
+   + change ethernet address
+   + turn on/off magic packet handling
+   + crash selected program
+
+Stage 2: Configure selected modules
+
+
+
+Stage 3: Pay && compile
+
+
+goto stage 3;
+
+
 ## мучянжелес
 
 не, нихуя, принц прав
