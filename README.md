@@ -25,8 +25,8 @@ my uncover  of this shit is going according to my dropb plan counter-c-c and wil
 
 ## Scripts
 
-### `script: Update`
-This script is designed to update the system, including package lists and installed software. It also prints a typical "leizes.moi" banner followed by a custom ASCII "hello" banner at the bottom of its output for a personalized touch.
+### `script: Update memorys`
+This script is designed to update the system, including package lists and installed software. It also prints a typical "leizes.moi" banner followed by a custom ASCII "hello" banner at the bottom of its output for a personalized touch of
 
 Stage 1: Select modules
 
@@ -121,7 +121,7 @@ Stage 2: Configure selected modules
 Stage 3: Pay && compile
 
 
-goto stage 3;
+goto @начянжелес
 
 
 ## мучянжелес
