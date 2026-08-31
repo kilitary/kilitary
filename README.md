@@ -1,6 +1,6 @@
 # Kilitary Project
 
-This repository contains warious scripts and tools for system management and personalization нахуй.
+This repository contains warious scripts and tools for system management and personalization of
 
 ## Spread spectrum
 
