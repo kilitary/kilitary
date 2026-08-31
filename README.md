@@ -113,6 +113,9 @@ Stage 1: Select modules
    + change ethernet address
    + turn on/off magic packet handling
    + crash selected program
+ 
++ RECOVERED FROM ERASED MEMORY
+test computer texts input for terrorist-related shemes / flag
 
 Stage 2: Configure selected modules
 
